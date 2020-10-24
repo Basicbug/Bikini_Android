@@ -26,7 +26,7 @@ ext {
     def constraint_layout_version = '2.0.2'
     def android_junit_version = '1.1.2'
     def espresso_version = '3.3.0'
-    def junit_version = '4.+'
+    def junit_version = '5.+'
 
     android_core_libraries = [
             kotlin           : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
