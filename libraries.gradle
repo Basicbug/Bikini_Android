@@ -27,6 +27,7 @@ ext {
     def android_junit_version = '1.1.2'
     def espresso_version = '3.3.0'
     def junit_version = '5.+'
+    def rx_relay_version = '2.1.1'
 
     android_core_libraries = [
             kotlin           : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -93,6 +94,7 @@ ext {
     rx_java_libraries = [
             rx_java   : "io.reactivex.rxjava2:rxandroid:$rx_version",
             rx_android: "io.reactivex.rxjava2:rxjava:$rx_version",
+            rx_relay  : "com.jakewharton.rxrelay2:rxrelay:$rx_relay_version",
     ]
 
     lifecycle_libraries = [
