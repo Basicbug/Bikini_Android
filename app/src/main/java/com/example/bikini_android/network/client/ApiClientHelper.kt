@@ -16,10 +16,10 @@ import kotlin.reflect.KClass
  */
 
 object ApiClientHelper {
-    private val apiClient: Retrofit = ServiceApiFactory.getApiClient(NetworkConstants.BASE_URL)
+    private val mainClient: Retrofit = ApiFactory.getMainApiClient(NetworkConstants.BASE_URL)
 
     @JvmStatic
-    fun <T : Any> createApiByService(clazz: KClass<T>): T {
-        return apiClient.create(clazz.java)
+    fun <T : Any> createMainApiByService(clazz: KClass<T>): T {
+        return mainClient.create(clazz.java)
     }
 }

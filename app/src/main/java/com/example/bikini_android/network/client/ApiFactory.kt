@@ -15,12 +15,12 @@ import retrofit2.Retrofit
  * @author MyeongKi
  */
 
-object ServiceApiFactory {
-    fun getApiClient(baseUrl: String): Retrofit {
+object ApiFactory {
+    fun getMainApiClient(baseUrl: String): Retrofit {
         val clientBuilder = if (BuildConfig.DEBUG) {
             BikiniDebugApiClient(baseUrl)
         } else {
-            BikiniServiceApiClient(baseUrl)
+            BikiniDefaultApiClient(baseUrl)
         }
         val okHttpBuilder = OkHttpClient.Builder()
         val retrofitBuilder = clientBuilder.builder(okHttpBuilder)
