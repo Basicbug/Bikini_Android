@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bikini_Android">
         <activity
-            android:name=".ui.mainholder.MainHolderActivity"
+            android:name=".ui.holder.MainHolderActivity"
             android:launchMode="singleTop">
 
             <intent-filter>

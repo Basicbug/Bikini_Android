@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.bikini_android.ui.mainholder
+package com.example.bikini_android.ui.holder
 
 import com.example.bikini_android.ui.base.BaseFragment
 
