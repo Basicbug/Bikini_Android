@@ -20,12 +20,12 @@ import com.example.bikini_android.ui.base.BaseActivity
 class MainHolderActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainHolderBinding
-    lateinit var navigateController: NavigatitonController
+    lateinit var navigateController: NavigationController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
-        navigateController = NavigatitonController(binding.contentFragmentHolder.id, supportFragmentManager)
+        navigateController = NavigationController(binding.contentFragmentHolder.id, supportFragmentManager)
         setUpBottomNavigation()
     }
 

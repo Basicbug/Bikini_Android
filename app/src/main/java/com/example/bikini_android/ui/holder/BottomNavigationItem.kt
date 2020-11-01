@@ -17,7 +17,7 @@ import io.reactivex.Observable
 
 enum class BottomNavigationItem(
     @IdRes val menuId: Int,
-    private val navigationAction: (NavigatitonController) -> Unit
+    private val navigationAction: (NavigationController) -> Unit
 ) {
     BIKINI_MAP(
         menuId = R.id.bikini_map_icon,
@@ -32,7 +32,7 @@ enum class BottomNavigationItem(
         navigationAction = { navigateController -> navigateController }
     );
 
-    fun navigate(navigationController: NavigatitonController) {
+    fun navigate(navigationController: NavigationController) {
         navigationAction(navigationController)
     }
 

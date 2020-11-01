@@ -17,7 +17,7 @@ import io.reactivex.Maybe
  * @author MyeongKi
  */
 @SuppressLint("CheckResult")
-class NavigatitonController(private val fragmentContainerId: Int, private val fragmentManager: FragmentManager) {
+class NavigationController(private val fragmentContainerId: Int, private val fragmentManager: FragmentManager) {
 
 
     private fun findFragment(fragmentClass: Class<out Fragment>): Fragment? {
