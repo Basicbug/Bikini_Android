@@ -24,12 +24,12 @@ enum class BottomNavigationItem(
         navigationAction = { navigateController -> navigateController.navigateToBikiniMap() }
     ),
     ADDING_CONTENTS(
-        menuId = R.id.adding_contents_icon,
-        navigationAction = { navigateController -> navigateController }
+        menuId = R.id.adding_feed_icon,
+        navigationAction = { navigateController -> navigateController.navigateToAddingFeed() }
     ),
     SETTINGS(
         menuId = R.id.settings_icon,
-        navigationAction = { navigateController -> navigateController }
+        navigationAction = { navigateController -> navigateController.navigateToSettings() }
     );
 
     fun navigate(navigationController: NavigationController) {

@@ -41,5 +41,13 @@ class MainHolderActivity : BaseActivity() {
             bottomNavigationItem?.navigate(navigateController)
             true
         }
+        navigateBottomMenu(BottomNavigationItem.BIKINI_MAP)
+    }
+
+    fun navigateBottomMenu(navigationItem: BottomNavigationItem) {
+        if (binding.bottomNavigation.selectedItemId != navigationItem.menuId) {
+            binding.bottomNavigation.selectedItemId = navigationItem.menuId
+        }
+        navigationItem.navigate(navigateController)
     }
 }
