@@ -1,7 +1,8 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: '../libraries.gradle'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
@@ -37,15 +38,24 @@ android {
 }
 
 dependencies {
+    testImplementation core_test_libraries.values()
+    androidTestImplementation android_core_test_libraries.values()
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation android_core_libraries.values()
 
-    implementation "com.google.android.material:material:1.1.0"
+    implementation database_libraries.values()
+    kapt database_annotion.values()
+
+    implementation image_libraries.values()
+    annotationProcessor image_annotation_processor.values()
+
+    implementation network_libraries.values()
+
+    implementation debugger_libraries.values()
+
+    implementation design_libraries.values()
+
+    implementation rx_java_libraries.values()
+
+    implementation lifecycle_libraries.values()
 }
