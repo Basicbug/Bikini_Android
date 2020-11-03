@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ bottom_navigation_item.xml 2020. 10. 31
+  ~
+  ~ Copyright 2020 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bikini_map_icon"
+        android:enabled="true"
+        android:icon="@drawable/bottom_bikini_map_icon"
+        android:title=""
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/adding_feed_icon"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title=""
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/settings_icon"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title=""
+        app:showAsAction="never" />
+</menu>
