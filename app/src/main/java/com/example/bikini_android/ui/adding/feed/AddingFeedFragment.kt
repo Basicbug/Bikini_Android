@@ -27,7 +27,9 @@ class AddingFeedFragment :MainHolderFragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View? = DataBindingUtil.inflate<FragmentAddingFeedBinding>(inflater, R.layout.fragment_adding_feed, container, false).also {
+        binding = it
+    }.root
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_adding_feed, container, false)
 
         return binding.root
