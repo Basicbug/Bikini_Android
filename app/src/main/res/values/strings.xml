@@ -3,4 +3,10 @@
     <string name="bikini_map_icon_title">지도</string>
     <string name="adding_contents_icon_title">추가</string>
     <string name="settings_icon_title">세팅</string>
+
+
+
+
+    <!--api key-->
+    <string name="google_map_api_key">AIzaSyAraq-2MhBXgG1wnaG-tFWIgamxYiCDAtk</string>
 </resources>

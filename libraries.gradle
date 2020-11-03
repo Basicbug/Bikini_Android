@@ -28,6 +28,9 @@ ext {
     def espresso_version = '3.3.0'
     def junit_version = '5.+'
     def rx_relay_version = '2.1.1'
+    def google_maps_version = '17.0.0'
+    def google_maps_utils_version = '2.0.3'
+    def google_maps_ktx_version = '2.2.0'
 
     android_core_libraries = [
             kotlin           : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -105,5 +108,11 @@ ext {
 
     preference_libraries = [
             preference: "net.grandcentrix.tray:tray:$preference_version"
+    ]
+
+    map_libraries = [
+            google_maps: "com.google.android.gms:play-services-maps:$google_maps_version",
+            google_maps_utils: "com.google.maps.android:android-maps-utils:$google_maps_utils_version",
+            google_maps_ktx:"com.google.maps.android:maps-utils-ktx:$google_maps_ktx_version"
     ]
 }
