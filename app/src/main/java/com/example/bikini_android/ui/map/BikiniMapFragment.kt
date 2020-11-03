@@ -20,20 +20,20 @@ import com.example.bikini_android.ui.holder.MainHolderFragment
  * @author MyeongKi
  */
 
-class BikiniMapFragment :MainHolderFragment(){
-    private lateinit var binding:FragmentBikiniMapBinding
+class BikiniMapFragment : MainHolderFragment() {
+    private lateinit var binding: FragmentBikiniMapBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bikini_map, container, false)
+    ): View? =
+        DataBindingUtil.inflate<FragmentBikiniMapBinding>(inflater, R.layout.fragment_bikini_map, container, false)
+            .also {
+                binding = it
+            }.root
 
-        return binding.root
-    }
-
-    companion object{
+    companion object {
         fun newInstance(): BikiniMapFragment {
             return BikiniMapFragment()
         }

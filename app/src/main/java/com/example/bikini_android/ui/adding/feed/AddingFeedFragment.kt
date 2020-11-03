@@ -20,21 +20,20 @@ import com.example.bikini_android.ui.holder.MainHolderFragment
  * @author MyeongKi
  */
 
-class AddingFeedFragment :MainHolderFragment(){
+class AddingFeedFragment : MainHolderFragment() {
     private lateinit var binding: FragmentAddingFeedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = DataBindingUtil.inflate<FragmentAddingFeedBinding>(inflater, R.layout.fragment_adding_feed, container, false).also {
-        binding = it
-    }.root
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_adding_feed, container, false)
+    ): View? =
+        DataBindingUtil.inflate<FragmentAddingFeedBinding>(inflater, R.layout.fragment_adding_feed, container, false)
+            .also {
+                binding = it
+            }.root
 
-        return binding.root
-    }
-    companion object{
+    companion object {
         fun newInstance(): AddingFeedFragment {
             return AddingFeedFragment()
         }

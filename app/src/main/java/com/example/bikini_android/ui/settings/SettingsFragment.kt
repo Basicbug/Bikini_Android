@@ -20,20 +20,20 @@ import com.example.bikini_android.ui.holder.MainHolderFragment
  * @author MyeongKi
  */
 
-class SettingsFragment :MainHolderFragment(){
+class SettingsFragment : MainHolderFragment() {
     private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
+    ): View? = DataBindingUtil.inflate<FragmentSettingsBinding>(inflater, R.layout.fragment_settings, container, false)
+        .also {
+            binding = it
+        }.root
 
-        return binding.root
-    }
-    companion object{
-        fun newInstance():SettingsFragment{
+    companion object {
+        fun newInstance(): SettingsFragment {
             return SettingsFragment()
         }
     }
