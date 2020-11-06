@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_opa80">#ccffffff</color>
     <color name="bottom_navigation_background_color">#000000</color>
+    <color name="grey">#808080</color>
 </resources>

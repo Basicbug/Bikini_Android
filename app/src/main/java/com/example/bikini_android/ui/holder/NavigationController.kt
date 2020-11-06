@@ -11,6 +11,7 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.bikini_android.ui.adding.feed.AddingFeedFragment
+import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.map.BikiniMapFragment
 import com.example.bikini_android.ui.settings.SettingsFragment
 import io.reactivex.Maybe
@@ -19,7 +20,10 @@ import io.reactivex.Maybe
  * @author MyeongKi
  */
 @SuppressLint("CheckResult")
-class NavigationController(private val fragmentContainerId: Int, private val fragmentManager: FragmentManager) {
+class NavigationController(
+    private val fragmentContainerId: Int,
+    private val fragmentManager: FragmentManager
+) {
 
 
     private fun findFragment(fragmentClass: Class<out Fragment>): Fragment? {
@@ -74,6 +78,15 @@ class NavigationController(private val fragmentContainerId: Int, private val fra
             .map { findFragment(it) }
             .doOnSuccess { replaceFragment(it!!) }
             .doOnComplete { replaceFragment(SettingsFragment.newInstance()) }
+            .subscribe()
+    }
+
+    fun navigateToFeeds() {
+        Maybe.just(FeedsFragment::class.java)
+            .filter { findFragment(it) != null }
+            .map { findFragment(it) }
+            .doOnSuccess { replaceFragment(it!!) }
+            .doOnComplete { replaceFragment(FeedsFragment.newInstance()) }
             .subscribe()
     }
 
