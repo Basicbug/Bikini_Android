@@ -19,7 +19,8 @@ const val BUILD_TYPE = BuildConfig.BUILD_TYPE
 class Logger {
 
     var TAG = ""
-    val PRE_TAG = "$APP_TAG$TAG"
+    val PRE_TAG
+        get() = "$APP_TAG$TAG"
 
     inline fun verbose(forceTag: String = "", message: () -> String) {
         Log.v("$PRE_TAG$forceTag", message())
