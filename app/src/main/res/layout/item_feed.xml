@@ -11,6 +11,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
+            android:background="@color/black"
             android:foreground="@drawable/circular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
+            android:background="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_thumbnail" />
@@ -51,7 +53,7 @@
             android:layout_marginStart="10dp"
             android:gravity="center_vertical"
             android:maxLines="4"
-            android:text="sample content"
+            android:text="sample content bla bla"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
