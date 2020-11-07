@@ -8,8 +8,8 @@
 
         <ImageView
             android:id="@+id/user_thumbnail"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/thumbnail_height_and_width"
+            android:layout_height="@dimen/thumbnail_height_and_width"
             android:layout_margin="10dp"
             android:background="@color/black"
             android:foreground="@drawable/circular"
@@ -18,7 +18,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/user_id_height"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:text="sample_user_id"
@@ -29,10 +29,11 @@
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/content_image_max_height"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_thumbnail" />
 

@@ -10,12 +10,13 @@ import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.feeds.adapter.FeedAdapter
+import com.example.bikini_android.ui.holder.MainHolderFragment
 
 /**
  * @author bsgreentea
  */
 
-class FeedsFragment : BaseFragment() {
+class FeedsFragment : MainHolderFragment() {
 
     private lateinit var binding: FragmentFeedsBinding
 

@@ -63,15 +63,6 @@ class NavigationController(
             .subscribe()
     }
 
-    fun navigateToAddingFeed() {
-        Maybe.just(AddingFeedFragment::class.java)
-            .filter { findFragment(it) != null }
-            .map { findFragment(it) }
-            .doOnSuccess { replaceFragment(it!!) }
-            .doOnComplete { replaceFragment(AddingFeedFragment.newInstance()) }
-            .subscribe()
-    }
-
     fun navigateToSettings() {
         Maybe.just(SettingsFragment::class.java)
             .filter { findFragment(it) != null }
