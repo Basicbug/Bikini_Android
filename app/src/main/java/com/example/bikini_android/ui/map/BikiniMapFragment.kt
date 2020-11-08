@@ -33,6 +33,7 @@ class BikiniMapFragment : MainHolderFragment() {
                 binding = it
             }.root
 
+
     companion object {
         fun newInstance(): BikiniMapFragment {
             return BikiniMapFragment()
