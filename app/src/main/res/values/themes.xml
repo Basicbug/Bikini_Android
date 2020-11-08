@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Bikini_Android" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!--common-->
         <item name="bottomNavigationBackgroundColor">@color/white</item>
         <item name="toolbarBackgroundColor">@color/white</item>
         <item name="android:textColor">@color/black</item>
