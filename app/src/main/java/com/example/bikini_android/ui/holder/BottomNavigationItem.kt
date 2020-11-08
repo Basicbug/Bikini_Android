@@ -23,9 +23,9 @@ enum class BottomNavigationItem(
         menuId = R.id.bikini_map_icon,
         navigationAction = { navigateController -> navigateController.navigateToBikiniMap() }
     ),
-    ADDING_CONTENTS(
-        menuId = R.id.adding_feed_icon,
-        navigationAction = { navigateController -> navigateController.navigateToAddingFeed() }
+    FEEDS(
+        menuId = R.id.feeds_icon,
+        navigationAction = { navigationController -> navigationController.navigateToFeeds() }
     ),
     SETTINGS(
         menuId = R.id.settings_icon,
