@@ -25,25 +25,28 @@ enum class BottomNavigationItem(
     BIKINI_MAP(
         menuId = R.id.bikini_map_icon,
         navigationAction = { navigateController -> navigateController.navigateToBikiniMap() },
-        eventAction = { relay ->  relay.accept(ToolbarItem(true, "test1"))}
+        eventAction = { relay -> relay.accept(ToolbarItem(true, "test1")) }
     ),
-    ADDING_CONTENTS(
-        menuId = R.id.adding_feed_icon,
-        navigationAction = { navigateController -> navigateController.navigateToAddingFeed() },
-        eventAction = { relay ->  relay.accept(ToolbarItem(false, "test2"))}
+    FEEDS(
+        menuId = R.id.feeds_icon,
+        navigationAction = { navigationController -> navigationController.navigateToFeeds() },
+        eventAction = { relay -> relay.accept(ToolbarItem(false, "test2")) }
+
     ),
     SETTINGS(
         menuId = R.id.settings_icon,
         navigationAction = { navigateController -> navigateController.navigateToSettings() },
-        eventAction = { relay ->  relay.accept(ToolbarItem(true, "test3"))}
+        eventAction = { relay -> relay.accept(ToolbarItem(true, "test3")) }
     );
 
     fun navigate(navigationController: NavigationController) {
         navigationAction(navigationController)
     }
-    fun invoke(relay:Relay<RxAction>) {
+
+    fun invoke(relay: Relay<RxAction>) {
         eventAction(relay)
     }
+
     companion object {
         @JvmStatic
         fun findById(
