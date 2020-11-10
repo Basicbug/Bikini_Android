@@ -10,8 +10,10 @@ package com.example.bikini_android.ui.holder
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
+import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
 import com.example.bikini_android.ui.base.BaseActivity
+import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
@@ -74,7 +76,7 @@ class MainHolderActivity : BaseActivity() {
             .ofType(ToolbarItem::class.java)
             .subscribe { event ->
                 this.supportActionBar?.let {
-                    it.title = event.title
+                    it.title = AppResources.getStringResId(event.titleResId)
                     if (event.visible) {
                         it.show()
                     } else {

@@ -9,6 +9,7 @@ package com.example.bikini_android.ui.holder
 
 import androidx.annotation.IdRes
 import com.example.bikini_android.R
+import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.Observable
@@ -25,18 +26,17 @@ enum class BottomNavigationItem(
     BIKINI_MAP(
         menuId = R.id.bikini_map_icon,
         navigationAction = { navigateController -> navigateController.navigateToBikiniMap() },
-        eventAction = { relay -> relay.accept(ToolbarItem(true, "test1")) }
+        eventAction = { relay -> relay.accept(ToolbarItem.BIKINI_TOOLBAR) }
     ),
     FEEDS(
         menuId = R.id.feeds_icon,
         navigationAction = { navigationController -> navigationController.navigateToFeeds() },
-        eventAction = { relay -> relay.accept(ToolbarItem(false, "test2")) }
-
+        eventAction = { relay -> relay.accept(ToolbarItem.FEEDS_TOOLBAR) }
     ),
     SETTINGS(
         menuId = R.id.settings_icon,
         navigationAction = { navigateController -> navigateController.navigateToSettings() },
-        eventAction = { relay -> relay.accept(ToolbarItem(true, "test3")) }
+        eventAction = { relay -> relay.accept(ToolbarItem.SETTINGS_TOOLBAR) }
     );
 
     fun navigate(navigationController: NavigationController) {
