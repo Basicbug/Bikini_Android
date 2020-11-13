@@ -12,10 +12,10 @@ class FeedViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val feedViewModel = FeedItemViewModel().apply {
-//        binding.feedItemViewModel = this
+        binding.feedItemViewModel = this
     }
 
     fun bind(feed: Feed) {
-        feedViewModel.userId = feed.userId ?: "sampleUserId"
+        feedViewModel.userId = feed.userId
     }
 }

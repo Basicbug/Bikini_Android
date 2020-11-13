@@ -1,21 +1,21 @@
 package com.example.bikini_android.ui.feeds.adapter
 
-import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
+import com.example.bikini_android.ui.common.ItemViewModel
 
 /**
  * @author bsgreentea
  */
-class FeedItemViewModel : BaseObservable() {
+class FeedItemViewModel : ItemViewModel() {
 
     @get: Bindable
     var userId = ""
-        set(value){
+        set(value) {
             field = value
             notifyPropertyChanged(BR.userId)
         }
 
-    fun getLayoutRes(): Int = R.layout.item_feed
+    override fun getLayoutRes(): Int = R.layout.item_feed
 }

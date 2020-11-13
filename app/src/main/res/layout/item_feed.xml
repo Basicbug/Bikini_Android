@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="feedItemViewModel"
+            type="com.example.bikini_android.ui.feeds.adapter.FeedItemViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +29,7 @@
             android:layout_height="@dimen/user_id_height"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
-            android:text="sample_user_id"
+            android:text="@{feedItemViewModel.userId}"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/user_thumbnail"
             app:layout_constraintTop_toTopOf="parent" />
