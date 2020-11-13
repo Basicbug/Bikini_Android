@@ -30,11 +30,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private val PREF_DEV_MODE = "pref.dev_mode"
-    private val PREF_BASE_URL = "pref.base_url"
-    private val DEV_BASE_URL = "dev.base.url"
-    private val PREF_DEV_CATEGORY = "pref.dev_category"
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preference_settings_main, rootKey)
     }
@@ -60,6 +55,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     companion object {
+        private const val PREF_DEV_MODE = "pref.dev_mode"
+        private const val PREF_BASE_URL = "pref.base_url"
+        private const val DEV_BASE_URL = "dev.base.url"
+        private const val PREF_DEV_CATEGORY = "pref.dev_category"
+
         fun newInstance(): SettingsFragment {
             return SettingsFragment()
         }
