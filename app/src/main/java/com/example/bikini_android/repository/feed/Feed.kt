@@ -6,5 +6,6 @@ package com.example.bikini_android.repository.feed
 data class Feed(
     var feedNumOfUser: Int = 0,
     var userId: String = "sampleUserId",
-    var content: String = "sampleContent"
+    var content: String = "sampleContent",
+    var imageUri: String = "sampleImageUri"
 )

@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.feeds.adapter.FeedAdapter
+import com.example.bikini_android.ui.feeds.types.ItemViewType
 import com.example.bikini_android.ui.holder.MainHolderFragment
 
 /**
@@ -36,16 +37,19 @@ class FeedsFragment : MainHolderFragment() {
 
         var testFeeds = mutableListOf<Feed>()
 
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
+        testFeeds.add(Feed(userId = "sample1"))
+        testFeeds.add(Feed(userId = "sample2"))
+        testFeeds.add(Feed(userId = "sample3"))
+        testFeeds.add(Feed(userId = "sample4"))
+        testFeeds.add(Feed(userId = "sample5"))
+        testFeeds.add(Feed(userId = "sample6"))
 
         adapter.setItems(testFeeds)
+        adapter.setViewType(ItemViewType.FOURCOLUMN.type)
 
         binding.feeds.adapter = adapter
+        binding.feeds.layoutManager = GridLayoutManager(activity, 4)
+
         return binding.root
     }
 
