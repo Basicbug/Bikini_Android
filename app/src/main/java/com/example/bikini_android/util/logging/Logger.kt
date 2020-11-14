@@ -7,7 +7,7 @@
 package com.example.bikini_android.util.logging
 
 import android.util.Log
-import androidx.multidex.BuildConfig
+import com.example.bikini_android.BuildConfig
 
 /**
  * @author qwebnm7788

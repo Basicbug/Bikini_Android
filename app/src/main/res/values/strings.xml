@@ -3,4 +3,8 @@
     <string name="bikini_map_icon_title">지도</string>
     <string name="adding_contents_icon_title">추가</string>
     <string name="settings_icon_title">세팅</string>
+    <!--toolbar-->
+    <string name="bikini_toolbar_title">Bikini</string>
+    <string name="feeds_toolbar_title">Feeds</string>
+    <string name="settings_toolbar_title">Settings</string>
 </resources>

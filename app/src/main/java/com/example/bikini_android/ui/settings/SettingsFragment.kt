@@ -32,6 +32,7 @@ class SettingsFragment : MainHolderFragment() {
             binding = it
         }.root
 
+
     companion object {
         fun newInstance(): SettingsFragment {
             return SettingsFragment()
