@@ -10,7 +10,7 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.feeds.adapter.FeedAdapter
-import com.example.bikini_android.ui.feeds.types.ItemViewType
+import com.example.bikini_android.ui.feeds.adapter.FeedAdapter.Companion.FOURCOLUMN
 import com.example.bikini_android.ui.holder.MainHolderFragment
 
 /**
@@ -45,7 +45,7 @@ class FeedsFragment : MainHolderFragment() {
         testFeeds.add(Feed(userId = "sample6"))
 
         adapter.setItems(testFeeds)
-        adapter.setViewType(ItemViewType.FOURCOLUMN.type)
+        adapter.setViewType(FOURCOLUMN)
 
         binding.feeds.adapter = adapter
         binding.feeds.layoutManager = GridLayoutManager(activity, 4)

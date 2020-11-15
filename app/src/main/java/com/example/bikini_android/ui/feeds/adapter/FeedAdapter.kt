@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.feeds.types.ItemViewType
 
 
 /**
@@ -17,10 +16,10 @@ class FeedAdapter : ListAdapter<Feed, RecyclerView.ViewHolder>(
     FeedDiffCallback()
 ) {
 
-    private var currentViewType = ItemViewType.LINEAR.type
+    private var currentViewType = LINEAR
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == ItemViewType.LINEAR.type) {
+        return if (viewType == LINEAR) {
             FeedViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
@@ -57,5 +56,10 @@ class FeedAdapter : ListAdapter<Feed, RecyclerView.ViewHolder>(
     fun setViewType(viewType: Int) {
         currentViewType = viewType
         notifyDataSetChanged()
+    }
+
+    companion object {
+        const val FOURCOLUMN = 4
+        const val LINEAR = 1
     }
 }
