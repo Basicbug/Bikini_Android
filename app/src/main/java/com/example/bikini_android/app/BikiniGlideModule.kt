@@ -58,7 +58,6 @@ class BikiniGlideModule : AppGlideModule() {
                 setDefaultTransitionOptions(Bitmap::class.java, BitmapTransitionOptions.withCrossFade())
             }
 
-
         } catch (e: Exception) {
             logger.error {
                 e.toString()
