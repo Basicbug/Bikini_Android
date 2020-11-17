@@ -27,12 +27,14 @@ object ImageBindingAdapter {
         @AttrRes errorAttrResId: Int?
     ) {
         val glideRequest = Glide.with(imageView.context).load(imageUrl)
-        options?.let {
-            glideRequest.apply(it)
-        }
-        errorAttrResId?.let {
-            glideRequest.error(it)
-            imageView.setBackgroundResource(it)
+        with(glideRequest){
+            options?.let {
+                apply(it)
+            }
+            errorAttrResId?.let {
+                error(it)
+                imageView.setBackgroundResource(it)
+            }
         }
         glideRequest.into(imageView)
     }
