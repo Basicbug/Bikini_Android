@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.bikini_android.ui.common
+package com.example.bikini_android.ui.common.item
 
 import androidx.annotation.LayoutRes
 

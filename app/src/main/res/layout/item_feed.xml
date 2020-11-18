@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="feedItemViewModel"
-            type="com.example.bikini_android.ui.feeds.adapter.FeedItemViewModel" />
+            name="viewmodel"
+            type="com.example.bikini_android.ui.feeds.adapter.FeedItemDefaultViewModel" />
 
     </data>
 
@@ -29,7 +29,7 @@
             android:layout_height="@dimen/user_id_height"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
-            android:text="@{feedItemViewModel.userId}"
+            android:text="@{viewmodel.userId}"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/user_thumbnail"
             app:layout_constraintTop_toTopOf="parent" />
