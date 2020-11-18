@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="feedItemGridViewModel"
+            name="viewmodel"
             type="com.example.bikini_android.ui.feeds.adapter.FeedItemGridViewModel" />
 
     </data>

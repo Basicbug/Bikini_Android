@@ -1,11 +1,11 @@
 /*
- * ItemViewModel.kt 2020. 11. 5
+ * ItemViewModel.kt 2020. 11. 16
  *
  * Copyright 2020 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android.ui.common
+package com.example.bikini_android.ui.common.item
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
@@ -17,7 +17,8 @@ import com.jakewharton.rxrelay2.Relay
  * @author MyeongKi
  */
 
-abstract class ItemViewModel : BaseObservable(), BindableLayout {
+abstract class ItemViewModel : BaseObservable(),
+    BindableLayout {
     @get:Bindable
     var enabled = true
         set(value) {

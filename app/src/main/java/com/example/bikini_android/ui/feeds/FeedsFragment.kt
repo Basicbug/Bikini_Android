@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
-import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.feeds.adapter.FeedAdapter
-import com.example.bikini_android.ui.feeds.adapter.FeedAdapter.Companion.FOURCOLUMN
+import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.ui.feeds.adapter.FeedItemDiffCallback
+import com.example.bikini_android.ui.feeds.adapter.FeedItemGridViewModel
 import com.example.bikini_android.ui.holder.MainHolderFragment
 
 /**
@@ -33,19 +34,29 @@ class FeedsFragment : MainHolderFragment() {
             false
         )
 
-        var adapter = FeedAdapter()
+        var adapter = DefaultListAdapter(FeedItemDiffCallback<FeedItemGridViewModel>())
 
-        var testFeeds = mutableListOf<Feed>()
+        var testFeeds = mutableListOf<FeedItemGridViewModel>()
 
-        testFeeds.add(Feed(userId = "sample1"))
-        testFeeds.add(Feed(userId = "sample2"))
-        testFeeds.add(Feed(userId = "sample3"))
-        testFeeds.add(Feed(userId = "sample4"))
-        testFeeds.add(Feed(userId = "sample5"))
-        testFeeds.add(Feed(userId = "sample6"))
-
-        adapter.setItems(testFeeds)
-        adapter.setViewType(FOURCOLUMN)
+        testFeeds.add(FeedItemGridViewModel().apply {
+            userId = "sample1"
+        })
+        testFeeds.add(FeedItemGridViewModel().apply {
+            userId = "sample2"
+        })
+        testFeeds.add(FeedItemGridViewModel().apply {
+            userId = "sample3"
+        })
+        testFeeds.add(FeedItemGridViewModel().apply {
+            userId = "sample4"
+        })
+        testFeeds.add(FeedItemGridViewModel().apply {
+            userId = "sample5"
+        })
+        testFeeds.add(FeedItemGridViewModel().apply {
+            userId = "sample6"
+        })
+        adapter.submitList(testFeeds)
 
         binding.feeds.adapter = adapter
         binding.feeds.layoutManager = GridLayoutManager(activity, 4)
