@@ -40,7 +40,7 @@ ext {
             constraint_layout: "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
             recyclerview     : "androidx.recyclerview:recyclerview:$recyclerview_version",
             fragment         : "androidx.fragment:fragment-ktx:$fragment_version",
-            preference       : "androidx.preference:preference-ktx:$android_preference_version"
+            preference       : "androidx.preference:preference-ktx:$android_preference_version",
     ]
 
     android_core_test_libraries = [

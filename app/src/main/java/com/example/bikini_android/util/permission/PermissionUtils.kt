@@ -24,6 +24,8 @@ import com.example.bikini_android.R
  */
 
 object PermissionUtils {
+    const val LOCATION_PERMISSION_REQUEST_CODE = 1
+
     @JvmStatic
     fun requestPermission(
         activity: AppCompatActivity, requestId: Int, permission: String, finishActivity: Boolean
@@ -39,6 +41,7 @@ object PermissionUtils {
             )
         }
     }
+
     @JvmStatic
     fun isPermissionGranted(
         grantPermissions: Array<String>, grantResults: IntArray,
@@ -52,9 +55,6 @@ object PermissionUtils {
         return false
     }
 
-    /**
-     * A dialog that displays a permission denied message.
-     */
     class PermissionDeniedDialog : DialogFragment() {
         private var finishActivity = false
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -80,10 +80,6 @@ object PermissionUtils {
         companion object {
             private const val ARGUMENT_FINISH_ACTIVITY = "finish"
 
-            /**
-             * Creates a new instance of this dialog and optionally finishes the calling Activity
-             * when the 'Ok' button is clicked.
-             */
             @JvmStatic
             fun newInstance(finishActivity: Boolean): PermissionDeniedDialog {
                 val arguments = Bundle().apply {
@@ -114,20 +110,10 @@ object PermissionUtils {
                     )
                     finishActivity = false
                 }
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                    PermissionDeniedDialog.newInstance(true).show(requireActivity().supportFragmentManager, "dialog")
+                }
                 .create()
-        }
-
-        override fun onDismiss(dialog: DialogInterface) {
-            super.onDismiss(dialog)
-            if (finishActivity) {
-                Toast.makeText(
-                    activity,
-                    R.string.permission_required_toast,
-                    Toast.LENGTH_SHORT
-                ).show()
-                activity?.finish()
-            }
         }
 
         companion object {
