@@ -31,6 +31,7 @@ ext {
     def google_maps_version = '17.0.0'
     def google_maps_utils_version = '2.0.3'
     def google_maps_ktx_version = '2.2.0'
+    def android_preference_version = "1.1.1"
 
     android_core_libraries = [
             kotlin           : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -39,6 +40,7 @@ ext {
             constraint_layout: "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
             recyclerview     : "androidx.recyclerview:recyclerview:$recyclerview_version",
             fragment         : "androidx.fragment:fragment-ktx:$fragment_version",
+            preference       : "androidx.preference:preference-ktx:$android_preference_version"
     ]
 
     android_core_test_libraries = [
@@ -101,9 +103,11 @@ ext {
     ]
 
     lifecycle_libraries = [
-            lifecycle           : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
-            lifecycle_view_model: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
-            lifecycle_life_data : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+            lifecycle               : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            lifecycle_view_model    : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            lifecycle_life_data     : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            lifecycle_core_ktx      : "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycle_version",
+            lifecycle_runtime_ktx   : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     ]
 
     preference_libraries = [
