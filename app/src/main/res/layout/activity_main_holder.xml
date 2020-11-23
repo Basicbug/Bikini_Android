@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
-            android:background="@color/white"
+            android:background="?attr/bottomNavigationBackgroundColor"
             android:elevation="@dimen/divide_line_height"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
