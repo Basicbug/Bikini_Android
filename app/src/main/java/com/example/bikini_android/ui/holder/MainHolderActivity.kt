@@ -37,8 +37,9 @@ class MainHolderActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
         navigateController = NavigationController(binding.contentFragmentHolder.id, supportFragmentManager)
-        setUpBottomNavigation()
         setUpToolbar()
+        setUpBottomNavigation()
+
     }
 
     override fun onDestroy() {
@@ -55,8 +56,9 @@ class MainHolderActivity : BaseActivity() {
     private fun setUpBottomNavigation() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             val bottomNavigationItem = BottomNavigationItem.findById(menuItem.itemId)
-            bottomNavigationItem?.navigate(navigateController)
-            bottomNavigationItem?.invoke(itemEventRelay)
+            bottomNavigationItem?.let {
+                navigateBottomMenu(it)
+            }
             true
         }
         navigateBottomMenu(BottomNavigationItem.BIKINI_MAP)
@@ -67,6 +69,7 @@ class MainHolderActivity : BaseActivity() {
             binding.bottomNavigation.selectedItemId = navigationItem.menuId
         }
         navigationItem.navigate(navigateController)
+        navigationItem.invoke(itemEventRelay)
     }
 
     private fun setUpToolbar() {
