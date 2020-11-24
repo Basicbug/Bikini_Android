@@ -8,5 +8,17 @@
         <item name="android:textColor">@color/white</item>
         <item name="defaultItemSelectedColor">@color/white</item>
         <item name="defaultItemUnselectedColor">@color/white_opa80</item>
+        <item name="android:alertDialogTheme">@style/PermissionDialogStyle</item>
+    </style>
+    <style name="PermissionDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/black</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle.textColor</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle.textColor</item>
+    </style>
+    <style name="PositiveButtonStyle.textColor" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/purple_700</item>
+    </style>
+    <style name="NegativeButtonStyle.textColor" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

@@ -116,7 +116,8 @@ object PermissionUtils {
 
         override fun onDismiss(dialog: DialogInterface) {
             super.onDismiss(dialog)
-            PermissionDeniedDialog.newInstance(true).show(requireActivity().supportFragmentManager, "dialog")
+            if (finishActivity)
+                PermissionDeniedDialog.newInstance(true).show(requireActivity().supportFragmentManager, "dialog")
         }
 
         companion object {
