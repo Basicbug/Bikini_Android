@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.LatLng
  * @author MyeongKi
  */
 
-abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
 
