@@ -10,6 +10,7 @@ package com.example.bikini_android.ui.base
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
@@ -40,8 +41,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback, ActivityCom
         super.onCreate(savedInstanceState)
         RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
             if (it.isAccept) {
-                enableMyLocation()
-                moveToMyLocation()
+                initMap()
             } else {
                 permissionDenied = true
             }
@@ -54,8 +54,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback, ActivityCom
 
     override fun onMapReady(googleMap: GoogleMap?) {
         map = googleMap ?: return
-        enableMyLocation()
-        moveToMyLocation()
+        initMap()
     }
 
     override fun onResume() {
@@ -78,6 +77,11 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback, ActivityCom
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    private fun initMap() {
+        enableMyLocation()
+        moveToMyLocation()
+    }
+
     private fun enableMyLocation() {
         if (!(::map.isInitialized)) return
         if (checkLocationPermission()) {
@@ -92,17 +96,27 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback, ActivityCom
 
     private fun moveToMyLocation() {
         if (checkLocationPermission()) {
-            val locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            val locationGps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            locationGps?.let {
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), DEFAULT_ZOOM_SIZE))
+            (requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
+                this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).also { networkLocation ->
+                    if (networkLocation != null) {
+                        moveToLocation(networkLocation)
+                    } else {
+                        this.getLastKnownLocation(LocationManager.GPS_PROVIDER)?.let { gpsLocation ->
+                            moveToLocation(gpsLocation)
+                        }
+                    }
+                }
             }
-            val locationWifi = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-            locationWifi?.let {
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), DEFAULT_ZOOM_SIZE))
-            }
-
         }
+    }
+
+    private fun moveToLocation(location: Location, zoomSize: Float = DEFAULT_ZOOM_SIZE) {
+        map.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(location.latitude, location.longitude),
+                zoomSize
+            )
+        )
     }
 
     companion object {
