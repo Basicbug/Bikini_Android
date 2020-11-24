@@ -110,10 +110,13 @@ object PermissionUtils {
                     )
                     finishActivity = false
                 }
-                .setNegativeButton(android.R.string.cancel) { _, _ ->
-                    PermissionDeniedDialog.newInstance(true).show(requireActivity().supportFragmentManager, "dialog")
-                }
+                .setNegativeButton(android.R.string.cancel, null)
                 .create()
+        }
+
+        override fun onDismiss(dialog: DialogInterface) {
+            super.onDismiss(dialog)
+            PermissionDeniedDialog.newInstance(true).show(requireActivity().supportFragmentManager, "dialog")
         }
 
         companion object {
