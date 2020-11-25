@@ -15,7 +15,8 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
  * @author MyeongKi
  */
 
-abstract class FeedItemViewModel :ItemViewModel(){
+abstract class FeedItemViewModel : ItemViewModel() {
+
     @get: Bindable
     var userId = ""
         set(value) {
