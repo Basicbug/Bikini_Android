@@ -95,18 +95,8 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun moveToMyLocation() {
-        if (checkLocationPermission()) {
-            (requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
-                this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).also { networkLocation ->
-                    if (networkLocation != null) {
-                        moveToLocation(networkLocation)
-                    } else {
-                        this.getLastKnownLocation(LocationManager.GPS_PROVIDER)?.let { gpsLocation ->
-                            moveToLocation(gpsLocation)
-                        }
-                    }
-                }
-            }
+        getCurrentLocation()?.let {
+            moveToLocation(it)
         }
     }
 
@@ -117,6 +107,23 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
                 zoomSize
             )
         )
+    }
+
+    protected fun getCurrentLocation(): Location? {
+        if (checkLocationPermission()) {
+            (requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
+                this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).also { networkLocation ->
+                    if (networkLocation != null) {
+                        return networkLocation
+                    } else {
+                        this.getLastKnownLocation(LocationManager.GPS_PROVIDER)?.let { gpsLocation ->
+                            return gpsLocation
+                        }
+                    }
+                }
+            }
+        }
+        return null
     }
 
     companion object {
