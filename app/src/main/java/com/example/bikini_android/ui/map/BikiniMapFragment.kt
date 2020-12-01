@@ -21,6 +21,7 @@ import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.FeedMarker
+import com.example.bikini_android.repository.feed.FeedMarkerId
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.event.FeedMarkerImageLoadEvent
@@ -39,7 +40,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
-    private val feedMarkerBindingTable = ArrayMap<String, ViewFeedMarkerBinding>()
+    private val feedMarkerBindingTable = ArrayMap<@FeedMarkerId String, ViewFeedMarkerBinding>()
     private val feedMarkerBindingRecyclePool = Pools.SynchronizedPool<ViewFeedMarkerBinding>(FEED_MARKER_COUNT)
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
 
