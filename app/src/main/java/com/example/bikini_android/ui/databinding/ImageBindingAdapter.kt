@@ -27,13 +27,13 @@ import javax.sql.DataSource
 
 object ImageBindingAdapter {
     @JvmStatic
-    @BindingAdapter(value = ["imageUrl", "glideOptions", "errorAttrResId", "event"], requireAll = false)
+    @BindingAdapter(value = ["imageUrl", "glideOptions", "errorAttrResId", "completeLoadEvent"], requireAll = false)
     fun setImageUrl(
         imageView: ImageView,
         imageUrl: String,
         options: RequestOptions?,
         @AttrRes errorAttrResId: Int?,
-        event: () -> Unit?
+        completeLoadEvent: () -> Unit
     ) {
         val glideRequest = Glide.with(imageView.context).load(imageUrl)
         with(glideRequest) {
@@ -44,30 +44,28 @@ object ImageBindingAdapter {
                 error(it)
                 imageView.setBackgroundResource(it)
             }
-            event?.let {
-                listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        return false
-                    }
+            listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
 
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: com.bumptech.glide.load.DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        it.invoke()
-                        return false
-                    }
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: com.bumptech.glide.load.DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    completeLoadEvent.invoke()
+                    return false
+                }
 
-                })
-            }
+            })
             glideRequest.into(imageView)
         }
     }
