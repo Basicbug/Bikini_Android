@@ -92,18 +92,16 @@ class BikiniMapFragment : BaseMapFragment() {
         }
     }
 
-    private fun bindFeedMarker(feedMarkerList: List<FeedMarker>) {
+    private fun bindFeedMarkerList(feedMarkerList: List<FeedMarker>) {
         for (feedMarker in feedMarkerList) {
-            var binding = feedMarkerBindingRecyclePool.acquire()
-            if (binding == null) {
-                binding = getFeedMarkerBinding()
-                feedMarkerBindingTable[feedMarker.id] = binding
-            }
-            binding.apply {
-                viewmodel = FeedMarkerItemViewModel(feedMarker).also {
-                    it.itemEventRelay = itemEventRelay
+            feedMarkerBindingRecyclePool.acquire() ?: getFeedMarkerBinding().run {
+                feedMarkerBindingTable[feedMarker.id] = this
+                apply {
+                    viewmodel = FeedMarkerItemViewModel(feedMarker).also {
+                        it.itemEventRelay = itemEventRelay
+                    }
+                    executePendingBindings()
                 }
-                executePendingBindings()
             }
         }
     }
@@ -135,7 +133,7 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private fun observeMapEvent() {
         //더미 구독 후
-        bindFeedMarker(loadTestFeedMarker())
+        bindFeedMarkerList(loadTestFeedMarker())
         itemEventRelay
             .ofType(FeedMarkerImageLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
