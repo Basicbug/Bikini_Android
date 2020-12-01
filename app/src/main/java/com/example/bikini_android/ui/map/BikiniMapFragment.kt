@@ -15,27 +15,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.util.Pools
-import androidx.core.view.drawToBitmap
 import androidx.databinding.DataBindingUtil
-
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.FeedMarker
 import com.example.bikini_android.ui.base.BaseMapFragment
-import com.example.bikini_android.ui.feeds.adapter.FeedItemViewModel
-import com.example.bikini_android.util.bus.RxActionBus
+import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.event.FeedMarkerImageLoadEvent
-import com.example.bikini_android.util.bus.event.LocationPermissionEvent
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.concurrent.TimeUnit
-import kotlin.math.roundToInt
 
 /**
  * @author MyeongKi
@@ -45,6 +41,7 @@ class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
     private val feedMarkerBindingTable = ArrayMap<String, ViewFeedMarkerBinding>()
     private val feedMarkerBindingRecyclePool = Pools.SynchronizedPool<ViewFeedMarkerBinding>(FEED_MARKER_COUNT)
+    private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,7 +99,9 @@ class BikiniMapFragment : BaseMapFragment() {
                 feedMarkerBindingTable[feedMarker.id] = binding
             }
             binding.apply {
-                viewmodel = FeedMarkerItemViewModel(feedMarker)
+                viewmodel = FeedMarkerItemViewModel(feedMarker).also {
+                    it.itemEventRelay = itemEventRelay
+                }
                 executePendingBindings()
             }
         }
@@ -136,8 +135,9 @@ class BikiniMapFragment : BaseMapFragment() {
     private fun observeMapEvent() {
         //더미 구독 후
         bindFeedMarker(loadTestFeedMarker())
-
-        RxActionBus.toObservable(FeedMarkerImageLoadEvent::class.java).observeOn(AndroidSchedulers.mainThread())
+        itemEventRelay
+            .ofType(FeedMarkerImageLoadEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 map.addMarker(
                     getFeedMarkerOption(event.feedMarker)

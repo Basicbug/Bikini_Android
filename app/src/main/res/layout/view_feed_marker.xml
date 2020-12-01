@@ -20,7 +20,7 @@
             android:layout_width="@dimen/feed_marker_size"
             android:layout_height="@dimen/feed_marker_size"
             app:imageUrl="@{viewmodel.imageUrl}"
-            app:event = "@{viewmodel.imageLoadEvent}"
+            app:event = "@{viewmodel.getImageLoadEvent}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
