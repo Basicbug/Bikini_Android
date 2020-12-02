@@ -65,9 +65,6 @@ class MainHolderActivity : BaseActivity() {
     }
 
     fun navigateBottomMenu(navigationItem: BottomNavigationItem) {
-        if (binding.bottomNavigation.selectedItemId != navigationItem.menuId) {
-            binding.bottomNavigation.selectedItemId = navigationItem.menuId
-        }
         navigationItem.navigate(navigateController)
         navigationItem.invoke(itemEventRelay)
     }
