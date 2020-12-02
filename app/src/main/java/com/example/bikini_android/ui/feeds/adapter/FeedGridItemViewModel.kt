@@ -5,7 +5,7 @@ import com.example.bikini_android.R
 /**
  * @author bsgreentea
  */
-class FeedItemGridViewModel : FeedItemViewModel() {
+class FeedGridItemViewModel : FeedItemViewModel() {
 
     override fun getLayoutRes(): Int = R.layout.item_feed_grid
 }
