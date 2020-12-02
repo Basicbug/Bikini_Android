@@ -8,6 +8,7 @@
 
     <!--common-->
     <dimen name="app_bar_height">54dp</dimen>
+    <dimen name="divide_line_height">4dp</dimen>
     <dimen name="app_bar_text_size">20sp</dimen>
     <dimen name="bottom_navigation_height">54dp</dimen>
     <dimen name="match_constraint">0dp</dimen>
@@ -15,5 +16,6 @@
     <dimen name="thumbnail_height_and_width">50dp</dimen>
     <dimen name="user_id_height">50dp</dimen>
     <dimen name="content_image_max_height">300dp</dimen>
+
 
 </resources>

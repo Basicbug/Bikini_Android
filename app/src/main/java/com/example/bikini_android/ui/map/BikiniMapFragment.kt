@@ -12,17 +12,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
-import com.example.bikini_android.ui.holder.MainHolderFragment
+import com.example.bikini_android.ui.base.BaseMapFragment
 
 /**
  * @author MyeongKi
  */
 
-class BikiniMapFragment : MainHolderFragment() {
+class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
