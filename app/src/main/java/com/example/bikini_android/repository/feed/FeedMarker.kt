@@ -14,10 +14,8 @@ import com.google.android.gms.maps.model.LatLng
  */
 
 data class FeedMarker(
-    @FeedMarkerId
     val id: String,
     val position: LatLng,
     val imageUrl: String
 )
 
-annotation class FeedMarkerId
