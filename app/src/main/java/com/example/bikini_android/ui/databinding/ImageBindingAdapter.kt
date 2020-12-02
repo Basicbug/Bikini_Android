@@ -16,10 +16,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.bus.RxActionBus
-import com.example.bikini_android.util.bus.event.FeedMarkerImageLoadEvent
-import javax.sql.DataSource
 
 /**
  * @author MyeongKi

@@ -11,7 +11,6 @@ import androidx.databinding.Bindable
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.FeedMarker
 import com.example.bikini_android.ui.common.ItemViewModel
-import com.example.bikini_android.util.bus.event.FeedMarkerImageLoadEvent
 
 /**
  * @author MyeongKi

@@ -9,56 +9,95 @@ package com.example.bikini_android.ui.map
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.util.ArrayMap
-import androidx.core.util.Pools
+import android.view.View
 import androidx.lifecycle.ViewModel
-import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.FeedMarker
+import com.example.bikini_android.util.bus.RxAction
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.jakewharton.rxrelay2.Relay
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
  */
 
 class BikiniMapViewModel : ViewModel() {
-    internal val feedMarkerBindingTable = ArrayMap<FeedMarker, ViewFeedMarkerBinding>()
-    internal val feedMarkerBindingRecyclePool = Pools.SynchronizedPool<ViewFeedMarkerBinding>(FEED_MARKER_COUNT)
+    private val _feedMarkers: MutableList<FeedMarker> = mutableListOf()
+    private lateinit var itemEventRelay: Relay<RxAction>
+    private lateinit var disposables: CompositeDisposable
 
-    private fun convertBitmap(feedMarker: FeedMarker): Bitmap? {
-        feedMarkerBindingTable[feedMarker]?.root?.let { feedMarkerView ->
-            return Bitmap.createBitmap(
-                feedMarkerView.measuredWidth,
-                feedMarkerView.measuredHeight,
-                Bitmap.Config.ARGB_8888
-            ).also { bitmap ->
-                Canvas(bitmap).run {
-                    feedMarkerView.draw(this)
-                }
+    fun init(itemEventRelay: Relay<RxAction>, disposables: CompositeDisposable) {
+        this.itemEventRelay = itemEventRelay
+        this.disposables = disposables
+    }
+
+    fun loadFeedMarkers() {
+        if (_feedMarkers.isNotEmpty()) {
+            itemEventRelay.accept(FeedMarkersLoadEvent(_feedMarkers))
+        } else {
+            loadFeedMarkersFromRepository()
+        }
+    }
+
+    private fun loadFeedMarkersFromRepository(){
+        itemEventRelay.accept(FeedMarkersLoadEvent(loadTestFeedMarker()))
+    }
+
+    fun getFeedMarkerOption(feedMarkerView: View, position: LatLng): MarkerOptions {
+        return MarkerOptions()
+            .position(position)
+            .icon(BitmapDescriptorFactory.fromBitmap(convertBitmap(feedMarkerView)))
+    }
+
+    private fun convertBitmap(feedMarkerView: View): Bitmap {
+        return Bitmap.createBitmap(
+            feedMarkerView.measuredWidth,
+            feedMarkerView.measuredHeight,
+            Bitmap.Config.ARGB_8888
+        ).also { bitmap ->
+            Canvas(bitmap).run {
+                feedMarkerView.draw(this)
             }
         }
-        return null
     }
 
-    fun getFeedMarkerOption(feedMarker: FeedMarker): MarkerOptions {
-        return MarkerOptions()
-            .position(feedMarker.position)
-            .icon(BitmapDescriptorFactory.fromBitmap(convertBitmap(feedMarker)))
-    }
-
-    fun clearFeedMarkerBindingRecyclePool(){
-        while (true) {
-            if (feedMarkerBindingRecyclePool.acquire() == null)
-                break
+    private fun loadTestFeedMarker(): List<FeedMarker> {
+        return mutableListOf<FeedMarker>().apply {
+            add(
+                FeedMarker(
+                    "1",
+                    LatLng(37.363188, 127.107497),
+                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                )
+            )
+            add(
+                FeedMarker(
+                    "2",
+                    LatLng(37.362424, 127.106644),
+                    "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png"
+                )
+            )
+            add(
+                FeedMarker(
+                    "3",
+                    LatLng(37.361290, 127.107213),
+                    "https://homepages.cae.wisc.edu/~ece533/images/baboon.png"
+                )
+            )
+            add(
+                FeedMarker(
+                    "4",
+                    LatLng(37.361025, 127.107824),
+                    "https://homepages.cae.wisc.edu/~ece533/images/boat.png"
+                )
+            )
         }
     }
-    override fun onCleared() {
-        feedMarkerBindingTable.clear()
-        clearFeedMarkerBindingRecyclePool()
-        super.onCleared()
-    }
 
-    companion object {
-        private const val FEED_MARKER_COUNT = 10
+    override fun onCleared() {
+        _feedMarkers.clear()
+        super.onCleared()
     }
 }
