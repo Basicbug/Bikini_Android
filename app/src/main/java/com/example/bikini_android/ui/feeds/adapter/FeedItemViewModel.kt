@@ -10,6 +10,7 @@ package com.example.bikini_android.ui.feeds.adapter
 import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.ui.common.item.ItemViewModel
+import java.util.*
 
 /**
  * @author MyeongKi
@@ -23,4 +24,10 @@ abstract class FeedItemViewModel : ItemViewModel() {
             field = value
             notifyPropertyChanged(BR.userId)
         }
+
+    var feedOrderOfUser = ""
+
+    override fun hashCode(): Int {
+        return Objects.hash(userId, feedOrderOfUser)
+    }
 }

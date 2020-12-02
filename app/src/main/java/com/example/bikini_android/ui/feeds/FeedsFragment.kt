@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
-import com.example.bikini_android.ui.feeds.adapter.FeedItemDefaultViewModel
 import com.example.bikini_android.ui.feeds.adapter.FeedItemDiffCallback
+import com.example.bikini_android.ui.feeds.adapter.FeedLinearItemViewModel
 import com.example.bikini_android.ui.holder.MainHolderFragment
 
 /**
@@ -32,19 +32,23 @@ class FeedsFragment : MainHolderFragment() {
             false
         )
 
-        var adapter = DefaultListAdapter(FeedItemDiffCallback<FeedItemDefaultViewModel>())
+        var adapter = DefaultListAdapter(FeedItemDiffCallback<FeedLinearItemViewModel>())
 
-        var testFeeds = mutableListOf<FeedItemDefaultViewModel>()
+        var testFeeds = mutableListOf<FeedLinearItemViewModel>()
 
-        testFeeds.add(FeedItemDefaultViewModel().apply {
+        testFeeds.add(FeedLinearItemViewModel().apply {
             userId = "sample1"
         })
-        testFeeds.add(FeedItemDefaultViewModel().apply {
+        testFeeds.add(FeedLinearItemViewModel().apply {
             userId = "sample2"
         })
-        testFeeds.add(FeedItemDefaultViewModel().apply {
+        testFeeds.add(FeedLinearItemViewModel().apply {
             userId = "sample3"
         })
+        testFeeds.add(FeedLinearItemViewModel().apply {
+            userId = "sample4"
+        })
+
 
         adapter.submitList(testFeeds)
 

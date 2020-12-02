@@ -7,7 +7,7 @@ import com.example.bikini_android.ui.common.list.DefaultDiffCallback
  */
 class FeedItemDiffCallback<T : FeedItemViewModel> : DefaultDiffCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-        return oldItem.userId == newItem.userId
+        return oldItem.hashCode() == newItem.hashCode()
     }
 
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
