@@ -7,15 +7,10 @@
 
 package com.example.bikini_android.ui.map
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.bikini_android.repository.feed.FeedMarker
 import com.example.bikini_android.util.bus.RxAction
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.disposables.CompositeDisposable
 
@@ -45,23 +40,6 @@ class BikiniMapViewModel : ViewModel() {
         itemEventRelay.accept(FeedMarkersLoadEvent(loadTestFeedMarker()))
     }
 
-    fun getFeedMarkerOption(feedMarkerView: View, position: LatLng): MarkerOptions {
-        return MarkerOptions()
-            .position(position)
-            .icon(BitmapDescriptorFactory.fromBitmap(convertBitmap(feedMarkerView)))
-    }
-
-    private fun convertBitmap(feedMarkerView: View): Bitmap {
-        return Bitmap.createBitmap(
-            feedMarkerView.measuredWidth,
-            feedMarkerView.measuredHeight,
-            Bitmap.Config.ARGB_8888
-        ).also { bitmap ->
-            Canvas(bitmap).run {
-                feedMarkerView.draw(this)
-            }
-        }
-    }
 
     private fun loadTestFeedMarker(): List<FeedMarker> {
         return mutableListOf<FeedMarker>().apply {

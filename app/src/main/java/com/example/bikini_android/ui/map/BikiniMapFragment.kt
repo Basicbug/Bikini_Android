@@ -21,6 +21,7 @@ import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.FeedMarker
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
 import com.jakewharton.rxrelay2.PublishRelay
@@ -55,7 +56,7 @@ class BikiniMapFragment : BaseMapFragment() {
         observeMapEvent()
         viewModel.loadFeedMarkers()
     }
-
+    
     private fun observeMapEvent() {
         itemEventRelay
             .ofType(FeedMarkerImageLoadEvent::class.java)
@@ -74,7 +75,7 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private fun addMarker(feedMarker: FeedMarker) {
         feedMarkerBindingTable[feedMarker]?.root?.let {
-            map.addMarker(viewModel.getFeedMarkerOption(it, feedMarker.position))
+            map.addMarker(GoogleMapUtils.getFeedMarkerOption(it, feedMarker.position))
         }
     }
 
