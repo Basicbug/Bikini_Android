@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileBinding
-import com.example.bikini_android.ui.holder.MainHolderFragment
+import com.example.bikini_android.ui.base.BaseFragment
 
 /**
  * @author bsgreentea
  */
-class ProfileFragment : MainHolderFragment() {
+class ProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
