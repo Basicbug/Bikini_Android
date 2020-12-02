@@ -18,6 +18,7 @@ import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
+import com.example.bikini_android.repository.feed.FeedConverter
 import com.example.bikini_android.repository.feed.FeedMarker
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.util.bus.RxAction
@@ -36,8 +37,8 @@ class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val feedMarkerBindingTable = ArrayMap<FeedMarker, ViewFeedMarkerBinding>()
-    private val viewModel: BikiniMapViewModel by lazy {
-        ViewModelProvider(this)[BikiniMapViewModel::class.java]
+    private val viewModel: BikiniMapFeedsViewModel by lazy {
+        ViewModelProvider(this)[BikiniMapFeedsViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -48,17 +49,18 @@ class BikiniMapFragment : BaseMapFragment() {
         DataBindingUtil.inflate<FragmentBikiniMapBinding>(inflater, R.layout.fragment_bikini_map, container, false)
             .also {
                 binding = it
-                viewModel.init(itemEventRelay, disposables)
+                viewModel.addEventRelay(requireContext(), itemEventRelay)
             }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeMapEvent()
-        viewModel.loadFeedMarkers()
+        viewModel.loadFeedMarkers(disposables)
     }
 
     override fun onDestroyView() {
         feedMarkerBindingTable.clear()
+        viewModel.deleteEventRelay(requireContext())
         super.onDestroyView()
     }
 
@@ -71,10 +73,16 @@ class BikiniMapFragment : BaseMapFragment() {
             }.addTo(disposables)
 
         itemEventRelay
-            .ofType(FeedMarkersLoadEvent::class.java)
+            .ofType(FeedsLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                bindFeedMarkerList(event.feedMarkers)
+                event.feeds
+                    .map {
+                        FeedConverter.convertToFeedMarker(it)
+                    }
+                    .run {
+                        bindFeedMarkerList(this)
+                    }
             }.addTo(disposables)
     }
 

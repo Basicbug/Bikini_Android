@@ -7,7 +7,7 @@
 
 package com.example.bikini_android.ui.map
 
-import com.example.bikini_android.repository.feed.FeedMarker
+import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.util.bus.RxAction
 
 /**
@@ -15,4 +15,4 @@ import com.example.bikini_android.util.bus.RxAction
  */
 
 
-class FeedMarkersLoadEvent(val feedMarkers: List<FeedMarker>) : RxAction
+class FeedsLoadEvent(val feeds: List<Feed>) : RxAction

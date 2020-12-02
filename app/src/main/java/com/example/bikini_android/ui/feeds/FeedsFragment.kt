@@ -35,13 +35,6 @@ class FeedsFragment : BaseFragment() {
 
         var testFeeds = mutableListOf<Feed>()
 
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-        testFeeds.add(Feed())
-
         adapter.setItems(testFeeds)
 
         binding.feeds.adapter = adapter
