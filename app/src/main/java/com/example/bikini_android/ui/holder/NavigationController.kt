@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.map.BikiniMapFragment
+import com.example.bikini_android.ui.profile.ProfileFragment
 import com.example.bikini_android.ui.settings.SettingsFragment
 import io.reactivex.Maybe
 
@@ -77,6 +78,15 @@ class NavigationController(
             .map { findFragment(it) }
             .doOnSuccess { replaceFragment(it!!) }
             .doOnComplete { replaceFragment(FeedsFragment.newInstance()) }
+            .subscribe()
+    }
+
+    fun navigateToProfile() {
+        Maybe.just(ProfileFragment::class.java)
+            .filter { findFragment(it) != null }
+            .map { findFragment(it) }
+            .doOnSuccess { replaceFragment(it!!) }
+            .doOnComplete { replaceFragment(ProfileFragment.newInstance()) }
             .subscribe()
     }
 

@@ -18,5 +18,6 @@ import com.example.bikini_android.util.bus.RxAction
 enum class ToolbarItem(val visible: Boolean, @StringRes val titleResId: Int) : RxAction {
     BIKINI_TOOLBAR(true, R.string.bikini_toolbar_title),
     FEEDS_TOOLBAR(true, R.string.feeds_toolbar_title),
-    SETTINGS_TOOLBAR(true, R.string.settings_toolbar_title);
+    SETTINGS_TOOLBAR(true, R.string.settings_toolbar_title),
+    PROFILE_TOOLBAR(true, R.string.profile_toolbar_title);
 }

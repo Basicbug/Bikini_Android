@@ -37,6 +37,11 @@ enum class BottomNavigationItem(
         menuId = R.id.settings_icon,
         navigationAction = { navigateController -> navigateController.navigateToSettings() },
         eventAction = { relay -> relay.accept(ToolbarItem.SETTINGS_TOOLBAR) }
+    ),
+    PROFILE(
+        menuId = R.id.profile_icon,
+        navigationAction = { navigateController -> navigateController.navigateToProfile() },
+        eventAction = { relay -> relay.accept(ToolbarItem.PROFILE_TOOLBAR) }
     );
 
     fun navigate(navigationController: NavigationController) {
