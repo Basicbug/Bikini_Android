@@ -56,7 +56,12 @@ class BikiniMapFragment : BaseMapFragment() {
         observeMapEvent()
         viewModel.loadFeedMarkers()
     }
-    
+
+    override fun onDestroyView() {
+        feedMarkerBindingTable.clear()
+        super.onDestroyView()
+    }
+
     private fun observeMapEvent() {
         itemEventRelay
             .ofType(FeedMarkerImageLoadEvent::class.java)
