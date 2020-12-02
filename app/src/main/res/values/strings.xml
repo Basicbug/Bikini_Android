@@ -3,9 +3,16 @@
     <string name="bikini_map_icon_title">지도</string>
     <string name="adding_contents_icon_title">추가</string>
     <string name="settings_icon_title">세팅</string>
+    <!--api key-->
+    <string name="google_map_api_key">AIzaSyAraq-2MhBXgG1wnaG-tFWIgamxYiCDAtk</string>
     <!--toolbar-->
     <string name="bikini_toolbar_title">Bikini</string>
     <string name="feeds_toolbar_title">Feeds</string>
     <string name="settings_toolbar_title">Settings</string>
     <string name="profile_toolbar_title">Profile</string>
+
+    <!--permission-->
+    <string name="permission_required_toast">권한이 필요합니다.</string>
+    <string name="permission_rationale_location">위치 권한 요청</string>
+    <string name="location_permission_denied">해당 권한 없이는 앱을 사용할 수 없습니다.</string>
 </resources>
