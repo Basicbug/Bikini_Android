@@ -1,16 +1,15 @@
 /*
- * BikiniMapViewModel.kt 2020. 12. 2
+ * FeedsViewModel.kt 2020. 12. 3
  *
  * Copyright 2020 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android.ui.map
+package com.example.bikini_android.ui.feeds
 
-import android.content.Context
-import android.util.ArrayMap
 import androidx.lifecycle.ViewModel
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.ui.map.FeedsLoadEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
@@ -20,30 +19,23 @@ import io.reactivex.disposables.CompositeDisposable
  * @author MyeongKi
  */
 
-class BikiniMapFeedsViewModel : ViewModel() {
+class FeedsViewModel(
+    private val itemEventRelay: Relay<RxAction>,
+    private val disposables: CompositeDisposable
+) : ViewModel() {
     private val _feeds: MutableList<Feed> = mutableListOf()
-    private var itemEventRelayTable: ArrayMap<Context, Relay<RxAction>> = ArrayMap()
 
-    fun addEventRelay(context: Context, itemEventRelay: Relay<RxAction>) {
-        itemEventRelayTable[context] = itemEventRelay
-    }
-
-    fun deleteEventRelay(context: Context) {
-        itemEventRelayTable[context] = null
-    }
-
-    fun loadFeedMarkers(disposables: CompositeDisposable) {
+    fun loadFeedMarkers() {
         if (_feeds.isNotEmpty()) {
-            invokeCompletedLoadFeedEvent()
+            itemEventRelay.accept(FeedsLoadEvent(_feeds))
         } else {
-            loadFeedMarkersFromRepository(disposables)
+            loadFeedMarkersFromRepository()
         }
     }
 
-    private fun loadFeedMarkersFromRepository(disposables: CompositeDisposable) {
-        _feeds.clear()
-        _feeds.addAll(loadTestFeedMarker())
-        invokeCompletedLoadFeedEvent()
+    private fun loadFeedMarkersFromRepository() {
+
+        itemEventRelay.accept(FeedsLoadEvent(loadTestFeedMarker()))
     }
 
     private fun loadTestFeedMarker(): List<Feed> {
@@ -87,15 +79,8 @@ class BikiniMapFeedsViewModel : ViewModel() {
         }
     }
 
-    private fun invokeCompletedLoadFeedEvent() {
-        for (itemEventRelay in itemEventRelayTable.values) {
-            itemEventRelay.accept(FeedsLoadEvent(_feeds))
-        }
-    }
-
     override fun onCleared() {
         _feeds.clear()
-        itemEventRelayTable.clear()
         super.onCleared()
     }
 }

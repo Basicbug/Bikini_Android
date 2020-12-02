@@ -21,6 +21,8 @@ import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.FeedConverter
 import com.example.bikini_android.repository.feed.FeedMarker
 import com.example.bikini_android.ui.base.BaseMapFragment
+import com.example.bikini_android.ui.feeds.FeedsViewModel
+import com.example.bikini_android.ui.feeds.FeedsViewModelFactory
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
@@ -37,8 +39,10 @@ class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val feedMarkerBindingTable = ArrayMap<FeedMarker, ViewFeedMarkerBinding>()
-    private val viewModel: BikiniMapFeedsViewModel by lazy {
-        ViewModelProvider(this)[BikiniMapFeedsViewModel::class.java]
+    private val viewModel: FeedsViewModel by lazy {
+        ViewModelProvider(this,
+            FeedsViewModelFactory(itemEventRelay, disposables)
+        )[FeedsViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -49,18 +53,16 @@ class BikiniMapFragment : BaseMapFragment() {
         DataBindingUtil.inflate<FragmentBikiniMapBinding>(inflater, R.layout.fragment_bikini_map, container, false)
             .also {
                 binding = it
-                viewModel.addEventRelay(requireContext(), itemEventRelay)
             }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeMapEvent()
-        viewModel.loadFeedMarkers(disposables)
+        viewModel.loadFeedMarkers()
     }
 
     override fun onDestroyView() {
         feedMarkerBindingTable.clear()
-        viewModel.deleteEventRelay(requireContext())
         super.onDestroyView()
     }
 
