@@ -22,7 +22,6 @@ import com.example.bikini_android.repository.feed.FeedConverter
 import com.example.bikini_android.repository.feed.FeedMarker
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.feeds.FeedsViewModel
-import com.example.bikini_android.ui.feeds.FeedsViewModelFactory
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
@@ -30,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
@@ -37,13 +37,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
-    private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
-    private val feedMarkerBindingTable = ArrayMap<FeedMarker, ViewFeedMarkerBinding>()
     private val viewModel: FeedsViewModel by lazy {
-        ViewModelProvider(this,
-            FeedsViewModelFactory(itemEventRelay, disposables)
-        )[FeedsViewModel::class.java]
+        ViewModelProvider(this)[FeedsViewModel::class.java]
     }
+    private val itemEventRelay: Relay<RxAction> by lazy {
+        viewModel.itemEventRelay
+    }
+
+    private val feedMarkerBindingTable = ArrayMap<FeedMarker, ViewFeedMarkerBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

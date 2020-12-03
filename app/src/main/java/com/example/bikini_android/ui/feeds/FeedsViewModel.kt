@@ -12,6 +12,7 @@ import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.map.FeedsLoadEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.google.android.gms.maps.model.LatLng
+import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.disposables.CompositeDisposable
 
@@ -19,11 +20,10 @@ import io.reactivex.disposables.CompositeDisposable
  * @author MyeongKi
  */
 
-class FeedsViewModel(
-    private val itemEventRelay: Relay<RxAction>,
-    private val disposables: CompositeDisposable
-) : ViewModel() {
+class FeedsViewModel : ViewModel() {
     private val _feeds: MutableList<Feed> = mutableListOf()
+    val itemEventRelay: Relay<RxAction> = PublishRelay.create()
+    private val disposables: CompositeDisposable = CompositeDisposable()
 
     fun loadFeedMarkers() {
         if (_feeds.isNotEmpty()) {
@@ -81,6 +81,7 @@ class FeedsViewModel(
 
     override fun onCleared() {
         _feeds.clear()
+        disposables.dispose()
         super.onCleared()
     }
 }
