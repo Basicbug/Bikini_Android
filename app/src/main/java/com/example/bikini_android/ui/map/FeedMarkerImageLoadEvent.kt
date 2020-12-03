@@ -7,10 +7,10 @@
 
 package com.example.bikini_android.ui.map
 
-import com.example.bikini_android.repository.feed.FeedMarker
+import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.util.bus.RxAction
 
 /**
  * @author MyeongKi
  */
-class FeedMarkerImageLoadEvent(val feedMarker: FeedMarker) : RxAction
+class FeedMarkerImageLoadEvent(val feed: Feed) : RxAction

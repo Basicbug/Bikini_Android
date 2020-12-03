@@ -10,5 +10,6 @@ data class Feed(
     var userId: String = "sampleUserId",
     var content: String = "sampleContent",
     val position: LatLng,
-    val imageUrl: String
+    val imageUrl: String,
+    val countOfGroupFeed: Int = 1
 )

@@ -18,18 +18,15 @@ import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
-import com.example.bikini_android.repository.feed.FeedConverter
-import com.example.bikini_android.repository.feed.FeedMarker
+import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.feeds.FeedsViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
-import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
@@ -44,7 +41,7 @@ class BikiniMapFragment : BaseMapFragment() {
         viewModel.itemEventRelay
     }
 
-    private val feedMarkerBindingTable = ArrayMap<FeedMarker, ViewFeedMarkerBinding>()
+    private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,35 +69,29 @@ class BikiniMapFragment : BaseMapFragment() {
             .ofType(FeedMarkerImageLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                addMarker(event.feedMarker)
+                addMarker(event.feed)
             }.addTo(disposables)
 
         itemEventRelay
             .ofType(FeedsLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                event.feeds
-                    .map {
-                        FeedConverter.convertToFeedMarker(it)
-                    }
-                    .run {
-                        bindFeedMarkerList(this)
-                    }
+                bindFeedMarkerList(event.feeds)
             }.addTo(disposables)
     }
 
-    private fun addMarker(feedMarker: FeedMarker) {
-        feedMarkerBindingTable[feedMarker]?.root?.let {
-            map.addMarker(GoogleMapUtils.getFeedMarkerOption(it, feedMarker.position))
+    private fun addMarker(feed: Feed) {
+        feedMarkerBindingTable[feed]?.root?.let {
+            map.addMarker(GoogleMapUtils.getFeedMarkerOption(it, feed.position))
         }
     }
 
-    private fun bindFeedMarkerList(feedMarkerList: List<FeedMarker>) {
-        for (feedMarker in feedMarkerList) {
+    private fun bindFeedMarkerList(feeds: List<Feed>) {
+        for (feed in feeds) {
             getFeedMarkerBinding().run {
-                feedMarkerBindingTable[feedMarker] = this
+                feedMarkerBindingTable[feed] = this
                 apply {
-                    viewmodel = FeedMarkerItemViewModel(feedMarker).also {
+                    viewmodel = FeedMarkerItemViewModel(feed).also {
                         it.itemEventRelay = itemEventRelay
                     }
                     executePendingBindings()

@@ -9,19 +9,19 @@ package com.example.bikini_android.ui.map
 
 import androidx.databinding.Bindable
 import com.example.bikini_android.R
-import com.example.bikini_android.repository.feed.FeedMarker
+import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.common.ItemViewModel
 
 /**
  * @author MyeongKi
  */
 
-class FeedMarkerItemViewModel(val feedMarker: FeedMarker) : ItemViewModel() {
+class FeedMarkerItemViewModel(val feed: Feed) : ItemViewModel() {
     @get:Bindable
-    var imageUrl = feedMarker.imageUrl
+    var imageUrl = feed.imageUrl
 
     fun getImageLoadEvent() {
-        itemEventRelay?.accept(FeedMarkerImageLoadEvent(feedMarker))
+        itemEventRelay?.accept(FeedMarkerImageLoadEvent(feed))
     }
 
     override fun getLayoutRes(): Int {
