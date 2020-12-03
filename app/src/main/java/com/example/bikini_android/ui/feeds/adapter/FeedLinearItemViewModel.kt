@@ -25,4 +25,8 @@ open class FeedLinearItemViewModel : FeedItemViewModel() {
         }
 
     override fun getLayoutRes(): Int = R.layout.item_feed
+
+    override fun hashCode(): Int {
+        return Objects.hash(super.hashCode(), imageUri, content)
+    }
 }
