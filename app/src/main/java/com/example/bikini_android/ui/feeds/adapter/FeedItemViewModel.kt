@@ -25,9 +25,9 @@ abstract class FeedItemViewModel : ItemViewModel() {
             notifyPropertyChanged(BR.userId)
         }
 
-    var feedOrderOfUser = ""
+    var feedNumOfUser = ""
 
     override fun hashCode(): Int {
-        return Objects.hash(userId, feedOrderOfUser)
+        return Objects.hash(userId, feedNumOfUser)
     }
 }

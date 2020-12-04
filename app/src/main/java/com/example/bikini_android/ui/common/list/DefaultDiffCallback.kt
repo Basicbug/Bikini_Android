@@ -6,12 +6,12 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
 /**
  * @author bsgreentea
  */
-abstract class DefaultDiffCallback<T : ItemViewModel> : DiffUtil.ItemCallback<T>() {
+class DefaultDiffCallback<T : ItemViewModel> : DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-        TODO("Not yet implemented")
+        return oldItem.hashCode() == newItem.hashCode()
     }
 
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-        TODO("Not yet implemented")
+        return oldItem.hashCode() == newItem.hashCode()
     }
 }

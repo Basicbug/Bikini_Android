@@ -11,13 +11,6 @@ import java.util.*
 open class FeedLinearItemViewModel : FeedItemViewModel() {
 
     @get: Bindable
-    var imageUri = ""
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.imageUri)
-        }
-
-    @get: Bindable
     var content = ""
         set(value) {
             field = value
@@ -25,4 +18,8 @@ open class FeedLinearItemViewModel : FeedItemViewModel() {
         }
 
     override fun getLayoutRes(): Int = R.layout.item_feed
+
+    override fun hashCode(): Int {
+        return Objects.hash(super.hashCode(), content)
+    }
 }

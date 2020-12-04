@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.ui.base.BaseFragment
+import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
-import com.example.bikini_android.ui.feeds.adapter.FeedItemDiffCallback
 import com.example.bikini_android.ui.feeds.adapter.FeedLinearItemViewModel
 
 /**
@@ -32,7 +32,7 @@ class FeedsFragment : BaseFragment() {
             false
         )
 
-        var adapter = DefaultListAdapter(FeedItemDiffCallback<FeedLinearItemViewModel>())
+        var adapter = DefaultListAdapter(DefaultDiffCallback<FeedLinearItemViewModel>())
 
         var testFeeds = mutableListOf<FeedLinearItemViewModel>()
 
