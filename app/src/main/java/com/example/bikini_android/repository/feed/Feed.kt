@@ -1,5 +1,7 @@
 package com.example.bikini_android.repository.feed
 
+import com.google.android.gms.maps.model.LatLng
+
 /**
  * @author bsgreentea
  */
@@ -8,8 +10,8 @@ data class Feed(
     var feedNumOfUser: Int = 0,
     var userId: String = "sampleUserId",
     var content: String = "sampleContent",
-    var imageUri: String = "sampleImageUri",
-    var profileImageUri: String = "sampleProfile",
-    var longitude: String = "xx.xxxx",
-    var latitude: String = "yy.yyyy"
+    var imageUrl: String = "sampleImageUri",
+    var profileImageUrl: String = "sampleProfile",
+    val position: LatLng,
+    val countOfGroupFeed: Int = 1
 )
