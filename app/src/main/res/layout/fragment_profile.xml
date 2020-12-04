@@ -3,36 +3,38 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bottom_navigation_height">
 
         <TextView
             android:id="@+id/my_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/space_large"
             android:text="sample_id"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_median"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/representative_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_margin="20dp"
+            android:layout_width="@dimen/profile_image_height_and_width"
+            android:layout_height="@dimen/profile_image_height_and_width"
+            android:layout_margin="@dimen/space_large"
             android:foreground="@drawable/circular"
+            android:src="@mipmap/ic_launcher"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/my_id" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="40dp"
             android:text="1K FLAGS"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_median"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/representative_image"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/representative_image"
             app:layout_constraintTop_toTopOf="@id/representative_image" />
 
@@ -40,7 +42,7 @@
             android:id="@+id/division_line"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/space_large"
             app:layout_constraintBottom_toTopOf="@id/my_feeds"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +50,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_feeds"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="@dimen/match_constraint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +60,8 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="@dimen/space_large"
+            android:layout_marginBottom="@dimen/space_large"
             android:src="@drawable/ic_baseline_add_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

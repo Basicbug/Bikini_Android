@@ -9,6 +9,7 @@
     <string name="bikini_toolbar_title">Bikini</string>
     <string name="feeds_toolbar_title">Feeds</string>
     <string name="settings_toolbar_title">Settings</string>
+    <string name="profile_toolbar_title">Profile</string>
 
     <!--permission-->
     <string name="permission_required_toast">권한이 필요합니다.</string>

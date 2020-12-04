@@ -17,5 +17,13 @@
     <dimen name="user_id_height">50dp</dimen>
     <dimen name="content_image_max_height">300dp</dimen>
 
+    <dimen name="profile_image_height_and_width">120dp</dimen>
+
+    <!--space-->
+    <dimen name="space_large">20dp</dimen>
+
+    <!--text-->
+    <dimen name="text_median">20sp</dimen>
+
 
 </resources>
