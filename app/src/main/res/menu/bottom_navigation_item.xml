@@ -25,4 +25,10 @@
         android:icon="@android:drawable/ic_dialog_info"
         android:title=""
         app:showAsAction="never" />
+    <item
+        android:id="@+id/profile_icon"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title=""
+        app:showAsAction="never" />
 </menu>
