@@ -1,5 +1,5 @@
 /*
- * SampleResponse.kt 2020. 10. 26
+ * DummyResponse.kt 2020. 11. 28
  *
  * Copyright 2020 BasicBug. All rights Reserved.
  *
@@ -13,9 +13,9 @@ import com.google.gson.annotations.SerializedName
  * @author MyeongKi
  */
 
-class SampleResponse : JsonResponseWrapper<SampleResponse.Result>() {
+class DummyImageResponse : JsonResponseWrapper<DummyImageResponse.Result>() {
     data class Result(
-        @SerializedName("sampleData")
-        val sample: String
+        @SerializedName("images")
+        val images: List<String>
     )
 }
