@@ -35,8 +35,8 @@ class MainHolderActivity : BaseActivity() {
     private lateinit var viewModels: List<ViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        viewModels = MainHolderViewModelsHelper.getViewModels(this, savedInstanceState)
         super.onCreate(savedInstanceState)
+        viewModels = MainHolderViewModelsHelper.getViewModels(this, savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
         navigateController = NavigationController(binding.contentFragmentHolder.id, supportFragmentManager)
         setUpToolbar()
