@@ -10,7 +10,7 @@ package com.example.bikini_android.ui.map
 import androidx.databinding.Bindable
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.common.ItemViewModel
+import com.example.bikini_android.ui.common.item.ItemViewModel
 
 /**
  * @author MyeongKi

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.bikini_android.ui.feeds.adapter.FeedLinearItemViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +30,7 @@
             android:layout_height="@dimen/user_id_height"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
-            android:text="sample_user_id"
+            android:text="@{viewmodel.userId}"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/user_thumbnail"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/grey"
+            android:src="@mipmap/ic_launcher"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="@dimen/content_image_max_height"
             app:layout_constraintStart_toStartOf="parent"

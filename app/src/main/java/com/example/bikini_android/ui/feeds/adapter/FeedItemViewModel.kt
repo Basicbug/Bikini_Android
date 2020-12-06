@@ -1,21 +1,33 @@
+/*
+ * FeedItemViewModel.kt 2020. 11. 17
+ *
+ * Copyright 2020 BasicBug. All rights Reserved.
+ *
+ */
+
 package com.example.bikini_android.ui.feeds.adapter
 
-import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.example.bikini_android.BR
-import com.example.bikini_android.R
+import com.example.bikini_android.ui.common.item.ItemViewModel
+import java.util.*
 
 /**
- * @author bsgreentea
+ * @author MyeongKi
  */
-class FeedItemViewModel : BaseObservable() {
+
+abstract class FeedItemViewModel : ItemViewModel() {
 
     @get: Bindable
     var userId = ""
-        set(value){
+        set(value) {
             field = value
             notifyPropertyChanged(BR.userId)
         }
 
-    fun getLayoutRes(): Int = R.layout.item_feed
+    var feedNumOfUser = ""
+
+    override fun hashCode(): Int {
+        return Objects.hash(userId, feedNumOfUser)
+    }
 }

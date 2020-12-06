@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
-import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseFragment
-import com.example.bikini_android.ui.feeds.adapter.FeedAdapter
+import com.example.bikini_android.ui.common.list.DefaultDiffCallback
+import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.ui.feeds.adapter.FeedLinearItemViewModel
 
 /**
  * @author bsgreentea
@@ -31,13 +32,28 @@ class FeedsFragment : BaseFragment() {
             false
         )
 
-        var adapter = FeedAdapter()
+        var adapter = DefaultListAdapter(DefaultDiffCallback<FeedLinearItemViewModel>())
 
-        var testFeeds = mutableListOf<Feed>()
+        var testFeeds = mutableListOf<FeedLinearItemViewModel>()
 
-        adapter.setItems(testFeeds)
+        testFeeds.add(FeedLinearItemViewModel().apply {
+            userId = "sample1"
+        })
+        testFeeds.add(FeedLinearItemViewModel().apply {
+            userId = "sample2"
+        })
+        testFeeds.add(FeedLinearItemViewModel().apply {
+            userId = "sample3"
+        })
+        testFeeds.add(FeedLinearItemViewModel().apply {
+            userId = "sample4"
+        })
+
+
+        adapter.submitList(testFeeds)
 
         binding.feeds.adapter = adapter
+
         return binding.root
     }
 

@@ -45,8 +45,10 @@ class FeedsViewModel : ViewModel() {
                     1,
                     "1",
                     "test",
+                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
+                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
                     LatLng(37.363188, 127.107497),
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                    1
                 )
             )
             add(
@@ -54,8 +56,10 @@ class FeedsViewModel : ViewModel() {
                     1,
                     "2",
                     "test",
+                    "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
+                    "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
                     LatLng(37.362424, 127.106644),
-                    "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png"
+                    1
                 )
             )
             add(
@@ -63,8 +67,11 @@ class FeedsViewModel : ViewModel() {
                     1,
                     "3",
                     "test",
+                    "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
+                    "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
                     LatLng(37.361290, 127.107213),
-                    "https://homepages.cae.wisc.edu/~ece533/images/baboon.png"
+                    1
+
                 )
             )
             add(
@@ -72,8 +79,10 @@ class FeedsViewModel : ViewModel() {
                     1,
                     "4",
                     "test",
+                    "https://homepages.cae.wisc.edu/~ece533/images/boat.png",
+                    "https://homepages.cae.wisc.edu/~ece533/images/boat.png",
                     LatLng(37.361025, 127.107824),
-                    "https://homepages.cae.wisc.edu/~ece533/images/boat.png"
+                    1
                 )
             )
         }
