@@ -13,5 +13,5 @@ data class Feed(
     var imageUrl: String = "sampleImageUri",
     var profileImageUrl: String = "sampleProfile",
     val position: LatLng,
-    val countOfGroupFeed: Int = 1
+    var countOfGroupFeed: Int = 1
 )

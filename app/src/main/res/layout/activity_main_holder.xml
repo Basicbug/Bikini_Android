@@ -22,7 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <FrameLayout
             android:id="@+id/content_fragment_holder"
             android:layout_width="0dp"
