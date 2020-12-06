@@ -20,8 +20,12 @@ import io.reactivex.disposables.CompositeDisposable
  * @author MyeongKi
  */
 
-class FeedsViewModel : ViewModel() {
-    private val _feeds: MutableList<Feed> = mutableListOf()
+class FeedsViewModel(initFeeds: List<Feed>) : ViewModel() {
+    private val _feeds: MutableList<Feed> = mutableListOf<Feed>().apply {
+        this.addAll(initFeeds)
+    }
+    val feeds: List<Feed>
+        get() = _feeds
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -34,8 +38,11 @@ class FeedsViewModel : ViewModel() {
     }
 
     private fun loadFeedMarkersFromRepository() {
+        loadTestFeedMarker().run {
+            replaceFeeds(this)
+            itemEventRelay.accept(FeedsLoadEvent(this))
+        }
 
-        itemEventRelay.accept(FeedsLoadEvent(loadTestFeedMarker()))
     }
 
     private fun loadTestFeedMarker(): List<Feed> {
@@ -86,6 +93,11 @@ class FeedsViewModel : ViewModel() {
                 )
             )
         }
+    }
+
+    private fun replaceFeeds(feeds: List<Feed>) {
+        _feeds.clear()
+        _feeds.addAll(feeds)
     }
 
     override fun onCleared() {

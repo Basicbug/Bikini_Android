@@ -9,11 +9,13 @@ package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.common.ToolbarItem
+import com.example.bikini_android.ui.feeds.FeedsViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
@@ -29,22 +31,17 @@ class MainHolderActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainHolderBinding
     lateinit var navigateController: NavigationController
-
-    private val disposable: CompositeDisposable = CompositeDisposable()
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
+    private lateinit var viewModels: List<ViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        viewModels = MainHolderViewModelsHelper.getViewModels(this, savedInstanceState)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
         navigateController = NavigationController(binding.contentFragmentHolder.id, supportFragmentManager)
         setUpToolbar()
         setUpBottomNavigation()
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.clear()
     }
 
     override fun onBackPressed() {
@@ -85,5 +82,14 @@ class MainHolderActivity : BaseActivity() {
                 }
 
             }.addTo(disposable)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        MainHolderViewModelsHelper.saveInstanceState(outState, viewModels)
+    }
+
+    companion object {
+        private const val KEY_FEEDS = "keyFeeds"
     }
 }
