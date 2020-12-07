@@ -21,7 +21,6 @@ import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.feeds.FeedsViewModel
-import com.example.bikini_android.ui.feeds.FeedsViewModelFactory
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo

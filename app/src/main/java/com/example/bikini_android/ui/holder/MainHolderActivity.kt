@@ -15,13 +15,11 @@ import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.common.ToolbarItem
-import com.example.bikini_android.ui.feeds.FeedsViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
@@ -32,11 +30,12 @@ class MainHolderActivity : BaseActivity() {
     lateinit var binding: ActivityMainHolderBinding
     lateinit var navigateController: NavigationController
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
-    private lateinit var viewModels: List<ViewModel>
+    private val viewModels: List<ViewModel> by lazy {
+        MainHolderViewModelsProvider.getViewModels(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModels = MainHolderViewModelsHelper.getViewModels(this, savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
         navigateController = NavigationController(binding.contentFragmentHolder.id, supportFragmentManager)
         setUpToolbar()
@@ -82,14 +81,5 @@ class MainHolderActivity : BaseActivity() {
                 }
 
             }.addTo(disposable)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        MainHolderViewModelsHelper.saveInstanceState(outState, viewModels)
-    }
-
-    companion object {
-        private const val KEY_FEEDS = "keyFeeds"
     }
 }
