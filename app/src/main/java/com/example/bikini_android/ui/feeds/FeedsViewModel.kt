@@ -10,6 +10,7 @@ package com.example.bikini_android.ui.feeds
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.map.FeedsLoadEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.google.android.gms.maps.model.LatLng
@@ -21,12 +22,8 @@ import io.reactivex.disposables.CompositeDisposable
  * @author MyeongKi
  */
 
-class FeedsViewModel(private val handle: SavedStateHandle) : ViewModel() {
+class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
     private var _feeds: List<Feed> = handle.get<MutableList<Feed>>(KEY_FEEDS) ?: mutableListOf()
-        set(value) {
-            handle[KEY_FEEDS] = value
-            field = value
-        }
 
     val feeds: List<Feed>
         get() = _feeds
@@ -47,7 +44,6 @@ class FeedsViewModel(private val handle: SavedStateHandle) : ViewModel() {
             _feeds = this
             itemEventRelay.accept(FeedsLoadEvent(this))
         }
-
     }
 
     private fun loadTestFeedMarker(): List<Feed> {
@@ -98,6 +94,10 @@ class FeedsViewModel(private val handle: SavedStateHandle) : ViewModel() {
                 )
             )
         }
+    }
+
+    override fun saveState() {
+        handle[KEY_FEEDS] = _feeds
     }
 
     override fun onCleared() {

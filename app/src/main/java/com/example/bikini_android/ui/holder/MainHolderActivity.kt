@@ -14,6 +14,7 @@ import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
 import com.example.bikini_android.ui.base.BaseActivity
+import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
@@ -30,8 +31,8 @@ class MainHolderActivity : BaseActivity() {
     lateinit var binding: ActivityMainHolderBinding
     lateinit var navigateController: NavigationController
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
-    private val viewModels: List<ViewModel> by lazy {
-        MainHolderViewModelsProvider.getViewModels(this)
+    private val viewModels: List<BaseViewModel> by lazy {
+        MainHolderViewModelsHelper.getViewModels(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,5 +82,10 @@ class MainHolderActivity : BaseActivity() {
                 }
 
             }.addTo(disposable)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        MainHolderViewModelsHelper.saveState(viewModels)
     }
 }
