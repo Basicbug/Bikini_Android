@@ -50,6 +50,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
         return mutableListOf<Feed>().apply {
             add(
                 Feed(
+                    "1",
                     1,
                     "1",
                     "test",
@@ -61,6 +62,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
             )
             add(
                 Feed(
+                    "2",
                     1,
                     "2",
                     "test",
@@ -72,6 +74,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
             )
             add(
                 Feed(
+                    "3",
                     1,
                     "3",
                     "test",
@@ -84,6 +87,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
             )
             add(
                 Feed(
+                    "4",
                     1,
                     "4",
                     "test",

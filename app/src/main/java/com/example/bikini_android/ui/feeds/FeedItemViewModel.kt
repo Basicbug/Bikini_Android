@@ -1,5 +1,5 @@
 /*
- * FeedItemViewModel.kt 2020. 11. 17
+ * FeedItemViewModel.kt 2020. 12. 8
  *
  * Copyright 2020 BasicBug. All rights Reserved.
  *
@@ -11,13 +11,14 @@ import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.example.bikini_android.util.bus.RxAction
 import java.util.*
 
 /**
  * @author MyeongKi
  */
 
-abstract class FeedItemViewModel(feed: Feed) : ItemViewModel() {
+abstract class FeedItemViewModel(private val feed: Feed) : ItemViewModel() {
 
     @get: Bindable
     var userId = feed.userId
@@ -25,6 +26,7 @@ abstract class FeedItemViewModel(feed: Feed) : ItemViewModel() {
             field = value
             notifyPropertyChanged(BR.userId)
         }
+
     @get: Bindable
     var imageUri = feed.imageUrl
         set(value) {
@@ -32,4 +34,8 @@ abstract class FeedItemViewModel(feed: Feed) : ItemViewModel() {
             notifyPropertyChanged(BR.imageUri)
         }
     var feedNumOfUser = feed.feedNumOfUser
+    fun onClickImage(){
+        itemEventRelay?.accept(ClickEvent(feed))
+    }
+    class ClickEvent(val feed: Feed) : RxAction
 }

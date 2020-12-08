@@ -18,6 +18,7 @@
             android:layout_width="@dimen/match_constraint"
             android:layout_height="@dimen/match_constraint"
             android:src="@mipmap/ic_launcher"
+            android:onClick="@{() -> viewmodel.onClickImage()}"
             app:imageUrl="@{viewmodel.imageUri}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,1:1"

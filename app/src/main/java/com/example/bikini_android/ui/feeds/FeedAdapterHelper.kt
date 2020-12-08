@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
+import com.example.bikini_android.util.bus.RxAction
+import com.jakewharton.rxrelay2.Relay
 
 
 /**
@@ -32,12 +34,14 @@ class FeedAdapterHelper(private val layoutType: RecyclerViewLayoutType = Recycle
         }
     }
 
-    fun getFeedItemViewModel(feed: Feed): FeedItemViewModel {
+    fun getFeedItemViewModel(feed: Feed, itemEventRelay: Relay<RxAction>): FeedItemViewModel {
         return when (layoutType) {
             RecyclerViewLayoutType.VERTICAL, RecyclerViewLayoutType.GRID ->
                 FeedGridItemViewModel(feed)
             RecyclerViewLayoutType.LINEAR ->
                 FeedLinearItemViewModel(feed)
+        }.apply {
+            this.itemEventRelay = itemEventRelay
         }
     }
 

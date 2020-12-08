@@ -12,6 +12,7 @@ import android.util.ArrayMap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
@@ -21,10 +22,12 @@ import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.feeds.FeedsViewModel
+import com.example.bikini_android.ui.holder.NavigationController
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.Marker
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -42,6 +45,8 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
+    private val feedBoundTable = ArrayMap<String, Feed>()
+    private lateinit var navigateController: NavigationController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,17 +56,26 @@ class BikiniMapFragment : BaseMapFragment() {
         DataBindingUtil.inflate<FragmentBikiniMapBinding>(inflater, R.layout.fragment_bikini_map, container, false)
             .also {
                 binding = it
+                navigateController = NavigationController(binding.contentFragmentHolder.id, parentFragmentManager)
             }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
         viewModel.loadFeeds()
+        initMap()
     }
 
     override fun onDestroyView() {
         feedMarkerBindingTable.clear()
         super.onDestroyView()
+    }
+
+    private fun initMap(){
+        map.setOnMarkerClickListener {
+            navigateController.navigateToGridFeeds()
+            true
+        }
     }
 
     private fun observeEvent() {
@@ -84,6 +98,12 @@ class BikiniMapFragment : BaseMapFragment() {
         feedMarkerBindingTable[feed]?.root?.let { view ->
             feed.position?.let { position ->
                 map.addMarker(GoogleMapUtils.getFeedMarkerOption(view, position))
+                    .apply {
+                        tag = feed.feedId
+                    }
+                    .also {
+                        feedBoundTable[feed.feedId] = feed
+                    }
             }
         }
     }
