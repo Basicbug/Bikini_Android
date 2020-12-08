@@ -45,20 +45,18 @@ class FeedsFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_feeds,
-            container,
-            false
-        )
-        binding.apply {
+    ): View? = DataBindingUtil.inflate<FragmentFeedsBinding>(
+        inflater,
+        R.layout.fragment_feeds,
+        container,
+        false
+    ).also {
+        binding = it.apply {
             feeds.adapter = feedsAdapter
             feeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
         observeEvent()
-        return binding.root
-    }
+    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
