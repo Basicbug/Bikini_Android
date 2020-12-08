@@ -30,7 +30,7 @@ enum class BottomNavigationItem(
     ),
     FEEDS(
         menuId = R.id.feeds_icon,
-        navigationAction = { navigationController -> navigationController.navigateToFeeds() },
+        navigationAction = { navigationController -> navigationController.navigateToLinearFeeds() },
         eventAction = { relay -> relay.accept(ToolbarItem.FEEDS_TOOLBAR) }
     ),
     SETTINGS(

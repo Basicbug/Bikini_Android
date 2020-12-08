@@ -10,6 +10,7 @@ package com.example.bikini_android.ui.holder
 import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.map.BikiniMapFragment
 import com.example.bikini_android.ui.profile.ProfileFragment
@@ -72,12 +73,21 @@ class NavigationController(
             .subscribe()
     }
 
-    fun navigateToFeeds() {
+    fun navigateToLinearFeeds() {
         Maybe.just(FeedsFragment::class.java)
             .filter { findFragment(it) != null }
             .map { findFragment(it) }
             .doOnSuccess { replaceFragment(it!!) }
-            .doOnComplete { replaceFragment(FeedsFragment.newInstance()) }
+            .doOnComplete { replaceFragment(FeedsFragment.newInstance(RecyclerViewLayoutType.LINEAR)) }
+            .subscribe()
+    }
+
+    fun navigateToGridFeeds() {
+        Maybe.just(FeedsFragment::class.java)
+            .filter { findFragment(it) != null }
+            .map { findFragment(it) }
+            .doOnSuccess { replaceFragment(it!!) }
+            .doOnComplete { replaceFragment(FeedsFragment.newInstance(RecyclerViewLayoutType.GRID)) }
             .subscribe()
     }
 

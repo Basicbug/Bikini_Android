@@ -1,5 +1,6 @@
 package com.example.bikini_android.ui.common.list
 
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bikini_android.ui.common.item.ItemViewModel
 
@@ -8,10 +9,11 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
  */
 class DefaultDiffCallback<T : ItemViewModel> : DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-        return oldItem.hashCode() == newItem.hashCode()
+        return oldItem == newItem
     }
 
+    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-        return oldItem.hashCode() == newItem.hashCode()
+        return oldItem == newItem
     }
 }

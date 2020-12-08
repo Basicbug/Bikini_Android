@@ -29,7 +29,7 @@ object ImageBindingAdapter {
         imageUrl: String,
         options: RequestOptions?,
         @AttrRes errorAttrResId: Int?,
-        completeLoadEvent: () -> Unit
+        completeLoadEvent: (() -> Unit)?
     ) {
         val glideRequest = Glide.with(imageView.context).load(imageUrl)
         with(glideRequest) {
@@ -57,7 +57,7 @@ object ImageBindingAdapter {
                     dataSource: com.bumptech.glide.load.DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    completeLoadEvent.invoke()
+                    completeLoadEvent?.invoke()
                     return false
                 }
 

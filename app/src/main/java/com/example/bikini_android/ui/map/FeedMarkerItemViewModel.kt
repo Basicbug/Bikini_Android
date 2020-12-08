@@ -16,7 +16,7 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
  * @author MyeongKi
  */
 
-class FeedMarkerItemViewModel(val feed: Feed) : ItemViewModel() {
+class FeedMarkerItemViewModel(private val feed: Feed) : ItemViewModel() {
     @get:Bindable
     var imageUrl = feed.imageUrl
 

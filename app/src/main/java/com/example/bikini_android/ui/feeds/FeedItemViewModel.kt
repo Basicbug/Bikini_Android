@@ -5,10 +5,11 @@
  *
  */
 
-package com.example.bikini_android.ui.feeds.adapter
+package com.example.bikini_android.ui.feeds
 
 import androidx.databinding.Bindable
 import com.example.bikini_android.BR
+import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import java.util.*
 
@@ -16,18 +17,19 @@ import java.util.*
  * @author MyeongKi
  */
 
-abstract class FeedItemViewModel : ItemViewModel() {
+abstract class FeedItemViewModel(feed: Feed) : ItemViewModel() {
 
     @get: Bindable
-    var userId = ""
+    var userId = feed.userId
         set(value) {
             field = value
             notifyPropertyChanged(BR.userId)
         }
-
-    var feedNumOfUser = ""
-
-    override fun hashCode(): Int {
-        return Objects.hash(userId, feedNumOfUser)
-    }
+    @get: Bindable
+    var imageUri = feed.imageUrl
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.imageUri)
+        }
+    var feedNumOfUser = feed.feedNumOfUser
 }

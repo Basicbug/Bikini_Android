@@ -55,8 +55,8 @@ class BikiniMapFragment : BaseMapFragment() {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
-        observeMapEvent()
-        viewModel.loadFeedMarkers()
+        observeEvent()
+        viewModel.loadFeeds()
     }
 
     override fun onDestroyView() {
@@ -64,7 +64,7 @@ class BikiniMapFragment : BaseMapFragment() {
         super.onDestroyView()
     }
 
-    private fun observeMapEvent() {
+    private fun observeEvent() {
         itemEventRelay
             .ofType(FeedMarkerImageLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
@@ -76,7 +76,7 @@ class BikiniMapFragment : BaseMapFragment() {
             .ofType(FeedsLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                bindFeedMarkerList(event.feeds)
+                bindFeedMarkers(event.feeds)
             }.addTo(disposables)
     }
 
@@ -88,7 +88,7 @@ class BikiniMapFragment : BaseMapFragment() {
         }
     }
 
-    private fun bindFeedMarkerList(feeds: List<Feed>) {
+    private fun bindFeedMarkers(feeds: List<Feed>) {
         for (feed in feeds) {
             getFeedMarkerBinding().run {
                 feedMarkerBindingTable[feed] = this

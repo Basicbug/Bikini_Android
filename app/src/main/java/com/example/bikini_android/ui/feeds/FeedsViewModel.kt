@@ -31,7 +31,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 
-    fun loadFeedMarkers() {
+    fun loadFeeds() {
         if (_feeds.isNotEmpty()) {
             itemEventRelay.accept(FeedsLoadEvent(_feeds))
         } else {
