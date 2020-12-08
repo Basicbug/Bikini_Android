@@ -7,8 +7,10 @@
 
 package com.example.bikini_android.ui.feeds
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.map.FeedsLoadEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.google.android.gms.maps.model.LatLng
@@ -20,8 +22,12 @@ import io.reactivex.disposables.CompositeDisposable
  * @author MyeongKi
  */
 
-class FeedsViewModel : ViewModel() {
-    private val _feeds: MutableList<Feed> = mutableListOf()
+class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
+    private var _feeds: List<Feed> = handle.get<MutableList<Feed>>(KEY_FEEDS) ?: mutableListOf()
+
+    val feeds: List<Feed>
+        get() = _feeds
+
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -34,8 +40,10 @@ class FeedsViewModel : ViewModel() {
     }
 
     private fun loadFeedMarkersFromRepository() {
-
-        itemEventRelay.accept(FeedsLoadEvent(loadTestFeedMarker()))
+        loadTestFeedMarker().run {
+            _feeds = this
+            itemEventRelay.accept(FeedsLoadEvent(this))
+        }
     }
 
     private fun loadTestFeedMarker(): List<Feed> {
@@ -88,9 +96,16 @@ class FeedsViewModel : ViewModel() {
         }
     }
 
+    override fun saveState() {
+        handle[KEY_FEEDS] = _feeds
+    }
+
     override fun onCleared() {
-        _feeds.clear()
         disposables.dispose()
         super.onCleared()
+    }
+
+    companion object {
+        private const val KEY_FEEDS = "keyFeeds"
     }
 }

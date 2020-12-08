@@ -35,7 +35,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
     private val viewModel: FeedsViewModel by lazy {
-        ViewModelProvider(this)[FeedsViewModel::class.java]
+        ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
     }
     private val itemEventRelay: Relay<RxAction> by lazy {
         viewModel.itemEventRelay
@@ -81,8 +81,10 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private fun addMarker(feed: Feed) {
-        feedMarkerBindingTable[feed]?.root?.let {
-            map.addMarker(GoogleMapUtils.getFeedMarkerOption(it, feed.position))
+        feedMarkerBindingTable[feed]?.root?.let { view ->
+            feed.position?.let { position ->
+                map.addMarker(GoogleMapUtils.getFeedMarkerOption(view, position))
+            }
         }
     }
 

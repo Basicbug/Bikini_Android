@@ -9,17 +9,18 @@ package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
 import com.example.bikini_android.ui.base.BaseActivity
+import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
@@ -29,9 +30,10 @@ class MainHolderActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainHolderBinding
     lateinit var navigateController: NavigationController
-
-    private val disposable: CompositeDisposable = CompositeDisposable()
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
+    private val viewModels: List<BaseViewModel> by lazy {
+        MainHolderViewModelsHelper.getViewModels(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +42,6 @@ class MainHolderActivity : BaseActivity() {
         setUpToolbar()
         setUpBottomNavigation()
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.clear()
     }
 
     override fun onBackPressed() {
@@ -85,5 +82,10 @@ class MainHolderActivity : BaseActivity() {
                 }
 
             }.addTo(disposable)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        MainHolderViewModelsHelper.saveState(viewModels)
     }
 }
