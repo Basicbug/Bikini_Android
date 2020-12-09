@@ -12,7 +12,6 @@ import android.util.ArrayMap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
@@ -27,7 +26,6 @@ import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.Marker
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -37,9 +35,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
-    private val viewModel: FeedsViewModel by lazy {
-        ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
-    }
+    private lateinit var viewModel: FeedsViewModel
     private val itemEventRelay: Relay<RxAction> by lazy {
         viewModel.itemEventRelay
     }
@@ -57,6 +53,7 @@ class BikiniMapFragment : BaseMapFragment() {
             .also {
                 binding = it
                 navigateController = NavigationController(binding.contentFragmentHolder.id, parentFragmentManager)
+                viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
             }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {

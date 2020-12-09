@@ -31,13 +31,12 @@ class MainHolderActivity : BaseActivity() {
     lateinit var binding: ActivityMainHolderBinding
     lateinit var navigateController: NavigationController
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
-    private val viewModels: List<BaseViewModel> by lazy {
-        MainHolderViewModelsHelper.getViewModels(this)
-    }
+    private lateinit var viewModels: List<BaseViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
+        viewModels = MainHolderViewModelsHelper.getViewModels(this)
         navigateController = NavigationController(binding.contentFragmentHolder.id, supportFragmentManager)
         setUpToolbar()
         setUpBottomNavigation()

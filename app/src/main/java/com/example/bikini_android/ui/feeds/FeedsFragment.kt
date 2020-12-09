@@ -32,9 +32,7 @@ class FeedsFragment : BaseFragment() {
     private var pivotFeed: Feed? = null
     private var sortType: FeedSortType = FeedSortType.POPULAR
     private val feedsAdapter = DefaultListAdapter(DefaultDiffCallback<FeedItemViewModel>())
-    private val viewModel: FeedsViewModel by lazy {
-        ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
-    }
+    private lateinit var viewModel: FeedsViewModel
     private val itemEventRelay: Relay<RxAction> by lazy {
         viewModel.itemEventRelay
     }
@@ -64,6 +62,7 @@ class FeedsFragment : BaseFragment() {
             feeds.adapter = feedsAdapter
             feeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
+        viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
         navigateController = NavigationController(binding.contentFragmentHolder.id, parentFragmentManager)
         observeEvent()
     }.root
