@@ -34,8 +34,13 @@ abstract class FeedItemViewModel(private val feed: Feed) : ItemViewModel() {
             notifyPropertyChanged(BR.imageUri)
         }
     var feedNumOfUser = feed.feedNumOfUser
-    fun onClickImage(){
+    fun onClickImage() {
         itemEventRelay?.accept(ClickEvent(feed))
     }
+
+    override fun getItemPivot(): Int {
+        return Objects.hash(feed.feedId)
+    }
+
     class ClickEvent(val feed: Feed) : RxAction
 }
