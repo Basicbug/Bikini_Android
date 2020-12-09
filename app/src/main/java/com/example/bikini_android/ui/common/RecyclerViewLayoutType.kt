@@ -7,14 +7,10 @@
 
 package com.example.bikini_android.ui.common
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
 /**
  * @author MyeongKi
  */
-@Parcelize
-enum class RecyclerViewLayoutType : Parcelable {
+enum class RecyclerViewLayoutType {
     VERTICAL,
     LINEAR,
     GRID

@@ -7,14 +7,10 @@
 
 package com.example.bikini_android.ui.feeds
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
 /**
  * @author MyeongKi
  */
-@Parcelize
-enum class FeedSortType : Parcelable {
+enum class FeedSortType {
     POPULAR,
     NEAR,
 }
