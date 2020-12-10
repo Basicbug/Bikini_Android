@@ -15,7 +15,6 @@
     <fragment
         android:id="@+id/profile"
         android:name="com.example.bikini_android.ui.profile.ProfileFragment"
-        android:label="@string/profile_toolbar_title"
         tools:layout="@layout/fragment_profile">
     </fragment>
 </navigation>

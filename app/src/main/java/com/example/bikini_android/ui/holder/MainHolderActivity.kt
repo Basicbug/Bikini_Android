@@ -40,7 +40,6 @@ class MainHolderActivity : BaseActivity() {
         viewModels = MainHolderViewModelsHelper.getViewModels(this)
         setUpToolbar()
         setUpBottomNavigation()
-
     }
 
     private fun setUpBottomNavigation() {

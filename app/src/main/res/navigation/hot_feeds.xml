@@ -11,18 +11,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/hot_feeds_navigation"
-    app:startDestination="@id/hot_feeds">
+    app:startDestination="@id/feeds_end">
 
     <fragment
-        android:id="@+id/hot_feeds"
+        android:id="@+id/feeds_end"
         android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
         tools:layout="@layout/fragment_feeds">
         <action
-            android:id="@+id/action_grid_feeds_end_to_linear_feeds_end"
-            app:destination="@id/linear_feeds_end" />
+            android:id="@+id/action_feeds_end_to_feeds_end"
+            app:destination="@id/feeds_end" />
+
     </fragment>
-    <fragment
-        android:id="@+id/linear_feeds_end"
-        android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
-        tools:layout="@layout/fragment_feeds"/>
 </navigation>

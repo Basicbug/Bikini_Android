@@ -32,9 +32,7 @@ class FeedsFragment : BaseFragment() {
     private var feedsType: FeedsType = FeedsType.HOT_RANKING_FEEDS
     private val feedsAdapter = DefaultListAdapter(DefaultDiffCallback<FeedItemViewModel>())
     private lateinit var viewModel: FeedsViewModel
-    private val itemEventRelay: Relay<RxAction> by lazy {
-        viewModel.itemEventRelay
-    }
+    private lateinit var itemEventRelay: Relay<RxAction>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +61,7 @@ class FeedsFragment : BaseFragment() {
             feeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
         viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
+        itemEventRelay = viewModel.itemEventRelay
         observeEvent()
     }.root
 
@@ -84,7 +83,7 @@ class FeedsFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 findNavController().navigate(
-                    R.id.action_grid_feeds_end_to_linear_feeds_end,
+                    R.id.action_feeds_end_to_feeds_end,
                     makeBundle(
                         RecyclerViewLayoutType.LINEAR,
                         feedsType,

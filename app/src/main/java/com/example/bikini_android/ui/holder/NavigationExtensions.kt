@@ -142,7 +142,7 @@ private fun detachNavHostFragment(
 ) {
     fragmentManager.beginTransaction()
         .detach(navHostFragment)
-        .commitNow()
+        .commitNowAllowingStateLoss()
 }
 
 private fun attachNavHostFragment(
@@ -157,7 +157,7 @@ private fun attachNavHostFragment(
                 setPrimaryNavigationFragment(navHostFragment)
             }
         }
-        .commitNow()
+        .commitNowAllowingStateLoss()
 
 }
 

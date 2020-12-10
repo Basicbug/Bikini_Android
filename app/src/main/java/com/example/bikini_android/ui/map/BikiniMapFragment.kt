@@ -74,7 +74,7 @@ class BikiniMapFragment : BaseMapFragment() {
         map.setOnMarkerClickListener { marker ->
             feedBoundTable[marker.tag]?.let { feed ->
                 findNavController().navigate(
-                    R.id.action_bikini_map_to_grid_feeds_end,
+                    R.id.action_bikini_map_to_feeds_end,
                     FeedsFragment.makeBundle(
                         RecyclerViewLayoutType.GRID,
                         FeedsType.NEAR_LOCATION_FEEDS,

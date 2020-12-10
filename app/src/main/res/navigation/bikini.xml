@@ -14,22 +14,17 @@
     <fragment
         android:id="@+id/bikini"
         android:name="com.example.bikini_android.ui.map.BikiniMapFragment"
-        android:label="@string/bikini_toolbar_title"
         tools:layout="@layout/fragment_bikini_map">
         <action
-            android:id="@+id/action_bikini_map_to_grid_feeds_end"
-            app:destination="@id/grid_feeds_end" />
+            android:id="@+id/action_bikini_map_to_feeds_end"
+            app:destination="@id/feeds_end" />
     </fragment>
     <fragment
-        android:id="@+id/grid_feeds_end"
+        android:id="@+id/feeds_end"
         android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
         tools:layout="@layout/fragment_feeds">
         <action
-            android:id="@+id/action_grid_feeds_end_to_linear_feeds_end"
-            app:destination="@id/linear_feeds_end" />
+            android:id="@+id/action_feeds_end_to_feeds_end"
+            app:destination="@id/feeds_end" />
     </fragment>
-    <fragment
-        android:id="@+id/linear_feeds_end"
-        android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
-        tools:layout="@layout/fragment_feeds"/>
 </navigation>
