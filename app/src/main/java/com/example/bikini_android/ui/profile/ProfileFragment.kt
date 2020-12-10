@@ -30,10 +30,4 @@ class ProfileFragment : BaseFragment() {
 
         return binding.root
     }
-
-    companion object {
-        fun newInstance(): ProfileFragment {
-            return ProfileFragment()
-        }
-    }
 }

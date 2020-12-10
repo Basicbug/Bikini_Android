@@ -14,14 +14,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseMapFragment
+import com.example.bikini_android.ui.common.RecyclerViewLayoutType
+import com.example.bikini_android.ui.feeds.FeedSortType
+import com.example.bikini_android.ui.feeds.FeedsFragment
+import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.FeedsViewModel
-import com.example.bikini_android.ui.holder.NavigationController
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
@@ -42,7 +46,6 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedBoundTable = ArrayMap<String, Feed>()
-    private lateinit var navigateController: NavigationController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +55,6 @@ class BikiniMapFragment : BaseMapFragment() {
         DataBindingUtil.inflate<FragmentBikiniMapBinding>(inflater, R.layout.fragment_bikini_map, container, false)
             .also {
                 binding = it
-                navigateController = NavigationController(binding.contentFragmentHolder.id, parentFragmentManager)
                 viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
             }.root
 
@@ -68,9 +70,19 @@ class BikiniMapFragment : BaseMapFragment() {
         super.onDestroyView()
     }
 
-    private fun initMap(){
-        map.setOnMarkerClickListener {
-            navigateController.navigateToGridFeeds()
+    private fun initMap() {
+        map.setOnMarkerClickListener { marker ->
+            feedBoundTable[marker.tag]?.let { feed ->
+                findNavController().navigate(
+                    R.id.action_bikini_map_to_grid_feeds_end,
+                    FeedsFragment.makeBundle(
+                        RecyclerViewLayoutType.GRID,
+                        FeedsType.NEAR_LOCATION_FEEDS,
+                        FeedSortType.NEAR,
+                        feed
+                    )
+                )
+            }
             true
         }
     }
@@ -135,12 +147,6 @@ class BikiniMapFragment : BaseMapFragment() {
                 measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
                 layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
             }
-        }
-    }
-
-    companion object {
-        fun newInstance(): BikiniMapFragment {
-            return BikiniMapFragment()
         }
     }
 }

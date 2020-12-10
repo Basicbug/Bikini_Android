@@ -8,6 +8,7 @@
 package com.example.bikini_android.ui.holder
 
 import androidx.annotation.IdRes
+import androidx.navigation.NavController
 import com.example.bikini_android.R
 import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
@@ -20,33 +21,24 @@ import io.reactivex.Observable
 
 enum class BottomNavigationItem(
     @IdRes val menuId: Int,
-    private val navigationAction: (NavigationController) -> Unit,
     private val eventAction: (Relay<RxAction>) -> Unit
 ) {
     BIKINI_MAP(
-        menuId = R.id.bikini_map_icon,
-        navigationAction = { navigateController -> navigateController.navigateToBikiniMap() },
+        menuId = R.id.bikini_navigation,
         eventAction = { relay -> relay.accept(ToolbarItem.BIKINI_TOOLBAR) }
     ),
     FEEDS(
-        menuId = R.id.feeds_icon,
-        navigationAction = { navigationController -> navigationController.navigateToLinearFeeds() },
+        menuId = R.id.hot_feeds_navigation,
         eventAction = { relay -> relay.accept(ToolbarItem.FEEDS_TOOLBAR) }
     ),
     SETTINGS(
-        menuId = R.id.settings_icon,
-        navigationAction = { navigateController -> navigateController.navigateToSettings() },
+        menuId = R.id.settings_navigation,
         eventAction = { relay -> relay.accept(ToolbarItem.SETTINGS_TOOLBAR) }
     ),
     PROFILE(
-        menuId = R.id.profile_icon,
-        navigationAction = { navigateController -> navigateController.navigateToProfile() },
+        menuId = R.id.profile_navigation,
         eventAction = { relay -> relay.accept(ToolbarItem.PROFILE_TOOLBAR) }
     );
-
-    fun navigate(navigationController: NavigationController) {
-        navigationAction(navigationController)
-    }
 
     fun invoke(relay: Relay<RxAction>) {
         eventAction(relay)

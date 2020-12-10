@@ -9,7 +9,9 @@ package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
@@ -29,7 +31,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class MainHolderActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainHolderBinding
-    lateinit var navigateController: NavigationController
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private lateinit var viewModels: List<BaseViewModel>
 
@@ -37,36 +38,32 @@ class MainHolderActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
         viewModels = MainHolderViewModelsHelper.getViewModels(this)
-        navigateController = NavigationController(binding.contentFragmentHolder.id, supportFragmentManager)
         setUpToolbar()
         setUpBottomNavigation()
 
     }
 
-    override fun onBackPressed() {
-        if (navigateController.popBackStack())
-            return
-        super.onBackPressed()
-    }
-
     private fun setUpBottomNavigation() {
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
-            val bottomNavigationItem = BottomNavigationItem.findById(menuItem.itemId)
-            bottomNavigationItem?.let {
-                navigateBottomMenu(it)
-            }
-            true
-        }
-        navigateBottomMenu(BottomNavigationItem.BIKINI_MAP)
-    }
+        val navGraphIds =
+            listOf(R.navigation.bikini, R.navigation.hot_feeds, R.navigation.settings, R.navigation.profile)
+        binding.bottomNavigation.setupNavController(
+            navGraphIds,
+            supportFragmentManager,
+            R.id.content_fragment_holder,
+            itemEventRelay
+        )
 
-    fun navigateBottomMenu(navigationItem: BottomNavigationItem) {
-        navigationItem.navigate(navigateController)
-        navigationItem.invoke(itemEventRelay)
+        itemEventRelay
+            .observeOn(AndroidSchedulers.mainThread())
+            .ofType(NavigationControllerEvent::class.java)
+            .subscribe { event ->
+                setupActionBarWithNavController(event.controller)
+            }.addTo(disposable)
     }
 
     private fun setUpToolbar() {
         this.setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         itemEventRelay
             .observeOn(AndroidSchedulers.mainThread())
             .ofType(ToolbarItem::class.java)
