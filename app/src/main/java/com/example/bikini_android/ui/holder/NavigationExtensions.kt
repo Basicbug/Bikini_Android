@@ -60,7 +60,6 @@ fun BottomNavigationView.setupNavController(
         if (this.selectedItemId == graphId) {
             navHostFragment.navController.also {
                 selectedNavController = it
-                itemEventRelay.accept(NavigationControllerEvent(it))
                 BottomNavigationItem.findById(this.selectedItemId)?.invoke(itemEventRelay)
             }
             attachNavHostFragment(fragmentManager, navHostFragment, index == 0)
@@ -111,7 +110,6 @@ fun BottomNavigationView.setupNavController(
                 isOnFirstFragment = selectedItemTag == firstFragmentTag
                 selectedFragment.navController.also {
                     selectedNavController = it
-                    itemEventRelay.accept(NavigationControllerEvent(it))
                     BottomNavigationItem.findById(item.itemId)?.invoke(itemEventRelay)
                 }
                 true

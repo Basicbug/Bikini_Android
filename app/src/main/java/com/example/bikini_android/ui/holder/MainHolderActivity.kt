@@ -10,6 +10,7 @@ package com.example.bikini_android.ui.holder
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bikini_android.R
@@ -51,13 +52,6 @@ class MainHolderActivity : BaseActivity() {
             R.id.content_fragment_holder,
             itemEventRelay
         )
-
-        itemEventRelay
-            .observeOn(AndroidSchedulers.mainThread())
-            .ofType(NavigationControllerEvent::class.java)
-            .subscribe { event ->
-                setupActionBarWithNavController(event.controller)
-            }.addTo(disposable)
     }
 
     private fun setUpToolbar() {
