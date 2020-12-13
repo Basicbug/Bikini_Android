@@ -46,7 +46,7 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedBoundTable = ArrayMap<String, Feed>()
-
+    private var isLoadUiData = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,6 +54,7 @@ class BikiniMapFragment : BaseMapFragment() {
     ): View? =
         DataBindingUtil.inflate<FragmentBikiniMapBinding>(inflater, R.layout.fragment_bikini_map, container, false)
             .also {
+                super.onCreateView(inflater, container, savedInstanceState)
                 binding = it
                 viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
             }.root
@@ -61,13 +62,20 @@ class BikiniMapFragment : BaseMapFragment() {
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        viewModel.loadFeeds()
+        loadUiData()
         initMap()
     }
 
     override fun onDestroyView() {
         feedMarkerBindingTable.clear()
         super.onDestroyView()
+    }
+
+    private fun loadUiData() {
+        if (!isLoadUiData) {
+            viewModel.loadFeeds()
+            isLoadUiData = true
+        }
     }
 
     private fun initMap() {

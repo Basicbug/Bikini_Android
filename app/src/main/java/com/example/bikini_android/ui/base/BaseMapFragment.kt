@@ -13,7 +13,9 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.R
@@ -36,18 +38,14 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
-            if (it.isAccept) {
-                initMap()
-            } else {
-                permissionDenied = true
-            }
-        }.addTo(disposables)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
+        if (it.isAccept) {
+            initMap()
+        } else {
+            permissionDenied = true
+        }
+    }.addTo(disposables)
         (this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?)?.getMapAsync(this)
     }
 

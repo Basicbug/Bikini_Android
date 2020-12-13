@@ -25,7 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class FeedsFragment : BaseFragment() {
-    private lateinit var binding: FragmentFeedsBinding
+    private var binding: FragmentFeedsBinding? = null
     private var feedAdapterHelper: FeedAdapterHelper = FeedAdapterHelper()
     private var pivotFeed: Feed? = null
     private var sortType: FeedSortType = FeedSortType.POPULAR
@@ -33,7 +33,7 @@ class FeedsFragment : BaseFragment() {
     private val feedsAdapter = DefaultListAdapter(DefaultDiffCallback<FeedItemViewModel>())
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
-
+    private var isLoadUiData = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -56,10 +56,12 @@ class FeedsFragment : BaseFragment() {
         container,
         false
     ).also {
+        super.onCreateView(inflater, container, savedInstanceState)
         binding = it.apply {
             feeds.adapter = feedsAdapter
             feeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
+
         viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
         itemEventRelay = viewModel.itemEventRelay
         observeEvent()
@@ -67,7 +69,10 @@ class FeedsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadFeeds()
+        if (!isLoadUiData) {
+            isLoadUiData = true
+            viewModel.loadFeeds()
+        }
     }
 
     private fun observeEvent() {
