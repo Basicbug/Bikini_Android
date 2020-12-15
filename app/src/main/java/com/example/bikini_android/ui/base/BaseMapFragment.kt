@@ -13,9 +13,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.R
@@ -37,15 +35,16 @@ import com.google.android.gms.maps.model.LatLng
 abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
-
+    private var isInitMap = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
-        if (it.isAccept) {
-            initMap()
-        } else {
-            permissionDenied = true
-        }
-    }.addTo(disposables)
+            if (it.isAccept) {
+                initMap()
+            } else {
+                permissionDenied = true
+            }
+        }.addTo(disposables)
+
         (this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?)?.getMapAsync(this)
     }
 
@@ -75,20 +74,26 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun initMap() {
-        enableMyLocation()
-        moveToMyLocation()
+        if (setMyLocationEnable()) {
+            if (!isInitMap) {
+                moveToMyLocation()
+                isInitMap = true
+            }
+        }
     }
 
-    private fun enableMyLocation() {
-        if (!(::map.isInitialized)) return
+    private fun setMyLocationEnable(): Boolean {
+        if (!(::map.isInitialized)) return false
         if (checkLocationPermission()) {
             map.isMyLocationEnabled = true
+            return true
         } else {
             PermissionUtils.requestPermission(
                 requireActivity() as AppCompatActivity, LOCATION_PERMISSION_REQUEST_CODE,
                 Manifest.permission.ACCESS_FINE_LOCATION, true
             )
         }
+        return false
     }
 
     private fun moveToMyLocation() {
