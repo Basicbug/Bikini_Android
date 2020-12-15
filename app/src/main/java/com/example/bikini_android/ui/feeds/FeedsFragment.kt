@@ -33,12 +33,15 @@ class FeedsFragment : BaseFragment() {
     private val feedsAdapter = DefaultListAdapter(DefaultDiffCallback<FeedItemViewModel>())
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
-    private var isLoadUiData = false
+
+    //private var isLoadUiData = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             feedAdapterHelper = FeedAdapterHelper(
-                RecyclerViewLayoutType.valueOf(it.getString(KEY_LAYOUT_TYPE_NAME) ?: RecyclerViewLayoutType.HORIZONTAL.name)
+                RecyclerViewLayoutType.valueOf(
+                    it.getString(KEY_LAYOUT_TYPE_NAME) ?: RecyclerViewLayoutType.HORIZONTAL.name
+                )
             )
             pivotFeed = it.getParcelable(KEY_PIVOT_FEED) as Feed?
             feedsType = FeedsType.valueOf(it.getString(KEY_FEEDS_TYPE) ?: FeedsType.HOT_RANKING_FEEDS.name)
@@ -69,10 +72,7 @@ class FeedsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!isLoadUiData) {
-            isLoadUiData = true
-            viewModel.loadFeeds()
-        }
+        viewModel.loadFeeds()
     }
 
     private fun observeEvent() {

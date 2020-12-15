@@ -40,13 +40,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class BikiniMapFragment : BaseMapFragment() {
     private lateinit var binding: FragmentBikiniMapBinding
     private lateinit var viewModel: FeedsViewModel
-    private val itemEventRelay: Relay<RxAction> by lazy {
-        viewModel.itemEventRelay
-    }
-
+    private lateinit var itemEventRelay: Relay<RxAction>
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
-    private var isLoadUiData = false
+    private var currentFeeds: List<Feed>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,25 +54,19 @@ class BikiniMapFragment : BaseMapFragment() {
                 super.onCreateView(inflater, container, savedInstanceState)
                 binding = it
                 viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
+                itemEventRelay = viewModel.itemEventRelay
             }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        loadUiData()
+        viewModel.loadFeeds()
         initMap()
     }
 
     override fun onDestroyView() {
         feedMarkerBindingTable.clear()
         super.onDestroyView()
-    }
-
-    private fun loadUiData() {
-        if (!isLoadUiData) {
-            viewModel.loadFeeds()
-            isLoadUiData = true
-        }
     }
 
     private fun initMap() {
@@ -111,8 +102,21 @@ class BikiniMapFragment : BaseMapFragment() {
             .ofType(FeedsLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                bindFeedMarkers(event.feeds)
+                if (isDiffFeeds(event.feeds)) {
+                    bindFeedMarkers(event.feeds)
+                }
             }.addTo(disposables)
+    }
+
+    private fun isDiffFeeds(feeds: List<Feed>): Boolean {
+        return if (currentFeeds != feeds) {
+            feedAddedToMapTable.clear()
+            feedMarkerBindingTable.clear()
+            currentFeeds = feeds
+            true
+        } else {
+            false
+        }
     }
 
     private fun addMarker(feed: Feed) {

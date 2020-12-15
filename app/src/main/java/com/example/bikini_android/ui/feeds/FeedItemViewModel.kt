@@ -42,5 +42,8 @@ abstract class FeedItemViewModel(private val feed: Feed) : ItemViewModel() {
         return Objects.hash(feed.feedId)
     }
 
+    override fun getContentsHashCode(): Int {
+        return feed.hashCode()
+    }
     class ClickEvent(val feed: Feed) : RxAction
 }
