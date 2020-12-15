@@ -17,9 +17,5 @@
         android:id="@+id/feeds_end"
         android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
         tools:layout="@layout/fragment_feeds">
-        <action
-            android:id="@+id/action_feeds_end_to_feeds_end"
-            app:destination="@id/feeds_end" />
-
     </fragment>
 </navigation>

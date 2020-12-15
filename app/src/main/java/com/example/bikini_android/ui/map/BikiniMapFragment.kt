@@ -22,7 +22,7 @@ import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.feeds.FeedSortType
+import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.FeedsViewModel
@@ -45,7 +45,7 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
-    private val feedBoundTable = ArrayMap<String, Feed>()
+    private val feedAddedToMapTable = ArrayMap<String, Feed>()
     private var isLoadUiData = false
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,19 +80,23 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private fun initMap() {
         map.setOnMarkerClickListener { marker ->
-            feedBoundTable[marker.tag]?.let { feed ->
-                findNavController().navigate(
-                    R.id.action_bikini_map_to_feeds_end,
-                    FeedsFragment.makeBundle(
-                        RecyclerViewLayoutType.GRID,
-                        FeedsType.NEAR_LOCATION_FEEDS,
-                        FeedSortType.NEAR,
-                        feed
-                    )
-                )
+            feedAddedToMapTable[marker.tag]?.let { feed ->
+                navigateNearLocationFeeds(feed)
             }
             true
         }
+    }
+
+    private fun navigateNearLocationFeeds(pivotFeed: Feed) {
+        findNavController().navigate(
+            R.id.action_bikini_map_to_feeds_end,
+            FeedsFragment.makeBundle(
+                RecyclerViewLayoutType.GRID,
+                FeedsType.NEAR_LOCATION_FEEDS,
+                FeedsSortType.NEAR_DISTANCE,
+                pivotFeed
+            )
+        )
     }
 
     private fun observeEvent() {
@@ -119,7 +123,7 @@ class BikiniMapFragment : BaseMapFragment() {
                         tag = feed.feedId
                     }
                     .also {
-                        feedBoundTable[feed.feedId] = feed
+                        feedAddedToMapTable[feed.feedId] = feed
                     }
             }
         }

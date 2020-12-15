@@ -21,13 +21,13 @@ import com.jakewharton.rxrelay2.Relay
  * @author MyeongKi
  */
 
-class FeedAdapterHelper(private val layoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.LINEAR) {
+class FeedAdapterHelper(private val layoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.HORIZONTAL) {
 
     fun getLayoutManger(context: Context): RecyclerView.LayoutManager {
         return when (layoutType) {
             RecyclerViewLayoutType.GRID ->
                 GridLayoutManager(context, FEED_GRID_SIZE)
-            RecyclerViewLayoutType.LINEAR ->
+            RecyclerViewLayoutType.HORIZONTAL ->
                 LinearLayoutManager(context)
             RecyclerViewLayoutType.VERTICAL ->
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -38,7 +38,7 @@ class FeedAdapterHelper(private val layoutType: RecyclerViewLayoutType = Recycle
         return when (layoutType) {
             RecyclerViewLayoutType.VERTICAL, RecyclerViewLayoutType.GRID ->
                 FeedGridItemViewModel(feed)
-            RecyclerViewLayoutType.LINEAR ->
+            RecyclerViewLayoutType.HORIZONTAL ->
                 FeedLinearItemViewModel(feed)
         }.apply {
             this.itemEventRelay = itemEventRelay

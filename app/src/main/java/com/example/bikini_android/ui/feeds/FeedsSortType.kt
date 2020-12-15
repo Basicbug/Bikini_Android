@@ -10,7 +10,7 @@ package com.example.bikini_android.ui.feeds
 /**
  * @author MyeongKi
  */
-enum class FeedSortType {
+enum class FeedsSortType {
     POPULAR,
-    NEAR,
+    NEAR_DISTANCE,
 }

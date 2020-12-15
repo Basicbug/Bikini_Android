@@ -30,6 +30,6 @@ abstract class ItemViewModel : BaseObservable(),
 
     open fun onClickItem() = Unit
     open fun onLongClickItem() = Unit
-    open fun getItemPivot():Int = this.hashCode()
-    open fun getContentsPivot():Int = this.hashCode()
+    open fun getItemHashCode():Int = this.hashCode()
+    open fun getContentsHashCode():Int = this.hashCode()
 }

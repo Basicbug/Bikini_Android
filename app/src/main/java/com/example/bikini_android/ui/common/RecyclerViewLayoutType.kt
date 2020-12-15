@@ -12,6 +12,6 @@ package com.example.bikini_android.ui.common
  */
 enum class RecyclerViewLayoutType {
     VERTICAL,
-    LINEAR,
+    HORIZONTAL,
     GRID
 }

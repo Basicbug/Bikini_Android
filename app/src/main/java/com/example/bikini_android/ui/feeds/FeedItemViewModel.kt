@@ -38,7 +38,7 @@ abstract class FeedItemViewModel(private val feed: Feed) : ItemViewModel() {
         itemEventRelay?.accept(ClickEvent(feed))
     }
 
-    override fun getItemPivot(): Int {
+    override fun getItemHashCode(): Int {
         return Objects.hash(feed.feedId)
     }
 

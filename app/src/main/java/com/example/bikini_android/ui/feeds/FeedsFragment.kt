@@ -25,10 +25,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class FeedsFragment : BaseFragment() {
-    private var binding: FragmentFeedsBinding? = null
+    private lateinit var binding: FragmentFeedsBinding
     private var feedAdapterHelper: FeedAdapterHelper = FeedAdapterHelper()
     private var pivotFeed: Feed? = null
-    private var sortType: FeedSortType = FeedSortType.POPULAR
+    private var sortType: FeedsSortType = FeedsSortType.POPULAR
     private var feedsType: FeedsType = FeedsType.HOT_RANKING_FEEDS
     private val feedsAdapter = DefaultListAdapter(DefaultDiffCallback<FeedItemViewModel>())
     private lateinit var viewModel: FeedsViewModel
@@ -38,11 +38,11 @@ class FeedsFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             feedAdapterHelper = FeedAdapterHelper(
-                RecyclerViewLayoutType.valueOf(it.getString(KEY_LAYOUT_TYPE_NAME) ?: RecyclerViewLayoutType.LINEAR.name)
+                RecyclerViewLayoutType.valueOf(it.getString(KEY_LAYOUT_TYPE_NAME) ?: RecyclerViewLayoutType.HORIZONTAL.name)
             )
             pivotFeed = it.getParcelable(KEY_PIVOT_FEED) as Feed?
             feedsType = FeedsType.valueOf(it.getString(KEY_FEEDS_TYPE) ?: FeedsType.HOT_RANKING_FEEDS.name)
-            sortType = FeedSortType.valueOf(it.getString(KEY_SORT_TYPE_NAME) ?: FeedSortType.NEAR.name)
+            sortType = FeedsSortType.valueOf(it.getString(KEY_SORT_TYPE_NAME) ?: FeedsSortType.NEAR_DISTANCE.name)
         }
     }
 
@@ -90,7 +90,7 @@ class FeedsFragment : BaseFragment() {
                 findNavController().navigate(
                     R.id.action_feeds_end_to_feeds_end,
                     makeBundle(
-                        RecyclerViewLayoutType.LINEAR,
+                        RecyclerViewLayoutType.HORIZONTAL,
                         feedsType,
                         sortType,
                         event.feed
@@ -116,7 +116,7 @@ class FeedsFragment : BaseFragment() {
         fun makeBundle(
             layoutType: RecyclerViewLayoutType,
             feedsType: FeedsType = FeedsType.HOT_RANKING_FEEDS,
-            sortType: FeedSortType = FeedSortType.POPULAR,
+            sortType: FeedsSortType = FeedsSortType.POPULAR,
             pivotFeed: Feed? = null
         ): Bundle {
             return Bundle().apply {
