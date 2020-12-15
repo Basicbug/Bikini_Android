@@ -7,7 +7,7 @@
     <string name="google_map_api_key">AIzaSyAraq-2MhBXgG1wnaG-tFWIgamxYiCDAtk</string>
     <!--toolbar-->
     <string name="bikini_toolbar_title">Bikini</string>
-    <string name="feeds_toolbar_title">Feeds</string>
+    <string name="feeds_toolbar_title">Hot</string>
     <string name="settings_toolbar_title">Settings</string>
     <string name="profile_toolbar_title">Profile</string>
 

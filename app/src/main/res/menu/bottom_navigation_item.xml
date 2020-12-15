@@ -10,19 +10,19 @@
     <item
         android:id="@+id/bikini_navigation"
         android:enabled="true"
-        android:icon="@drawable/bottom_bikini_map_icon"
+        android:icon="@drawable/ic_baseline_person_pin_24"
         android:title=""
         app:showAsAction="never" />
     <item
         android:id="@+id/hot_feeds_navigation"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/ic_baseline_whatshot_24"
         android:title=""
         app:showAsAction="never" />
     <item
         android:id="@+id/settings_navigation"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/ic_baseline_perm_data_setting_24"
         android:title=""
         app:showAsAction="never" />
     <item
