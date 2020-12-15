@@ -83,7 +83,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun setMyLocationEnable(): Boolean {
-        if (!(::map.isInitialized)) return false
+        if (!(::map.isInitialized)) return true
         if (checkLocationPermission()) {
             map.isMyLocationEnabled = true
             return true
