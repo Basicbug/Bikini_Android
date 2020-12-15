@@ -35,7 +35,7 @@ import com.google.android.gms.maps.model.LatLng
 abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
-    private var isInitMap = false
+    private var isFirstInitMyLocation = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
             if (it.isAccept) {
@@ -75,9 +75,9 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun initMap() {
         if (setMyLocationEnable()) {
-            if (!isInitMap) {
+            if (!isFirstInitMyLocation) {
                 moveToMyLocation()
-                isInitMap = true
+                isFirstInitMyLocation = true
             }
         }
     }
