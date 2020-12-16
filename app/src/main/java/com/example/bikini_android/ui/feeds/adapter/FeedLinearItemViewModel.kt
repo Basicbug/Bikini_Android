@@ -8,7 +8,7 @@ import java.util.*
 /**
  * @author bsgreentea
  */
-open class FeedLinearItemViewModel : FeedItemViewModel() {
+class FeedLinearItemViewModel : FeedItemViewModel() {
 
     @get: Bindable
     var content = ""
