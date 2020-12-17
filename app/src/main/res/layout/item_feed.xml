@@ -24,7 +24,18 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <ImageView
+            android:id="@+id/location"
+            android:layout_width="@dimen/feed_location_button_size"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_baseline_person_pin_circle_24"
+            android:onClick="@{() -> viewmodel.onClickLocation()}"
+            app:tint="?attr/locationButtonTintColor"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/image"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="@dimen/user_id_height"
@@ -46,6 +57,7 @@
             app:layout_constraintHeight_max="@dimen/content_image_max_height"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_thumbnail" />
+
 
         <TextView
             android:id="@+id/distance"

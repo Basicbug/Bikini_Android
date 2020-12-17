@@ -84,7 +84,7 @@ class FeedsFragment : BaseFragment() {
             }.addTo(disposables)
 
         itemEventRelay
-            .ofType(FeedItemViewModel.ClickEvent::class.java)
+            .ofType(FeedGridItemViewModel.ImageClickEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 findNavController().navigate(
@@ -96,6 +96,13 @@ class FeedsFragment : BaseFragment() {
                         event.feed
                     )
                 )
+            }.addTo(disposables)
+
+        itemEventRelay
+            .ofType(FeedLinearItemViewModel.LocationClickEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event ->
+                
             }.addTo(disposables)
     }
 

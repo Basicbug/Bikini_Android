@@ -18,7 +18,7 @@ import java.util.*
  * @author MyeongKi
  */
 
-abstract class FeedItemViewModel(private val feed: Feed) : ItemViewModel() {
+abstract class FeedItemViewModel(protected val feed: Feed) : ItemViewModel() {
 
     @get: Bindable
     var userId = feed.userId
@@ -34,16 +34,11 @@ abstract class FeedItemViewModel(private val feed: Feed) : ItemViewModel() {
             notifyPropertyChanged(BR.imageUri)
         }
     var feedNumOfUser = feed.feedNumOfUser
-    fun onClickImage() {
-        itemEventRelay?.accept(ClickEvent(feed))
-    }
 
     override fun getItemHashCode(): Int {
         return Objects.hash(feed.feedId)
     }
-
     override fun getContentsHashCode(): Int {
         return feed.hashCode()
     }
-    class ClickEvent(val feed: Feed) : RxAction
 }
