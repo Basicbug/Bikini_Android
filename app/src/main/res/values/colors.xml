@@ -9,6 +9,10 @@
     <color name="white">#FFFFFF</color>
     <color name="white_opa80">#ccffffff</color>
     <color name="black_opa80">#cc000000</color>
+    <color name="white_opa60">#99ffffff</color>
+    <color name="white_opa70">#b2ffffff</color>
+    <color name="black_opa70">#b2000000</color>
+    <color name="black_opa60">#99000000</color>
     <color name="white_opa50">#80ffffff</color>
     <color name="black_opa50">#7f000000</color>
     <color name="black_opa05">#0d000000</color>
