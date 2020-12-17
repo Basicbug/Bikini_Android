@@ -35,9 +35,8 @@ import com.google.android.gms.maps.model.LatLng
 abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var isFirstInitMyLocation = false
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
             if (it.isAccept) {
                 initMap()
@@ -45,9 +44,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
                 permissionDenied = true
             }
         }.addTo(disposables)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?)?.getMapAsync(this)
     }
 
@@ -77,20 +74,26 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun initMap() {
-        enableMyLocation()
-        moveToMyLocation()
+        if (setMyLocationEnable()) {
+            if (!isFirstInitMyLocation) {
+                moveToMyLocation()
+                isFirstInitMyLocation = true
+            }
+        }
     }
 
-    private fun enableMyLocation() {
-        if (!(::map.isInitialized)) return
+    private fun setMyLocationEnable(): Boolean {
+        if (!(::map.isInitialized)) return true
         if (checkLocationPermission()) {
             map.isMyLocationEnabled = true
+            return true
         } else {
             PermissionUtils.requestPermission(
                 requireActivity() as AppCompatActivity, LOCATION_PERMISSION_REQUEST_CODE,
                 Manifest.permission.ACCESS_FINE_LOCATION, true
             )
         }
+        return false
     }
 
     private fun moveToMyLocation() {

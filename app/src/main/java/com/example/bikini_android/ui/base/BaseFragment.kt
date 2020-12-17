@@ -7,6 +7,10 @@
 
 package com.example.bikini_android.ui.base
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.reactivex.disposables.CompositeDisposable
 
@@ -15,11 +19,18 @@ import io.reactivex.disposables.CompositeDisposable
  */
 
 abstract class BaseFragment : Fragment() {
-    protected val disposables: CompositeDisposable = CompositeDisposable()
+    private lateinit var _disposables: CompositeDisposable
+    protected val disposables
+        get() = _disposables
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _disposables = CompositeDisposable()
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        if (!disposables.isDisposed) {
-            disposables.dispose()
+        if (!_disposables.isDisposed) {
+            _disposables.dispose()
         }
     }
 }

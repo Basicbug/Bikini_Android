@@ -7,6 +7,7 @@
         <item name="android:colorPrimaryDark" tools:targetApi="lollipop">@color/black</item>
         <item name="android:textColor">@color/white</item>
         <item name="defaultItemSelectedColor">@color/white</item>
-        <item name="defaultItemUnselectedColor">@color/white_opa80</item>
+        <item name="defaultItemUnselectedColor">@color/white_opa50</item>
+        <item name="defaultBackgroundColor">@color/white_opa05</item>
     </style>
 </resources>
