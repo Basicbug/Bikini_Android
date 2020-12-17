@@ -17,14 +17,14 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseActivity : AppCompatActivity(), OnPermissionCallback {
     private var permissionDenied = false
-    protected val disposable: CompositeDisposable = CompositeDisposable()
+    protected val disposables: CompositeDisposable = CompositeDisposable()
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super<OnPermissionCallback>.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
     override fun onDestroy() {
         super.onDestroy()
-        disposable.clear()
+        disposables.clear()
     }
 
 }

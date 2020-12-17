@@ -9,10 +9,6 @@ package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
@@ -70,7 +66,7 @@ class MainHolderActivity : BaseActivity() {
                     }
                 }
 
-            }.addTo(disposable)
+            }.addTo(disposables)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

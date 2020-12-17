@@ -13,5 +13,6 @@
     <attr name="defaultItemSelectedColor" format="reference|color" />
     <attr name="defaultItemUnselectedColor" format="reference|color" />
     <attr name="defaultBackgroundColor" format="reference|color" />
+    <attr name="splashTintColor" format="reference|color" />
 
 </resources>
