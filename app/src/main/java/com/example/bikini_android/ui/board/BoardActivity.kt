@@ -9,22 +9,25 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityBoardBinding
 import com.example.bikini_android.ui.base.BaseActivity
+import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.rx.addTo
+import com.jakewharton.rxrelay2.Relay
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class BoardActivity : BaseActivity() {
 
     lateinit var binding: ActivityBoardBinding
-    private val viewModel: BoardViewModel by lazy {
-        ViewModelProvider(this)[BoardViewModel::class.java]
-    }
+    private lateinit var viewModel: BoardViewModel
+    private lateinit var itemEventRelay: Relay<RxAction>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board)
-
+        viewModel = ViewModelProvider(this)[BoardViewModel::class.java]
+        itemEventRelay = viewModel.itemEventRelay
         binding.apply {
-            boardViewModel = viewModel
+            viewmodel = viewModel.boardItemViewModel
         }
-
         setUpObservers()
     }
 
@@ -41,17 +44,26 @@ class BoardActivity : BaseActivity() {
     }
 
     private fun setUpObservers() {
-        viewModel.onPickImageClicked.observe(this, Observer {
+        itemEventRelay
+            .ofType(BoardItemViewModel.EventType::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                when (it) {
+                    BoardItemViewModel.EventType.PUBLISH_FEED ->
+                        finish()
+                    BoardItemViewModel.EventType.NAVIGATE_GALLERY ->
+                        navigateToGallery()
+                    else -> Unit
+                }
 
-            val galleryIntent = Intent(Intent.ACTION_PICK).apply {
-                type = "image/*"
-            }
-            startActivityForResult(galleryIntent, PICK_IMAGE)
-        })
+            }.addTo(disposable)
+    }
 
-        viewModel.onPublishClicked.observe(this, Observer {
-            finish()
-        })
+    private fun navigateToGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+        }
+        startActivityForResult(galleryIntent, PICK_IMAGE)
     }
 
     companion object {
