@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.bikini_android.R
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jakewharton.rxrelay2.Relay
@@ -31,11 +32,17 @@ class NavigationHelper(
 ) {
     private val disposables = CompositeDisposable()
     private val taskQueue: Queue<() -> Unit> = LinkedList<() -> Unit>()
+    private val logger = Logger().apply {
+        TAG = this.javaClass.simpleName
+    }
 
     init {
         itemRelay
             .observeOn(AndroidSchedulers.mainThread())
             .ofType(CompleteChangeNavEvent::class.java)
+            .doOnError {
+                logger.error { it.toString() }
+            }
             .subscribe {
                 taskQueue.poll()?.invoke()
             }.addTo(disposables)
