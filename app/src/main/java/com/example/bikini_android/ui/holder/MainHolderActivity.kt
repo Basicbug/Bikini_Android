@@ -9,7 +9,6 @@ package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding

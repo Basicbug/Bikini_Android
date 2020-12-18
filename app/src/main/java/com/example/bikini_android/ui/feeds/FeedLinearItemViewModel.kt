@@ -4,7 +4,6 @@ import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.feeds.FeedItemViewModel
 import com.example.bikini_android.util.bus.RxAction
 
 /**

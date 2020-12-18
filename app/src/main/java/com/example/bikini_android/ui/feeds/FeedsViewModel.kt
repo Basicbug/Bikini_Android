@@ -8,7 +8,6 @@
 package com.example.bikini_android.ui.feeds
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.map.FeedsLoadEvent

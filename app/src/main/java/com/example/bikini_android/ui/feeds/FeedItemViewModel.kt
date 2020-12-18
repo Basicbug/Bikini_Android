@@ -11,7 +11,6 @@ import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.common.item.ItemViewModel
-import com.example.bikini_android.util.bus.RxAction
 import java.util.*
 
 /**

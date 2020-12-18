@@ -8,7 +8,6 @@
 package com.example.bikini_android.ui.holder
 
 import androidx.annotation.IdRes
-import androidx.navigation.NavController
 import com.example.bikini_android.R
 import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
