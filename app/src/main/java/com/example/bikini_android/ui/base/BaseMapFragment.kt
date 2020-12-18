@@ -98,14 +98,14 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun moveToMyLocation() {
         getCurrentLocation()?.let {
-            moveToLocation(it)
+            moveToLocation(LatLng(it.latitude, it.longitude))
         }
     }
 
-    private fun moveToLocation(location: Location, zoomSize: Float = DEFAULT_ZOOM_SIZE) {
+    protected fun moveToLocation(latLng: LatLng, zoomSize: Float = DEFAULT_ZOOM_SIZE) {
         map.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
-                LatLng(location.latitude, location.longitude),
+                LatLng(latLng.latitude, latLng.longitude),
                 zoomSize
             )
         )

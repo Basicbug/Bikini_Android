@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.bikini_android.ui.holder.MainHolderActivity
+import com.example.bikini_android.ui.holder.NavigationHelper
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -31,6 +33,14 @@ abstract class BaseFragment : Fragment() {
         super.onDestroyView()
         if (!_disposables.isDisposed) {
             _disposables.dispose()
+        }
+    }
+
+    protected fun getNavigationHelper(): NavigationHelper? {
+        return if (activity is MainHolderActivity) {
+            (activity as MainHolderActivity).navigationHelper
+        } else {
+            null
         }
     }
 }

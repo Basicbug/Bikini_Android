@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
@@ -14,6 +13,7 @@ import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.ui.map.BikiniMapFragment
 import com.example.bikini_android.ui.map.FeedsLoadEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
@@ -34,7 +34,6 @@ class FeedsFragment : BaseFragment() {
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
 
-    //private var isLoadUiData = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -87,8 +86,7 @@ class FeedsFragment : BaseFragment() {
             .ofType(FeedGridItemViewModel.ImageClickEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                findNavController().navigate(
-                    R.id.action_feeds_end_to_feeds_end,
+                getNavigationHelper()?.navigateToBikiniFeeds(
                     makeBundle(
                         RecyclerViewLayoutType.HORIZONTAL,
                         feedsType,
@@ -102,7 +100,11 @@ class FeedsFragment : BaseFragment() {
             .ofType(FeedLinearItemViewModel.LocationClickEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                
+                event.feed.position?.let {
+                    val bundle = BikiniMapFragment.makeBundle(it)
+                    getNavigationHelper()?.navigateToBikiniMap(bundle)
+                }
+
             }.addTo(disposables)
     }
 
