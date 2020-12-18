@@ -12,4 +12,4 @@ import com.example.bikini_android.util.bus.RxAction
 /**
  * @author MyeongKi
  */
-class CompleteChangeNavEvent(val success: Boolean) : RxAction
+class CompleteChangeNavEvent : RxAction

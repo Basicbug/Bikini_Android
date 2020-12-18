@@ -8,11 +8,10 @@
 package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
+import androidx.annotation.IdRes
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -43,23 +42,34 @@ class NavigationHelper(
     }
 
     fun navigateToBikiniFeeds(bundle: Bundle) {
-        if (bottomNav.selectedItemId != R.id.bikini_navigation) {
-            taskQueue.offer { getNavController().navigate(R.id.action_bikini_feeds, bundle) }
-            bottomNav.selectedItemId = R.id.bikini_navigation
-
+        if (isValidBottomNav(R.id.bikini_navigation)) {
+            navigateToFeeds(bundle).invoke()
         } else {
-            getNavController().navigate(R.id.action_bikini_feeds, bundle)
+            taskQueue.offer(navigateToFeeds(bundle))
+            bottomNav.selectedItemId = R.id.bikini_navigation
         }
     }
 
     fun navigateToBikiniMap(bundle: Bundle) {
-        if (bottomNav.selectedItemId != R.id.bikini_navigation) {
-            taskQueue.offer { getNavController().navigate(R.id.action_bikini_map, bundle) }
-            bottomNav.selectedItemId = R.id.bikini_navigation
-
+        if (isValidBottomNav(R.id.bikini_navigation)) {
+            navigateToMap(bundle).invoke()
         } else {
-            getNavController().navigate(R.id.action_bikini_map, bundle)
+            taskQueue.offer(navigateToMap(bundle))
+            bottomNav.selectedItemId = R.id.bikini_navigation
         }
+    }
+
+    private fun navigateToFeeds(bundle: Bundle): () -> Unit = {
+        getNavController().navigate(R.id.action_bikini_feeds, bundle)
+    }
+
+    private fun navigateToMap(bundle: Bundle): () -> Unit = {
+        getNavController().navigate(R.id.action_bikini_map, bundle)
+    }
+
+    @Suppress("SameParameterValue")
+    private fun isValidBottomNav(@IdRes resId: Int): Boolean {
+        return bottomNav.selectedItemId == resId
     }
 
     fun clear() {

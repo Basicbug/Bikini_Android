@@ -111,7 +111,7 @@ fun BottomNavigationView.setupNavController(
                 selectedFragment.navController.also {
                     selectedNavController = it
                     BottomNavigationItem.findById(item.itemId)?.invoke(itemEventRelay)
-                    itemEventRelay.accept(CompleteChangeNavEvent(true))
+                    itemEventRelay.accept(CompleteChangeNavEvent())
                 }
                 true
             } else {
