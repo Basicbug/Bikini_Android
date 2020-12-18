@@ -35,7 +35,9 @@ import com.google.android.gms.maps.model.LatLng
 abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
-    private var isFirstInitMyLocation = false
+    protected var locationFocused: LatLng? = null
+    private var isMoveToLocation = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
             if (it.isAccept) {
@@ -75,9 +77,16 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun initMap() {
         if (setMyLocationEnable()) {
-            if (!isFirstInitMyLocation) {
-                moveToMyLocation()
-                isFirstInitMyLocation = true
+            if (locationFocused == null) {
+                getCurrentLocation()?.let {
+                    locationFocused = LatLng(it.latitude, it.longitude)
+                }
+            }
+            if(!isMoveToLocation){
+                locationFocused?.let {
+                    moveToLocation(it)
+                    isMoveToLocation = true
+                }
             }
         }
     }
@@ -96,13 +105,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
         return false
     }
 
-    private fun moveToMyLocation() {
-        getCurrentLocation()?.let {
-            moveToLocation(LatLng(it.latitude, it.longitude))
-        }
-    }
-
-    protected fun moveToLocation(latLng: LatLng, zoomSize: Float = DEFAULT_ZOOM_SIZE) {
+    private fun moveToLocation(latLng: LatLng, zoomSize: Float = DEFAULT_ZOOM_SIZE) {
         map.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 LatLng(latLng.latitude, latLng.longitude),
@@ -111,7 +114,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
         )
     }
 
-    protected fun getCurrentLocation(): Location? {
+    private fun getCurrentLocation(): Location? {
         if (checkLocationPermission()) {
             (requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
                 this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).also { networkLocation ->

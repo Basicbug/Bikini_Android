@@ -44,7 +44,6 @@ class BikiniMapFragment : BaseMapFragment() {
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
     private var currentFeeds: List<Feed>? = null
-    private var locationFocused: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,9 +83,6 @@ class BikiniMapFragment : BaseMapFragment() {
                 navigateNearLocationFeeds(feed)
             }
             true
-        }
-        locationFocused?.let {
-            moveToLocation(it)
         }
     }
 
