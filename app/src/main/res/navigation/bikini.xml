@@ -15,16 +15,19 @@
         android:id="@+id/bikini"
         android:name="com.example.bikini_android.ui.map.BikiniMapFragment"
         tools:layout="@layout/fragment_bikini_map">
-        <action
-            android:id="@+id/action_bikini_map_to_feeds_end"
-            app:destination="@id/feeds_end" />
     </fragment>
+
     <fragment
         android:id="@+id/feeds_end"
         android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
         tools:layout="@layout/fragment_feeds">
-        <action
-            android:id="@+id/action_feeds_end_to_feeds_end"
-            app:destination="@id/feeds_end" />
     </fragment>
+
+    <action
+        android:id="@+id/action_bikini_feeds"
+        app:destination="@id/feeds_end" />
+
+    <action
+        android:id="@+id/action_bikini_map"
+        app:destination="@id/bikini" />
 </navigation>

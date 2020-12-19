@@ -30,7 +30,7 @@ class MainHolderActivity : BaseActivity() {
     lateinit var binding: ActivityMainHolderBinding
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private lateinit var viewModels: List<BaseViewModel>
-
+    lateinit var navigationHelper: NavigationHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
@@ -48,6 +48,8 @@ class MainHolderActivity : BaseActivity() {
             R.id.content_fragment_holder,
             itemEventRelay
         )
+        navigationHelper =
+            NavigationHelper(binding.bottomNavigation, this, itemEventRelay)
     }
 
     private fun setUpToolbar() {
@@ -67,6 +69,11 @@ class MainHolderActivity : BaseActivity() {
                 }
 
             }.addTo(disposables)
+    }
+
+    override fun onDestroy() {
+        navigationHelper.clear()
+        super.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

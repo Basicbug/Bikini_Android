@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
@@ -22,14 +21,15 @@ import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsFragment
+import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.FeedsViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -44,6 +44,14 @@ class BikiniMapFragment : BaseMapFragment() {
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
     private var currentFeeds: List<Feed>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            locationFocused = it.getParcelable(KEY_LAT_LNG)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -79,8 +87,7 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private fun navigateNearLocationFeeds(pivotFeed: Feed) {
-        findNavController().navigate(
-            R.id.action_bikini_map_to_feeds_end,
+        getNavigationHelper()?.navigateToBikiniFeeds(
             FeedsFragment.makeBundle(
                 RecyclerViewLayoutType.GRID,
                 FeedsType.NEAR_LOCATION_FEEDS,
@@ -162,6 +169,18 @@ class BikiniMapFragment : BaseMapFragment() {
                 )
                 measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
                 layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+            }
+        }
+    }
+
+    companion object {
+        private const val KEY_LAT_LNG = "keyLatLng"
+
+        fun makeBundle(
+            latLng: LatLng
+        ): Bundle {
+            return Bundle().apply {
+                putParcelable(KEY_LAT_LNG, latLng)
             }
         }
     }
