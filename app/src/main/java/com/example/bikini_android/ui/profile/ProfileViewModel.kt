@@ -1,18 +1,22 @@
 package com.example.bikini_android.ui.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import com.example.bikini_android.ui.base.BaseViewModel
-import com.example.bikini_android.util.etc.Event
+import com.example.bikini_android.util.bus.RxAction
+import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 
 class ProfileViewModel : BaseViewModel() {
 
-    private val _onMakeFeedClicked = MutableLiveData<Event<Unit>>()
-    val onMakeFeedClicked: LiveData<Event<Unit>>
-        get() = _onMakeFeedClicked
+    val itemEventRelay: Relay<RxAction> = PublishRelay.create()
 
-    fun onMakeFeedClick() {
-        _onMakeFeedClicked.postValue(Event(Unit))
+    fun openBoard() {
+        Log.d("asdfasdf", "Asdfasdfasd")
+        itemEventRelay.accept(EventType.OPEN_BOARD)
+    }
+
+    enum class EventType : RxAction {
+        OPEN_BOARD
     }
 
 }
