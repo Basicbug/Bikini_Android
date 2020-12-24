@@ -31,6 +31,7 @@ class ProfileFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_profile,

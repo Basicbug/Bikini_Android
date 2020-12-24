@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     testImplementation core_test_libraries.values()
     androidTestImplementation android_core_test_libraries.values()
 

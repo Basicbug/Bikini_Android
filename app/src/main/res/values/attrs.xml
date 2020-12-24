@@ -12,4 +12,8 @@
     <attr name="toolbarBackgroundColor" format="reference|color" />
     <attr name="defaultItemSelectedColor" format="reference|color" />
     <attr name="defaultItemUnselectedColor" format="reference|color" />
+    <attr name="defaultBackgroundColor" format="reference|color" />
+    <attr name="splashTintColor" format="reference|color" />
+    <attr name="defaultTintColor" format="reference|color" />
+    <attr name="locationButtonTintColor" format="reference|color" />
 </resources>

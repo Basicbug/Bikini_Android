@@ -28,6 +28,8 @@ abstract class ItemViewModel : BaseObservable(),
 
     var itemEventRelay: Relay<RxAction>? = null
 
-    fun onClickItem() = Unit
-    fun onLongClickItem() = Unit
+    open fun onClickItem() = Unit
+    open fun onLongClickItem() = Unit
+    open fun getItemHashCode():Int = this.hashCode()
+    open fun getContentsHashCode():Int = this.hashCode()
 }

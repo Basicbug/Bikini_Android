@@ -57,14 +57,14 @@ class BoardActivity : BaseActivity() {
                         navigateToGallery()
                     else -> Unit
                 }
-            }.addTo(disposable)
+            }.addTo(disposables)
 
         itemEventRelay
             .ofType(ImageLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 bindPickedImage(event.imageUri)
-            }.addTo(disposable)
+            }.addTo(disposables)
     }
 
     private fun bindPickedImage(imageUrl: String) {

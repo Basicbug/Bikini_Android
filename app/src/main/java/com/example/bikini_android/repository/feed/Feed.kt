@@ -10,6 +10,7 @@ import kotlinx.android.parcel.Parcelize
 @Suppress("unused")
 @Parcelize
 data class Feed(
+    var feedId: String = "test1",
     var feedNumOfUser: Int = 0,
     var userId: String = "sampleUserId",
     var content: String = "sampleContent",

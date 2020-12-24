@@ -35,9 +35,10 @@ import com.google.android.gms.maps.model.LatLng
 abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
+    protected var locationFocused: LatLng? = null
+    private var isMoveToLocation = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
             if (it.isAccept) {
                 initMap()
@@ -45,9 +46,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
                 permissionDenied = true
             }
         }.addTo(disposables)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?)?.getMapAsync(this)
     }
 
@@ -77,38 +76,45 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun initMap() {
-        enableMyLocation()
-        moveToMyLocation()
+        if (setMyLocationEnable()) {
+            if (locationFocused == null) {
+                getCurrentLocation()?.let {
+                    locationFocused = LatLng(it.latitude, it.longitude)
+                }
+            }
+            if(!isMoveToLocation){
+                locationFocused?.let {
+                    moveToLocation(it)
+                    isMoveToLocation = true
+                }
+            }
+        }
     }
 
-    private fun enableMyLocation() {
-        if (!(::map.isInitialized)) return
+    private fun setMyLocationEnable(): Boolean {
+        if (!(::map.isInitialized)) return true
         if (checkLocationPermission()) {
             map.isMyLocationEnabled = true
+            return true
         } else {
             PermissionUtils.requestPermission(
                 requireActivity() as AppCompatActivity, LOCATION_PERMISSION_REQUEST_CODE,
                 Manifest.permission.ACCESS_FINE_LOCATION, true
             )
         }
+        return false
     }
 
-    private fun moveToMyLocation() {
-        getCurrentLocation()?.let {
-            moveToLocation(it)
-        }
-    }
-
-    private fun moveToLocation(location: Location, zoomSize: Float = DEFAULT_ZOOM_SIZE) {
+    private fun moveToLocation(latLng: LatLng, zoomSize: Float = DEFAULT_ZOOM_SIZE) {
         map.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
-                LatLng(location.latitude, location.longitude),
+                LatLng(latLng.latitude, latLng.longitude),
                 zoomSize
             )
         )
     }
 
-    protected fun getCurrentLocation(): Location? {
+    private fun getCurrentLocation(): Location? {
         if (checkLocationPermission()) {
             (requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
                 this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).also { networkLocation ->

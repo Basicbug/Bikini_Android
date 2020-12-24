@@ -9,11 +9,7 @@ package com.example.bikini_android.ui.settings
 
 import android.os.Bundle
 import android.view.View
-import androidx.preference.EditTextPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceCategory
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.*
 import com.example.bikini_android.R
 import com.example.bikini_android.util.ktx.pref
 import com.example.bikini_android.util.logging.Logger
@@ -60,9 +56,5 @@ class SettingsFragment : PreferenceFragmentCompat() {
         private const val PREF_BASE_URL = "pref.base_url"
         private const val DEV_BASE_URL = "dev.base.url"
         private const val PREF_DEV_CATEGORY = "pref.dev_category"
-
-        fun newInstance(): SettingsFragment {
-            return SettingsFragment()
-        }
     }
 }

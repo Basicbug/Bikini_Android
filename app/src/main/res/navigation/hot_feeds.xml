@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ hot_feeds.xml 2020. 12. 10
+  ~
+  ~ Copyright 2020 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hot_feeds_navigation"
+    app:startDestination="@id/feeds_end">
+
+    <fragment
+        android:id="@+id/feeds_end"
+        android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
+        tools:layout="@layout/fragment_feeds">
+    </fragment>
+</navigation>

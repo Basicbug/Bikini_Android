@@ -8,7 +8,6 @@
 package com.example.bikini_android.ui.feeds
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.map.FeedsLoadEvent
@@ -31,7 +30,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 
-    fun loadFeedMarkers() {
+    fun loadFeeds() {
         if (_feeds.isNotEmpty()) {
             itemEventRelay.accept(FeedsLoadEvent(_feeds))
         } else {
@@ -50,6 +49,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
         return mutableListOf<Feed>().apply {
             add(
                 Feed(
+                    "1",
                     1,
                     "1",
                     "test",
@@ -61,6 +61,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
             )
             add(
                 Feed(
+                    "2",
                     1,
                     "2",
                     "test",
@@ -72,6 +73,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
             )
             add(
                 Feed(
+                    "3",
                     1,
                     "3",
                     "test",
@@ -84,6 +86,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
             )
             add(
                 Feed(
+                    "4",
                     1,
                     "4",
                     "test",
