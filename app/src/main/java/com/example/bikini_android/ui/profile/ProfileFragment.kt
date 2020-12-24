@@ -23,16 +23,8 @@ class ProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
-    private val viewModel: ProfileViewModel by lazy {
-        ViewModelProvider(this)[ProfileViewModel::class.java]
-    }
-
-//    private lateinit var viewModel: ProfileViewModel
-//    private lateinit var itemEventRelay: Relay<RxAction>
-
-    private val itemEventRelay: Relay<RxAction> by lazy {
-        viewModel.itemEventRelay
-    }
+    private lateinit var viewModel: ProfileViewModel
+    private lateinit var itemEventRelay: Relay<RxAction>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,8 +38,12 @@ class ProfileFragment : BaseFragment() {
             false
         )
 
-//        viewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
-//        itemEventRelay = viewModel.itemEventRelay
+        viewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+        itemEventRelay = viewModel.itemEventRelay
+
+        binding.apply {
+            viewmodel = viewModel
+        }
 
         observeEvent()
 
@@ -55,9 +51,6 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun observeEvent() {
-//        viewModel.onMakeFeedClicked.observe(viewLifecycleOwner, Observer {
-//            startActivity(Intent(activity, BoardActivity::class.java))
-//        })
         itemEventRelay
             .ofType(ProfileViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())
