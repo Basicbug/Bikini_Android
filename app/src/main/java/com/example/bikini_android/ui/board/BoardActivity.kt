@@ -2,9 +2,7 @@ package com.example.bikini_android.ui.board
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityBoardBinding
@@ -35,9 +33,12 @@ class BoardActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE) {
-            if (data != null) {
+
+            data?.let {
                 val imageUri = data.data
-                Log.d("uri", imageUri.toString())
+                imageUri?.let {
+                    itemEventRelay.accept(ImageLoadEvent(imageUri.toString()))
+                }
             }
         }
 
@@ -49,14 +50,32 @@ class BoardActivity : BaseActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 when (it) {
-                    BoardItemViewModel.EventType.PUBLISH_FEED ->
+                    BoardItemViewModel.EventType.POST_FEED -> {
                         finish()
+                    }
                     BoardItemViewModel.EventType.NAVIGATE_GALLERY ->
                         navigateToGallery()
                     else -> Unit
                 }
-
             }.addTo(disposable)
+
+        itemEventRelay
+            .ofType(ImageLoadEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event ->
+                bindPickedImage(event.imageUri)
+            }.addTo(disposable)
+    }
+
+    private fun bindPickedImage(imageUrl: String) {
+        binding.run {
+            apply {
+                viewmodel = BoardItemViewModel(itemEventRelay).also {
+                    it.imageUrl = imageUrl
+                }
+                executePendingBindings()
+            }
+        }
     }
 
     private fun navigateToGallery() {

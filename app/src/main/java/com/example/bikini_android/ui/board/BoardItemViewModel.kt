@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.ui.board
 
+import androidx.databinding.Bindable
 import com.example.bikini_android.R
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import com.example.bikini_android.util.bus.RxAction
@@ -17,6 +18,10 @@ import com.jakewharton.rxrelay2.Relay
  */
 
 class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
+
+    @get:Bindable
+    var imageUrl = "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+
     init {
         this.itemEventRelay = itemEventRelay
     }
@@ -25,15 +30,17 @@ class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
         itemEventRelay?.accept(EventType.NAVIGATE_GALLERY)
     }
 
-    fun publishFeed() {
-        itemEventRelay?.accept(EventType.PUBLISH_FEED)
+    fun postFeed() {
+        itemEventRelay?.accept(EventType.POST_FEED)
     }
+
+    fun getImageLoadEvent() {}
 
     override fun getLayoutRes(): Int {
         return R.layout.activity_board
     }
 
     enum class EventType : RxAction {
-        NAVIGATE_GALLERY, PUBLISH_FEED;
+        NAVIGATE_GALLERY, POST_FEED;
     }
 }
