@@ -8,6 +8,7 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityBoardBinding
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.bus.event.ImageLoadEvent
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,12 +33,12 @@ class BoardActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE) {
+        if (requestCode == REQUEST_CODE_GALLERY_PAGE) {
 
-            data?.let {
-                val imageUri = data.data
-                imageUri?.let {
-                    itemEventRelay.accept(ImageLoadEvent(imageUri.toString()))
+            data?.let { intent ->
+                val imageUrl = intent.data
+                imageUrl?.let {
+                    itemEventRelay.accept(ImageLoadEvent(it.toString()))
                 }
             }
         }
@@ -58,34 +59,16 @@ class BoardActivity : BaseActivity() {
                     else -> Unit
                 }
             }.addTo(disposables)
-
-        itemEventRelay
-            .ofType(ImageLoadEvent::class.java)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { event ->
-                bindPickedImage(event.imageUri)
-            }.addTo(disposables)
-    }
-
-    private fun bindPickedImage(imageUrl: String) {
-        binding.run {
-            apply {
-                viewmodel = BoardItemViewModel(itemEventRelay).also {
-                    it.imageUrl = imageUrl
-                }
-                executePendingBindings()
-            }
-        }
     }
 
     private fun navigateToGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK).apply {
             type = "image/*"
         }
-        startActivityForResult(galleryIntent, PICK_IMAGE)
+        startActivityForResult(galleryIntent, REQUEST_CODE_GALLERY_PAGE)
     }
 
     companion object {
-        private const val PICK_IMAGE = 1
+        private const val REQUEST_CODE_GALLERY_PAGE = 1
     }
 }
