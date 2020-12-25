@@ -8,6 +8,7 @@
 package com.example.bikini_android.ui.board
 
 import androidx.databinding.Bindable
+import com.example.bikini_android.BR
 import com.example.bikini_android.R
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import com.example.bikini_android.util.bus.RxAction
@@ -19,8 +20,12 @@ import com.jakewharton.rxrelay2.Relay
 
 class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
 
-    @get:Bindable
+    @get: Bindable
     var imageUrl = "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.imageUrl)
+        }
 
     init {
         this.itemEventRelay = itemEventRelay

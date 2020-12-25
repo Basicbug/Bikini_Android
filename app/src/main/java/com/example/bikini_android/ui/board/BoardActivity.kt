@@ -34,10 +34,10 @@ class BoardActivity : BaseActivity() {
 
         if (requestCode == PICK_IMAGE) {
 
-            data?.let {
-                val imageUri = data.data
+            data?.let {intent->
+                val imageUri = intent.data
                 imageUri?.let {
-                    itemEventRelay.accept(ImageLoadEvent(imageUri.toString()))
+                    itemEventRelay.accept(ImageLoadEvent(it.toString()))
                 }
             }
         }
@@ -58,24 +58,6 @@ class BoardActivity : BaseActivity() {
                     else -> Unit
                 }
             }.addTo(disposables)
-
-        itemEventRelay
-            .ofType(ImageLoadEvent::class.java)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { event ->
-                bindPickedImage(event.imageUri)
-            }.addTo(disposables)
-    }
-
-    private fun bindPickedImage(imageUrl: String) {
-        binding.run {
-            apply {
-                viewmodel = BoardItemViewModel(itemEventRelay).also {
-                    it.imageUrl = imageUrl
-                }
-                executePendingBindings()
-            }
-        }
     }
 
     private fun navigateToGallery() {
