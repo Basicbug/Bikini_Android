@@ -16,6 +16,11 @@
     <dimen name="content_image_max_height">300dp</dimen>
     <dimen name="text_median_size">20sp</dimen>
     <dimen name="large_margin">20dp</dimen>
+    <dimen name="median_margin">10dp</dimen>
+    <!--small feed-->
+    <dimen name="feed_marker_size">100dp</dimen>
+    <dimen name="feed_badge_size">12sp</dimen>
+
     <!--feed-->
     <dimen name="feed_marker_image_top_margin">8dp</dimen>
     <dimen name="feed_marker_image_height">78dp</dimen>
@@ -23,6 +28,7 @@
     <dimen name="feed_marker_background_size">110dp</dimen>
     <dimen name="grid_feed_image_size">200dp</dimen>
     <dimen name="feed_location_button_size">35dp</dimen>
+
     <!--profile-->
     <dimen name="profile_image_size">120dp</dimen>
     <dimen name="user_id_height">50dp</dimen>
