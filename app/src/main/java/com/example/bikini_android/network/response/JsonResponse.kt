@@ -18,7 +18,9 @@ data class JsonResponse<T>(
     @SerializedName("result")
     val result: T?,
     @SerializedName("message")
-    val message: RestApiMessage
+    val message: String,
+    @SerializedName("code")
+    val code: String
 ) {
     fun validate(): Boolean {
         if (result == null) {
