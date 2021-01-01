@@ -68,7 +68,7 @@ class BikiniMapFragment : BaseMapFragment() {
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        viewModel.loadFeeds()
+        viewModel.initFeeds(feedsType = FeedsType.NEAR_LOCATION_FEEDS)
         initMap()
     }
 
@@ -106,7 +106,7 @@ class BikiniMapFragment : BaseMapFragment() {
             }.addTo(disposables)
 
         itemEventRelay
-            .ofType(FeedsLoadEvent::class.java)
+            .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 if (isDiffFeeds(event.feeds)) {

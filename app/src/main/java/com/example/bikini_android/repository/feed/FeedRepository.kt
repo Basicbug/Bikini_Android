@@ -14,7 +14,7 @@ import io.reactivex.Single
  */
 
 interface FeedRepository {
-    fun getUserFeeds(
+    fun getUserFeedsFromRemote(
         userId: String
     ): Single<List<Feed>>
 }

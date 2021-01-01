@@ -14,7 +14,7 @@ import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
 import com.example.bikini_android.ui.map.BikiniMapFragment
-import com.example.bikini_android.ui.map.FeedsLoadEvent
+import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
@@ -71,12 +71,12 @@ class FeedsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadFeeds()
+        viewModel.initFeeds(feedsType)
     }
 
     private fun observeEvent() {
         itemEventRelay
-            .ofType(FeedsLoadEvent::class.java)
+            .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 bindFeeds(event.feeds)

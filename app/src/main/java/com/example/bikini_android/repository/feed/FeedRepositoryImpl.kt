@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers
  */
 
 class FeedRepositoryImpl private constructor() : FeedRepository {
-    override fun getUserFeeds(userId: String): Single<List<Feed>> {
+    override fun getUserFeedsFromRemote(userId: String): Single<List<Feed>> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
             .getUserFeeds(userId)

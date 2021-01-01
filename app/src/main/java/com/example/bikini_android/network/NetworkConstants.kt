@@ -11,5 +11,5 @@ package com.example.bikini_android.network
  * @author MyeongKi
  */
 object NetworkConstants {
-    const val BASE_URL: String = "https://fast-garden-84224.herokuapp.com"
+    const val BASE_URL: String = "http://ec2-15-164-98-44.ap-northeast-2.compute.amazonaws.com:8080"
 }

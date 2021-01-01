@@ -13,10 +13,6 @@ import com.example.bikini_android.repository.feed.FeedRepositoryInjector
  * @author MyeongKi
  */
 
-class InvokeUserFeedsUseCaseImpl:InvokeFeedsUseCase{
+class LoadUserFeedsUseCase{
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
-
-    override fun invokeFeeds() {
-
-    }
 }

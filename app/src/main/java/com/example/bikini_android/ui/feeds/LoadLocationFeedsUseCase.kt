@@ -1,5 +1,5 @@
 /*
- * InvokeLocationFeedsUseCaseImpl.kt 2021. 1. 1
+ * LoadLocationFeedsUseCase.kt 2021. 1. 1
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *

@@ -10,11 +10,12 @@ package com.example.bikini_android.ui.feeds
 import androidx.lifecycle.SavedStateHandle
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseViewModel
-import com.example.bikini_android.ui.map.FeedsLoadEvent
+import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
-import com.google.android.gms.maps.model.LatLng
+import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -22,85 +23,78 @@ import io.reactivex.disposables.CompositeDisposable
  */
 
 class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
-    private var _feeds: List<Feed> = handle.get<MutableList<Feed>>(KEY_FEEDS) ?: mutableListOf()
+    private var _myFeeds: List<Feed> = handle.get<MutableList<Feed>>(KEY_MY_FEEDS) ?: mutableListOf()
 
-    val feeds: List<Feed>
-        get() = _feeds
-
+    val myFeeds: List<Feed>
+        get() = _myFeeds
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 
-    fun loadFeeds() {
-        if (_feeds.isNotEmpty()) {
-            itemEventRelay.accept(FeedsLoadEvent(_feeds))
-        } else {
-            loadFeedMarkersFromRepository()
+    private val loadMyFeedsUseCase = LoadMyFeedsUseCase(disposables, itemEventRelay)
+    init {
+        itemEventRelay
+            .ofType(FeedsEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event ->
+                when (event.feedsType){
+                    FeedsType.MY_FEEDS -> {
+                        _myFeeds = event.feeds
+                    }
+                    FeedsType.NEAR_LOCATION_FEEDS -> {
+
+                    }
+                    FeedsType.HOT_RANKING_FEEDS -> {
+
+                    }
+                }
+            }.addTo(disposables)
+    }
+    fun initFeeds(feedsType: FeedsType) {
+        when (feedsType) {
+            FeedsType.MY_FEEDS -> {
+                if (_myFeeds.isNotEmpty()) {
+                    itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))
+                } else {
+                    loadMyFeeds()
+                }
+            }
+            FeedsType.NEAR_LOCATION_FEEDS -> {
+                if (_myFeeds.isNotEmpty()) {
+                    itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))
+                } else {
+                    loadMyFeeds()
+                }
+            }
+            FeedsType.HOT_RANKING_FEEDS -> {
+                if (_myFeeds.isNotEmpty()) {
+                    itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))
+                } else {
+                    loadMyFeeds()
+                }
+            }
         }
     }
 
-    private fun loadFeedMarkersFromRepository() {
-        loadTestFeedMarker().run {
-            _feeds = this
-            itemEventRelay.accept(FeedsLoadEvent(this))
+    fun refreshMyFeeds(feedsType: FeedsType) {
+        when (feedsType) {
+            FeedsType.MY_FEEDS -> {
+                loadMyFeeds()
+            }
+            FeedsType.NEAR_LOCATION_FEEDS -> {
+
+            }
+            FeedsType.HOT_RANKING_FEEDS -> {
+
+            }
         }
     }
 
-    private fun loadTestFeedMarker(): List<Feed> {
-        return mutableListOf<Feed>().apply {
-            add(
-                Feed(
-                    "1",
-                    1,
-                    "1",
-                    "test",
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
-                    LatLng(37.363188, 127.107497),
-                    1
-                )
-            )
-            add(
-                Feed(
-                    "2",
-                    1,
-                    "2",
-                    "test",
-                    "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
-                    "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
-                    LatLng(37.362424, 127.106644),
-                    1
-                )
-            )
-            add(
-                Feed(
-                    "3",
-                    1,
-                    "3",
-                    "test",
-                    "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-                    "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-                    LatLng(37.361290, 127.107213),
-                    1
-
-                )
-            )
-            add(
-                Feed(
-                    "4",
-                    1,
-                    "4",
-                    "test",
-                    "https://homepages.cae.wisc.edu/~ece533/images/boat.png",
-                    "https://homepages.cae.wisc.edu/~ece533/images/boat.png",
-                    LatLng(37.361025, 127.107824),
-                    1
-                )
-            )
-        }
+    private fun loadMyFeeds() {
+        loadMyFeedsUseCase.execute()
     }
 
     override fun saveState() {
-        handle[KEY_FEEDS] = _feeds
+        handle[KEY_MY_FEEDS] = _myFeeds
     }
 
     override fun onCleared() {
@@ -109,6 +103,6 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
     }
 
     companion object {
-        private const val KEY_FEEDS = "keyFeeds"
+        private const val KEY_MY_FEEDS = "keyMyFeeds"
     }
 }
