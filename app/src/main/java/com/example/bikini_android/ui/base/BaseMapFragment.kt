@@ -47,7 +47,9 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
             }
         }.addTo(disposables)
 
-        (this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?)?.getMapAsync(this)
+        (this.childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?)?.getMapAsync(
+            this
+        )
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -82,7 +84,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
                     locationFocused = LatLng(it.latitude, it.longitude)
                 }
             }
-            if(!isMoveToLocation){
+            if (!isMoveToLocation) {
                 locationFocused?.let {
                     moveToLocation(it)
                     isMoveToLocation = true
@@ -117,15 +119,17 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     private fun getCurrentLocation(): Location? {
         if (checkLocationPermission()) {
             (requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
-                this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).also { networkLocation ->
-                    if (networkLocation != null) {
-                        return networkLocation
-                    } else {
-                        this.getLastKnownLocation(LocationManager.GPS_PROVIDER)?.let { gpsLocation ->
-                            return gpsLocation
+                this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    .also { networkLocation ->
+                        if (networkLocation != null) {
+                            return networkLocation
+                        } else {
+                            this.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                                ?.let { gpsLocation ->
+                                    return gpsLocation
+                                }
                         }
                     }
-                }
             }
         }
         return null

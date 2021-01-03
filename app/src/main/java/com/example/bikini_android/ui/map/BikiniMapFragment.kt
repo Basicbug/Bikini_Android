@@ -32,7 +32,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.concurrent.TimeUnit
 
 /**
  * @author MyeongKi
@@ -58,7 +57,12 @@ class BikiniMapFragment : BaseMapFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        DataBindingUtil.inflate<FragmentBikiniMapBinding>(inflater, R.layout.fragment_bikini_map, container, false)
+        DataBindingUtil.inflate<FragmentBikiniMapBinding>(
+            inflater,
+            R.layout.fragment_bikini_map,
+            container,
+            false
+        )
             .also {
                 super.onCreateView(inflater, container, savedInstanceState)
                 binding = it

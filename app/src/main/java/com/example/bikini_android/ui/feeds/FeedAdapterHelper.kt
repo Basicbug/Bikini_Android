@@ -16,7 +16,6 @@ import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 
-
 /**
  * @author MyeongKi
  */

@@ -92,7 +92,6 @@ object PermissionUtils {
         }
     }
 
-
     class RationaleDialog : DialogFragment() {
         private var finishActivity = false
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -119,7 +118,8 @@ object PermissionUtils {
         override fun onDismiss(dialog: DialogInterface) {
             super.onDismiss(dialog)
             if (finishActivity)
-                PermissionDeniedDialog.newInstance(true).show(requireActivity().supportFragmentManager, "dialog")
+                PermissionDeniedDialog.newInstance(true)
+                    .show(requireActivity().supportFragmentManager, "dialog")
         }
 
         companion object {

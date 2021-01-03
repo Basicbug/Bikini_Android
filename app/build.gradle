@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.bikini_android"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -59,4 +59,5 @@ dependencies {
     implementation lifecycle_libraries.values()
 
     implementation map_libraries.values()
+
 }

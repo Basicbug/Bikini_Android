@@ -11,7 +11,7 @@ import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.common.item.ItemViewModel
-import java.util.*
+import java.util.Objects
 
 /**
  * @author MyeongKi
@@ -37,6 +37,7 @@ abstract class FeedItemViewModel(protected val feed: Feed) : ItemViewModel() {
     override fun getItemHashCode(): Int {
         return Objects.hash(feed.feedId)
     }
+
     override fun getContentsHashCode(): Int {
         return feed.hashCode()
     }

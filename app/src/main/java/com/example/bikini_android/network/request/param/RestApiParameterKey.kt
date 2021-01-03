@@ -11,6 +11,6 @@ package com.example.bikini_android.network.request.param
  * @author MyeongKi
  */
 
-enum class RestApiParameterKey (val key:String){
+enum class RestApiParameterKey(val key: String) {
     SAMPLE("sampleKey")
 }

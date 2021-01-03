@@ -24,7 +24,10 @@ import kotlinx.coroutines.delay
 
 object ImageBindingAdapter {
     @JvmStatic
-    @BindingAdapter(value = ["imageUrl", "glideOptions", "errorAttrResId", "completeLoadEvent"], requireAll = false)
+    @BindingAdapter(
+        value = ["imageUrl", "glideOptions", "errorAttrResId", "completeLoadEvent"],
+        requireAll = false
+    )
     fun setImageUrl(
         imageView: ImageView,
         imageUrl: String,
@@ -63,7 +66,6 @@ object ImageBindingAdapter {
                         it.invoke()
                         return false
                     }
-
                 })
             }
             glideRequest.into(imageView)

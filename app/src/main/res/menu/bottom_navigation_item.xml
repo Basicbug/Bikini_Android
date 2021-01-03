@@ -22,7 +22,7 @@
     <item
         android:id="@+id/settings_navigation"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_perm_data_setting_24"
+        android:icon="@drawable/baseline_perm_data_setting_black"
         android:title=""
         app:showAsAction="never" />
     <item

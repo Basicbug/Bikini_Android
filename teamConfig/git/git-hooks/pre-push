@@ -3,7 +3,7 @@
 
 echo "정적 분석 중"
 
-./gradlew ktlint detekt
+./gradlew ktlint
 
 status=$?
 

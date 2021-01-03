@@ -15,5 +15,5 @@ import com.google.gson.annotations.SerializedName
 
 abstract class JsonResponseWrapper<T> {
     @SerializedName("response")
-    val response:JsonResponse<T>? = null
+    val response: JsonResponse<T>? = null
 }
