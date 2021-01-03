@@ -16,7 +16,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import kotlinx.coroutines.delay
 
 /**
  * @author MyeongKi
@@ -25,7 +24,7 @@ import kotlinx.coroutines.delay
 object ImageBindingAdapter {
     @JvmStatic
     @BindingAdapter(
-        value = ["imageUrl", "glideOptions", "errorAttrResId", "completeLoadEvent"],
+        value = arrayOf("imageUrl", "glideOptions", "errorAttrResId", "completeLoadEvent"),
         requireAll = false
     )
     fun setImageUrl(
