@@ -2,8 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: '../libraries.gradle'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-parcelize'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -38,8 +37,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     testImplementation core_test_libraries.values()
     androidTestImplementation android_core_test_libraries.values()
 
@@ -49,7 +46,7 @@ dependencies {
     kapt database_annotion.values()
 
     implementation image_libraries.values()
-    annotationProcessor image_annotation_processor.values()
+    kapt image_annotation_processor.values()
 
     implementation network_libraries.values()
 
