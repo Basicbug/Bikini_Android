@@ -68,7 +68,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
                 }
             }
             FeedsType.NEAR_LOCATION_FEEDS -> {
-                if (_myFeeds.isNotEmpty()) {//FIXME 수정
+                if (_myFeeds.isNotEmpty()) { //FIXME 수정
                     itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))//FIXME 수정
                 } else {
                     loadMyFeedsUseCase.execute()//FIXME 수정

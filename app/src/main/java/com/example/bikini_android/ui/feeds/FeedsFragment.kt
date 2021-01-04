@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
@@ -25,7 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  * @author bsgreentea
  */
 
-class FeedsFragment : BaseFragment(){
+class FeedsFragment : BaseFragment() {
     private lateinit var binding: FragmentFeedsBinding
     private var feedAdapterHelper: FeedAdapterHelper = FeedAdapterHelper()
     private var pivotFeed: Feed? = null

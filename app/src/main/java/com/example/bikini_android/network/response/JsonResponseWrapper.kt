@@ -13,7 +13,6 @@ import com.google.gson.annotations.SerializedName
  * @author MyeongKi
  */
 
-
 abstract class JsonResponseWrapper<T> {
     @SerializedName("result")
     val result: T? = null

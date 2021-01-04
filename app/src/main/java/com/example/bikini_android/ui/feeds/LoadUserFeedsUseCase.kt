@@ -13,6 +13,6 @@ import com.example.bikini_android.repository.feed.FeedRepositoryInjector
  * @author MyeongKi
  */
 
-class LoadUserFeedsUseCase{
+class LoadUserFeedsUseCase {
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
 }
