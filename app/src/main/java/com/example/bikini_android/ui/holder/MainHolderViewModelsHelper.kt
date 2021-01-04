@@ -5,7 +5,6 @@
  *
  */
 
-
 package com.example.bikini_android.ui.holder
 
 import androidx.lifecycle.ViewModelProvider
@@ -27,8 +26,9 @@ object MainHolderViewModelsHelper : ViewModelsHelper {
             )[FeedsViewModel::class.java]
         )
     }
-    override fun saveState(viewModels:List<BaseViewModel>){
-        for(viewModel in viewModels){
+
+    override fun saveState(viewModels: List<BaseViewModel>) {
+        for (viewModel in viewModels) {
             viewModel.saveState()
         }
     }

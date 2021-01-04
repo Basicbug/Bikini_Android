@@ -13,7 +13,6 @@ import com.google.gson.annotations.SerializedName
  * @author MyeongKi
  */
 
-
 data class JsonResponse<T>(
     @SerializedName("result")
     val result: T?,

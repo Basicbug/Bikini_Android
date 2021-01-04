@@ -19,12 +19,20 @@ abstract class BaseActivity : AppCompatActivity(), OnPermissionCallback {
     private var permissionDenied = false
     protected val disposables: CompositeDisposable = CompositeDisposable()
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super<OnPermissionCallback>.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super < OnPermissionCallback > .onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults
+        )
     }
+
     override fun onDestroy() {
         super.onDestroy()
         disposables.clear()
     }
-
 }

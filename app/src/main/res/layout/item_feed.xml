@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -9,7 +10,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="20dp">
@@ -23,7 +24,8 @@
             android:foreground="@drawable/circular"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/profile_image"/>
         <ImageView
             android:id="@+id/location"
             android:layout_width="@dimen/feed_location_button_size"
@@ -35,7 +37,8 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/image"/>
+            app:layout_constraintBottom_toTopOf="@id/image"
+            android:contentDescription="@string/location_button_image" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="@dimen/user_id_height"
@@ -56,7 +59,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="@dimen/content_image_max_height"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_thumbnail" />
+            app:layout_constraintTop_toBottomOf="@id/user_thumbnail"
+            android:contentDescription="@string/feed_image" />
 
 
         <TextView
@@ -65,7 +69,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:gravity="center_vertical"
-            android:text="1.23km from you"
+            android:text="@string/test"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image" />
 
@@ -76,7 +80,7 @@
             android:layout_marginStart="10dp"
             android:gravity="center_vertical"
             android:maxLines="4"
-            android:text="sample content bla bla"
+            android:text="@string/test"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

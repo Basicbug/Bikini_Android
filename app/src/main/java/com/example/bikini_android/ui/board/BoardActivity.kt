@@ -1,3 +1,4 @@
+
 package com.example.bikini_android.ui.board
 
 import android.content.Intent
@@ -42,7 +43,6 @@ class BoardActivity : BaseActivity() {
                 }
             }
         }
-
     }
 
     private fun setUpObservers() {

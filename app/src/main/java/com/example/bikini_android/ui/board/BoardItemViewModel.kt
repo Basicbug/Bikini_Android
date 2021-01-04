@@ -39,7 +39,7 @@ class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
         itemEventRelay?.accept(EventType.POST_FEED)
     }
 
-    fun getImageLoadEvent() {}
+    fun getImageLoadEvent() = Unit
 
     override fun getLayoutRes(): Int {
         return R.layout.activity_board

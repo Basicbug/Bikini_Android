@@ -13,6 +13,4 @@ import com.example.bikini_android.util.bus.RxAction
  * @author MyeongKi
  */
 
-class LocationPermissionEvent(val isAccept: Boolean) : RxAction {
-
-}
+class LocationPermissionEvent(val isAccept: Boolean) : RxAction

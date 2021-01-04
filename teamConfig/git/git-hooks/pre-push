@@ -1,0 +1,16 @@
+#!/bin/sh
+#mac의 경우 위처럼 사용하면 되고 window일 경우는 !/bin/bash 사용
+
+echo "정적 분석 중"
+
+./gradlew ktlint lint
+
+status=$?
+
+if [ "$status" = 0 ] ; then
+    echo "이슈 없음"
+    exit 0
+else
+    echo 1>&2 "이슈 있음"
+    exit 1
+fi
