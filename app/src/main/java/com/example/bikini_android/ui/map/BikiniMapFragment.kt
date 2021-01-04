@@ -113,6 +113,7 @@ class BikiniMapFragment : BaseMapFragment() {
         itemEventRelay
             .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
+            .filter { it.feedsType == FeedsType.NEAR_LOCATION_FEEDS }
             .subscribe { event ->
                 if (isDiffFeeds(event.feeds)) {
                     bindFeedMarkers(event.feeds)
