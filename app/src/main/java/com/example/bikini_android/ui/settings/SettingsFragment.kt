@@ -9,7 +9,11 @@ package com.example.bikini_android.ui.settings
 
 import android.os.Bundle
 import android.view.View
-import androidx.preference.*
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import com.example.bikini_android.R
 import com.example.bikini_android.util.ktx.pref
 import com.example.bikini_android.util.logging.Logger
@@ -36,7 +40,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference<SwitchPreferenceCompat>(PREF_DEV_MODE)?.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { _, newValue ->
                 logger.debug { "dev mode $newValue" }
-                findPreference<PreferenceCategory>(PREF_DEV_CATEGORY)?.isEnabled = newValue as Boolean
+                findPreference<PreferenceCategory>(PREF_DEV_CATEGORY)?.isEnabled =
+                    newValue as Boolean
                 true
             }
 
@@ -49,7 +54,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
     }
-
 
     companion object {
         private const val PREF_DEV_MODE = "pref.dev_mode"

@@ -92,7 +92,6 @@ object PermissionUtils {
         }
     }
 
-
     class RationaleDialog : DialogFragment() {
         private var finishActivity = false
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -103,11 +102,13 @@ object PermissionUtils {
             return AlertDialog.Builder(activity)
                 .setMessage(R.string.permission_rationale_location)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
-                    ActivityCompat.requestPermissions(
-                        activity!!,
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        requestCode
-                    )
+                    activity?.let {
+                        ActivityCompat.requestPermissions(
+                            it,
+                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                            requestCode
+                        )
+                    }
                     finishActivity = false
                 }
                 .setNegativeButton(android.R.string.cancel, null)
@@ -117,7 +118,8 @@ object PermissionUtils {
         override fun onDismiss(dialog: DialogInterface) {
             super.onDismiss(dialog)
             if (finishActivity)
-                PermissionDeniedDialog.newInstance(true).show(requireActivity().supportFragmentManager, "dialog")
+                PermissionDeniedDialog.newInstance(true)
+                    .show(requireActivity().supportFragmentManager, "dialog")
         }
 
         companion object {

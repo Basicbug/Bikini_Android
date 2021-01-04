@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 /**
  * @author MyeongKi
  */
-abstract class RestApiClient(private val requestUrl: String):ApiClient {
+abstract class RestApiClient(private val requestUrl: String) : ApiClient {
 
     override fun builder(builder: OkHttpClient.Builder): Retrofit.Builder {
         builder

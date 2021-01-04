@@ -24,7 +24,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
 import com.example.bikini_android.util.logging.Logger
-import java.lang.Exception
 
 /**
  * @author MyeongKi
@@ -58,7 +57,7 @@ class BikiniGlideModule : AppGlideModule() {
                 setDefaultTransitionOptions(Bitmap::class.java, BitmapTransitionOptions.withCrossFade())
             }
 
-        } catch (e: Exception) {
+        } catch (e: IllegalAccessException) {
             logger.error {
                 e.toString()
             }

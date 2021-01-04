@@ -15,5 +15,4 @@ import com.example.bikini_android.util.bus.RxAction
  * @author MyeongKi
  */
 
-
 class FeedsEvent(val feeds: List<Feed>, val feedsType: FeedsType) : RxAction

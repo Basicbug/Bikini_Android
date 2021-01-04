@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ image_description.xml 2021. 1. 3
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+
+    <string name="pick_image">선택한 이미지</string>
+    <string name="splash_image">스플래시 이미지</string>
+    <string name="profile_image">프로필 이미지</string>
+    <string name="add_button_image">더하기 버튼</string>
+    <string name="feed_image">피드 이미지</string>
+    <string name="location_button_image">위치 버튼 이미지</string>
+    <string name="background_image">배경 이미지</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ my_backup_rules.xml 2021. 1. 3
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<full-backup-content>
+    <include domain="file" path="."
+        requireFlags="clientSideEncryption" />
+</full-backup-content>
