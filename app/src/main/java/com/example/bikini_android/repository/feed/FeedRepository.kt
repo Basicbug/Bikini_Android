@@ -17,4 +17,8 @@ interface FeedRepository {
     fun getUserFeedsFromRemote(
         userId: String
     ): Single<List<Feed>>
+
+    fun getRankingFeedsFromRemote(
+        limit: Int
+    ): Single<List<Feed>>
 }

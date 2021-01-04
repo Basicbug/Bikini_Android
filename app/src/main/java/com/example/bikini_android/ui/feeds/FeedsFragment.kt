@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
@@ -24,12 +25,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  * @author bsgreentea
  */
 
-class FeedsFragment : BaseFragment() {
+class FeedsFragment : BaseFragment(){
     private lateinit var binding: FragmentFeedsBinding
     private var feedAdapterHelper: FeedAdapterHelper = FeedAdapterHelper()
     private var pivotFeed: Feed? = null
     private var sortType: FeedsSortType = FeedsSortType.POPULAR
-    private var feedsType: FeedsType = FeedsType.HOT_RANKING_FEEDS
+    private var feedsType: FeedsType = FeedsType.RANKING_FEEDS
     private val feedsAdapter = DefaultListAdapter(DefaultDiffCallback<FeedItemViewModel>())
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
@@ -43,8 +44,11 @@ class FeedsFragment : BaseFragment() {
                 )
             )
             pivotFeed = it.getParcelable(KEY_PIVOT_FEED) as Feed?
-            feedsType = FeedsType.valueOf(it.getString(KEY_FEEDS_TYPE) ?: FeedsType.HOT_RANKING_FEEDS.name)
-            sortType = FeedsSortType.valueOf(it.getString(KEY_SORT_TYPE_NAME) ?: FeedsSortType.NEAR_DISTANCE.name)
+            feedsType =
+                FeedsType.valueOf(it.getString(KEY_FEEDS_TYPE) ?: FeedsType.RANKING_FEEDS.name)
+            sortType = FeedsSortType.valueOf(
+                it.getString(KEY_SORT_TYPE_NAME) ?: FeedsSortType.NEAR_DISTANCE.name
+            )
         }
     }
 
@@ -52,7 +56,7 @@ class FeedsFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = DataBindingUtil.inflate<FragmentFeedsBinding>(
+    ): View = DataBindingUtil.inflate<FragmentFeedsBinding>(
         inflater,
         R.layout.fragment_feeds,
         container,
@@ -63,7 +67,6 @@ class FeedsFragment : BaseFragment() {
             feeds.adapter = feedsAdapter
             feeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
-
         viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
         itemEventRelay = viewModel.itemEventRelay
         observeEvent()
@@ -78,6 +81,7 @@ class FeedsFragment : BaseFragment() {
         itemEventRelay
             .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
+            .filter { it.feedsType == this.feedsType }
             .subscribe { event ->
                 bindFeeds(event.feeds)
             }.addTo(disposables)
@@ -124,7 +128,7 @@ class FeedsFragment : BaseFragment() {
 
         fun makeBundle(
             layoutType: RecyclerViewLayoutType,
-            feedsType: FeedsType = FeedsType.HOT_RANKING_FEEDS,
+            feedsType: FeedsType = FeedsType.RANKING_FEEDS,
             sortType: FeedsSortType = FeedsSortType.POPULAR,
             pivotFeed: Feed? = null
         ): Bundle {

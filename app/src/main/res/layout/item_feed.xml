@@ -52,12 +52,11 @@
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/feed_vertical_image_height"
             android:layout_marginTop="10dp"
             android:background="?attr/defaultBackgroundColor"
             app:imageUrl="@{viewmodel.imageUri}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_max="@dimen/content_image_max_height"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_thumbnail"
             android:contentDescription="@string/feed_image" />

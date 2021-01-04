@@ -13,7 +13,7 @@ package com.example.bikini_android.ui.feeds
  */
 
 enum class FeedsType {
-    HOT_RANKING_FEEDS,
+    RANKING_FEEDS,
     MY_FEEDS,
     NEAR_LOCATION_FEEDS
 }

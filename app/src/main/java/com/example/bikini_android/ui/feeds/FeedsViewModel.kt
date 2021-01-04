@@ -23,53 +23,62 @@ import io.reactivex.disposables.CompositeDisposable
  */
 
 class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
-    private var _myFeeds: List<Feed> = handle.get<MutableList<Feed>>(KEY_MY_FEEDS) ?: mutableListOf()
+    private var _myFeeds: List<Feed> =
+        handle.get<MutableList<Feed>>(KEY_MY_FEEDS) ?: mutableListOf()
+    private var _rankingFeeds: List<Feed> =
+        handle.get<MutableList<Feed>>(KEY_RANKING_FEEDS) ?: mutableListOf()
 
     val myFeeds: List<Feed>
         get() = _myFeeds
+    val rankingFeeds: List<Feed>
+        get() = _rankingFeeds
+
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 
     private val loadMyFeedsUseCase = LoadMyFeedsUseCase(disposables, itemEventRelay)
+    private val loadRankingFeedsUseCase = LoadRankingFeedsUseCase(disposables, itemEventRelay)
+
     init {
         itemEventRelay
             .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                when (event.feedsType){
+                when (event.feedsType) {
                     FeedsType.MY_FEEDS -> {
                         _myFeeds = event.feeds
                     }
                     FeedsType.NEAR_LOCATION_FEEDS -> {
 
                     }
-                    FeedsType.HOT_RANKING_FEEDS -> {
-
+                    FeedsType.RANKING_FEEDS -> {
+                        _rankingFeeds = event.feeds
                     }
                 }
             }.addTo(disposables)
     }
+
     fun initFeeds(feedsType: FeedsType) {
         when (feedsType) {
             FeedsType.MY_FEEDS -> {
                 if (_myFeeds.isNotEmpty()) {
                     itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))
                 } else {
-                    loadMyFeeds()
+                    loadMyFeedsUseCase.execute()
                 }
             }
             FeedsType.NEAR_LOCATION_FEEDS -> {
-                if (_myFeeds.isNotEmpty()) {
-                    itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))
+                if (_myFeeds.isNotEmpty()) {//FIXME 수정
+                    itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))//FIXME 수정
                 } else {
-                    loadMyFeeds()
+                    loadMyFeedsUseCase.execute()//FIXME 수정
                 }
             }
-            FeedsType.HOT_RANKING_FEEDS -> {
-                if (_myFeeds.isNotEmpty()) {
-                    itemEventRelay.accept(FeedsEvent(_myFeeds, FeedsType.MY_FEEDS))
+            FeedsType.RANKING_FEEDS -> {
+                if (_rankingFeeds.isNotEmpty()) {
+                    itemEventRelay.accept(FeedsEvent(_rankingFeeds, FeedsType.MY_FEEDS))
                 } else {
-                    loadMyFeeds()
+                    loadRankingFeedsUseCase.execute()
                 }
             }
         }
@@ -78,23 +87,20 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
     fun refreshMyFeeds(feedsType: FeedsType) {
         when (feedsType) {
             FeedsType.MY_FEEDS -> {
-                loadMyFeeds()
+                loadMyFeedsUseCase.execute()
             }
             FeedsType.NEAR_LOCATION_FEEDS -> {
 
             }
-            FeedsType.HOT_RANKING_FEEDS -> {
-
+            FeedsType.RANKING_FEEDS -> {
+                loadRankingFeedsUseCase.execute()
             }
         }
     }
 
-    private fun loadMyFeeds() {
-        loadMyFeedsUseCase.execute()
-    }
-
     override fun saveState() {
         handle[KEY_MY_FEEDS] = _myFeeds
+        handle[KEY_RANKING_FEEDS] = _rankingFeeds
     }
 
     override fun onCleared() {
@@ -104,5 +110,6 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
 
     companion object {
         private const val KEY_MY_FEEDS = "keyMyFeeds"
+        private const val KEY_RANKING_FEEDS = "keyRankingFeeds"
     }
 }

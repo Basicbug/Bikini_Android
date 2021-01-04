@@ -22,6 +22,9 @@ interface FeedService {
     @GET("/v1/feed/list/{userId}")
     fun getUserFeeds(@Path("userId") userId: String): Single<FeedsResponse>
 
+    @GET("/v1/feed/list/top/{limit}")
+    fun getRankFeeds(@Path("limit") limit: Int): Single<FeedsResponse>
+
     @GET("path")
     fun getNearLocationFeeds(@QueryMap locationParameter: NearLocationFeedParameter): Single<FeedsResponse>
 }

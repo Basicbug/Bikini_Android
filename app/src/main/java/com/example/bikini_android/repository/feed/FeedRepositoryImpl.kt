@@ -29,6 +29,17 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             }
     }
 
+    override fun getRankingFeedsFromRemote(limit: Int): Single<List<Feed>> {
+        return ApiClientHelper
+            .createMainApiByService(FeedService::class)
+            .getRankFeeds(limit)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map {
+                it.result?.feeds
+            }
+    }
+
     companion object {
         fun getInstance(): FeedRepository {
             return LazyHolder.INSTANCE
