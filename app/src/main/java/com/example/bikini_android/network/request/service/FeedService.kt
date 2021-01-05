@@ -27,4 +27,7 @@ interface FeedService {
 
     @GET("path")
     fun getNearLocationFeeds(@QueryMap locationParameter: NearLocationFeedParameter): Single<FeedsResponse>
+
+    @GET("/v1/feed/list")
+    fun getAllFeeds(): Single<FeedsResponse>
 }

@@ -40,6 +40,17 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             }
     }
 
+    override fun getAllFeedsFromRemote(): Single<List<Feed>> {
+        return ApiClientHelper
+            .createMainApiByService(FeedService::class)
+            .getAllFeeds()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map {
+                it.result?.feeds
+            }
+    }
+
     companion object {
         fun getInstance(): FeedRepository {
             return LazyHolder.INSTANCE
