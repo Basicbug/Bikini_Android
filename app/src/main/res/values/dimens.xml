@@ -12,13 +12,13 @@
     <dimen name="bottom_navigation_height">54dp</dimen>
     <dimen name="match_constraint">0dp</dimen>
     <dimen name="thumbnail_size">50dp</dimen>
-    <dimen name="content_image_max_height">300dp</dimen>
     <dimen name="text_median_size">20sp</dimen>
     <dimen name="large_margin">20dp</dimen>
     <dimen name="median_margin">10dp</dimen>
     <!--small feed-->
     <dimen name="feed_marker_size">100dp</dimen>
     <dimen name="feed_badge_size">12sp</dimen>
+    <dimen name="feed_vertical_image_height">300dp</dimen>
 
     <!--feed-->
     <dimen name="feed_marker_image_top_margin">8dp</dimen>

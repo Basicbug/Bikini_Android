@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ network_security_config.xml 2021. 1. 1
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">ec2-15-164-98-44.ap-northeast-2.compute.amazonaws.com</domain>
+    </domain-config>
+</network-security-config>

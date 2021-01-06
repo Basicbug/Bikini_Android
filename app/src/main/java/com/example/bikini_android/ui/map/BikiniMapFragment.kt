@@ -56,7 +56,7 @@ class BikiniMapFragment : BaseMapFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
+    ): View =
         DataBindingUtil.inflate<FragmentBikiniMapBinding>(
             inflater,
             R.layout.fragment_bikini_map,
@@ -73,7 +73,7 @@ class BikiniMapFragment : BaseMapFragment() {
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        viewModel.loadFeeds()
+        viewModel.initFeeds(feedsType = FeedsType.ALL_FEEDS)
         initMap()
     }
 
@@ -95,7 +95,7 @@ class BikiniMapFragment : BaseMapFragment() {
         getNavigationHelper()?.navigateToBikiniFeeds(
             FeedsFragment.makeBundle(
                 RecyclerViewLayoutType.GRID,
-                FeedsType.NEAR_LOCATION_FEEDS,
+                FeedsType.ALL_FEEDS,
                 FeedsSortType.NEAR_DISTANCE,
                 pivotFeed
             )
@@ -111,8 +111,9 @@ class BikiniMapFragment : BaseMapFragment() {
             }.addTo(disposables)
 
         itemEventRelay
-            .ofType(FeedsLoadEvent::class.java)
+            .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
+            .filter { it.feedsType == FeedsType.ALL_FEEDS }
             .subscribe { event ->
                 if (isDiffFeeds(event.feeds)) {
                     bindFeedMarkers(event.feeds)
@@ -180,7 +181,6 @@ class BikiniMapFragment : BaseMapFragment() {
 
     companion object {
         private const val KEY_LAT_LNG = "keyLatLng"
-
         fun makeBundle(
             latLng: LatLng
         ): Bundle {
