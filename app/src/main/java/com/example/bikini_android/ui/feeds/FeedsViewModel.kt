@@ -29,12 +29,9 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
         handle.get<MutableList<Feed>>(KEY_RANKING_FEEDS) ?: mutableListOf()
     private var _allFeeds: List<Feed> =
         handle.get<MutableList<Feed>>(KEY_ALL_FEEDS) ?: mutableListOf()
-    val myFeeds: List<Feed>
-        get() = _myFeeds
-    val rankingFeeds: List<Feed>
-        get() = _rankingFeeds
-    val allFeeds: List<Feed>
-        get() = _allFeeds
+    val myFeeds: List<Feed> = _myFeeds
+    val rankingFeeds: List<Feed> = _rankingFeeds
+    val allFeeds: List<Feed> = _allFeeds
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 

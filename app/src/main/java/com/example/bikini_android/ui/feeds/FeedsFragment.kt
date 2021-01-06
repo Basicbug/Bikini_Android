@@ -25,7 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class FeedsFragment : BaseFragment() {
-    private lateinit var binding: FragmentFeedsBinding
+    private var binding: FragmentFeedsBinding? = null
     private var feedAdapterHelper: FeedAdapterHelper = FeedAdapterHelper()
     private var pivotFeed: Feed? = null
     private var sortType: FeedsSortType = FeedsSortType.POPULAR
@@ -111,6 +111,10 @@ class FeedsFragment : BaseFragment() {
             }.addTo(disposables)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
     private fun bindFeeds(feeds: List<Feed>) {
         feedsAdapter.submitList(
             feeds.map {

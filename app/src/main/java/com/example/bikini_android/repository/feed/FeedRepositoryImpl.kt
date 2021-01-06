@@ -10,7 +10,6 @@ package com.example.bikini_android.repository.feed
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.FeedService
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -23,7 +22,6 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .createMainApiByService(FeedService::class)
             .getUserFeeds(userId)
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .map {
                 it.result?.feeds
             }
@@ -34,7 +32,6 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .createMainApiByService(FeedService::class)
             .getRankFeeds(limit)
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .map {
                 it.result?.feeds
             }
@@ -45,7 +42,6 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .createMainApiByService(FeedService::class)
             .getAllFeeds()
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .map {
                 it.result?.feeds
             }
