@@ -7,6 +7,7 @@ import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.event.ImageLoadEvent
 import com.example.bikini_android.util.rx.addTo
+import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,13 +30,17 @@ class BoardViewModel : BaseViewModel() {
 
         itemEventRelay
             .ofType(FeedPostEvent::class.java)
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                ApiClientHelper.createMainApiByService(FeedService::class)
-                    .postFeed(Feed(position = event.latLng))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                postFeed(event.latLng)
             }.addTo(disposables)
+    }
+
+    private fun postFeed(latLng: LatLng) {
+        ApiClientHelper.createMainApiByService(FeedService::class)
+            .postFeed(Feed(position = latLng))
+            .subscribeOn(Schedulers.io())
+            .subscribe()
+            .addTo(disposables)
     }
 
     override fun onCleared() {
