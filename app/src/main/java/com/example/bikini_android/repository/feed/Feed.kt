@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 /**
  * @author bsgreentea
  */
-@Suppress("unused")
 @Parcelize
 data class Feed(
     var feedId: String = "test1",

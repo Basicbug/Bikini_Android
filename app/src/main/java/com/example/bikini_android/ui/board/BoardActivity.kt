@@ -7,10 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityBoardBinding
+import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.event.ImageLoadEvent
 import com.example.bikini_android.util.rx.addTo
+import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -52,7 +54,8 @@ class BoardActivity : BaseActivity() {
             .subscribe {
                 when (it) {
                     BoardItemViewModel.EventType.POST_FEED -> {
-                        finish()
+                        itemEventRelay.accept(FeedPostEvent(LocationInfo(1.1, 1.1)))
+//                        finish()
                     }
                     BoardItemViewModel.EventType.NAVIGATE_GALLERY ->
                         navigateToGallery()
