@@ -58,6 +58,15 @@ class NavigationHelper(
         }
     }
 
+    fun navigateToProfileFeeds(bundle: Bundle) {
+        if (isValidBottomNav(R.id.profile_navigation)) {
+            navigateToFeeds(bundle).invoke()
+        } else {
+            taskQueue.offer(navigateToFeeds(bundle))
+            bottomNav.selectedItemId = R.id.profile_navigation
+        }
+    }
+
     fun navigateToBikiniMap(bundle: Bundle) {
         if (isValidBottomNav(R.id.bikini_navigation)) {
             navigateToMap(bundle).invoke()
@@ -68,7 +77,7 @@ class NavigationHelper(
     }
 
     private fun navigateToFeeds(bundle: Bundle): () -> Unit = {
-        getNavController().navigate(R.id.action_bikini_feeds, bundle)
+        getNavController().navigate(R.id.action_feeds, bundle)
     }
 
     private fun navigateToMap(bundle: Bundle): () -> Unit = {

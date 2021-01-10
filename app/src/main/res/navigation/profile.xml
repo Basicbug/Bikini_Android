@@ -17,4 +17,12 @@
         android:name="com.example.bikini_android.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
     </fragment>
+    <fragment
+        android:id="@+id/feeds_end"
+        android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
+        tools:layout="@layout/fragment_feeds">
+    </fragment>
+    <action
+        android:id="@+id/action_feeds"
+        app:destination="@id/feeds_end" />
 </navigation>

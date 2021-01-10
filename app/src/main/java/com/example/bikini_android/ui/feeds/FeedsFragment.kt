@@ -26,21 +26,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class FeedsFragment : BaseFragment() {
     private var binding: FragmentFeedsBinding? = null
-    private var feedAdapterHelper: FeedAdapterHelper = FeedAdapterHelper()
     private var pivotFeed: Feed? = null
     private var sortType: FeedsSortType = FeedsSortType.POPULAR
     private var feedsType: FeedsType = FeedsType.RANKING_FEEDS
-    private val feedsAdapter = DefaultListAdapter(DefaultDiffCallback<FeedItemViewModel>())
+    private var recyclerViewLayoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.VERTICAL
+
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
+    private lateinit var feedAdapterHelper: FeedAdapterHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            feedAdapterHelper = FeedAdapterHelper(
-                RecyclerViewLayoutType.valueOf(
-                    it.getString(KEY_LAYOUT_TYPE_NAME) ?: RecyclerViewLayoutType.HORIZONTAL.name
-                )
+            recyclerViewLayoutType = RecyclerViewLayoutType.valueOf(
+                it.getString(KEY_LAYOUT_TYPE_NAME) ?: RecyclerViewLayoutType.VERTICAL.name
             )
             pivotFeed = it.getParcelable(KEY_PIVOT_FEED) as Feed?
             feedsType =
@@ -62,12 +61,18 @@ class FeedsFragment : BaseFragment() {
         false
     ).also {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = it.apply {
-            feeds.adapter = feedsAdapter
-            feeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
-        }
         viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
         itemEventRelay = viewModel.itemEventRelay
+        feedAdapterHelper = FeedAdapterHelper(
+            DefaultListAdapter(DefaultDiffCallback()),
+            recyclerViewLayoutType,
+            itemEventRelay
+        )
+
+        binding = it.apply {
+            feeds.adapter = feedAdapterHelper.feedsAdapter
+            feeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
+        }
         observeEvent()
     }.root
 
@@ -82,7 +87,7 @@ class FeedsFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .filter { it.feedsType == this.feedsType }
             .subscribe { event ->
-                bindFeeds(event.feeds)
+                feedAdapterHelper.bindFeeds(event.feeds)
             }.addTo(disposables)
 
         itemEventRelay
@@ -91,7 +96,7 @@ class FeedsFragment : BaseFragment() {
             .subscribe { event ->
                 getNavigationHelper()?.navigateToBikiniFeeds(
                     makeBundle(
-                        RecyclerViewLayoutType.HORIZONTAL,
+                        RecyclerViewLayoutType.VERTICAL,
                         feedsType,
                         sortType,
                         event.feed
@@ -100,7 +105,7 @@ class FeedsFragment : BaseFragment() {
             }.addTo(disposables)
 
         itemEventRelay
-            .ofType(FeedLinearItemViewModel.LocationClickEvent::class.java)
+            .ofType(FeedVerticalItemViewModel.LocationClickEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 event.feed.position?.let {
@@ -114,13 +119,6 @@ class FeedsFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-    private fun bindFeeds(feeds: List<Feed>) {
-        feedsAdapter.submitList(
-            feeds.map {
-                feedAdapterHelper.getFeedItemViewModel(it, itemEventRelay)
-            }
-        )
     }
 
     companion object {

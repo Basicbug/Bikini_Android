@@ -11,6 +11,16 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileBinding
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.board.BoardActivity
+import com.example.bikini_android.ui.common.RecyclerViewLayoutType
+import com.example.bikini_android.ui.common.list.DefaultDiffCallback
+import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.ui.feeds.FeedAdapterHelper
+import com.example.bikini_android.ui.feeds.FeedGridItemViewModel
+import com.example.bikini_android.ui.feeds.FeedsFragment
+import com.example.bikini_android.ui.feeds.FeedsSortType
+import com.example.bikini_android.ui.feeds.FeedsType
+import com.example.bikini_android.ui.feeds.FeedsViewModel
+import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
@@ -21,38 +31,60 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 class ProfileFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private var binding: FragmentProfileBinding? = null
 
-    private lateinit var viewModel: ProfileViewModel
-    private lateinit var itemEventRelay: Relay<RxAction>
+    private lateinit var feedsViewModel: FeedsViewModel
+    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var feedsEventRelay: Relay<RxAction>
+    private lateinit var profileEventRelay: Relay<RxAction>
+
+    private lateinit var feedAdapterHelper: FeedAdapterHelper
+
+    private val feedsType: FeedsType = FeedsType.MY_FEEDS
+    private val sortType: FeedsSortType = FeedsSortType.LATEST_DATE
+    private val recyclerViewLayoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.GRID
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View = DataBindingUtil.inflate<FragmentProfileBinding>(
+        inflater,
+        R.layout.fragment_profile,
+        container,
+        false
+    ).also {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_profile,
-            container,
-            false
+        feedsViewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
+        profileViewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+        feedsEventRelay = feedsViewModel.itemEventRelay
+        profileEventRelay = profileViewModel.itemEventRelay
+        feedAdapterHelper = FeedAdapterHelper(
+            DefaultListAdapter(DefaultDiffCallback()),
+            recyclerViewLayoutType,
+            feedsEventRelay
         )
 
-        viewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
-        itemEventRelay = viewModel.itemEventRelay
-
-        binding.apply {
-            viewmodel = viewModel
+        binding = it.apply {
+            viewmodel = profileViewModel
+            myFeeds.adapter = feedAdapterHelper.feedsAdapter
+            myFeeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
-
         observeEvent()
+    }.root
 
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        feedsViewModel.initFeeds(feedsType)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     private fun observeEvent() {
-        itemEventRelay
+        profileEventRelay
             .ofType(ProfileViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -62,15 +94,30 @@ class ProfileFragment : BaseFragment() {
                     else -> Unit
                 }
             }.addTo(disposables)
+        feedsEventRelay
+            .ofType(FeedsEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter { it.feedsType == this.feedsType }
+            .subscribe { event ->
+                feedAdapterHelper.bindFeeds(event.feeds)
+            }.addTo(disposables)
+
+        feedsEventRelay
+            .ofType(FeedGridItemViewModel.ImageClickEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event ->
+                getNavigationHelper()?.navigateToProfileFeeds(
+                    FeedsFragment.makeBundle(
+                        RecyclerViewLayoutType.VERTICAL,
+                        feedsType,
+                        sortType,
+                        event.feed
+                    )
+                )
+            }.addTo(disposables)
     }
 
     private fun openBoard() {
         startActivity(Intent(activity, BoardActivity::class.java))
-    }
-
-    companion object {
-        fun newInstance(): ProfileFragment {
-            return ProfileFragment()
-        }
     }
 }

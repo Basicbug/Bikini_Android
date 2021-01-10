@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.feeds.FeedLinearItemViewModel" />
+            type="com.example.bikini_android.ui.feeds.FeedVerticalItemViewModel" />
 
     </data>
 
