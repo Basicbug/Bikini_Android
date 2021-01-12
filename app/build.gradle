@@ -31,17 +31,12 @@ android {
         def versionNamePatch = versionProps['VERSION_NAME_PATCH'].toInteger()
         versionProps['VERSION_NAME_PATCH'] = versionNamePatch.toString()
 
-        def versionNameBuild = versionProps['VERSION_NAME_BUILD'].toInteger() + 1
-        versionProps['VERSION_NAME_BUILD'] = versionNameBuild.toString()
-
-
-        versionProps.store(versionPropsFile.newWriter(), null)
         defaultConfig {
             applicationId "com.example.bikini_android"
             minSdkVersion 23
             targetSdkVersion 30
             versionCode = versionCodeNo
-            versionName = versionNameMajor + "." + versionNameMinor + "," + versionNamePatch + "." + versionNameBuild
+            versionName = versionNameMajor + "." + versionNameMinor + "," + versionNamePatch
             multiDexEnabled true
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         }
