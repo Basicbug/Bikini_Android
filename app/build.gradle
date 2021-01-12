@@ -3,18 +3,52 @@ apply plugin: 'kotlin-android'
 apply from: '../libraries.gradle'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    def versionPropsFile = file('../version.properties')
 
-    defaultConfig {
-        applicationId "com.example.bikini_android"
-        minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    if (versionPropsFile.canRead()) {
+        Properties versionProps = new Properties()
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        //
+        // versionCode
+        //
+        def versionCodeNo = versionProps['VERSION_CODE'].toInteger()
+        versionProps['VERSION_CODE'] = versionCodeNo.toString()
+
+        //
+        // versionName
+        //
+        def versionNameMajor = versionProps['VERSION_NAME_MAJOR'].toInteger()
+        versionProps['VERSION_NAME_MAJOR'] = versionNameMajor.toString()
+
+        def versionNameMinor = versionProps['VERSION_NAME_MINOR'].toInteger()
+        versionProps['VERSION_NAME_MINOR'] = versionNameMinor.toString()
+
+        def versionNamePatch = versionProps['VERSION_NAME_PATCH'].toInteger()
+        versionProps['VERSION_NAME_PATCH'] = versionNamePatch.toString()
+
+        def versionNameBuild = versionProps['VERSION_NAME_BUILD'].toInteger() + 1
+        versionProps['VERSION_NAME_BUILD'] = versionNameBuild.toString()
+
+
+        versionProps.store(versionPropsFile.newWriter(), null)
+        defaultConfig {
+            applicationId "com.example.bikini_android"
+            minSdkVersion 23
+            targetSdkVersion 30
+            versionCode = versionCodeNo
+            versionName = versionNameMajor + "." + versionNameMinor + "," + versionNamePatch + "." + versionNameBuild
+            multiDexEnabled true
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        }
+
+
+    } else {
+        throw new GradleException("Could not read version.properties!")
     }
 
     buildTypes {
