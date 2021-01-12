@@ -9,7 +9,7 @@ import com.example.bikini_android.util.bus.RxAction
 /**
  * @author bsgreentea
  */
-class FeedLinearItemViewModel(feed: Feed) : FeedItemViewModel(feed) {
+class FeedVerticalItemViewModel(feed: Feed) : FeedItemViewModel(feed) {
 
     @get: Bindable
     var content = feed.content

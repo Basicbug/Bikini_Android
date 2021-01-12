@@ -24,7 +24,7 @@
     </fragment>
 
     <action
-        android:id="@+id/action_bikini_feeds"
+        android:id="@+id/action_feeds"
         app:destination="@id/feeds_end" />
 
     <action

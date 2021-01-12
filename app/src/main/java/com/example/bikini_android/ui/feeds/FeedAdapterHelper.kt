@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
+import com.example.bikini_android.ui.common.list.DefaultListAdapter
 import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 
@@ -20,27 +21,38 @@ import com.jakewharton.rxrelay2.Relay
  * @author MyeongKi
  */
 
-class FeedAdapterHelper(private val layoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.HORIZONTAL) {
-
+class FeedAdapterHelper(
+    val feedsAdapter: DefaultListAdapter<FeedItemViewModel>,
+    private val layoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.VERTICAL,
+    private val itemEventRelay: Relay<RxAction>
+) {
     fun getLayoutManger(context: Context): RecyclerView.LayoutManager {
         return when (layoutType) {
             RecyclerViewLayoutType.GRID ->
                 GridLayoutManager(context, FEED_GRID_SIZE)
             RecyclerViewLayoutType.HORIZONTAL ->
-                LinearLayoutManager(context)
+                LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             RecyclerViewLayoutType.VERTICAL ->
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
     }
 
-    fun getFeedItemViewModel(feed: Feed, itemEventRelay: Relay<RxAction>): FeedItemViewModel {
+    fun bindFeeds(feeds: List<Feed>) {
+        feedsAdapter.submitList(
+            feeds.map {
+                getFeedItemViewModel(it)
+            }
+        )
+    }
+
+    private fun getFeedItemViewModel(feed: Feed): FeedItemViewModel {
         return when (layoutType) {
-            RecyclerViewLayoutType.VERTICAL, RecyclerViewLayoutType.GRID ->
+            RecyclerViewLayoutType.HORIZONTAL, RecyclerViewLayoutType.GRID ->
                 FeedGridItemViewModel(feed)
-            RecyclerViewLayoutType.HORIZONTAL ->
-                FeedLinearItemViewModel(feed)
+            RecyclerViewLayoutType.VERTICAL ->
+                FeedVerticalItemViewModel(feed)
         }.apply {
-            this.itemEventRelay = itemEventRelay
+            itemEventRelay = this@FeedAdapterHelper.itemEventRelay
         }
     }
 

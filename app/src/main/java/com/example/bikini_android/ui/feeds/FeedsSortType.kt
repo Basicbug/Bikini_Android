@@ -13,4 +13,5 @@ package com.example.bikini_android.ui.feeds
 enum class FeedsSortType {
     POPULAR,
     NEAR_DISTANCE,
+    LATEST_DATE
 }
