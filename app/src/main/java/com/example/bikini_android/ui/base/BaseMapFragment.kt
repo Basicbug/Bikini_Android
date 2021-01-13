@@ -17,6 +17,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.R
+import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.LocationPermissionEvent
 import com.example.bikini_android.util.permission.PermissionUtils
@@ -35,7 +36,7 @@ import com.google.android.gms.maps.model.LatLng
 abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     protected lateinit var map: GoogleMap
     private var permissionDenied = false
-    protected var locationFocused: LatLng? = null
+    protected var locationFocused: LocationInfo? = null
     private var isMoveToLocation = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,12 +82,12 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
         if (setMyLocationEnable()) {
             if (locationFocused == null) {
                 getCurrentLocation()?.let {
-                    locationFocused = LatLng(it.latitude, it.longitude)
+                    locationFocused = LocationInfo(it.latitude, it.longitude)
                 }
             }
             if (!isMoveToLocation) {
                 locationFocused?.let {
-                    moveToLocation(it)
+                    moveToLocation(LatLng(it.latitude, it.longitude))
                     isMoveToLocation = true
                 }
             }

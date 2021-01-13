@@ -1,7 +1,6 @@
 package com.example.bikini_android.repository.feed
 
 import android.os.Parcelable
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -16,6 +15,6 @@ data class Feed(
     var content: String = "sampleContent",
     var imageUrl: String = "sampleImageUri",
     var profileImageUrl: String = "sampleProfile",
-    val position: LatLng?,
+    val locationInfo: LocationInfo?,
     var countOfGroupFeed: Int = 1
 ) : Parcelable
