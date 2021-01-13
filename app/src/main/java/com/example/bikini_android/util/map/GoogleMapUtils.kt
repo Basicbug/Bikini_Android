@@ -10,6 +10,7 @@ package com.example.bikini_android.util.map
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.View
+import com.example.bikini_android.repository.feed.LocationInfo
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -19,9 +20,9 @@ import com.google.android.gms.maps.model.MarkerOptions
  */
 
 object GoogleMapUtils {
-    fun getFeedMarkerOption(iconView: View, position: LatLng): MarkerOptions {
+    fun getFeedMarkerOption(iconView: View, locationInfo: LocationInfo): MarkerOptions {
         return MarkerOptions()
-            .position(position)
+            .position(LatLng(locationInfo.latitude, locationInfo.longitude))
             .icon(BitmapDescriptorFactory.fromBitmap(convertBitmap(iconView)))
     }
 

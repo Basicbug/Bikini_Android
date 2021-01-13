@@ -19,6 +19,7 @@ import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.feeds.FeedsFragment
@@ -29,7 +30,6 @@ import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -48,7 +48,7 @@ class BikiniMapFragment : BaseMapFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            locationFocused = it.getParcelable(KEY_LAT_LNG)
+            locationFocused = it.getParcelable(KEY_LOCATION_INFO)
         }
     }
 
@@ -134,8 +134,8 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private fun addMarker(feed: Feed) {
         feedMarkerBindingTable[feed]?.root?.let { view ->
-            feed.position?.let { position ->
-                map.addMarker(GoogleMapUtils.getFeedMarkerOption(view, position))
+            feed.locationInfo?.let { locationInfo ->
+                map.addMarker(GoogleMapUtils.getFeedMarkerOption(view, locationInfo))
                     .apply {
                         tag = feed.feedId
                     }
@@ -180,12 +180,12 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     companion object {
-        private const val KEY_LAT_LNG = "keyLatLng"
+        private const val KEY_LOCATION_INFO = "keyLocationInfo"
         fun makeBundle(
-            latLng: LatLng
+            location: LocationInfo
         ): Bundle {
             return Bundle().apply {
-                putParcelable(KEY_LAT_LNG, latLng)
+                putParcelable(KEY_LOCATION_INFO, location)
             }
         }
     }

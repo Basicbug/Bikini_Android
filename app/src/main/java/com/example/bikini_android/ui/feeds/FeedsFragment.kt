@@ -108,7 +108,7 @@ class FeedsFragment : BaseFragment() {
             .ofType(FeedVerticalItemViewModel.LocationClickEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                event.feed.position?.let {
+                event.feed.locationInfo?.let {
                     val bundle = BikiniMapFragment.makeBundle(it)
                     getNavigationHelper()?.navigateToBikiniMap(bundle)
                 }
