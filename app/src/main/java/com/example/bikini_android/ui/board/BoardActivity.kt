@@ -12,7 +12,6 @@ import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.event.ImageLoadEvent
 import com.example.bikini_android.util.rx.addTo
-import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 

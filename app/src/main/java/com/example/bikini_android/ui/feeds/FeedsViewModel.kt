@@ -71,7 +71,7 @@ class FeedsViewModel(private val handle: SavedStateHandle) : BaseViewModel() {
             FeedsType.NEAR_LOCATION_FEEDS -> Unit
             FeedsType.RANKING_FEEDS -> {
                 if (_rankingFeeds.isNotEmpty()) {
-                    itemEventRelay.accept(FeedsEvent(_rankingFeeds, FeedsType.MY_FEEDS))
+                    itemEventRelay.accept(FeedsEvent(_rankingFeeds, FeedsType.RANKING_FEEDS))
                 } else {
                     loadRankingFeedsUseCase.execute()
                 }
