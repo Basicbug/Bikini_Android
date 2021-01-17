@@ -7,6 +7,7 @@ import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.event.ImageLoadEvent
+import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -15,6 +16,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class BoardViewModel : BaseViewModel() {
+    private val logger = Logger().apply {
+        TAG = this@BoardViewModel.javaClass.simpleName
+    }
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     val boardItemViewModel = BoardItemViewModel(itemEventRelay)
 
@@ -39,7 +43,11 @@ class BoardViewModel : BaseViewModel() {
         ApiClientHelper.createMainApiByService(FeedService::class)
             .postFeed(Feed(locationInfo = locationInfo))
             .subscribeOn(Schedulers.io())
-            .subscribe()
+            .subscribe({
+                logger.info { it.toString() }
+            }, {
+                logger.error { it.toString() }
+            })
             .addTo(disposables)
     }
 

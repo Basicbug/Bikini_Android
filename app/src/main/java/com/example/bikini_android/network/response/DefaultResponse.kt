@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author bsgreentea
  */
-class FeedAddResponse : JsonResponseWrapper<FeedAddResponse.Result>() {
+class DefaultResponse : JsonResponseWrapper<DefaultResponse.Result>() {
     data class Result(
         @SerializedName("status")
         val status: String

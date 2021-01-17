@@ -24,6 +24,7 @@ class LoadAllFeedsUseCase(
     private val disposable: CompositeDisposable,
     private val itemEventRelay: Relay<RxAction>
 ) {
+    
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
 
     fun execute() {
