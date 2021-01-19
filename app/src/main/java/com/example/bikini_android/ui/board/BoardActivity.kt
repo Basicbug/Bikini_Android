@@ -1,4 +1,3 @@
-
 package com.example.bikini_android.ui.board
 
 import android.content.Intent
@@ -7,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityBoardBinding
-import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
@@ -52,8 +50,8 @@ class BoardActivity : BaseActivity() {
             .subscribe {
                 when (it) {
                     BoardItemViewModel.EventType.POST_FEED -> {
-                        itemEventRelay.accept(FeedPostEvent(LocationInfo(1.1, 1.1)))
-//                        finish()
+                        viewModel.postFeed()
+                        finish()
                     }
                     BoardItemViewModel.EventType.NAVIGATE_GALLERY ->
                         navigateToGallery()

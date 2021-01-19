@@ -3,10 +3,10 @@ package com.example.bikini_android.ui.board
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.FeedService
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.logging.Logger
+import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -22,21 +22,13 @@ class BoardViewModel : BaseViewModel() {
 
     val disposables = CompositeDisposable()
 
-    init {
-        itemEventRelay
-            .ofType(FeedPostEvent::class.java)
-            .subscribe { event ->
-                postFeed(event.locationInfo)
-            }.addTo(disposables)
-    }
-
     fun attachImageSelected(imageUrl: String) {
         boardItemViewModel.imageUrl = imageUrl
     }
 
-    private fun postFeed(locationInfo: LocationInfo) {
+    fun postFeed() {
         ApiClientHelper.createMainApiByService(FeedService::class)
-            .postFeed(Feed(locationInfo = locationInfo))
+            .postFeed(makePostFeed())
             .subscribeOn(Schedulers.io())
             .subscribe({
                 logger.info { it.toString() }
@@ -44,6 +36,14 @@ class BoardViewModel : BaseViewModel() {
                 logger.error { it.toString() }
             })
             .addTo(disposables)
+    }
+
+    private fun makePostFeed(): Feed {
+        return Feed(
+            content = boardItemViewModel.content.get() ?: "",
+            imageUrl = boardItemViewModel.imageUrl,
+            locationInfo = LocationUtils.getCurrentLocationInfo()
+        )
     }
 
     override fun onCleared() {
