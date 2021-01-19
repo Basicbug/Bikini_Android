@@ -10,7 +10,6 @@ import com.example.bikini_android.databinding.ActivityBoardBinding
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.bus.event.ImageLoadEvent
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,7 +39,7 @@ class BoardActivity : BaseActivity() {
             data?.let { intent ->
                 val imageUrl = intent.data
                 imageUrl?.let {
-                    itemEventRelay.accept(ImageLoadEvent(it.toString()))
+                    viewModel.attachImageSelected(it.toString())
                 }
             }
         }
