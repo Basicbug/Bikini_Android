@@ -37,17 +37,8 @@ object LocationUtils {
         if (checkLocationPermission()) {
             (AppResources.getContext()
                 .getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
-                this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                    .also { networkLocation ->
-                        if (networkLocation != null) {
-                            return networkLocation
-                        } else {
-                            this.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                                ?.let { gpsLocation ->
-                                    return gpsLocation
-                                }
-                        }
-                    }
+                return this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    ?: this.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             }
         }
         return null
