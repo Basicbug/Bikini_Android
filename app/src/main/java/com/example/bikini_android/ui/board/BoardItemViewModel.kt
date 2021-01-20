@@ -8,6 +8,7 @@
 package com.example.bikini_android.ui.board
 
 import androidx.databinding.Bindable
+import androidx.databinding.ObservableField
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
 import com.example.bikini_android.ui.common.item.ItemViewModel
@@ -19,6 +20,7 @@ import com.jakewharton.rxrelay2.Relay
  */
 
 class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
+    val content = ObservableField<String>()
 
     @get:Bindable
     var imageUrl = "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"

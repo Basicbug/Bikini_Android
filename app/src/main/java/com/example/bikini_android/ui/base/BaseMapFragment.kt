@@ -8,18 +8,14 @@
 package com.example.bikini_android.ui.base
 
 import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.LocationPermissionEvent
+import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.permission.PermissionUtils
 import com.example.bikini_android.util.permission.PermissionUtils.LOCATION_PERMISSION_REQUEST_CODE
 import com.example.bikini_android.util.rx.addTo
@@ -71,17 +67,10 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
             .show(requireActivity().supportFragmentManager, "dialog")
     }
 
-    private fun checkLocationPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
     private fun initMap() {
         if (setMyLocationEnable()) {
             if (locationFocused == null) {
-                getCurrentLocation()?.let {
+                LocationUtils.getCurrentLocation()?.let {
                     locationFocused = LocationInfo(it.latitude, it.longitude)
                 }
             }
@@ -96,7 +85,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun setMyLocationEnable(): Boolean {
         if (!(::map.isInitialized)) return true
-        if (checkLocationPermission()) {
+        if (LocationUtils.checkLocationPermission()) {
             map.isMyLocationEnabled = true
             return true
         } else {
@@ -115,25 +104,6 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
                 zoomSize
             )
         )
-    }
-
-    private fun getCurrentLocation(): Location? {
-        if (checkLocationPermission()) {
-            (requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
-                this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                    .also { networkLocation ->
-                        if (networkLocation != null) {
-                            return networkLocation
-                        } else {
-                            this.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                                ?.let { gpsLocation ->
-                                    return gpsLocation
-                                }
-                        }
-                    }
-            }
-        }
-        return null
     }
 
     companion object {
