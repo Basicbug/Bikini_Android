@@ -36,6 +36,7 @@
             android:name=".ui.holder.MainHolderActivity"
             android:launchMode="singleTop">
         </activity>
+        <activity android:name=".ui.login.LoginActivity"/>
     </application>
 
 </manifest>

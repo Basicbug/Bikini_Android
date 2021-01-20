@@ -10,8 +10,10 @@ package com.example.bikini_android.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import com.example.bikini_android.R
+import com.example.bikini_android.manager.NaverLoginManager
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
+import com.example.bikini_android.ui.login.LoginActivity
 import com.example.bikini_android.util.rx.addTo
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,7 +33,13 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun finishInternal() {
-        startActivity(Intent(this, MainHolderActivity::class.java))
+
+        if (NaverLoginManager.isAlreadyLogin()) {
+            startActivity(Intent(this, MainHolderActivity::class.java))
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
         finish()
     }
 
