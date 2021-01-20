@@ -36,7 +36,9 @@ class MainHolderActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
         viewModels = MainHolderViewModelsHelper.getViewModels(this)
         setUpToolbar()
-        setUpBottomNavigation()
+        if (savedInstanceState == null) {
+            setUpBottomNavigation()
+        }
     }
 
     private fun setUpBottomNavigation() {
@@ -70,7 +72,10 @@ class MainHolderActivity : BaseActivity() {
 
             }.addTo(disposables)
     }
-
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        setUpBottomNavigation()
+    }
     override fun onDestroy() {
         navigationHelper.clear()
         super.onDestroy()
