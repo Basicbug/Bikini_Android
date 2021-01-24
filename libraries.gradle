@@ -33,93 +33,98 @@ ext {
     def google_maps_ktx_version = '2.2.0'
     def android_preference_version = "1.1.1"
     def navigation_version = '2.3.2'
+    def leakcanary_version = '2.6'
 
     android_core_libraries = [
-        kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-        ktx                : "androidx.core:core-ktx:$ktx_version",
-        appcompat          : "androidx.appcompat:appcompat:$appcompat_version",
-        constraint_layout  : "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
-        recyclerview       : "androidx.recyclerview:recyclerview:$recyclerview_version",
-        fragment           : "androidx.fragment:fragment-ktx:$fragment_version",
-        preference         : "androidx.preference:preference-ktx:$android_preference_version",
-        navigation_fragment: "androidx.navigation:navigation-fragment-ktx:$navigation_version",
-        navigation         : "androidx.navigation:navigation-ui-ktx:$navigation_version",
+            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            ktx                : "androidx.core:core-ktx:$ktx_version",
+            appcompat          : "androidx.appcompat:appcompat:$appcompat_version",
+            constraint_layout  : "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
+            recyclerview       : "androidx.recyclerview:recyclerview:$recyclerview_version",
+            fragment           : "androidx.fragment:fragment-ktx:$fragment_version",
+            preference         : "androidx.preference:preference-ktx:$android_preference_version",
+            navigation_fragment: "androidx.navigation:navigation-fragment-ktx:$navigation_version",
+            navigation         : "androidx.navigation:navigation-ui-ktx:$navigation_version",
     ]
 
     android_core_test_libraries = [
-        junit   : "androidx.test.ext:junit:$android_junit_version",
-        espresso: "androidx.test.espresso:espresso-core:$espresso_version",
+            junit   : "androidx.test.ext:junit:$android_junit_version",
+            espresso: "androidx.test.espresso:espresso-core:$espresso_version",
     ]
 
     core_test_libraries = [
-        android_junit: "junit:junit:$junit_version",
+            android_junit: "junit:junit:$junit_version",
     ]
 
     network_libraries = [
-        gson                   : "com.google.code.gson:gson:$gson_version",
-        retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
-        retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
-        retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            gson                   : "com.google.code.gson:gson:$gson_version",
+            retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
     ]
 
     image_libraries = [
-        glide: "com.github.bumptech.glide:glide:$glide_version",
+            glide: "com.github.bumptech.glide:glide:$glide_version",
     ]
 
     image_annotation_processor = [
-        glide_annotation: "com.github.bumptech.glide:compiler:$glide_version",
+            glide_annotation: "com.github.bumptech.glide:compiler:$glide_version",
     ]
 
     database_libraries = [
-        room        : "androidx.room:room-runtime:$room_version",
-        room_kotline: "androidx.room:room-ktx:$room_version",
-        room_rx_java: "androidx.room:room-rxjava2:$room_version"
+            room        : "androidx.room:room-runtime:$room_version",
+            room_kotline: "androidx.room:room-ktx:$room_version",
+            room_rx_java: "androidx.room:room-rxjava2:$room_version"
     ]
 
     database_annotion = [
-        room_annotation: "androidx.room:room-compiler:$room_version",
+            room_annotation: "androidx.room:room-compiler:$room_version",
     ]
 
     debugger_libraries = [
-        stetho_main: "com.facebook.stetho:stetho-okhttp3:$stetho_version",
-        stetho     : "com.facebook.stetho:stetho-okhttp3:$stetho_version",
+            stetho_main: "com.facebook.stetho:stetho-okhttp3:$stetho_version",
+            stetho     : "com.facebook.stetho:stetho-okhttp3:$stetho_version",
     ]
 
     firebase_libraries = [
-        firebase_analytics: "com.google.firebase:firebase-analytics:$firebase_analytics_version",
-        firebase_messaging: "com.google.firebase:firebase-messaging:$firebase_messaging_version"
+            firebase_analytics: "com.google.firebase:firebase-analytics:$firebase_analytics_version",
+            firebase_messaging: "com.google.firebase:firebase-messaging:$firebase_messaging_version"
     ]
 
     login_libraries = [
-        naver_id_Login: "com.naver.nid:naveridlogin-android-sdk:$naver_id_login_version"
+            naver_id_Login: "com.naver.nid:naveridlogin-android-sdk:$naver_id_login_version"
     ]
 
     design_libraries = [
-        design    : "com.android.support:design:$design_version",
-        navigation: "com.google.android.material:material:$material_version",
+            design    : "com.android.support:design:$design_version",
+            navigation: "com.google.android.material:material:$material_version",
     ]
 
     rx_java_libraries = [
-        rx_java   : "io.reactivex.rxjava2:rxandroid:$rx_version",
-        rx_android: "io.reactivex.rxjava2:rxjava:$rx_version",
-        rx_relay  : "com.jakewharton.rxrelay2:rxrelay:$rx_relay_version",
+            rx_java   : "io.reactivex.rxjava2:rxandroid:$rx_version",
+            rx_android: "io.reactivex.rxjava2:rxjava:$rx_version",
+            rx_relay  : "com.jakewharton.rxrelay2:rxrelay:$rx_relay_version",
     ]
 
     lifecycle_libraries = [
-        lifecycle            : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
-        lifecycle_view_model : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
-        lifecycle_life_data  : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
-        lifecycle_core_ktx   : "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycle_version",
-        lifecycle_runtime_ktx: "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+            lifecycle            : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            lifecycle_view_model : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            lifecycle_life_data  : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            lifecycle_core_ktx   : "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycle_version",
+            lifecycle_runtime_ktx: "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     ]
 
     preference_libraries = [
-        preference: "net.grandcentrix.tray:tray:$preference_version"
+            preference: "net.grandcentrix.tray:tray:$preference_version"
     ]
 
     map_libraries = [
-        google_maps      : "com.google.android.gms:play-services-maps:$google_maps_version",
-        google_maps_utils: "com.google.maps.android:android-maps-utils:$google_maps_utils_version",
-        google_maps_ktx  : "com.google.maps.android:maps-utils-ktx:$google_maps_ktx_version"
+            google_maps      : "com.google.android.gms:play-services-maps:$google_maps_version",
+            google_maps_utils: "com.google.maps.android:android-maps-utils:$google_maps_utils_version",
+            google_maps_ktx  : "com.google.maps.android:maps-utils-ktx:$google_maps_ktx_version"
+    ]
+
+    leakcanary_libraries = [
+            leakcanary: "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
     ]
 }
