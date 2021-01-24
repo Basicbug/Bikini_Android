@@ -39,7 +39,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class BikiniMapFragment : BaseMapFragment() {
-    private lateinit var binding: FragmentBikiniMapBinding
+    private var binding: FragmentBikiniMapBinding? = null
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
@@ -87,6 +87,7 @@ class BikiniMapFragment : BaseMapFragment() {
     override fun onDestroyView() {
         feedMarkerBindingTable.clear()
         super.onDestroyView()
+        binding = null
     }
 
     private fun initMap() {
@@ -149,6 +150,7 @@ class BikiniMapFragment : BaseMapFragment() {
                     .also {
                         feedAddedToMapTable[feed.feedId] = feed
                     }
+
             }
         }
     }

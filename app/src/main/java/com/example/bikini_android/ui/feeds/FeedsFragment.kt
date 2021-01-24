@@ -123,6 +123,7 @@ class FeedsFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding?.feeds?.adapter = null
         binding = null
     }
 
