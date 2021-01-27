@@ -44,7 +44,6 @@ class BikiniMapFragment : BaseMapFragment() {
     private lateinit var itemEventRelay: Relay<RxAction>
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
-    private var currentFeeds: List<Feed>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +84,7 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     override fun onDestroyView() {
-        feedMarkerBindingTable.clear()
+        clearFeedTable()
         super.onDestroyView()
         binding = null
     }
@@ -123,21 +122,14 @@ class BikiniMapFragment : BaseMapFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .filter { it.feedsType == FeedsType.ALL_FEEDS }
             .subscribe { event ->
-                if (isDiffFeeds(event.feeds)) {
-                    bindFeedMarkers(event.feeds)
-                }
+                clearFeedTable()
+                bindFeedMarkers(event.feeds)
             }.addTo(disposables)
     }
 
-    private fun isDiffFeeds(feeds: List<Feed>): Boolean {
-        return if (currentFeeds != feeds) {
-            feedAddedToMapTable.clear()
-            feedMarkerBindingTable.clear()
-            currentFeeds = feeds
-            true
-        } else {
-            false
-        }
+    private fun clearFeedTable() {
+        feedAddedToMapTable.clear()
+        feedMarkerBindingTable.clear()
     }
 
     private fun addMarker(feed: Feed) {
