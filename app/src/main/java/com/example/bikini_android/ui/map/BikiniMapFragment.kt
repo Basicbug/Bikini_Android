@@ -25,7 +25,8 @@ import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
-import com.example.bikini_android.ui.feeds.FeedsViewModel
+import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
+import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
@@ -66,14 +67,20 @@ class BikiniMapFragment : BaseMapFragment() {
             .also {
                 super.onCreateView(inflater, container, savedInstanceState)
                 binding = it
-                viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
+                viewModel = ViewModelProvider(
+                    requireActivity(),
+                    FeedsViewModelFactoryProvider(
+                        requireActivity(),
+                        savedInstanceState
+                    )
+                ).get(FeedsViewModelFactoryProvider.getFeedViewModelClazz(FeedsType.ALL_FEEDS))
                 itemEventRelay = viewModel.itemEventRelay
             }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        viewModel.initFeeds(feedsType = FeedsType.ALL_FEEDS)
+        viewModel.initFeeds()
         initMap()
     }
 

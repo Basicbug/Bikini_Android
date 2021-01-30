@@ -13,6 +13,8 @@ import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
+import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.BikiniMapFragment
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
@@ -61,7 +63,10 @@ class FeedsFragment : BaseFragment() {
         false
     ).also {
         super.onCreateView(inflater, container, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            FeedsViewModelFactoryProvider(requireActivity(), savedInstanceState)
+        )[FeedsViewModelFactoryProvider.getFeedViewModelClazz(feedsType)]
         itemEventRelay = viewModel.itemEventRelay
         feedAdapterHelper = FeedAdapterHelper(
             DefaultListAdapter(DefaultDiffCallback()),
@@ -78,7 +83,7 @@ class FeedsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.initFeeds(feedsType)
+        viewModel.initFeeds()
     }
 
     private fun observeEvent() {

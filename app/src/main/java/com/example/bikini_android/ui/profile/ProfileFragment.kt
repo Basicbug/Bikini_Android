@@ -19,7 +19,8 @@ import com.example.bikini_android.ui.feeds.FeedGridItemViewModel
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
-import com.example.bikini_android.ui.feeds.FeedsViewModel
+import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
+import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
@@ -55,7 +56,10 @@ class ProfileFragment : BaseFragment() {
         false
     ).also {
         super.onCreateView(inflater, container, savedInstanceState)
-        feedsViewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
+        feedsViewModel = ViewModelProvider(
+            requireActivity(),
+            FeedsViewModelFactoryProvider(requireActivity(), savedInstanceState)
+        )[FeedsViewModelFactoryProvider.getFeedViewModelClazz(feedsType)]
         profileViewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
         feedsEventRelay = feedsViewModel.itemEventRelay
         profileEventRelay = profileViewModel.itemEventRelay
@@ -75,7 +79,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feedsViewModel.initFeeds(feedsType)
+        feedsViewModel.initFeeds()
     }
 
     override fun onDestroyView() {
