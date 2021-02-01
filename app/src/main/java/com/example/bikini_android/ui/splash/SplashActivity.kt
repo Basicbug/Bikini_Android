@@ -10,7 +10,7 @@ package com.example.bikini_android.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import com.example.bikini_android.R
-import com.example.bikini_android.manager.NaverLoginManager
+import com.example.bikini_android.manager.PreferenceManager
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.example.bikini_android.ui.login.LoginActivity
@@ -34,7 +34,7 @@ class SplashActivity : BaseActivity() {
 
     private fun finishInternal() {
 
-        if (NaverLoginManager.isAlreadyLogin()) {
+        if (isAlreadyLogin()) {
             startActivity(Intent(this, MainHolderActivity::class.java))
         } else {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -42,6 +42,9 @@ class SplashActivity : BaseActivity() {
 
         finish()
     }
+
+    private fun isAlreadyLogin(): Boolean =
+        PreferenceManager.getBoolean("isAuthorized")
 
     override fun finish() {
         super.finish()

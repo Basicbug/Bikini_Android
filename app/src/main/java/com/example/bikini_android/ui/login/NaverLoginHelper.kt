@@ -1,7 +1,7 @@
 package com.example.bikini_android.ui.login
 
 import android.view.View
-import com.example.bikini_android.manager.NaverLoginManager
+import com.example.bikini_android.manager.login.NaverLoginManager
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton
 
 /**
@@ -10,6 +10,6 @@ import com.nhn.android.naverlogin.ui.view.OAuthLoginButton
 class NaverLoginHelper {
 
     fun customizePropertiesView(view: View) {
-        (view as OAuthLoginButton).setOAuthLoginHandler(NaverLoginManager)
+//        (view as OAuthLoginButton).setOAuthLoginHandler(NaverLoginManager)
     }
 }
