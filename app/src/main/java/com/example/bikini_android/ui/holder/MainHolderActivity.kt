@@ -34,7 +34,7 @@ class MainHolderActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
-        viewModels = MainHolderViewModelsHelper.getViewModels(this)
+        viewModels = MainHolderViewModelsHelper.getViewModels(this, savedInstanceState)
         setUpToolbar()
         if (savedInstanceState == null) {
             setUpBottomNavigation()
@@ -43,7 +43,12 @@ class MainHolderActivity : BaseActivity() {
 
     private fun setUpBottomNavigation() {
         val navGraphIds =
-            listOf(R.navigation.bikini, R.navigation.hot_feeds, R.navigation.settings, R.navigation.profile)
+            listOf(
+                R.navigation.bikini,
+                R.navigation.hot_feeds,
+                R.navigation.settings,
+                R.navigation.profile
+            )
         binding.bottomNavigation.setupNavController(
             navGraphIds,
             supportFragmentManager,
@@ -72,10 +77,12 @@ class MainHolderActivity : BaseActivity() {
 
             }.addTo(disposables)
     }
+
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         setUpBottomNavigation()
     }
+
     override fun onDestroy() {
         navigationHelper.clear()
         super.onDestroy()

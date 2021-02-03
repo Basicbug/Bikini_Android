@@ -21,10 +21,13 @@ import io.reactivex.schedulers.Schedulers
  * @author MyeongKi
  */
 
-class LoadMyFeedsUseCase(private val disposable: CompositeDisposable, private val itemEventRelay: Relay<RxAction>) {
+class LoadMyFeedsUseCase(
+    private val disposable: CompositeDisposable,
+    private val itemEventRelay: Relay<RxAction>
+) : LoadFeedsUseCase {
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
     private val testMyId = "ChoMk"
-    fun execute() {
+    override fun execute() {
         feedsRepository
             .getUserFeedsFromRemote(testMyId)
             .subscribeOn(Schedulers.io())

@@ -23,13 +23,13 @@ import io.reactivex.schedulers.Schedulers
 class LoadAllFeedsUseCase(
     private val disposable: CompositeDisposable,
     private val itemEventRelay: Relay<RxAction>
-) {
+) : LoadFeedsUseCase {
     private val logger = Logger().apply {
         TAG = this@LoadAllFeedsUseCase.javaClass.simpleName
     }
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
 
-    fun execute() {
+    override fun execute() {
         feedsRepository
             .getAllFeedsFromRemote()
             .subscribeOn(Schedulers.io())

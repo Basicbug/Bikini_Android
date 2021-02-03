@@ -24,9 +24,9 @@ import io.reactivex.schedulers.Schedulers
 class LoadRankingFeedsUseCase(
     private val disposable: CompositeDisposable,
     private val itemEventRelay: Relay<RxAction>
-) {
+) : LoadFeedsUseCase {
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
-    fun execute() {
+    override fun execute() {
         feedsRepository
             .getRankingFeedsFromRemote(LIMIT)
             .subscribeOn(Schedulers.io())

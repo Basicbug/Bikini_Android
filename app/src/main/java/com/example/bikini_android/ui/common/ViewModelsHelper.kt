@@ -7,7 +7,8 @@
 
 package com.example.bikini_android.ui.common
 
-import androidx.lifecycle.ViewModelStoreOwner
+import android.os.Bundle
+import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.base.BaseViewModel
 
 /**
@@ -15,6 +16,6 @@ import com.example.bikini_android.ui.base.BaseViewModel
  */
 
 interface ViewModelsHelper {
-    fun getViewModels(owner: ViewModelStoreOwner): List<BaseViewModel>
+    fun getViewModels(owner: BaseActivity, savedInstanceState: Bundle?): List<BaseViewModel>
     fun saveState(viewModels: List<BaseViewModel>)
 }
