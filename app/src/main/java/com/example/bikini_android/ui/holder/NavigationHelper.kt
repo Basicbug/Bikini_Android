@@ -28,7 +28,7 @@ import java.util.Queue
 
 class NavigationHelper(
     private val bottomNav: BottomNavigationView,
-    private val activity: MainHolderActivity,
+    private var activity: MainHolderActivity?,
     itemRelay: Relay<RxAction>
 ) {
     private val disposables = CompositeDisposable()
@@ -91,9 +91,10 @@ class NavigationHelper(
 
     fun clear() {
         disposables.dispose()
+        activity = null
     }
 
     private fun getNavController(): NavController {
-        return activity.findNavController(R.id.content_fragment_holder)
+        return activity!!.findNavController(R.id.content_fragment_holder)
     }
 }

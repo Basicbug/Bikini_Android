@@ -84,6 +84,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding?.myFeeds?.adapter = null
         binding = null
     }
 

@@ -111,4 +111,6 @@ dependencies {
 
     implementation map_libraries.values()
 
+    debugImplementation leakcanary_libraries.values()
+
 }

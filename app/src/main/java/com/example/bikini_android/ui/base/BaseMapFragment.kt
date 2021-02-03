@@ -62,6 +62,11 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
+    override fun onDestroyView() {
+        map.clear()
+        super.onDestroyView()
+    }
+
     private fun showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog.newInstance(true)
             .show(requireActivity().supportFragmentManager, "dialog")

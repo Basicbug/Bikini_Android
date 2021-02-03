@@ -39,12 +39,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class BikiniMapFragment : BaseMapFragment() {
-    private lateinit var binding: FragmentBikiniMapBinding
+    private var binding: FragmentBikiniMapBinding? = null
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
-    private var currentFeeds: List<Feed>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,8 +84,9 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     override fun onDestroyView() {
-        feedMarkerBindingTable.clear()
+        clearFeedTable()
         super.onDestroyView()
+        binding = null
     }
 
     private fun initMap() {
@@ -122,21 +122,14 @@ class BikiniMapFragment : BaseMapFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .filter { it.feedsType == FeedsType.ALL_FEEDS }
             .subscribe { event ->
-                if (isDiffFeeds(event.feeds)) {
-                    bindFeedMarkers(event.feeds)
-                }
+                clearFeedTable()
+                bindFeedMarkers(event.feeds)
             }.addTo(disposables)
     }
 
-    private fun isDiffFeeds(feeds: List<Feed>): Boolean {
-        return if (currentFeeds != feeds) {
-            feedAddedToMapTable.clear()
-            feedMarkerBindingTable.clear()
-            currentFeeds = feeds
-            true
-        } else {
-            false
-        }
+    private fun clearFeedTable() {
+        feedAddedToMapTable.clear()
+        feedMarkerBindingTable.clear()
     }
 
     private fun addMarker(feed: Feed) {
@@ -149,6 +142,7 @@ class BikiniMapFragment : BaseMapFragment() {
                     .also {
                         feedAddedToMapTable[feed.feedId] = feed
                     }
+
             }
         }
     }

@@ -27,10 +27,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class MainHolderActivity : BaseActivity() {
 
-    lateinit var binding: ActivityMainHolderBinding
+    var binding: ActivityMainHolderBinding? = null
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private lateinit var viewModels: List<BaseViewModel>
-    lateinit var navigationHelper: NavigationHelper
+    var navigationHelper: NavigationHelper? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
@@ -49,18 +49,20 @@ class MainHolderActivity : BaseActivity() {
                 R.navigation.settings,
                 R.navigation.profile
             )
-        binding.bottomNavigation.setupNavController(
-            navGraphIds,
-            supportFragmentManager,
-            R.id.content_fragment_holder,
-            itemEventRelay
-        )
-        navigationHelper =
-            NavigationHelper(binding.bottomNavigation, this, itemEventRelay)
+        binding?.let {
+            it.bottomNavigation.setupNavController(
+                navGraphIds,
+                supportFragmentManager,
+                R.id.content_fragment_holder,
+                itemEventRelay
+            )
+            navigationHelper =
+                NavigationHelper(it.bottomNavigation, this, itemEventRelay)
+        }
     }
 
     private fun setUpToolbar() {
-        this.setSupportActionBar(binding.toolbar)
+        this.setSupportActionBar(binding?.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         itemEventRelay
             .observeOn(AndroidSchedulers.mainThread())
@@ -84,8 +86,10 @@ class MainHolderActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        navigationHelper.clear()
+        navigationHelper?.clear()
+        navigationHelper = null
         super.onDestroy()
+        binding = null
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
