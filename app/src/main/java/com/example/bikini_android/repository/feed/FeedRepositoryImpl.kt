@@ -8,7 +8,9 @@
 package com.example.bikini_android.repository.feed
 
 import com.example.bikini_android.network.client.ApiClientHelper
+import com.example.bikini_android.network.request.param.NearbyFeedParameter
 import com.example.bikini_android.network.request.service.FeedService
+import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
@@ -41,6 +43,19 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
             .getAllFeeds()
+            .subscribeOn(Schedulers.io())
+            .map {
+                it.result?.feeds
+            }
+    }
+
+    override fun getNearbyFeedsFromRemote(latLng: LatLng, radius: Double): Single<List<Feed>> {
+        return ApiClientHelper
+            .createMainApiByService(FeedService::class)
+            .getNearbyLocationFeeds(NearbyFeedParameter().apply {
+                setLocation(latLng)
+                setRadius(radius)
+            })
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds

@@ -7,7 +7,7 @@
 
 package com.example.bikini_android.network.request.service
 
-import com.example.bikini_android.network.request.param.NearLocationFeedParameter
+import com.example.bikini_android.network.request.param.NearbyFeedParameter
 import com.example.bikini_android.network.response.DefaultResponse
 import com.example.bikini_android.network.response.FeedsResponse
 import com.example.bikini_android.repository.feed.Feed
@@ -29,8 +29,8 @@ interface FeedService {
     @GET("/v1/feed/list/top/{limit}")
     fun getRankFeeds(@Path("limit") limit: Int): Single<FeedsResponse>
 
-    @GET("path")
-    fun getNearLocationFeeds(@QueryMap locationParameter: NearLocationFeedParameter): Single<FeedsResponse>
+    @GET("/v1/feed/nearby")
+    fun getNearbyLocationFeeds(@QueryMap nearbyParameter: NearbyFeedParameter): Single<FeedsResponse>
 
     @GET("/v1/feed/list")
     fun getAllFeeds(): Single<FeedsResponse>

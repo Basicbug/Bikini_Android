@@ -14,6 +14,6 @@ package com.example.bikini_android.ui.feeds
 enum class FeedsType {
     RANKING_FEEDS,
     MY_FEEDS,
-    NEAR_LOCATION_FEEDS,
+    NEARBY_FEEDS,
     ALL_FEEDS
 }
