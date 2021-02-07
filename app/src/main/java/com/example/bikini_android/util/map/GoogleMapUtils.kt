@@ -12,6 +12,7 @@ import android.graphics.Canvas
 import android.location.Location
 import android.view.View
 import com.example.bikini_android.repository.feed.LocationInfo
+import com.example.bikini_android.util.map.LocationUtils.getDistanceBetween
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -49,6 +50,9 @@ object GoogleMapUtils {
             visibleRegion.nearRight.longitude,
             diagonalDistance
         )
-        return diagonalDistance[0] / 2000
+        return getDistanceBetween(
+            LatLng(visibleRegion.farLeft.latitude, visibleRegion.farLeft.longitude),
+            LatLng(visibleRegion.nearRight.latitude, visibleRegion.nearRight.longitude)
+        ) / 2
     }
 }

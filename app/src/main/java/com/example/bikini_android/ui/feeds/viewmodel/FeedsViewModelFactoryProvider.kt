@@ -39,7 +39,7 @@ class FeedsViewModelFactoryProvider(
             modelClass.isAssignableFrom(AllFeedsViewModel::class.java) -> {
                 AllFeedsViewModel(handle) as T
             }
-            modelClass.isAssignableFrom(NearbyFeedsViewModel::class.java) ->{
+            modelClass.isAssignableFrom(NearbyFeedsViewModel::class.java) -> {
                 NearbyFeedsViewModel(handle) as T
             }
             else -> {

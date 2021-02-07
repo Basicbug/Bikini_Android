@@ -31,9 +31,9 @@ class LoadAllFeedsUseCase(
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
 
     override fun execute(lastFeedsRendered: List<Feed>) {
-        if(lastFeedsRendered.isNotEmpty()){
+        if (lastFeedsRendered.isNotEmpty()) {
             itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.ALL_FEEDS))
-        }else{
+        } else {
             feedsRepository
                 .getAllFeedsFromRemote()
                 .subscribeOn(Schedulers.io())

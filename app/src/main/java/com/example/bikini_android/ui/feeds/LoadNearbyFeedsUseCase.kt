@@ -12,6 +12,7 @@ import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.logging.Logger
+import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
@@ -82,7 +83,7 @@ class LoadNearbyFeedsUseCase(
         nearbyFeedsInfoCached?.feeds?.let { originalFeeds ->
             val feedsFiltered = mutableListOf<Feed>()
             originalFeeds.forEach {
-                if (isNearbyFeed(it)) {
+                if (isNearbyFeed(latLng, radius, it)) {
                     feedsFiltered.add(it)
                 }
             }
@@ -91,9 +92,11 @@ class LoadNearbyFeedsUseCase(
         }
     }
 
-    //TODO FIXME
-    private fun isNearbyFeed(feed: Feed): Boolean {
-        return true
+    private fun isNearbyFeed(latLng: LatLng, radius: Float, feed: Feed): Boolean {
+        feed.locationInfo?.let {
+            return LocationUtils.getDistanceBetween(latLng, LatLng(it.latitude, it.longitude)) <= radius
+        }
+        return false
     }
 
     private fun cacheNearbyFeedsInfo(
