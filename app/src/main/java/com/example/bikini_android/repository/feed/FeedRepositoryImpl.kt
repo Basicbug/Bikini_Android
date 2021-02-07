@@ -49,7 +49,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             }
     }
 
-    override fun getNearbyFeedsFromRemote(latLng: LatLng, radius: Double): Single<List<Feed>> {
+    override fun getNearbyFeedsFromRemote(latLng: LatLng, radius: Float): Single<List<Feed>> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
             .getNearbyLocationFeeds(NearbyFeedParameter().apply {

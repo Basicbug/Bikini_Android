@@ -52,7 +52,7 @@ abstract class FeedsViewModel(
         loadFeedsUseCase.execute(lastFeedsRendered = feedsRendered)
     }
 
-    fun loadFeeds(latLng: LatLng, radius: Double) {
+    fun loadFeeds(latLng: LatLng, radius: Float) {
         loadFeedsUseCase.execute(latLng, radius)
     }
 

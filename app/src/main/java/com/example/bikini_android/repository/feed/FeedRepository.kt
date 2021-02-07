@@ -27,6 +27,6 @@ interface FeedRepository {
 
     fun getNearbyFeedsFromRemote(
         latLng: LatLng,
-        radius: Double
+        radius: Float
     ): Single<List<Feed>>
 }

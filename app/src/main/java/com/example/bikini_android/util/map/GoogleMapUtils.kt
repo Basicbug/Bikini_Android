@@ -9,11 +9,13 @@ package com.example.bikini_android.util.map
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Location
 import android.view.View
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.VisibleRegion
 
 /**
  * @author MyeongKi
@@ -36,5 +38,17 @@ object GoogleMapUtils {
                 feedMarkerView.draw(this)
             }
         }
+    }
+
+    fun getVisibleRadius(visibleRegion: VisibleRegion): Float {
+        val diagonalDistance = FloatArray(1)
+        Location.distanceBetween(
+            visibleRegion.farLeft.latitude,
+            visibleRegion.farLeft.longitude,
+            visibleRegion.nearRight.latitude,
+            visibleRegion.nearRight.longitude,
+            diagonalDistance
+        )
+        return diagonalDistance[0] / 2000
     }
 }

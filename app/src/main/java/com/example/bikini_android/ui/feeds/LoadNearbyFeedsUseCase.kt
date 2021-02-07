@@ -42,7 +42,7 @@ class LoadNearbyFeedsUseCase(
         }
     }
 
-    override fun execute(latLng: LatLng, radius: Double) {
+    override fun execute(latLng: LatLng, radius: Float) {
         when (getNearbyLoadCase(latLng, radius)) {
             NearbyLoadCase.LOAD_REMOTE_CASE -> {
                 loadNearbyFeedsFromRemote(latLng, radius)
@@ -53,7 +53,7 @@ class LoadNearbyFeedsUseCase(
         }
     }
 
-    private fun getNearbyLoadCase(latLng: LatLng, radius: Double): NearbyLoadCase {
+    private fun getNearbyLoadCase(latLng: LatLng, radius: Float): NearbyLoadCase {
         nearbyFeedsInfoCached?.let {
             return if (it.latLng != latLng || it.biggestRadius < radius) {
                 NearbyLoadCase.LOAD_REMOTE_CASE
@@ -64,7 +64,7 @@ class LoadNearbyFeedsUseCase(
         return NearbyLoadCase.LOAD_REMOTE_CASE
     }
 
-    private fun loadNearbyFeedsFromRemote(latLng: LatLng, radius: Double) {
+    private fun loadNearbyFeedsFromRemote(latLng: LatLng, radius: Float) {
         feedsRepository
             .getNearbyFeedsFromRemote(latLng, radius)
             .subscribeOn(Schedulers.io())
@@ -78,7 +78,7 @@ class LoadNearbyFeedsUseCase(
             .addTo(disposable)
     }
 
-    private fun loadNearbyFeedsFromLocal(latLng: LatLng, radius: Double) {
+    private fun loadNearbyFeedsFromLocal(latLng: LatLng, radius: Float) {
         nearbyFeedsInfoCached?.feeds?.let { originalFeeds ->
             val feedsFiltered = mutableListOf<Feed>()
             originalFeeds.forEach {
@@ -98,7 +98,7 @@ class LoadNearbyFeedsUseCase(
 
     private fun cacheNearbyFeedsInfo(
         currentLatLng: LatLng,
-        currentRadius: Double,
+        currentRadius: Float,
         feedsLoaded: List<Feed>
     ) {
         nearbyFeedsInfoCached =
@@ -116,11 +116,11 @@ class LoadNearbyFeedsUseCase(
 
     private data class NearbyFeedsInfo(
         val latLng: LatLng,
-        val biggestRadius: Double,
+        val biggestRadius: Float,
         val feeds: List<Feed>
     )
 
     companion object {
-        private const val MIN_RADIUS = 0.0
+        private const val MIN_RADIUS = 0.0f
     }
 }

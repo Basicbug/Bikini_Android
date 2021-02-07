@@ -15,5 +15,5 @@ import com.google.android.gms.maps.model.LatLng
  */
 interface LoadFeedsUseCase {
     fun execute(lastFeedsRendered: List<Feed>) = Unit
-    fun execute(latLng: LatLng, radius: Double) = Unit
+    fun execute(latLng: LatLng, radius: Float) = Unit
 }

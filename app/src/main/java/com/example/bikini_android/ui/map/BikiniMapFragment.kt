@@ -27,12 +27,9 @@ import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
-import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
-import com.example.bikini_android.util.map.LocationUtils.getCurrentLatLng
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
-import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 /**
@@ -42,7 +39,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class BikiniMapFragment : BaseMapFragment() {
     private var binding: FragmentBikiniMapBinding? = null
     private lateinit var viewModel: FeedsViewModel
-    private lateinit var itemEventRelay: Relay<RxAction>
+
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
 
@@ -63,29 +60,24 @@ class BikiniMapFragment : BaseMapFragment() {
             R.layout.fragment_bikini_map,
             container,
             false
-        )
-            .also {
-                super.onCreateView(inflater, container, savedInstanceState)
-                binding = it
-                viewModel = ViewModelProvider(
+        ).also {
+            super.onCreateView(inflater, container, savedInstanceState)
+            binding = it
+            viewModel = ViewModelProvider(
+                requireActivity(),
+                FeedsViewModelFactoryProvider(
                     requireActivity(),
-                    FeedsViewModelFactoryProvider(
-                        requireActivity(),
-                        savedInstanceState
-                    )
-                ).get(FeedsViewModelFactoryProvider.getFeedViewModelClazz(MAP_FEEDS_TYPE))
-                itemEventRelay = viewModel.itemEventRelay
-            }.root
-
-
+                    savedInstanceState
+                )
+            ).get(FeedsViewModelFactoryProvider.getFeedViewModelClazz(MAP_FEEDS_TYPE))
+            itemEventRelay = viewModel.itemEventRelay
+        }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        getCurrentLatLng()?.let {
-            viewModel.loadFeeds(it, 10.0)
-        }
         initMap()
+        viewModel.loadFeeds()
     }
 
     override fun onDestroyView() {
@@ -127,8 +119,13 @@ class BikiniMapFragment : BaseMapFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .filter { it.feedsType == MAP_FEEDS_TYPE }
             .subscribe { event ->
-                clearFeedTable()
                 bindFeedMarkers(event.feeds)
+            }.addTo(disposables)
+        itemEventRelay
+            .ofType(MapLocationChangeEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event ->
+                viewModel.loadFeeds(event.latLng, event.visibleRadius)
             }.addTo(disposables)
     }
 
@@ -154,13 +151,15 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private fun bindFeedMarkers(feeds: List<Feed>) {
         for (feed in feeds) {
-            getFeedMarkerBinding().run {
-                feedMarkerBindingTable[feed] = this
-                apply {
-                    viewmodel = FeedMarkerItemViewModel(feed).also {
-                        it.itemEventRelay = itemEventRelay
+            if (feedMarkerBindingTable[feed] == null) {
+                getFeedMarkerBinding().run {
+                    feedMarkerBindingTable[feed] = this
+                    apply {
+                        viewmodel = FeedMarkerItemViewModel(feed).also {
+                            it.itemEventRelay = itemEventRelay
+                        }
+                        executePendingBindings()
                     }
-                    executePendingBindings()
                 }
             }
         }

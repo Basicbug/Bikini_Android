@@ -18,7 +18,7 @@ class NearbyFeedParameter : RestApiParameter() {
         put(RestApiParameterKey.LATITUDE, value.latitude.toString())
         put(RestApiParameterKey.LONGITUDE, value.longitude.toString())
     }
-    fun setRadius(value: Double) {
+    fun setRadius(value: Float) {
         put(RestApiParameterKey.RADIUS, value.toString())
     }
 
