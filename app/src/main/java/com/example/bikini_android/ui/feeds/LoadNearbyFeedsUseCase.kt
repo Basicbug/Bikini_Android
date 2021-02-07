@@ -34,6 +34,14 @@ class LoadNearbyFeedsUseCase(
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
     private var nearbyFeedsInfoCached: NearbyFeedsInfo? = null
 
+    override fun execute(lastFeedsRendered: List<Feed>) {
+        if (lastFeedsRendered.isNotEmpty()) {
+            itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.NEARBY_FEEDS))
+        } else {
+
+        }
+    }
+
     override fun execute(latLng: LatLng, radius: Double) {
         when (getNearbyLoadCase(latLng, radius)) {
             NearbyLoadCase.LOAD_REMOTE_CASE -> {

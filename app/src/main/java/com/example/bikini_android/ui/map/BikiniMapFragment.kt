@@ -72,14 +72,14 @@ class BikiniMapFragment : BaseMapFragment() {
                         requireActivity(),
                         savedInstanceState
                     )
-                ).get(FeedsViewModelFactoryProvider.getFeedViewModelClazz(FeedsType.ALL_FEEDS))
+                ).get(FeedsViewModelFactoryProvider.getFeedViewModelClazz(MAP_FEEDS_TYPE))
                 itemEventRelay = viewModel.itemEventRelay
             }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        viewModel.initFeeds()
+        viewModel.loadFeeds()
         initMap()
     }
 
@@ -102,7 +102,7 @@ class BikiniMapFragment : BaseMapFragment() {
         getNavigationHelper()?.navigateToBikiniFeeds(
             FeedsFragment.makeBundle(
                 RecyclerViewLayoutType.GRID,
-                FeedsType.ALL_FEEDS,
+                MAP_FEEDS_TYPE,
                 FeedsSortType.NEAR_DISTANCE,
                 pivotFeed
             )
@@ -120,7 +120,7 @@ class BikiniMapFragment : BaseMapFragment() {
         itemEventRelay
             .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
-            .filter { it.feedsType == FeedsType.ALL_FEEDS }
+            .filter { it.feedsType == MAP_FEEDS_TYPE }
             .subscribe { event ->
                 clearFeedTable()
                 bindFeedMarkers(event.feeds)
@@ -182,6 +182,8 @@ class BikiniMapFragment : BaseMapFragment() {
 
     companion object {
         private const val KEY_LOCATION_INFO = "keyLocationInfo"
+        private val MAP_FEEDS_TYPE = FeedsType.NEARBY_FEEDS
+
         fun makeBundle(
             location: LocationInfo
         ): Bundle {

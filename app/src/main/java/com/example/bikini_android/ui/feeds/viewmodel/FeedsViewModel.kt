@@ -15,6 +15,7 @@ import com.example.bikini_android.ui.feeds.LoadFeedsUseCase
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
+import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,10 +29,10 @@ abstract class FeedsViewModel(
     private val handle: SavedStateHandle,
     private val feedType: FeedsType
 ) : BaseViewModel() {
-    private var _feeds: List<Feed> =
-        handle.get<MutableList<Feed>>(KEY_FEEDS) ?: mutableListOf()
-    val feeds: List<Feed>
-        get() = _feeds
+    private var _feedsRendered: List<Feed> =
+        handle.get<MutableList<Feed>>(KEY_FEEDS_RENDERED) ?: mutableListOf()
+    val feedsRendered: List<Feed>
+        get() = _feedsRendered
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     protected val disposables: CompositeDisposable = CompositeDisposable()
@@ -43,24 +44,20 @@ abstract class FeedsViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .filter { it.feedsType == feedType }
             .subscribe { event ->
-                _feeds = event.feeds
+                _feedsRendered = event.feeds
             }.addTo(disposables)
     }
 
-    fun initFeeds() {
-        if (feeds.isNotEmpty()) {
-            itemEventRelay.accept(FeedsEvent(feeds, feedType))
-        } else {
-            loadFeedsUseCase.execute()
-        }
+    fun loadFeeds() {
+        loadFeedsUseCase.execute(lastFeedsRendered = feedsRendered)
     }
 
-    fun refreshMyFeeds() {
-        loadFeedsUseCase.execute()
+    fun loadFeeds(latLng: LatLng, radius: Double) {
+        loadFeedsUseCase.execute(latLng, radius)
     }
 
     override fun saveState() {
-        handle[KEY_FEEDS] = feeds
+        handle[KEY_FEEDS_RENDERED] = feedsRendered
     }
 
     override fun onCleared() {
@@ -69,6 +66,6 @@ abstract class FeedsViewModel(
     }
 
     companion object {
-        private const val KEY_FEEDS = "keyFeeds"
+        private const val KEY_FEEDS_RENDERED = "keyFeedsRendered"
     }
 }

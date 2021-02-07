@@ -15,7 +15,8 @@ import com.example.bikini_android.ui.feeds.LoadNearbyFeedsUseCase
 /**
  * @author MyeongKi
  */
-class NearbyFeedsViewModel(handle: SavedStateHandle) : FeedsViewModel(handle, FeedsType.NEARBY_FEEDS) {
+class NearbyFeedsViewModel(handle: SavedStateHandle) :
+    FeedsViewModel(handle, FeedsType.NEARBY_FEEDS) {
     override var loadFeedsUseCase: LoadFeedsUseCase =
         LoadNearbyFeedsUseCase(disposables, itemEventRelay)
 }
