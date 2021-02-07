@@ -15,6 +15,7 @@ import android.location.LocationManager
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.repository.feed.LocationInfo
+import com.google.android.gms.maps.model.LatLng
 
 /**
  * @author MyeongKi
@@ -32,7 +33,11 @@ object LocationUtils {
             LocationInfo(it.latitude, it.longitude)
         }
     }
-
+    fun getCurrentLatLng():LatLng?{
+        return getCurrentLocation()?.let {
+            LatLng(it.latitude, it.longitude)
+        }
+    }
     fun getCurrentLocation(): Location? {
         if (checkLocationPermission()) {
             (AppResources.getContext()

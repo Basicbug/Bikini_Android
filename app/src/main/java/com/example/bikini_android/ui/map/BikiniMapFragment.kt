@@ -29,6 +29,7 @@ import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.GoogleMapUtils
+import com.example.bikini_android.util.map.LocationUtils.getCurrentLatLng
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
 import com.jakewharton.rxrelay2.Relay
@@ -76,10 +77,14 @@ class BikiniMapFragment : BaseMapFragment() {
                 itemEventRelay = viewModel.itemEventRelay
             }.root
 
+
+
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
-        viewModel.loadFeeds()
+        getCurrentLatLng()?.let {
+            viewModel.loadFeeds(it, 10.0)
+        }
         initMap()
     }
 
