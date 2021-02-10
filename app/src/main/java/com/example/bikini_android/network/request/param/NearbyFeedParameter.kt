@@ -13,12 +13,12 @@ import com.google.android.gms.maps.model.LatLng
  * @author MyeongKi
  */
 
-class NearLocationFeedParameter : RestApiParameter() {
+class NearbyFeedParameter : RestApiParameter() {
     fun setLocation(value: LatLng) {
         put(RestApiParameterKey.LATITUDE, value.latitude.toString())
         put(RestApiParameterKey.LONGITUDE, value.longitude.toString())
     }
-    fun setRadius(value: Double) {
+    fun setRadius(value: Float) {
         put(RestApiParameterKey.RADIUS, value.toString())
     }
 

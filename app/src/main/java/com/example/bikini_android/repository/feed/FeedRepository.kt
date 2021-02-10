@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.repository.feed
 
+import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 
 /**
@@ -23,4 +24,9 @@ interface FeedRepository {
     ): Single<List<Feed>>
 
     fun getAllFeedsFromRemote(): Single<List<Feed>>
+
+    fun getNearbyFeedsFromRemote(
+        latLng: LatLng,
+        radius: Float
+    ): Single<List<Feed>>
 }

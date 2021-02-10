@@ -83,7 +83,7 @@ class FeedsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.initFeeds()
+        viewModel.loadFeeds()
     }
 
     private fun observeEvent() {

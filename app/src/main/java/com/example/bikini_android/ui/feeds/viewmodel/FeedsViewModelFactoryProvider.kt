@@ -39,6 +39,9 @@ class FeedsViewModelFactoryProvider(
             modelClass.isAssignableFrom(AllFeedsViewModel::class.java) -> {
                 AllFeedsViewModel(handle) as T
             }
+            modelClass.isAssignableFrom(NearbyFeedsViewModel::class.java) -> {
+                NearbyFeedsViewModel(handle) as T
+            }
             else -> {
                 throw IllegalArgumentException()
             }
@@ -55,11 +58,11 @@ class FeedsViewModelFactoryProvider(
                 FeedsType.RANKING_FEEDS -> {
                     RankingFeedsViewModel::class.java as Class<FeedsViewModel>
                 }
+                FeedsType.NEARBY_FEEDS -> {
+                    NearbyFeedsViewModel::class.java as Class<FeedsViewModel>
+                }
                 FeedsType.ALL_FEEDS -> {
                     AllFeedsViewModel::class.java as Class<FeedsViewModel>
-                }
-                else -> {
-                    throw IllegalArgumentException()
                 }
             }
         }

@@ -15,6 +15,7 @@ import android.location.LocationManager
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.repository.feed.LocationInfo
+import com.google.android.gms.maps.model.LatLng
 
 /**
  * @author MyeongKi
@@ -33,6 +34,12 @@ object LocationUtils {
         }
     }
 
+    fun getCurrentLatLng(): LatLng? {
+        return getCurrentLocation()?.let {
+            LatLng(it.latitude, it.longitude)
+        }
+    }
+
     fun getCurrentLocation(): Location? {
         if (checkLocationPermission()) {
             (AppResources.getContext()
@@ -42,5 +49,17 @@ object LocationUtils {
             }
         }
         return null
+    }
+
+    fun getDistanceBetween(startLatLng: LatLng, endLatLng: LatLng): Float {
+        val diagonalDistance = FloatArray(1)
+        Location.distanceBetween(
+            startLatLng.latitude,
+            startLatLng.longitude,
+            endLatLng.latitude,
+            endLatLng.longitude,
+            diagonalDistance
+        )
+        return diagonalDistance[0] / 1000
     }
 }

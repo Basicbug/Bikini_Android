@@ -13,8 +13,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.LocationInfo
+import com.example.bikini_android.ui.map.MapLocationChangeEvent
+import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.LocationPermissionEvent
+import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.permission.PermissionUtils
 import com.example.bikini_android.util.permission.PermissionUtils.LOCATION_PERMISSION_REQUEST_CODE
@@ -24,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.jakewharton.rxrelay2.Relay
 
 /**
  * @author MyeongKi
@@ -34,7 +38,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     private var permissionDenied = false
     protected var locationFocused: LocationInfo? = null
     private var isMoveToLocation = false
-
+    protected lateinit var itemEventRelay: Relay<RxAction>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         RxActionBus.toObservable(LocationPermissionEvent::class.java).subscribe {
             if (it.isAccept) {
@@ -52,6 +56,7 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap?) {
         map = googleMap ?: return
         initMap()
+
     }
 
     override fun onResume() {
@@ -84,6 +89,14 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
                     moveToLocation(LatLng(it.latitude, it.longitude))
                     isMoveToLocation = true
                 }
+            }
+            map.setOnCameraIdleListener {
+                itemEventRelay.accept(
+                    MapLocationChangeEvent(
+                        map.cameraPosition.target,
+                        GoogleMapUtils.getVisibleRadius(map.projection.visibleRegion)
+                    )
+                )
             }
         }
     }

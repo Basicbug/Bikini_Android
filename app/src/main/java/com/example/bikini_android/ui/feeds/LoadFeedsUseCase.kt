@@ -7,9 +7,13 @@
 
 package com.example.bikini_android.ui.feeds
 
+import com.example.bikini_android.repository.feed.Feed
+import com.google.android.gms.maps.model.LatLng
+
 /**
  * @author MyeongKi
  */
 interface LoadFeedsUseCase {
-    fun execute()
+    fun execute(lastFeedsRendered: List<Feed>) = Unit
+    fun execute(latLng: LatLng, radius: Float) = Unit
 }

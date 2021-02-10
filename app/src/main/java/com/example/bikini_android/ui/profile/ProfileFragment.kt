@@ -79,7 +79,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feedsViewModel.initFeeds()
+        feedsViewModel.loadFeeds()
     }
 
     override fun onDestroyView() {
