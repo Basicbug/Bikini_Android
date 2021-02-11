@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ arrays.xml 2021. 2. 11
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  -->
+
+<resources>
+    <array name="pref_server_type_labels">
+        <item>DEV</item>
+        <item>PRD</item>
+    </array>
+    <array name="pref_server_type_values">
+        <item>DEV</item>
+        <item>PRD</item>
+    </array>
+</resources>
