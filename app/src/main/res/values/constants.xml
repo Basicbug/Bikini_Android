@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ constants.xml 2021. 1. 5
   ~
   ~ Copyright 2021 BasicBug. All rights Reserved.
@@ -9,4 +8,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
     <!--api key-->
     <string name="google_map_api_key">AIzaSyAraq-2MhBXgG1wnaG-tFWIgamxYiCDAtk</string>
+    <string name="naver_login_client_id">XegnHxsuJTCKfKRJYn95</string>
+    <string name="naver_login_client_secret">074hXOqltm</string>
 </resources>
