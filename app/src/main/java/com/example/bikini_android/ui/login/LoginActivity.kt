@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityLoginBinding
+import com.example.bikini_android.manager.login.LoginManagerFactory
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.manager.login.NaverLoginManager
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
@@ -18,7 +20,9 @@ class LoginActivity : BaseActivity() {
 
     lateinit var binding: ActivityLoginBinding
 
-    private val naverLoginManager = NaverLoginManager()
+    private val naverLoginManager = LoginManagerProxy.apply {
+        setLoginManager(LoginManagerFactory.createFactory<NaverLoginManager>().makeLoginManager())
+    }.getLoginManager() as NaverLoginManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
