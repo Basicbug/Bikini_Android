@@ -19,5 +19,9 @@ object PreferenceManager {
         getPreferences().edit().putBoolean(key, value).apply()
     }
 
+    fun setString(key: String, value: String) {
+        getPreferences().edit().putString(key, value).apply()
+    }
+
     fun getBoolean(key: String) = getPreferences().getBoolean(key, false)
 }
