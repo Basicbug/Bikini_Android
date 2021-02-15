@@ -28,11 +28,11 @@ import java.util.Queue
 
 class NavigationHelper(
     private val bottomNav: BottomNavigationView,
-    private val activity: MainHolderActivity,
+    private var activity: MainHolderActivity?,
     itemRelay: Relay<RxAction>
 ) {
     private val disposables = CompositeDisposable()
-    private val taskQueue: Queue<() -> Unit> = LinkedList<() -> Unit>()
+    private val navigateTaskQueue: Queue<() -> Unit> = LinkedList()
     private val logger = Logger().apply {
         TAG = this.javaClass.simpleName
     }
@@ -45,7 +45,7 @@ class NavigationHelper(
                 logger.error { it.toString() }
             }
             .subscribe {
-                taskQueue.poll()?.invoke()
+                navigateTaskQueue.poll()?.invoke()
             }.addTo(disposables)
     }
 
@@ -53,7 +53,7 @@ class NavigationHelper(
         if (isValidBottomNav(R.id.bikini_navigation)) {
             navigateToFeeds(bundle).invoke()
         } else {
-            taskQueue.offer(navigateToFeeds(bundle))
+            navigateTaskQueue.offer(navigateToFeeds(bundle))
             bottomNav.selectedItemId = R.id.bikini_navigation
         }
     }
@@ -62,7 +62,7 @@ class NavigationHelper(
         if (isValidBottomNav(R.id.profile_navigation)) {
             navigateToFeeds(bundle).invoke()
         } else {
-            taskQueue.offer(navigateToFeeds(bundle))
+            navigateTaskQueue.offer(navigateToFeeds(bundle))
             bottomNav.selectedItemId = R.id.profile_navigation
         }
     }
@@ -71,7 +71,7 @@ class NavigationHelper(
         if (isValidBottomNav(R.id.bikini_navigation)) {
             navigateToMap(bundle).invoke()
         } else {
-            taskQueue.offer(navigateToMap(bundle))
+            navigateTaskQueue.offer(navigateToMap(bundle))
             bottomNav.selectedItemId = R.id.bikini_navigation
         }
     }
@@ -91,9 +91,10 @@ class NavigationHelper(
 
     fun clear() {
         disposables.dispose()
+        activity = null
     }
 
     private fun getNavController(): NavController {
-        return activity.findNavController(R.id.content_fragment_holder)
+        return activity!!.findNavController(R.id.content_fragment_holder)
     }
 }

@@ -8,6 +8,7 @@
 package com.example.bikini_android.ui.feeds
 
 import android.util.Log
+import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
@@ -21,19 +22,26 @@ import io.reactivex.schedulers.Schedulers
  * @author MyeongKi
  */
 
-class LoadMyFeedsUseCase(private val disposable: CompositeDisposable, private val itemEventRelay: Relay<RxAction>) {
+class LoadMyFeedsUseCase(
+    private val disposable: CompositeDisposable,
+    private val itemEventRelay: Relay<RxAction>
+) : LoadFeedsUseCase {
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
     private val testMyId = "ChoMk"
-    fun execute() {
-        feedsRepository
-            .getUserFeedsFromRemote(testMyId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                itemEventRelay.accept(FeedsEvent(it, FeedsType.MY_FEEDS))
-            }, {
-                Log.d("tset", it.toString())
-            })
-            .addTo(disposable)
+    override fun execute(lastFeedsRendered: List<Feed>) {
+        if (lastFeedsRendered.isNotEmpty()) {
+            itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.MY_FEEDS))
+        } else {
+            feedsRepository
+                .getUserFeedsFromRemote(testMyId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    itemEventRelay.accept(FeedsEvent(it, FeedsType.MY_FEEDS))
+                }, {
+                    Log.d("tset", it.toString())
+                })
+                .addTo(disposable)
+        }
     }
 }

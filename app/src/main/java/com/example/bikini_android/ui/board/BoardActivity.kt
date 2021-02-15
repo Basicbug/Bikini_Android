@@ -1,4 +1,3 @@
-
 package com.example.bikini_android.ui.board
 
 import android.content.Intent
@@ -9,7 +8,6 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityBoardBinding
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.bus.event.ImageLoadEvent
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,7 +37,7 @@ class BoardActivity : BaseActivity() {
             data?.let { intent ->
                 val imageUrl = intent.data
                 imageUrl?.let {
-                    itemEventRelay.accept(ImageLoadEvent(it.toString()))
+                    viewModel.attachImageSelected(it.toString())
                 }
             }
         }
@@ -52,6 +50,7 @@ class BoardActivity : BaseActivity() {
             .subscribe {
                 when (it) {
                     BoardItemViewModel.EventType.POST_FEED -> {
+                        viewModel.postFeed()
                         finish()
                     }
                     BoardItemViewModel.EventType.NAVIGATE_GALLERY ->

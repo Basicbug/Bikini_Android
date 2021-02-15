@@ -8,6 +8,7 @@
 package com.example.bikini_android.ui.feeds
 
 import android.util.Log
+import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
@@ -24,19 +25,23 @@ import io.reactivex.schedulers.Schedulers
 class LoadRankingFeedsUseCase(
     private val disposable: CompositeDisposable,
     private val itemEventRelay: Relay<RxAction>
-) {
+) : LoadFeedsUseCase {
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
-    fun execute() {
-        feedsRepository
-            .getRankingFeedsFromRemote(LIMIT)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                itemEventRelay.accept(FeedsEvent(it, FeedsType.RANKING_FEEDS))
-            }, {
-                Log.d("tset", it.toString())
-            })
-            .addTo(disposable)
+    override fun execute(lastFeedsRendered: List<Feed>) {
+        if (lastFeedsRendered.isNotEmpty()) {
+            itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.RANKING_FEEDS))
+        } else {
+            feedsRepository
+                .getRankingFeedsFromRemote(LIMIT)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    itemEventRelay.accept(FeedsEvent(it, FeedsType.RANKING_FEEDS))
+                }, {
+                    Log.d("tset", it.toString())
+                })
+                .addTo(disposable)
+        }
     }
 
     companion object {
