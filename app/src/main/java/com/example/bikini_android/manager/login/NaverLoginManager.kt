@@ -1,6 +1,7 @@
 package com.example.bikini_android.manager.login
 
 import android.util.Log
+import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.manager.PreferenceManager
 import com.example.bikini_android.ui.login.LoginEvent
@@ -22,22 +23,28 @@ class NaverLoginManager : LoginManager, OAuthLoginHandler() {
     private val loginInstance = OAuthLogin.getInstance().apply {
         init(
             appContext,
-            CLIENT_ID,
-            CLIENT_SECRET, "Bikini"
+            AppResources.getStringResId(R.string.naver_login_client_id),
+            AppResources.getStringResId(R.string.naver_login_client_secret),
+            "Bikini"
         )
     }
 
     override fun run(success: Boolean) {
         if (success) {
-            PreferenceManager.setBoolean("isAuthorized", true)
+            PreferenceManager.setBoolean(AppResources.getStringResId(R.string.is_logged_in), true)
+            PreferenceManager.setString(
+                AppResources.getStringResId(R.string.last_login_platform),
+                AppResources.getStringResId(R.string.naver_id_login)
+            )
             loginEventRelay.accept(LoginEvent())
         } else {
             Log.d("login", "failed")
         }
     }
 
-    fun getLoginInstance(): OAuthLogin =
-        loginInstance
+    override fun isLoggedIn(): Boolean {
+        return PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
+    }
 
     override fun logOut() {
         loginInstance?.logout(
@@ -46,7 +53,6 @@ class NaverLoginManager : LoginManager, OAuthLoginHandler() {
     }
 
     companion object {
-        private const val CLIENT_ID = "XegnHxsuJTCKfKRJYn95"
-        private const val CLIENT_SECRET = "074hXOqltm"
+        val instance = NaverLoginManager()
     }
 }

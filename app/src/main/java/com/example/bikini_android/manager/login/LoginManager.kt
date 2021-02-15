@@ -11,4 +11,5 @@ interface LoginManager {
     val loginEventRelay: Relay<RxAction>
 
     fun logOut()
+    fun isLoggedIn(): Boolean
 }
