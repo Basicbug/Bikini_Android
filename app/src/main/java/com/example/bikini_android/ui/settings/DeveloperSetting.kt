@@ -10,7 +10,6 @@ import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.network.NetworkConstants
 import com.example.bikini_android.network.ServerType
 import com.example.bikini_android.util.ktx.get
-import com.example.bikini_android.util.ktx.pref
 
 /**
  * @author qwebnm7788
@@ -18,12 +17,12 @@ import com.example.bikini_android.util.ktx.pref
 object DeveloperSetting {
 
     private fun isDevMode(): Boolean {
-        return AppResources.getContext().pref().get(SettingsFragment.PREF_DEV_MODE, false)
+        return AppResources.getSharedPref().get(SettingsFragment.PREF_DEV_MODE, false)
     }
 
     private fun getServerType(): ServerType {
         if (isDevMode()) {
-            with (AppResources.getContext().pref()) {
+            with (AppResources.getSharedPref()) {
                 val serverType = get(SettingsFragment.PREF_SERVER_TYPE, "DEV")
                 return ServerType.valueOf(serverType)
             }
