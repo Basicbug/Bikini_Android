@@ -9,14 +9,16 @@ package com.example.bikini_android.ui.settings
 
 import android.os.Bundle
 import android.view.View
-import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.example.bikini_android.R
 import com.example.bikini_android.util.ktx.pref
+import com.example.bikini_android.util.ktx.put
 import com.example.bikini_android.util.logging.Logger
+import kotlin.LazyThreadSafetyMode.NONE
 
 /**
  * @author MyeongKi
@@ -24,9 +26,9 @@ import com.example.bikini_android.util.logging.Logger
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    private val logger: Logger by lazy {
+    private val logger: Logger by lazy(NONE) {
         Logger().apply {
-            TAG = "AddingFeedFragment"
+            TAG = "SettingsFragment"
         }
     }
 
@@ -45,20 +47,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
 
-        findPreference<EditTextPreference>(PREF_BASE_URL)?.onPreferenceChangeListener =
-            Preference.OnPreferenceChangeListener { _, newValue ->
-                logger.debug { "changed base url $newValue" }
+        findPreference<ListPreference>(PREF_SERVER_TYPE)?.apply {
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, serverType ->
+                logger.debug { "changed serverType $serverType" }
                 with(requireActivity().pref()) {
-                    edit().putString(DEV_BASE_URL, newValue as String).commit()
+                    put(PREF_SERVER_TYPE, serverType)
                 }
+                preference.summary = serverType.toString()
                 true
             }
+            summary = value
+        }
     }
 
     companion object {
-        private const val PREF_DEV_MODE = "pref.dev_mode"
-        private const val PREF_BASE_URL = "pref.base_url"
-        private const val DEV_BASE_URL = "dev.base.url"
+        const val PREF_SERVER_TYPE = "pref.server.type"
+        const val PREF_DEV_MODE = "pref.dev_mode"
         private const val PREF_DEV_CATEGORY = "pref.dev_category"
     }
 }
