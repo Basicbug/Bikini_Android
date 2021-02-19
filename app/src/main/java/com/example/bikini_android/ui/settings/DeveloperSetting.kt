@@ -1,40 +1,15 @@
 /*
- * DeveloperSetting.kt 2021. 2. 11
+ * DeveloperSetting.kt 2021. 2. 19
  *
  * Copyright 2021 BasicBug. All rights Reserved.
+ *
  */
 
 package com.example.bikini_android.ui.settings
 
-import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.network.NetworkConstants
-import com.example.bikini_android.network.ServerType
-import com.example.bikini_android.util.ktx.get
-
 /**
- * @author qwebnm7788
+ * @author MyeongKi
  */
-object DeveloperSetting {
-
-    private fun isDevMode(): Boolean {
-        return AppResources.getSharedPref().get(SettingsFragment.PREF_DEV_MODE, false)
-    }
-
-    private fun getServerType(): ServerType {
-        if (isDevMode()) {
-            with (AppResources.getSharedPref()) {
-                val serverType = get(SettingsFragment.PREF_SERVER_TYPE, "DEV")
-                return ServerType.valueOf(serverType)
-            }
-        } else {
-            return ServerType.DEV
-        }
-    }
-
-    fun getBaseDomain(): String {
-        return when (getServerType()) {
-            ServerType.DEV -> NetworkConstants.DEV_URL
-            ServerType.PRD -> NetworkConstants.PRD_URL
-        }
-    }
+interface DeveloperSetting {
+    fun getBaseDomain(): String
 }
