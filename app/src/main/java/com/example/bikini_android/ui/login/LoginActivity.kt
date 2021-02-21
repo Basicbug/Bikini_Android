@@ -37,7 +37,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun observeEvent() {
-        naverLoginManager.loginEventRelay
+        LoginManagerProxy.loginEventRelay
             .ofType(LoginEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
