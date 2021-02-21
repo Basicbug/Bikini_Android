@@ -1,5 +1,8 @@
 package com.example.bikini_android.manager.login
 
+import com.example.bikini_android.R
+import com.example.bikini_android.app.AppResources
+import com.example.bikini_android.manager.PreferenceManager
 import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -13,21 +16,17 @@ object LoginManagerProxy : LoginManager {
 
     override val loginEventRelay: Relay<RxAction> = PublishRelay.create()
 
-    fun getLoginManager() = loginManager ?: NullPointerException("no manager")
+    fun getLoginManager() = loginManager ?: NullPointerException("there's no manager")
 
     fun setLoginManager(manager: LoginManager) {
         loginManager = manager
     }
 
     override fun logOut() {
-        if (loginManager is NaverLoginManager) {
-            (loginManager as NaverLoginManager).logOut()
-        }
+        loginManager?.logOut()
     }
 
-    override fun isLoggedIn(): Boolean {
-        return if (loginManager is NaverLoginManager) {
-            (loginManager as NaverLoginManager).isLoggedIn()
-        } else false
-    }
+    override fun isLoggedIn() =
+        loginManager?.isLoggedIn() ?: PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
+
 }

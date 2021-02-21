@@ -1,20 +1,17 @@
 package com.example.bikini_android.manager.login
 
-import android.util.Log
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.manager.PreferenceManager
-import com.example.bikini_android.ui.login.LoginEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import com.nhn.android.naverlogin.OAuthLogin
-import com.nhn.android.naverlogin.OAuthLoginHandler
 
 /**
  * @author bsgreentea
  */
-class NaverLoginManager : LoginManager, OAuthLoginHandler() {
+class NaverLoginManager : LoginManager {
 
     private val appContext = AppResources.getContext()
 
@@ -25,21 +22,8 @@ class NaverLoginManager : LoginManager, OAuthLoginHandler() {
             appContext,
             AppResources.getStringResId(R.string.naver_login_client_id),
             AppResources.getStringResId(R.string.naver_login_client_secret),
-            "Bikini"
+            AppResources.getStringResId(R.string.app_name)
         )
-    }
-
-    override fun run(success: Boolean) {
-        if (success) {
-            PreferenceManager.setBoolean(AppResources.getStringResId(R.string.is_logged_in), true)
-            PreferenceManager.setString(
-                AppResources.getStringResId(R.string.last_login_platform),
-                AppResources.getStringResId(R.string.naver_id_login)
-            )
-            loginEventRelay.accept(LoginEvent())
-        } else {
-            Log.d("login", "failed")
-        }
     }
 
     override fun isLoggedIn(): Boolean {
@@ -47,9 +31,7 @@ class NaverLoginManager : LoginManager, OAuthLoginHandler() {
     }
 
     override fun logOut() {
-        loginInstance?.logout(
-            appContext
-        )
+        loginInstance?.logout(appContext)
     }
 
     companion object {
