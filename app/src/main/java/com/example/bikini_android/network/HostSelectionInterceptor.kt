@@ -6,7 +6,7 @@
 
 package com.example.bikini_android.network
 
-import com.example.bikini_android.ui.settings.DeveloperSetting
+import com.example.bikini_android.ui.settings.DeveloperSettingImpl
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -18,7 +18,7 @@ class HostSelectionInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
-        val host = HttpUrl.parse(DeveloperSetting.getBaseDomain())
+        val host = HttpUrl.parse(DeveloperSettingImpl.getBaseDomain())
 
         if (host != null) {
             val newUrl = request.url().newBuilder()

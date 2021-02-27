@@ -6,9 +6,6 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <SwitchPreferenceCompat
-        android:key="pref.dev_mode"
-        android:title="Developer mode" />
     <PreferenceCategory
         android:key="pref.dev_category">
         <ListPreference
@@ -17,5 +14,4 @@
             android:entries="@array/pref_server_type_labels"
             android:entryValues="@array/pref_server_type_values" />
     </PreferenceCategory>
-
 </PreferenceScreen>
