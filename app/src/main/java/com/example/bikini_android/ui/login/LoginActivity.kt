@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         binding.apply {
-            naverLoginHandler = NaverOAuthLoginHandler()
+            naverOAuthHandler = NaverOAuthLoginHandler()
         }
 
         observeEvent()
@@ -36,7 +36,6 @@ class LoginActivity : BaseActivity() {
             .ofType(LoginEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                LoginManagerProxy.successLogin()
                 startActivity(Intent(this, MainHolderActivity::class.java))
                 finish()
             }.addTo(disposables)

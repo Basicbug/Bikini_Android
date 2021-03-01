@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="naverLoginHandler"
-            type="com.example.bikini_android.manager.login.NaverOAuthLoginHandler" />
+            name="naverOAuthHandler"
+            type="com.nhn.android.naverlogin.OAuthLoginHandler" />
 
     </data>
 
@@ -22,7 +22,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:setNaverLoginHandler="@{naverLoginHandler}" />
+            app:setOAuthLoginHandler="@{naverOAuthHandler}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

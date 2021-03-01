@@ -12,6 +12,7 @@ class NaverOAuthLoginHandler : OAuthLoginHandler() {
         if (success) {
 
             LoginManagerProxy.setLoginManager(LoginManagerFactory.createFactory<NaverLoginManager>().makeLoginManager())
+            LoginManagerProxy.successLogin()
             LoginManagerProxy.loginEventRelay.accept(LoginEvent())
 
         } else {
