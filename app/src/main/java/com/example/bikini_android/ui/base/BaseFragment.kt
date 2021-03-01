@@ -37,7 +37,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun getNavigationHelper(): NavigationHelper? {
-        return if (activity is MainHolderActivity) {
+        return if(activity is MainHolderActivity) {
             (activity as MainHolderActivity).navigationHelper
         } else {
             null
