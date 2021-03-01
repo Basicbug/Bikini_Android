@@ -5,9 +5,8 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityLoginBinding
-import com.example.bikini_android.manager.login.LoginManagerFactory
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.manager.login.NaverLoginManager
+import com.example.bikini_android.manager.login.NaverOAuthLoginHandler
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.example.bikini_android.util.rx.addTo
@@ -20,17 +19,13 @@ class LoginActivity : BaseActivity() {
 
     lateinit var binding: ActivityLoginBinding
 
-    private val naverLoginManager = LoginManagerProxy.apply {
-        setLoginManager(LoginManagerFactory.createFactory<NaverLoginManager>().makeLoginManager())
-    }.getLoginManager() as NaverLoginManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         binding.apply {
-            loginManager = naverLoginManager
+            naverLoginHandler = NaverOAuthLoginHandler()
         }
 
         observeEvent()
@@ -41,6 +36,7 @@ class LoginActivity : BaseActivity() {
             .ofType(LoginEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
+                LoginManagerProxy.successLogin()
                 startActivity(Intent(this, MainHolderActivity::class.java))
                 finish()
             }.addTo(disposables)
