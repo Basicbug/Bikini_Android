@@ -1,4 +1,4 @@
-name: BIKINI CI
+name: CONVENTIONS CI
 
 on:
   pull_request:
