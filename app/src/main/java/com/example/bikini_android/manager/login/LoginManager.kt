@@ -12,4 +12,5 @@ interface LoginManager {
 
     fun logOut()
     fun isLoggedIn(): Boolean
+    fun successLogin()
 }

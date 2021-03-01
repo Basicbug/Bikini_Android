@@ -5,5 +5,5 @@ package com.example.bikini_android.manager.login
  */
 class NaverLoginManagerFactory : LoginManagerFactory() {
 
-    override fun makeLoginManager(): LoginManager = NaverLoginManager()
+    override fun makeLoginManager(): LoginManager = NaverLoginManager.instance
 }

@@ -34,6 +34,19 @@ class NaverLoginManager : LoginManager {
         loginInstance?.logout(appContext)
     }
 
+    override fun successLogin() {
+
+        PreferenceManager.apply {
+            setBoolean(AppResources.getStringResId(R.string.is_logged_in), true)
+            setString(
+                AppResources.getStringResId(R.string.last_login_platform),
+                AppResources.getStringResId(R.string.naver_id_login)
+            )
+        }
+
+        // TODO api 연결해라
+    }
+
     companion object {
         val instance = NaverLoginManager()
     }

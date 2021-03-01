@@ -29,4 +29,7 @@ object LoginManagerProxy : LoginManager {
     override fun isLoggedIn() =
         loginManager?.isLoggedIn() ?: PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
 
+    override fun successLogin() {
+        loginManager?.successLogin()
+    }
 }
