@@ -14,9 +14,7 @@ import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 /**
  * @author MyeongKi
@@ -36,8 +34,6 @@ class LoadAllFeedsUseCase(
         } else {
             feedsRepository
                 .getAllFeedsFromRemote()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     itemEventRelay.accept(FeedsEvent(it, FeedsType.ALL_FEEDS))
                 }, {

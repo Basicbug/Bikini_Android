@@ -1,5 +1,6 @@
 package com.example.bikini_android.ui.board
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -8,6 +9,10 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityBoardBinding
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.bus.RxActionBus
+import com.example.bikini_android.util.bus.event.ReadExternalStoragePermissionEvent
+import com.example.bikini_android.util.file.FileUtils
+import com.example.bikini_android.util.permission.PermissionUtils
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,7 +42,7 @@ class BoardActivity : BaseActivity() {
             data?.let { intent ->
                 val imageUrl = intent.data
                 imageUrl?.let {
-                    viewModel.attachImageSelected(it.toString())
+                    viewModel.setImageUriSelected(it)
                 }
             }
         }
@@ -58,9 +63,26 @@ class BoardActivity : BaseActivity() {
                     else -> Unit
                 }
             }.addTo(disposables)
+        RxActionBus.toObservable(ReadExternalStoragePermissionEvent::class.java).subscribe {
+            if (it.isAccept) {
+                startGalleryPage()
+            }
+        }.addTo(disposables)
     }
 
     private fun navigateToGallery() {
+        if (FileUtils.checkReadExternalStoragePermission()) {
+            startGalleryPage()
+        } else {
+            PermissionUtils.requestPermission(
+                this,
+                PermissionUtils.READ_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE,
+                Manifest.permission.READ_EXTERNAL_STORAGE, true
+            )
+        }
+    }
+
+    private fun startGalleryPage() {
         val galleryIntent = Intent(Intent.ACTION_PICK).apply {
             type = "image/*"
         }

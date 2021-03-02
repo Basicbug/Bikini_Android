@@ -16,9 +16,7 @@ import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlin.math.max
 
 /**
@@ -68,8 +66,6 @@ class LoadNearbyFeedsUseCase(
     private fun loadNearbyFeedsFromRemote(latLng: LatLng, radius: Float) {
         feedsRepository
             .getNearbyFeedsFromRemote(latLng, radius)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 cacheNearbyFeedsInfo(latLng, radius, it)
                 itemEventRelay.accept(FeedsEvent(it, FeedsType.NEARBY_FEEDS))
@@ -94,7 +90,10 @@ class LoadNearbyFeedsUseCase(
 
     private fun isNearbyFeed(latLng: LatLng, radius: Float, feed: Feed): Boolean {
         feed.locationInfo?.let {
-            return LocationUtils.getDistanceBetween(latLng, LatLng(it.latitude, it.longitude)) <= radius
+            return LocationUtils.getDistanceBetween(
+                latLng,
+                LatLng(it.latitude, it.longitude)
+            ) <= radius
         }
         return false
     }

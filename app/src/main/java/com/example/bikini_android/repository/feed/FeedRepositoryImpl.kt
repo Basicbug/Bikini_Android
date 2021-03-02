@@ -10,9 +10,13 @@ package com.example.bikini_android.repository.feed
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.param.NearbyFeedParameter
 import com.example.bikini_android.network.request.service.FeedService
+import com.example.bikini_android.network.request.service.ImagesService
+import com.example.bikini_android.network.response.DefaultResponse
 import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
+import retrofit2.http.Part
 
 /**
  * @author MyeongKi
@@ -60,6 +64,24 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .map {
                 it.result?.feeds
             }
+    }
+
+    override fun addFeedToRemote(
+        feed: Feed,
+        imageFiles: List<MultipartBody.Part>
+    ): Single<DefaultResponse> {
+        return ApiClientHelper
+            .createMainApiByService(ImagesService::class)
+            .uploadImages(imageFiles)
+            .flatMap {
+                it.result?.url?.let {
+                    ApiClientHelper.createMainApiByService(FeedService::class)
+                        .addFeed(feed.apply {
+                            imageUrl = it
+                        })
+                }
+            }
+            .subscribeOn(Schedulers.io())
     }
 
     companion object {
