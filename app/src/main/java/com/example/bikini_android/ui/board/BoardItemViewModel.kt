@@ -23,7 +23,7 @@ class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
     val content = ObservableField<String>()
 
     @get:Bindable
-    var imageUrl = "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+    var imageUrl =""
         set(value) {
             field = value
             notifyPropertyChanged(BR.imageUrl)
@@ -48,6 +48,6 @@ class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
     }
 
     enum class EventType : RxAction {
-        NAVIGATE_GALLERY, POST_FEED;
+        NAVIGATE_GALLERY, POST_FEED, FINISH;
     }
 }

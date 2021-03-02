@@ -1,47 +1,68 @@
 package com.example.bikini_android.ui.board
 
-import com.example.bikini_android.network.client.ApiClientHelper
-import com.example.bikini_android.network.request.service.FeedService
+import android.net.Uri
+import com.example.bikini_android.R
+import com.example.bikini_android.app.ToastHelper
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.logging.Logger
+import com.example.bikini_android.util.file.FileUtils
 import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class BoardViewModel : BaseViewModel() {
-    private val logger = Logger().apply {
-        TAG = this@BoardViewModel.javaClass.simpleName
-    }
+
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     val boardItemViewModel = BoardItemViewModel(itemEventRelay)
-
     val disposables = CompositeDisposable()
 
-    fun attachImageSelected(imageUrl: String) {
+    private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
+    private var imageUri: Uri? = null
+
+    fun setImageUriSelected(uri: Uri) {
+        imageUri = uri
+        attachImageSelected(uri.toString())
+    }
+
+    private fun attachImageSelected(imageUrl: String) {
         boardItemViewModel.imageUrl = imageUrl
     }
 
     fun postFeed() {
-        ApiClientHelper.createMainApiByService(FeedService::class)
-            .postFeed(makePostFeed())
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                logger.info { it.toString() }
-            }, {
-                logger.error { it.toString() }
-            })
-            .addTo(disposables)
+        getValidFeedAndImageUrl()?.let { (feed, imageUri) ->
+            feedsRepository
+                .addFeedToRemote(
+                    feed,
+                    FileUtils.getImageFiles(listOf(imageUri))
+                )
+                .subscribe { _ ->
+                    itemEventRelay.accept(BoardItemViewModel.EventType.FINISH)
+                }
+                .addTo(disposables)
+        }
+    }
+
+    private fun getValidFeedAndImageUrl(): Pair<Feed, Uri>? {
+        if (imageUri == null) {
+            ToastHelper.show(R.string.image_unselected)
+            return null
+        }
+        val feed = makePostFeed().also { feed ->
+            if (feed.content.isEmpty()) {
+                ToastHelper.show(R.string.content_empty)
+                return null
+            }
+        }
+        return Pair(feed, imageUri!!)
     }
 
     private fun makePostFeed(): Feed {
         return Feed(
             content = boardItemViewModel.content.get() ?: "",
-            imageUrl = boardItemViewModel.imageUrl,
             locationInfo = LocationUtils.getCurrentLocationInfo()
         )
     }

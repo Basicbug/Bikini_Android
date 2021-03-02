@@ -13,6 +13,7 @@ data class Feed(
     var feedId: String = "test1",
     var feedNumOfUser: Int = 0,
     var userId: String = "sampleUserId",
+    var imageIds: List<Int>? = null,
     var content: String = "sampleContent",
     var imageUrl: String = "sampleImageUri",
     var profileImageUrl: String = "sampleProfile",

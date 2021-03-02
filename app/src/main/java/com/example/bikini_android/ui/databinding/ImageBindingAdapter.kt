@@ -34,6 +34,7 @@ object ImageBindingAdapter {
         @AttrRes errorAttrResId: Int?,
         completeLoadEvent: (() -> Unit)?
     ) {
+
         val glideRequest = Glide.with(imageView.context).load(imageUrl)
         with(glideRequest) {
             options?.let {

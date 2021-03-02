@@ -25,6 +25,7 @@ import com.example.bikini_android.R
 
 object PermissionUtils {
     const val LOCATION_PERMISSION_REQUEST_CODE = 1
+    const val READ_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 2
 
     @JvmStatic
     fun requestPermission(
