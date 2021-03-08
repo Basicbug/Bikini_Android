@@ -57,6 +57,21 @@ android {
             keyPassword SIGNED_KEY_PASSWORD
         }
     }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+        debug {
+            java.srcDirs = ['src/debug/java']
+            res.srcDirs = ['src/debug/res']
+        }
+        release {
+            java.srcDirs = ['src/release/java']
+            res.srcDirs = ['src/release/res']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true

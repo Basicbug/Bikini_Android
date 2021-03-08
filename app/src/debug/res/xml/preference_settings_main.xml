@@ -6,15 +6,12 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <SwitchPreferenceCompat
-        android:key="pref.dev_mode"
-        android:title="Developer mode" />
     <PreferenceCategory
         android:key="pref.dev_category">
-        <EditTextPreference
-            android:key="pref.base_url"
-            android:title="Base Url"
-            android:summary="test summary" />
+        <ListPreference
+            android:key="pref.server.type"
+            android:title="ServerType"
+            android:entries="@array/pref_server_type_labels"
+            android:entryValues="@array/pref_server_type_values" />
     </PreferenceCategory>
-
 </PreferenceScreen>

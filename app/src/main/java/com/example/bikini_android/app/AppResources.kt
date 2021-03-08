@@ -8,8 +8,10 @@
 package com.example.bikini_android.app
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.annotation.StringRes
+import com.example.bikini_android.util.ktx.pref
 
 /**
  * @author MyeongKi
@@ -31,4 +33,8 @@ object AppResources {
         return getResources().getString(resId)
     }
 
+    @JvmStatic
+    fun getSharedPref(): SharedPreferences {
+        return getContext().pref()
+    }
 }
