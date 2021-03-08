@@ -29,7 +29,7 @@ class SettingsFragment : BaseSettingsFragment() {
                 Preference.OnPreferenceChangeListener { preference, serverType ->
                     logger.debug { "changed serverType $serverType" }
                     with(requireActivity().pref()) {
-                        put(PREF_SERVER_TYPE, serverType)
+                        put(PREF_SERVER_TYPE, serverType.toString())
                     }
                     preference.summary = serverType.toString()
                     true
