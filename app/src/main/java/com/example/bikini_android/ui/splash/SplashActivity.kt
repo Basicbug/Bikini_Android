@@ -10,11 +10,13 @@ package com.example.bikini_android.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import com.example.bikini_android.R
+import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.example.bikini_android.ui.login.LoginActivity
 import com.example.bikini_android.util.rx.addTo
+import com.nhn.android.naverlogin.OAuthLogin
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
@@ -26,6 +28,16 @@ import java.util.concurrent.TimeUnit
 class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        OAuthLogin.getInstance().apply {
+            init(
+                AppResources.getContext(),
+                AppResources.getStringResId(R.string.naver_login_client_id),
+                AppResources.getStringResId(R.string.naver_login_client_secret),
+                AppResources.getStringResId(R.string.app_name)
+            )
+        }
+
         setContentView(R.layout.activity_splash)
         Observable.timer(SPLASH_TIME.toLong(), TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())

@@ -8,6 +8,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
     <!--api key-->
     <string name="google_map_api_key">AIzaSyAraq-2MhBXgG1wnaG-tFWIgamxYiCDAtk</string>
-    <string name="naver_login_client_id">XegnHxsuJTCKfKRJYn95</string>
-    <string name="naver_login_client_secret">074hXOqltm</string>
+    <string name="naver_login_client_id">jh2tEGSMKIJkm5DP15GX</string>
+    <string name="naver_login_client_secret">JHl6ZDzPc5</string>
 </resources>

@@ -17,14 +17,15 @@ class NaverLoginManager : LoginManager {
 
     override val loginEventRelay: Relay<RxAction> = PublishRelay.create()
 
-    private val loginInstance = OAuthLogin.getInstance().apply {
-        init(
-            appContext,
-            AppResources.getStringResId(R.string.naver_login_client_id),
-            AppResources.getStringResId(R.string.naver_login_client_secret),
-            AppResources.getStringResId(R.string.app_name)
-        )
-    }
+    private val loginInstance = OAuthLogin.getInstance()
+//        .apply {
+//        init(
+//            appContext,
+//            AppResources.getStringResId(R.string.naver_login_client_id),
+//            AppResources.getStringResId(R.string.naver_login_client_secret),
+//            AppResources.getStringResId(R.string.app_name)
+//        )
+//    }
 
     override fun isLoggedIn(): Boolean {
         return PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
