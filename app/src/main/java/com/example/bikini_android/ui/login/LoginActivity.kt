@@ -28,10 +28,7 @@ class LoginActivity : BaseActivity() {
 
         binding.apply {
             naverOAuthHandler = NaverOAuthLoginHandler()
-//            naverLogin.setOAuthLoginHandler(NaverOAuthLoginHandler())
         }
-
-//        binding.naverLogin.setOAuthLoginHandler(NaverOAuthLoginHandler())
 
         observeEvent()
     }
