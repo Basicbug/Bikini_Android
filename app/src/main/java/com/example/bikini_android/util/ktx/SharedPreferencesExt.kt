@@ -19,6 +19,7 @@ fun Context.pref(): SharedPreferences {
     return getSharedPreferences(BIKINI_SHARED_PREF, Context.MODE_PRIVATE)
 }
 
+@Suppress("UNCHECKED_CAST")
 inline fun <reified T> SharedPreferences.get(key: String, defaultValue: T): T {
     when (T::class) {
         Boolean::class -> return getBoolean(key, defaultValue as Boolean) as T

@@ -7,7 +7,6 @@
 package com.example.bikini_android.network
 
 import com.example.bikini_android.ui.settings.DeveloperSettingImpl
-import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import okhttp3.Response

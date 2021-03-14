@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityLoginBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.manager.login.NaverOAuthLoginHandler
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.example.bikini_android.util.rx.addTo
-import com.nhn.android.naverlogin.OAuthLogin
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 /**
