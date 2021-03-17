@@ -1,5 +1,5 @@
 /*
- * BaseSettingsFragment.kt 2021. 2. 19
+ * BaseSettingsFragment.kt 2021. 3. 17
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
