@@ -26,9 +26,8 @@ import java.util.concurrent.TimeUnit
  */
 
 class SplashActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+    init {
         OAuthLogin.getInstance().apply {
             init(
                 AppResources.getContext(),
@@ -37,6 +36,10 @@ class SplashActivity : BaseActivity() {
                 AppResources.getStringResId(R.string.app_name)
             )
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_splash)
         Observable.timer(SPLASH_TIME.toLong(), TimeUnit.SECONDS)

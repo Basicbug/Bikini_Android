@@ -17,7 +17,7 @@ class NaverLoginManager : LoginManager {
 
     override val loginEventRelay: Relay<RxAction> = PublishRelay.create()
 
-    private val loginInstance = OAuthLogin.getInstance()
+    val loginInstance = OAuthLogin.getInstance()
 
     override fun isLoggedIn(): Boolean {
         return PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
