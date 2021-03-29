@@ -31,6 +31,8 @@ object ToastHelper {
     }
 
     fun cancel() {
-        toast?.cancel()
+        AndroidSchedulers.mainThread().scheduleDirect {
+            toast?.cancel()
+        }
     }
 }
