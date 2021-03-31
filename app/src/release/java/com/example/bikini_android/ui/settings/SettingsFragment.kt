@@ -8,7 +8,6 @@
 package com.example.bikini_android.ui.settings
 
 import android.os.Bundle
-import android.view.View
 import com.example.bikini_android.ui.base.BaseSettingsFragment
 
 /**
@@ -16,8 +15,5 @@ import com.example.bikini_android.ui.base.BaseSettingsFragment
  */
 
 class SettingsFragment : BaseSettingsFragment() {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //여기에 필요한 xml 선언 및 준비
-    }
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) = Unit
 }

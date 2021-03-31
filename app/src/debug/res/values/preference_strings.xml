@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ preference_strings.xml 2021. 3. 31
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <string name="perf_dev_category">pref.dev_category</string>
+    <string name="perf_server_type">pref.server.type</string>
+</resources>

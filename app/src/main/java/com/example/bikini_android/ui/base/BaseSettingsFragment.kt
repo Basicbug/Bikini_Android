@@ -22,8 +22,4 @@ abstract class BaseSettingsFragment : PreferenceFragmentCompat() {
             TAG = "SettingsFragment"
         }
     }
-
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.preference_settings_main, rootKey)
-    }
 }
