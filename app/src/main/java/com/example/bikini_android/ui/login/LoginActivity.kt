@@ -42,6 +42,7 @@ class LoginActivity : BaseActivity() {
     private fun observeEvent() {
         LoginManagerProxy.loginEventRelay
             .ofType(LoginEvent::class.java)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 sendTokenToServer(it.accessToken)
