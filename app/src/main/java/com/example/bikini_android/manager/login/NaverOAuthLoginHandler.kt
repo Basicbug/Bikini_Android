@@ -1,6 +1,7 @@
 package com.example.bikini_android.manager.login
 
 import android.util.Log
+import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.ui.login.LoginEvent
 import com.nhn.android.naverlogin.OAuthLoginHandler
 
@@ -12,8 +13,9 @@ class NaverOAuthLoginHandler : OAuthLoginHandler() {
         if (success) {
 
             LoginManagerProxy.setLoginManager(LoginManagerFactory.createFactory<NaverLoginManager>().makeLoginManager())
-            LoginManagerProxy.successLogin()
-            LoginManagerProxy.loginEventRelay.accept(LoginEvent())
+            val accessToken =
+                NaverLoginManager.instance.loginInstance.getAccessToken(AppResources.getContext())
+            LoginManagerProxy.loginEventRelay.accept(LoginEvent(accessToken))
 
         } else {
             Log.d("login", "failed")

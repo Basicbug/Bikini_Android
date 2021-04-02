@@ -11,7 +11,6 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.example.bikini_android.ui.login.LoginActivity
@@ -58,7 +57,8 @@ class SplashActivity : BaseActivity() {
         finish()
     }
 
-    private fun isAlreadyLoggedIn() = LoginManagerProxy.isLoggedIn()
+    //    private fun isAlreadyLoggedIn() = LoginManagerProxy.isLoggedIn()
+    private fun isAlreadyLoggedIn() = true
 
     override fun finish() {
         super.finish()

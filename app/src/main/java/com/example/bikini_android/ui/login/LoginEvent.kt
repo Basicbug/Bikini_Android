@@ -5,4 +5,4 @@ import com.example.bikini_android.util.bus.RxAction
 /**
  * @author bsgreentea
  */
-class LoginEvent : RxAction
+class LoginEvent(val accessToken: String) : RxAction

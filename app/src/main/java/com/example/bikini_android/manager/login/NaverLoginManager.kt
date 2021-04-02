@@ -17,14 +17,14 @@ class NaverLoginManager : LoginManager {
 
     override val loginEventRelay: Relay<RxAction> = PublishRelay.create()
 
-    val loginInstance = OAuthLogin.getInstance()
+    val loginInstance: OAuthLogin = OAuthLogin.getInstance()
 
     override fun isLoggedIn(): Boolean {
         return PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
     }
 
     override fun logOut() {
-        loginInstance?.logout(appContext)
+        loginInstance.logout(appContext)
     }
 
     override fun successLogin() {
@@ -36,8 +36,6 @@ class NaverLoginManager : LoginManager {
                 AppResources.getStringResId(R.string.naver_id_login)
             )
         }
-
-        // TODO api 연결해라
     }
 
     companion object {
