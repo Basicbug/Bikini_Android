@@ -60,6 +60,8 @@ ext {
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            okhttp3                : "com.squareup.okhttp3:okhttp:3.11.0",
+            okhttp3_logging        : "com.squareup.okhttp3:logging-interceptor:3.11.0"
     ]
 
     image_libraries = [

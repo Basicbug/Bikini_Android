@@ -24,9 +24,10 @@ object DeveloperSettingImpl : DeveloperSetting {
     }
 
     override fun getBaseDomain(): String {
-        return when (getServerType()) {
-            ServerType.DEV -> NetworkConstants.DEV_URL
-            ServerType.PRD -> NetworkConstants.PRD_URL
-        }
+        return NetworkConstants.DEV_URL
+        // return when (getServerType()) {
+        //     ServerType.DEV -> NetworkConstants.DEV_URL
+        //     ServerType.PRD -> NetworkConstants.PRD_URL
+        // }
     }
 }

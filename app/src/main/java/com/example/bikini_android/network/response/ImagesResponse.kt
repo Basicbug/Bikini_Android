@@ -12,10 +12,10 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author MyeongKi
  */
-class ImagesResponse : JsonResponseWrapper<ImagesResponse.Result>() {
+class ImagesResponse : JsonResponseWrapper<List<ImagesResponse.Result>>() {
     data class Result(
         @SerializedName("id")
-        val id: String,
+        val id: Int,
         @SerializedName("url")
         val url: String
     )

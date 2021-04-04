@@ -8,6 +8,7 @@
 package com.example.bikini_android.repository.feed
 
 import com.example.bikini_android.network.response.DefaultResponse
+import com.example.bikini_android.network.response.ImagesResponse
 import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -35,5 +36,5 @@ interface FeedRepository {
     fun addFeedToRemote(
         feed: Feed,
         imageFiles: List<MultipartBody.Part>
-    ): Single<DefaultResponse>
+    ): Single<ImagesResponse>
 }

@@ -7,11 +7,13 @@
 
 package com.example.bikini_android.repository.feed
 
+import android.util.Log
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.param.NearbyFeedParameter
 import com.example.bikini_android.network.request.service.FeedService
 import com.example.bikini_android.network.request.service.ImagesService
 import com.example.bikini_android.network.response.DefaultResponse
+import com.example.bikini_android.network.response.ImagesResponse
 import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -69,18 +71,29 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun addFeedToRemote(
         feed: Feed,
         imageFiles: List<MultipartBody.Part>
-    ): Single<DefaultResponse> {
+    ): Single<ImagesResponse> {
+        val response = ApiClientHelper.createMainApiByService(ImagesService::class)
+            .uploadImages(imageFiles)
+            .subscribeOn(Schedulers.io())
+            .subscribe { t1, t2 ->
+                Log.e("Jaewon", "DONE")
+            }
+
         return ApiClientHelper
             .createMainApiByService(ImagesService::class)
             .uploadImages(imageFiles)
-            .flatMap {
-                it.result?.url?.let {
-                    ApiClientHelper.createMainApiByService(FeedService::class)
-                        .addFeed(feed.apply {
-                            imageUrl = it
-                        })
-                }
-            }
+            // .flatMap {
+            //     val list = it.result
+            //     with (list) {
+            //
+            //     }
+            //     it.result?.url?.let {
+            //         ApiClientHelper.createMainApiByService(FeedService::class)
+            //             .addFeed(feed.apply {
+            //                 imageUrl = it
+            //             })
+            //     }
+            // }
             .subscribeOn(Schedulers.io())
     }
 
