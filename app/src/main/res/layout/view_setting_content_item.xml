@@ -39,6 +39,7 @@
             android:layout_height="@dimen/arrow_height"
             android:layout_margin="@dimen/default_margin"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:contentDescription="@string/arrow_image"
             app:tint="?attr/locationButtonTintColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
