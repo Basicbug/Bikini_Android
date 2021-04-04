@@ -22,4 +22,3 @@
 
 -keep class com.example.bikini_android.network.**{*;}
 
--keep class com.example.bikini_android.repository.**{*;}
