@@ -8,18 +8,30 @@
 package com.example.bikini_android.ui.settings
 
 import com.example.bikini_android.ui.common.item.ItemViewModel
-import com.example.bikini_android.ui.holder.NavigationHelper
+import com.example.bikini_android.ui.holder.NavigationHelperImpl
+import com.example.bikini_android.ui.settings.item.SettingContentItemViewModel
+import com.example.bikini_android.ui.settings.item.SettingTitleItemViewModel
 
 /**
  * @author MyeongKi
  */
-//추상화 시켜서 기본적인 아이템을 주입
+
 abstract class SettingItemsProvider {
-    fun createMainSettingItems(navigationHelper: NavigationHelper?): List<ItemViewModel> {
+    fun createMainSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return mutableListOf<ItemViewModel>().apply {
-            addAll(createMainSettingItemsFlavorOnly(navigationHelper))
+            addAll(createCommonSettingItems(navigationHelper))
+            addAll(createMainSubSettingItems(navigationHelper))
         }
     }
 
-    protected abstract fun createMainSettingItemsFlavorOnly(navigationHelper: NavigationHelper?): List<ItemViewModel>
+    private fun createCommonSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+        return listOf(
+            SettingTitleItemViewModel.Builder("공통으로 사용할 아이템들은 main에 저장").build(),
+            SettingContentItemViewModel.Builder("예: 로그인이나 혹은 테마 등등").setOnClickAction {
+
+            }.build()
+        )
+    }
+
+    protected abstract fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel>
 }

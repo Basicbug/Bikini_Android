@@ -17,4 +17,8 @@
         android:name="com.example.bikini_android.ui.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings">
     </fragment>
+    <include app:graph="@navigation/settings_flavor_only" />
+    <action
+        android:id="@+id/action_flavor_only_setting"
+        app:destination="@id/settings_flavor_only_navigation" />
 </navigation>

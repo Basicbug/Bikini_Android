@@ -1,5 +1,5 @@
 /*
- * SettingsFragment.kt 2021. 4. 3
+ * SettingsFlavorOnlyFragment.kt 2021. 4. 4
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
@@ -15,7 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.R
-import com.example.bikini_android.databinding.FragmentSettingsBinding
+import com.example.bikini_android.databinding.FragmentFlavorOnlySettingsBinding
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
@@ -23,16 +23,15 @@ import com.example.bikini_android.ui.common.list.DefaultListAdapter
 /**
  * @author MyeongKi
  */
-
-class SettingsFragment : BaseFragment() {
-    private var binding: FragmentSettingsBinding? = null
+class SettingsFlavorOnlyFragment : BaseFragment() {
+    private var binding: FragmentFlavorOnlySettingsBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = DataBindingUtil.inflate<FragmentSettingsBinding>(
+    ): View = DataBindingUtil.inflate<FragmentFlavorOnlySettingsBinding>(
         inflater,
-        R.layout.fragment_settings,
+        R.layout.fragment_flavor_only_settings,
         container,
         false
     ).also {
@@ -40,7 +39,7 @@ class SettingsFragment : BaseFragment() {
         binding = it.apply {
             settings.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             settings.adapter = DefaultListAdapter(DefaultDiffCallback()).apply {
-                submitList(SettingItemsProviderImpl.createMainSettingItems(getNavigationHelper()))
+                submitList(SettingItemsProviderImpl.createSettingItemsFlavorOnly(getNavigationHelper()))
             }
         }
     }.root

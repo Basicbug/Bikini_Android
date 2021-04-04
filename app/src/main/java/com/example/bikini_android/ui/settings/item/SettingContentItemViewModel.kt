@@ -37,7 +37,8 @@ class SettingContentItemViewModel private constructor(
             notifyPropertyChanged(BR.content)
         }
 
-    fun onClick() {
+    override fun onClickItem() {
+        super.onClickItem()
         onClickAction?.invoke()
     }
 
