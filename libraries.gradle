@@ -33,6 +33,8 @@ ext {
     def android_preference_version = "1.1.1"
     def navigation_version = '2.3.2'
     def leakcanary_version = '2.6'
+    def flipper_version = '0.83.0'
+    def soloader_version = '0.10.1'
 
     android_core_libraries = [
             kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -125,5 +127,15 @@ ext {
 
     leakcanary_libraries = [
             leakcanary: "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    ]
+
+    flipper_libraries_debug = [
+            flipper       : "com.facebook.flipper:flipper:$flipper_version",
+            soloader      : "com.facebook.soloader:soloader:$soloader_version",
+            network_plugin: "com.facebook.flipper:flipper-network-plugin:$flipper_version",
+    ]
+
+    flipper_libraries_release = [
+            noop: "com.facebook.flipper:flipper-noop:$flipper_version",
     ]
 }
