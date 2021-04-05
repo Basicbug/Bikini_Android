@@ -8,8 +8,10 @@
 package com.example.bikini_android.network.client
 
 import com.example.bikini_android.app.AppResources
+import com.example.bikini_android.app.BikiniApp
 import com.example.bikini_android.network.HostSelectionInterceptor
 import com.example.bikini_android.network.ResponseCacheFactory
+import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -27,6 +29,7 @@ abstract class RestApiClient(private val requestUrl: String) : ApiClient {
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(HostSelectionInterceptor())
+            .addInterceptor(FlipperOkhttpInterceptor(BikiniApp.networkFlipperPlugin))
             .cache(ResponseCacheFactory().createCache(AppResources.getContext()))
         return Retrofit.Builder().client(builder.build())
     }
