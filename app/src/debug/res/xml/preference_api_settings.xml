@@ -7,9 +7,9 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:key="pref.dev_category">
+        android:key="@string/perf_dev_category">
         <ListPreference
-            android:key="pref.server.type"
+            android:key="@string/perf_server_type"
             android:title="ServerType"
             android:entries="@array/pref_server_type_labels"
             android:entryValues="@array/pref_server_type_values" />

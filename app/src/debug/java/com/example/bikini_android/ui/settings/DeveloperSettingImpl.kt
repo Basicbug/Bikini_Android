@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.ui.settings
 
+import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.network.NetworkConstants
 import com.example.bikini_android.network.ServerType
@@ -18,7 +19,7 @@ import com.example.bikini_android.util.ktx.get
 object DeveloperSettingImpl : DeveloperSetting {
     private fun getServerType(): ServerType {
         with(AppResources.getSharedPref()) {
-            val serverType = get(SettingsFragment.PREF_SERVER_TYPE, "DEV")
+            val serverType = get(AppResources.getStringResId(R.string.perf_server_type), "DEV")
             return ServerType.valueOf(serverType)
         }
     }

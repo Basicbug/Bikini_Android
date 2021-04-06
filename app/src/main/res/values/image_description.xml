@@ -13,5 +13,6 @@
     <string name="add_button_image">더하기 버튼</string>
     <string name="feed_image">피드 이미지</string>
     <string name="location_button_image">위치 버튼 이미지</string>
-    <string name="background_image">배경 이미지</string>
+    <string name="marker_background_image">마커 배경 이미지</string>
+    <string name="arrow_image">화살표 이미지</string>
 </resources>

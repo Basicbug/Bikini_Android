@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ string.xml 2021. 4. 4
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <!--settings-->
+    <string name="setting_dev_title">Dev Settings</string>
+    <string name="setting_network_title">Network</string>
+    <string name="setting_api_title">API</string>
+</resources>

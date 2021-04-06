@@ -19,7 +19,7 @@ class FeedGridItemViewModel(feed: Feed) : FeedItemViewModel(feed) {
         itemEventRelay?.accept(ImageClickEvent(feed))
     }
 
-    override fun getLayoutRes(): Int = R.layout.item_feed_grid
+    override fun getLayoutRes(): Int = R.layout.view_feed_grid_item
 
     class ImageClickEvent(val feed: Feed) : RxAction
 }
