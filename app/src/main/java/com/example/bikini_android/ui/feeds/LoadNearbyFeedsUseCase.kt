@@ -70,12 +70,12 @@ class LoadNearbyFeedsUseCase(
             .getNearbyFeedsFromRemote(latLng, radius)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                cacheNearbyFeedsInfo(latLng, radius, it)
-                itemEventRelay.accept(FeedsEvent(it, FeedsType.NEARBY_FEEDS))
-            }, {
-                logger.error { it.toString() }
-            })
+            .subscribe { result ->
+                result?.let {
+                    cacheNearbyFeedsInfo(latLng, radius, it)
+                    itemEventRelay.accept(FeedsEvent(it, FeedsType.NEARBY_FEEDS))
+                }
+            }
             .addTo(disposable)
     }
 
@@ -94,7 +94,10 @@ class LoadNearbyFeedsUseCase(
 
     private fun isNearbyFeed(latLng: LatLng, radius: Float, feed: Feed): Boolean {
         feed.locationInfo?.let {
-            return LocationUtils.getDistanceBetween(latLng, LatLng(it.latitude, it.longitude)) <= radius
+            return LocationUtils.getDistanceBetween(
+                latLng,
+                LatLng(it.latitude, it.longitude)
+            ) <= radius
         }
         return false
     }
