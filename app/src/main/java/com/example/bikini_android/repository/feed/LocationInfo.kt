@@ -8,12 +8,14 @@
 package com.example.bikini_android.repository.feed
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import kotlinx.parcelize.Parcelize
 
 /**
  * @author MyeongKi
  */
 @Parcelize
+@Keep
 data class LocationInfo(
     val latitude: Double,
     val longitude: Double,

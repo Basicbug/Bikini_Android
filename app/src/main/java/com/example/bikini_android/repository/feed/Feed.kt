@@ -1,12 +1,14 @@
 package com.example.bikini_android.repository.feed
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import kotlinx.parcelize.Parcelize
 
 /**
  * @author bsgreentea
  */
 @Parcelize
+@Keep
 data class Feed(
     var feedId: String = "test1",
     var feedNumOfUser: Int = 0,

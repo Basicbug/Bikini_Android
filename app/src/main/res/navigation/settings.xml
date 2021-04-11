@@ -11,10 +11,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settings_navigation"
-    app:startDestination="@id/settings">
+    app:startDestination="@id/settings_main">
     <fragment
-        android:id="@+id/settings"
+        android:id="@+id/settings_main"
         android:name="com.example.bikini_android.ui.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings">
     </fragment>
+    <include app:graph="@navigation/settings_flavor_only" />
+    <action
+        android:id="@+id/action_flavor_only_setting"
+        app:destination="@id/settings_flavor_only_navigation" />
 </navigation>

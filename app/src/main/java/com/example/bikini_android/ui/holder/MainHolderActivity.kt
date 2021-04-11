@@ -30,7 +30,7 @@ class MainHolderActivity : BaseActivity() {
     var binding: ActivityMainHolderBinding? = null
     private val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private lateinit var viewModels: List<BaseViewModel>
-    var navigationHelper: NavigationHelper? = null
+    var navigationHelper: NavigationHelperImpl? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
@@ -57,7 +57,7 @@ class MainHolderActivity : BaseActivity() {
                 itemEventRelay
             )
             navigationHelper =
-                NavigationHelper(it.bottomNavigation, this, itemEventRelay)
+                NavigationHelperImpl(it.bottomNavigation, this, itemEventRelay)
         }
     }
 

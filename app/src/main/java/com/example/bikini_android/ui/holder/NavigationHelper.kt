@@ -26,7 +26,7 @@ import java.util.Queue
  * @author MyeongKi
  */
 
-class NavigationHelper(
+abstract class NavigationHelper(
     private val bottomNav: BottomNavigationView,
     private var activity: MainHolderActivity?,
     itemRelay: Relay<RxAction>
@@ -85,7 +85,7 @@ class NavigationHelper(
     }
 
     @Suppress("SameParameterValue")
-    private fun isValidBottomNav(@IdRes resId: Int): Boolean {
+    protected fun isValidBottomNav(@IdRes resId: Int): Boolean {
         return bottomNav.selectedItemId == resId
     }
 
@@ -94,7 +94,7 @@ class NavigationHelper(
         activity = null
     }
 
-    private fun getNavController(): NavController {
+    protected fun getNavController(): NavController {
         return activity!!.findNavController(R.id.content_fragment_holder)
     }
 }
