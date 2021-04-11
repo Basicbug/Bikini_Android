@@ -44,4 +44,9 @@ class SettingsFragment : BaseFragment() {
             }
         }
     }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
