@@ -9,13 +9,7 @@ package com.example.bikini_android.app
 
 import android.app.Application
 import android.content.Context
-import com.example.bikini_android.BuildConfig
-import com.facebook.flipper.android.AndroidFlipperClient
-import com.facebook.flipper.android.utils.FlipperUtils
-import com.facebook.flipper.plugins.inspector.DescriptorMapping
-import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
-import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
-import com.facebook.soloader.SoLoader
+import com.example.bikini_android.ui.settings.FlipperSettingImpl
 
 /**
  * @author MyeongKi
@@ -28,16 +22,7 @@ class BikiniApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        SoLoader.init(this, false)
-
-        if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(this)) {
-            val client = AndroidFlipperClient.getInstance(this)
-            client.apply {
-                addPlugin(InspectorFlipperPlugin(this@BikiniApp, DescriptorMapping.withDefaults()))
-                addPlugin(networkFlipperPlugin)
-            }
-            client.start()
-        }
+        FlipperSettingImpl.initFlipperSetting(this)
     }
 
     companion object {
@@ -45,7 +30,5 @@ class BikiniApp : Application() {
         fun applicationContext(): Context {
             return instance!!.applicationContext
         }
-
-        val networkFlipperPlugin = NetworkFlipperPlugin()
     }
 }
