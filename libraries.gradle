@@ -35,6 +35,7 @@ ext {
     def leakcanary_version = '2.6'
     def flipper_version = '0.83.0'
     def soloader_version = '0.10.1'
+    def okhttp_version = '4.9.1'
 
     android_core_libraries = [
             kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -62,6 +63,7 @@ ext {
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            okhttp                 : "com.squareup.okhttp3:okhttp:$okhttp_version",
     ]
 
     image_libraries = [
