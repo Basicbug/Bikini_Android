@@ -38,11 +38,11 @@ class LoadAllFeedsUseCase(
                 .getAllFeedsFromRemote()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    itemEventRelay.accept(FeedsEvent(it, FeedsType.ALL_FEEDS))
-                }, {
-                    logger.error { it.toString() }
-                })
+                .subscribe { result ->
+                    result?.let {
+                        itemEventRelay.accept(FeedsEvent(it, FeedsType.ALL_FEEDS))
+                    }
+                }
                 .addTo(disposable)
         }
     }

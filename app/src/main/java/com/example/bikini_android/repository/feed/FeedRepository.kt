@@ -17,16 +17,16 @@ import io.reactivex.Single
 interface FeedRepository {
     fun getUserFeedsFromRemote(
         userId: String
-    ): Single<List<Feed>>
+    ): Single<List<Feed>?>
 
     fun getRankingFeedsFromRemote(
         limit: Int
-    ): Single<List<Feed>>
+    ): Single<List<Feed>?>
 
-    fun getAllFeedsFromRemote(): Single<List<Feed>>
+    fun getAllFeedsFromRemote(): Single<List<Feed>?>
 
     fun getNearbyFeedsFromRemote(
         latLng: LatLng,
         radius: Float
-    ): Single<List<Feed>>
+    ): Single<List<Feed>?>
 }

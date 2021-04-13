@@ -7,7 +7,6 @@
 
 package com.example.bikini_android.ui.feeds
 
-import android.util.Log
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.map.FeedsEvent
@@ -35,11 +34,11 @@ class LoadRankingFeedsUseCase(
                 .getRankingFeedsFromRemote(LIMIT)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    itemEventRelay.accept(FeedsEvent(it, FeedsType.RANKING_FEEDS))
-                }, {
-                    Log.d("tset", it.toString())
-                })
+                .subscribe { result ->
+                    result?.let {
+                        itemEventRelay.accept(FeedsEvent(it, FeedsType.RANKING_FEEDS))
+                    }
+                }
                 .addTo(disposable)
         }
     }
