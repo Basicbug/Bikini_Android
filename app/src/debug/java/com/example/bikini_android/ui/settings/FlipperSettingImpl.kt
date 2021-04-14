@@ -1,33 +1,36 @@
 package com.example.bikini_android.ui.settings
 
-import android.app.Application
+import com.example.bikini_android.app.AppResources
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.soloader.SoLoader
-import okhttp3.OkHttpClient
 
 /**
  * @author bsgreentea
  */
-object FlipperSettingImpl {
+class FlipperSettingImpl {
 
     private val flipperNetworkPlugin = NetworkFlipperPlugin()
 
-    fun initFlipperSetting(app: Application) {
+    private fun initFlipperSetting() {
 
-        SoLoader.init(app, false)
-
-        val client = AndroidFlipperClient.getInstance(app)
-        client.apply {
-            addPlugin(InspectorFlipperPlugin(app, DescriptorMapping.withDefaults()))
+        SoLoader.init(AppResources.getContext(), false)
+        AndroidFlipperClient.getInstance(AppResources.getContext()).apply {
+            addPlugin(
+                InspectorFlipperPlugin(
+                    AppResources.getContext(),
+                    DescriptorMapping.withDefaults()
+                )
+            )
             addPlugin(flipperNetworkPlugin)
-        }
-        client.start()
+        }.start()
     }
 
-    fun addFlipperNetworkPlugin(builder: OkHttpClient.Builder) =
-        builder.addNetworkInterceptor(FlipperOkhttpInterceptor(flipperNetworkPlugin))
+    fun getFlipperNetworkPlugin(): FlipperOkhttpInterceptor {
+        initFlipperSetting()
+        return FlipperOkhttpInterceptor(flipperNetworkPlugin)
+    }
 }

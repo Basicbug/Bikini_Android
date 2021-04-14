@@ -28,8 +28,9 @@ abstract class RestApiClient(private val requestUrl: String) : ApiClient {
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(HostSelectionInterceptor())
+            .addInterceptor(FlipperSettingImpl().getFlipperNetworkPlugin())
             .cache(ResponseCacheFactory().createCache(AppResources.getContext()))
-        return Retrofit.Builder().client(FlipperSettingImpl.addFlipperNetworkPlugin(builder).build())
+        return Retrofit.Builder().client(builder.build())
     }
 
     override fun build(builder: Retrofit.Builder): Retrofit {

@@ -1,13 +1,16 @@
 package com.example.bikini_android.ui.settings
 
-import android.app.Application
-import okhttp3.OkHttpClient
+import okhttp3.Interceptor
+import okhttp3.Response
 
 /**
  * @author bsgreentea
  */
-object FlipperSettingImpl {
+class FlipperSettingImpl {
 
-    fun initFlipperSetting(app: Application) {}
-    fun addFlipperNetworkPlugin(builder: OkHttpClient.Builder) = builder
+    fun getFlipperNetworkPlugin() = object : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            return chain.proceed(chain.request())
+        }
+    }
 }
