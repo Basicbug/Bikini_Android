@@ -29,6 +29,7 @@ import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModel
 import com.example.bikini_android.ui.map.viewmodel.MapViewModelFactoryProvider
+import com.example.bikini_android.util.ktx.autoCleared
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
@@ -39,7 +40,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class BikiniMapFragment : BaseMapFragment() {
-    private var binding: FragmentBikiniMapBinding? = null
+    private var binding by autoCleared<FragmentBikiniMapBinding>()
     private lateinit var feedsViewModel: FeedsViewModel
 
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
@@ -91,7 +92,6 @@ class BikiniMapFragment : BaseMapFragment() {
     override fun onDestroyView() {
         clearFeedTable()
         super.onDestroyView()
-        binding = null
     }
 
     private fun initMap() {
