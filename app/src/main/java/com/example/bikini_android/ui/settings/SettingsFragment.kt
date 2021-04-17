@@ -19,13 +19,14 @@ import com.example.bikini_android.databinding.FragmentSettingsBinding
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.util.ktx.autoCleared
 
 /**
  * @author MyeongKi
  */
 
 class SettingsFragment : BaseFragment() {
-    private var binding: FragmentSettingsBinding? = null
+    private var binding by autoCleared<FragmentSettingsBinding>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,9 +45,4 @@ class SettingsFragment : BaseFragment() {
             }
         }
     }.root
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
 }

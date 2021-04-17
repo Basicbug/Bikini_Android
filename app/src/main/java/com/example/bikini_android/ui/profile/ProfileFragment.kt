@@ -23,6 +23,7 @@ import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.ktx.autoCleared
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,14 +33,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 class ProfileFragment : BaseFragment() {
 
-    private var binding: FragmentProfileBinding? = null
+    private var binding by autoCleared<FragmentProfileBinding>()
+    private var feedAdapterHelper by autoCleared<FeedAdapterHelper>()
 
     private lateinit var feedsViewModel: FeedsViewModel
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var feedsEventRelay: Relay<RxAction>
     private lateinit var profileEventRelay: Relay<RxAction>
-
-    private lateinit var feedAdapterHelper: FeedAdapterHelper
 
     private val feedsType: FeedsType = FeedsType.MY_FEEDS
     private val sortType: FeedsSortType = FeedsSortType.LATEST_DATE
@@ -80,12 +80,6 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         feedsViewModel.loadFeeds()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding?.myFeeds?.adapter = null
-        binding = null
     }
 
     private fun observeEvent() {
