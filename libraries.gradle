@@ -34,6 +34,7 @@ ext {
     def navigation_version = '2.3.2'
     def okhttp_version = '4.9.0'
     def leakcanary_version = '2.6'
+    def kakao_id_login_version = '2.4.2'
 
     android_core_libraries = [
             kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -57,11 +58,11 @@ ext {
     ]
 
     network_libraries = [
-        gson                   : "com.google.code.gson:gson:$gson_version",
-        retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
-        retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
-        retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
-        okhttp                 : "com.squareup.okhttp3:okhttp:$okhttp_version",
+            gson                   : "com.google.code.gson:gson:$gson_version",
+            retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            okhttp                 : "com.squareup.okhttp3:okhttp:$okhttp_version",
     ]
 
     image_libraries = [
@@ -93,7 +94,8 @@ ext {
     ]
 
     login_libraries = [
-            naver_id_Login: "com.naver.nid:naveridlogin-android-sdk:$naver_id_login_version"
+            naver_id_Login: "com.naver.nid:naveridlogin-android-sdk:$naver_id_login_version",
+            kakao_id_login: "com.kakao.sdk:v2-user:$kakao_id_login_version",
     ]
 
     design_libraries = [
