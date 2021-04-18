@@ -2,10 +2,12 @@ package com.example.bikini_android.ui.board
 
 import android.net.Uri
 import com.example.bikini_android.R
+import com.example.bikini_android.app.TEST_USER_ID
 import com.example.bikini_android.app.ToastHelper
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.base.BaseViewModel
+import com.example.bikini_android.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.file.FileUtils
 import com.example.bikini_android.util.map.LocationUtils
@@ -18,6 +20,7 @@ class BoardViewModel : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     val boardItemViewModel = BoardItemViewModel(itemEventRelay)
+    val progressViewModel = ProgressItemViewModel()
     val disposables = CompositeDisposable()
 
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
@@ -34,12 +37,17 @@ class BoardViewModel : BaseViewModel() {
 
     fun postFeed() {
         getValidFeedAndImageUrl()?.let { (feed, imageUri) ->
+            progressViewModel.isVisible = true
             feedsRepository
                 .addFeedToRemote(
                     feed,
                     FileUtils.getImageFiles(listOf(imageUri))
                 )
+                .doOnError {
+                    progressViewModel.isVisible = false
+                }
                 .subscribe { _ ->
+                    progressViewModel.isVisible = false
                     itemEventRelay.accept(BoardItemViewModel.EventType.FINISH)
                 }
                 .addTo(disposables)
@@ -63,7 +71,8 @@ class BoardViewModel : BaseViewModel() {
     private fun makePostFeed(): Feed {
         return Feed(
             content = boardItemViewModel.content.get() ?: "",
-            locationInfo = LocationUtils.getCurrentLocationInfo()
+            locationInfo = LocationUtils.getCurrentLocationInfo(),
+            userId = TEST_USER_ID
         )
     }
 

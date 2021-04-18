@@ -29,7 +29,7 @@ class BoardActivity : BaseActivity() {
         viewModel = ViewModelProvider(this)[BoardViewModel::class.java]
         itemEventRelay = viewModel.itemEventRelay
         binding.apply {
-            viewmodel = viewModel.boardItemViewModel
+            viewmodel = viewModel
         }
         setUpObservers()
     }
@@ -90,6 +90,12 @@ class BoardActivity : BaseActivity() {
             type = "image/*"
         }
         startActivityForResult(galleryIntent, REQUEST_CODE_GALLERY_PAGE)
+    }
+
+    override fun onBackPressed() {
+        if (viewModel.progressViewModel.isVisible)
+            return
+        super.onBackPressed()
     }
 
     companion object {

@@ -34,7 +34,6 @@ object ImageBindingAdapter {
         @AttrRes errorAttrResId: Int?,
         completeLoadEvent: (() -> Unit)?
     ) {
-
         val glideRequest = Glide.with(imageView.context).load(imageUrl)
         with(glideRequest) {
             options?.let {
@@ -42,7 +41,6 @@ object ImageBindingAdapter {
             }
             errorAttrResId?.let {
                 error(it)
-                imageView.setBackgroundResource(it)
             }
             completeLoadEvent?.let {
                 addListener(object : RequestListener<Drawable> {

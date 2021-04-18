@@ -23,7 +23,7 @@ class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
     val content = ObservableField<String>()
 
     @get:Bindable
-    var imageUrl =""
+    var imageUrl = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.imageUrl)

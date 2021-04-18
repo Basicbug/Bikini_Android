@@ -33,7 +33,7 @@ object FileUtils {
 
     fun getPath(uri: Uri, context: Context): String {
         var result: String? = null
-        val projection = arrayOf(MediaStore.Images.Media.DATA)//수정 필요
+        val projection = arrayOf(MediaStore.Images.Media.DATA)//FIXME 수정 필요
         val cursor = context.contentResolver.query(uri, projection, null, null, null)
         cursor?.let {
             if (it.moveToFirst()) {

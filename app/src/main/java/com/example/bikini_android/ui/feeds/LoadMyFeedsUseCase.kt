@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.ui.feeds
 
+import com.example.bikini_android.app.TEST_USER_ID
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.map.FeedsEvent
@@ -24,13 +25,12 @@ class LoadMyFeedsUseCase(
     private val itemEventRelay: Relay<RxAction>
 ) : LoadFeedsUseCase {
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
-    private val testMyId = "ChoMk"
     override fun execute(lastFeedsRendered: List<Feed>) {
         if (lastFeedsRendered.isNotEmpty()) {
             itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.MY_FEEDS))
         } else {
             feedsRepository
-                .getUserFeedsFromRemote(testMyId)
+                .getUserFeedsFromRemote(TEST_USER_ID)
                 .subscribe { result ->
                     result?.let {
                         itemEventRelay.accept(FeedsEvent(it, FeedsType.MY_FEEDS))
