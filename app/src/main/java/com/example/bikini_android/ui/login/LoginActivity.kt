@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityLoginBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.manager.login.NaverOAuthLoginHandler
+import com.example.bikini_android.manager.login.naver.NaverOAuthLoginHandler
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.AuthService
 import com.example.bikini_android.ui.base.BaseActivity
@@ -33,7 +33,8 @@ class LoginActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         binding.apply {
-            naverOAuthHandler = NaverOAuthLoginHandler()
+            naverOAuthHandler =
+                NaverOAuthLoginHandler()
         }
 
         observeEvent()

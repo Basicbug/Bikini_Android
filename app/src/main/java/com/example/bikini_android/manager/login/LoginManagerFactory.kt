@@ -1,5 +1,8 @@
 package com.example.bikini_android.manager.login
 
+import com.example.bikini_android.manager.login.naver.NaverLoginManager
+import com.example.bikini_android.manager.login.naver.NaverLoginManagerFactory
+
 /**
  * @author bsgreentea
  */
