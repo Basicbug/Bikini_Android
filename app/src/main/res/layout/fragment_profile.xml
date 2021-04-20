@@ -51,7 +51,7 @@
 
         <View
             android:id="@+id/division_line"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/match_constraint"
             android:layout_height="2dp"
             android:layout_marginTop="@dimen/large_margin"
             app:layout_constraintBottom_toTopOf="@id/my_feeds"

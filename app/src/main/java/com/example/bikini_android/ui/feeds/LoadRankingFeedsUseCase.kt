@@ -13,9 +13,7 @@ import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 /**
  * @author MyeongKi
@@ -32,8 +30,6 @@ class LoadRankingFeedsUseCase(
         } else {
             feedsRepository
                 .getRankingFeedsFromRemote(LIMIT)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { result ->
                     result?.let {
                         itemEventRelay.accept(FeedsEvent(it, FeedsType.RANKING_FEEDS))

@@ -10,6 +10,7 @@ package com.example.bikini_android.ui.map
 import androidx.databinding.Bindable
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.repository.feed.firstImageUrl
 import com.example.bikini_android.ui.common.item.ItemViewModel
 
 /**
@@ -18,7 +19,7 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
 
 class FeedMarkerItemViewModel(private val feed: Feed) : ItemViewModel() {
     @get:Bindable
-    var imageUrl = feed.imageUrl
+    var imageUrl = feed.firstImageUrl()
 
     fun getImageLoadEvent() {
         itemEventRelay?.accept(FeedMarkerImageLoadEvent(feed))
@@ -27,5 +28,4 @@ class FeedMarkerItemViewModel(private val feed: Feed) : ItemViewModel() {
     override fun getLayoutRes(): Int {
         return R.layout.view_feed_marker
     }
-
 }
