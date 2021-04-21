@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ arrays.xml 2021. 2. 11
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  -->
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settings_flavor_only_navigation">
+</navigation>

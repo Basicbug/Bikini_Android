@@ -10,6 +10,7 @@ package com.example.bikini_android.ui.feeds
 import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.repository.feed.firstImageUrl
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import java.util.Objects
 
@@ -27,7 +28,7 @@ abstract class FeedItemViewModel(protected val feed: Feed) : ItemViewModel() {
         }
 
     @get: Bindable
-    var imageUri = feed.imageUrl
+    var imageUri = feed.firstImageUrl()
         set(value) {
             field = value
             notifyPropertyChanged(BR.imageUri)

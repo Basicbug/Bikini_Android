@@ -36,7 +36,7 @@ interface FeedService {
     fun getAllFeeds(): Single<FeedsResponse>
 
     @POST("v1/feed/add")
-    fun postFeed(
+    fun addFeed(
         @Body feed: Feed
     ): Single<DefaultResponse>
 }

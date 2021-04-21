@@ -41,7 +41,6 @@ object ImageBindingAdapter {
             }
             errorAttrResId?.let {
                 error(it)
-                imageView.setBackgroundResource(it)
             }
             completeLoadEvent?.let {
                 addListener(object : RequestListener<Drawable> {

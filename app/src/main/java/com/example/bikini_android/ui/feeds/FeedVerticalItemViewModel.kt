@@ -22,7 +22,7 @@ class FeedVerticalItemViewModel(feed: Feed) : FeedItemViewModel(feed) {
         itemEventRelay?.accept(LocationClickEvent(feed))
     }
 
-    override fun getLayoutRes(): Int = R.layout.item_feed
+    override fun getLayoutRes(): Int = R.layout.view_feed_item
 
     class LocationClickEvent(val feed: Feed) : RxAction
 }

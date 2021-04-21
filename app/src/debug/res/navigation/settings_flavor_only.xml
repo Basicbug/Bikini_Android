@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ arrays.xml 2021. 2. 11
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  -->
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settings_flavor_only_navigation"
+    app:startDestination="@id/settings_main_flavor_only">
+    <fragment
+        android:id="@+id/settings_main_flavor_only"
+        android:name="com.example.bikini_android.ui.settings.SettingsFlavorOnlyFragment"
+        tools:layout="@layout/fragment_flavor_only_settings">
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings_api"
+        android:name="com.example.bikini_android.ui.settings.SettingsApiFragment"
+        tools:layout="@layout/fragment_api_settings">
+    </fragment>
+    <action
+        android:id="@+id/action_settings_api"
+        app:destination="@id/settings_api" />
+</navigation>

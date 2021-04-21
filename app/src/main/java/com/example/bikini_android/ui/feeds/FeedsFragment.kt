@@ -18,6 +18,7 @@ import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvid
 import com.example.bikini_android.ui.map.BikiniMapFragment
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.ktx.autoCleared
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -27,7 +28,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class FeedsFragment : BaseFragment() {
-    private var binding: FragmentFeedsBinding? = null
+    private var binding by autoCleared<FragmentFeedsBinding>()
+    private var feedAdapterHelper by autoCleared<FeedAdapterHelper>()
     private var pivotFeed: Feed? = null
     private var sortType: FeedsSortType = FeedsSortType.POPULAR
     private var feedsType: FeedsType = FeedsType.RANKING_FEEDS
@@ -35,7 +37,6 @@ class FeedsFragment : BaseFragment() {
 
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
-    private lateinit var feedAdapterHelper: FeedAdapterHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,12 +120,6 @@ class FeedsFragment : BaseFragment() {
                 }
 
             }.addTo(disposables)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding?.feeds?.adapter = null
-        binding = null
     }
 
     companion object {

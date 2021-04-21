@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ view_setting_content_item.xml 2021. 4. 3
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.bikini_android.ui.settings.item.SettingContentItemViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/content_item_height"
+        android:onClick="@{()->viewmodel.onClickItem()}">
+
+        <TextView
+            android:id="@+id/content"
+            android:text="@{viewmodel.content}"
+            android:textSize="@dimen/text_default_size"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="설정 이름" />
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="@dimen/arrow_width"
+            android:layout_height="@dimen/arrow_height"
+            android:layout_margin="@dimen/default_margin"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:contentDescription="@string/arrow_image"
+            app:tint="?attr/locationButtonTintColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

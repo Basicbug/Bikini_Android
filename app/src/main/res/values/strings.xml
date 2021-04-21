@@ -16,4 +16,14 @@
     <string name="permission_required_toast">권한이 필요합니다.</string>
     <string name="permission_rationale_location">위치 권한 요청</string>
     <string name="location_permission_denied">해당 권한 없이는 앱을 사용할 수 없습니다.</string>
+    <!--board-->
+    <string name="board_content_hint">오늘은?</string>
+
+    <!--common-->
+    <string name="post">등록</string>
+    <string name="confirm">확인</string>
+    <string name="unknown_error_message">잠시 후 다시 이용해 주세요.</string>
+    <string name="image_unselected">이미지를 선택하세요.</string>
+    <string name="content_empty">내용을 입력하세요.</string>
+
 </resources>

@@ -49,7 +49,7 @@ android {
     } else {
         throw new GradleException("Could not read version.properties!")
     }
-    signingConfigs{
+    signingConfigs {
         releaseWithSignedKey {
             storeFile file(SIGNED_STORE_FILE)
             storePassword SIGNED_STORE_PASSWORD
@@ -100,6 +100,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -129,4 +130,7 @@ dependencies {
     implementation login_libraries.values()
 
     debugImplementation leakcanary_libraries.values()
+    debugImplementation flipper_libraries_debug.values()
+
+    releaseImplementation flipper_libraries_release.values()
 }

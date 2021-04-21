@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
             android:text="@string/test"
-            android:textSize="@dimen/text_median_size"
+            android:textSize="@dimen/text_default_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test"
-            android:textSize="@dimen/text_median_size"
+            android:textSize="@dimen/text_default_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/representative_image"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
 
         <View
             android:id="@+id/division_line"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/match_constraint"
             android:layout_height="2dp"
             android:layout_marginTop="@dimen/large_margin"
             app:layout_constraintBottom_toTopOf="@id/my_feeds"

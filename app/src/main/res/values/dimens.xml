@@ -13,9 +13,10 @@
     <dimen name="bottom_navigation_height">54dp</dimen>
     <dimen name="match_constraint">0dp</dimen>
     <dimen name="thumbnail_size">50dp</dimen>
-    <dimen name="text_median_size">20sp</dimen>
+    <dimen name="text_default_size">18sp</dimen>
     <dimen name="large_margin">20dp</dimen>
     <dimen name="median_margin">10dp</dimen>
+    <dimen name="default_margin">20dp</dimen>
 
     <!--small feed-->
     <dimen name="feed_marker_size">100dp</dimen>
@@ -29,6 +30,10 @@
     <dimen name="feed_marker_background_size">110dp</dimen>
     <dimen name="grid_feed_image_size">200dp</dimen>
     <dimen name="feed_location_button_size">35dp</dimen>
+    <!--setting-->
+    <dimen name="content_item_height">48dp</dimen>
+    <dimen name="arrow_height">20dp</dimen>
+    <dimen name="arrow_width">15dp</dimen>
 
     <!--profile-->
     <dimen name="profile_image_size">120dp</dimen>

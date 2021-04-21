@@ -27,6 +27,9 @@ import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
+import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModel
+import com.example.bikini_android.ui.map.viewmodel.MapViewModelFactoryProvider
+import com.example.bikini_android.util.ktx.autoCleared
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
@@ -37,16 +40,27 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  */
 
 class BikiniMapFragment : BaseMapFragment() {
-    private var binding: FragmentBikiniMapBinding? = null
-    private lateinit var viewModel: FeedsViewModel
+    private var binding by autoCleared<FragmentBikiniMapBinding>()
+    private lateinit var feedsViewModel: FeedsViewModel
 
     private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mapViewModel = ViewModelProvider(
+            this,
+            MapViewModelFactoryProvider(this, savedInstanceState)
+        )[BikiniMapViewModel::class.java]
+        feedsViewModel = ViewModelProvider(
+            requireActivity(),
+            FeedsViewModelFactoryProvider(
+                requireActivity(),
+                savedInstanceState
+            )
+        ).get(FeedsViewModelFactoryProvider.getFeedViewModelClazz(MAP_FEEDS_TYPE))
         arguments?.let {
-            locationFocused = it.getParcelable(KEY_LOCATION_INFO)
+            mapViewModel.locationFocused = it.getParcelable(KEY_LOCATION_INFO)
         }
     }
 
@@ -63,31 +77,25 @@ class BikiniMapFragment : BaseMapFragment() {
         ).also {
             super.onCreateView(inflater, container, savedInstanceState)
             binding = it
-            viewModel = ViewModelProvider(
-                requireActivity(),
-                FeedsViewModelFactoryProvider(
-                    requireActivity(),
-                    savedInstanceState
-                )
-            ).get(FeedsViewModelFactoryProvider.getFeedViewModelClazz(MAP_FEEDS_TYPE))
-            itemEventRelay = viewModel.itemEventRelay
+            mapView = it.map.also { view ->
+                view.getMapAsync(this)
+            }
         }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         observeEvent()
         initMap()
-        viewModel.loadFeeds()
+        feedsViewModel.loadFeeds()
     }
 
     override fun onDestroyView() {
         clearFeedTable()
         super.onDestroyView()
-        binding = null
     }
 
     private fun initMap() {
-        map.setOnMarkerClickListener { marker ->
+        map.get()?.setOnMarkerClickListener { marker ->
             feedAddedToMapTable[marker.tag]?.let { feed ->
                 navigateNearLocationFeeds(feed)
             }
@@ -107,25 +115,26 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private fun observeEvent() {
-        itemEventRelay
+        fragmentItemEventRelay
             .ofType(FeedMarkerImageLoadEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 addMarker(event.feed)
             }.addTo(disposables)
 
-        itemEventRelay
+        fragmentItemEventRelay
+            .ofType(MapLocationChangeEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event ->
+                feedsViewModel.loadFeeds(event.latLng, event.visibleRadius)
+            }.addTo(disposables)
+
+        feedsViewModel.itemEventRelay
             .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .filter { it.feedsType == MAP_FEEDS_TYPE }
             .subscribe { event ->
                 bindFeedMarkers(event.feeds)
-            }.addTo(disposables)
-        itemEventRelay
-            .ofType(MapLocationChangeEvent::class.java)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { event ->
-                viewModel.loadFeeds(event.latLng, event.visibleRadius)
             }.addTo(disposables)
     }
 
@@ -137,13 +146,15 @@ class BikiniMapFragment : BaseMapFragment() {
     private fun addMarker(feed: Feed) {
         feedMarkerBindingTable[feed]?.root?.let { view ->
             feed.locationInfo?.let { locationInfo ->
-                map.addMarker(GoogleMapUtils.getFeedMarkerOption(view, locationInfo))
-                    .apply {
-                        tag = feed.feedId
-                    }
-                    .also {
-                        feedAddedToMapTable[feed.feedId] = feed
-                    }
+                map.get()?.let {
+                    it.addMarker(GoogleMapUtils.getFeedMarkerOption(view, locationInfo))
+                        .apply {
+                            tag = feed.feedId
+                        }
+                        .also {
+                            feedAddedToMapTable[feed.feedId] = feed
+                        }
+                }
 
             }
         }
@@ -156,7 +167,7 @@ class BikiniMapFragment : BaseMapFragment() {
                     feedMarkerBindingTable[feed] = this
                     apply {
                         viewmodel = FeedMarkerItemViewModel(feed).also {
-                            it.itemEventRelay = itemEventRelay
+                            it.itemEventRelay = fragmentItemEventRelay
                         }
                         executePendingBindings()
                     }
