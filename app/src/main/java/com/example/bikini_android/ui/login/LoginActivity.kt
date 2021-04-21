@@ -57,9 +57,12 @@ class LoginActivity : BaseActivity() {
             .loginNaver(accessToken)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                startActivity(Intent(this, MainHolderActivity::class.java))
-                finish()
+            .subscribe({ response ->
+                response.result?.let {
+                    LoginManagerProxy.jwt = it
+                    startActivity(Intent(this, MainHolderActivity::class.java))
+                    finish()
+                }
             }, {
                 logger.error { it.toString() }
             })

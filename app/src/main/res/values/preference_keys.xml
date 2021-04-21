@@ -4,4 +4,5 @@
     <string name="is_logged_in">isLoggedIn</string>
     <string name="last_login_platform">lastLoginPlatform</string>
     <string name="naver_id_login">NAVER</string>
+    <string name="jwt">JSON-Web-Token</string>
 </resources>

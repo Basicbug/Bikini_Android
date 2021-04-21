@@ -12,6 +12,15 @@ import com.jakewharton.rxrelay2.Relay
  */
 object LoginManagerProxy : LoginManager {
 
+    var jwt: String = ""
+        get() = field
+        set(value) {
+            value.let {
+                field = it
+                PreferenceManager.setString(AppResources.getStringResId(R.string.jwt), it)
+            }
+        }
+
     private var loginManager: LoginManager? = null
 
     override val loginEventRelay: Relay<RxAction> = PublishRelay.create()
