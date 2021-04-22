@@ -28,15 +28,19 @@ class LoadRankingFeedsUseCase(
         if (lastFeedsRendered.isNotEmpty()) {
             itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.RANKING_FEEDS))
         } else {
-            feedsRepository
-                .getRankingFeedsFromRemote(LIMIT)
-                .subscribe { result ->
-                    result?.let {
-                        itemEventRelay.accept(FeedsEvent(it, FeedsType.RANKING_FEEDS))
-                    }
-                }
-                .addTo(disposable)
+            execute()
         }
+    }
+
+    override fun execute() {
+        feedsRepository
+            .getRankingFeedsFromRemote(LIMIT)
+            .subscribe { result ->
+                result?.let {
+                    itemEventRelay.accept(FeedsEvent(it, FeedsType.RANKING_FEEDS))
+                }
+            }
+            .addTo(disposable)
     }
 
     companion object {

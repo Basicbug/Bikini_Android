@@ -29,14 +29,18 @@ class LoadAllFeedsUseCase(
         if (lastFeedsRendered.isNotEmpty()) {
             itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.ALL_FEEDS))
         } else {
-            feedsRepository
-                .getAllFeedsFromRemote()
-                .subscribe { result ->
-                    result?.let {
-                        itemEventRelay.accept(FeedsEvent(it, FeedsType.ALL_FEEDS))
-                    }
-                }
-                .addTo(disposable)
+            execute()
         }
+    }
+
+    override fun execute() {
+        feedsRepository
+            .getAllFeedsFromRemote()
+            .subscribe { result ->
+                result?.let {
+                    itemEventRelay.accept(FeedsEvent(it, FeedsType.ALL_FEEDS))
+                }
+            }
+            .addTo(disposable)
     }
 }
