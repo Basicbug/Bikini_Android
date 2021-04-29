@@ -9,6 +9,8 @@ import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.bus.RxActionBus
+import com.example.bikini_android.util.bus.event.RefreshFeedEvent
 import com.example.bikini_android.util.file.FileUtils
 import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
@@ -48,6 +50,7 @@ class BoardViewModel : BaseViewModel() {
                 }
                 .subscribe { _ ->
                     progressViewModel.isVisible = false
+                    RxActionBus.post(RefreshFeedEvent())
                     itemEventRelay.accept(BoardItemViewModel.EventType.FINISH)
                 }
                 .addTo(disposables)

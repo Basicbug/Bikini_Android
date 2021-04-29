@@ -56,6 +56,10 @@ abstract class FeedsViewModel(
         loadFeedsUseCase.execute(latLng, radius)
     }
 
+    fun refreshFeeds() {
+        loadFeedsUseCase.execute()
+    }
+
     override fun saveState() {
         handle[KEY_FEEDS_RENDERED] = feedsRendered
     }

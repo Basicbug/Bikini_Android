@@ -18,6 +18,8 @@ import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvid
 import com.example.bikini_android.ui.map.BikiniMapFragment
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.bus.RxActionBus
+import com.example.bikini_android.util.bus.event.RefreshFeedEvent
 import com.example.bikini_android.util.ktx.autoCleared
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
@@ -120,6 +122,9 @@ class FeedsFragment : BaseFragment() {
                 }
 
             }.addTo(disposables)
+        RxActionBus.toObservable(RefreshFeedEvent::class.java).subscribe {
+            viewModel.refreshFeeds()
+        }.addTo(disposables)
     }
 
     companion object {
