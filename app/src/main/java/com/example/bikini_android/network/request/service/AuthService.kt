@@ -3,6 +3,7 @@ package com.example.bikini_android.network.request.service
 import com.example.bikini_android.network.response.LoginResponse
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -10,7 +11,7 @@ import retrofit2.http.Query
  */
 interface AuthService {
 
-    @GET("/v1/auth/login/naver")
-    fun loginNaver(@Query("accessToken") accessToken: String): Single<LoginResponse>
+    @GET("/v1/auth/login/{provider}")
+    fun loginNaver(@Path("provider") provider: String, @Query("accessToken") accessToken: String): Single<LoginResponse>
 
 }

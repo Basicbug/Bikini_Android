@@ -54,7 +54,7 @@ class LoginActivity : BaseActivity() {
     private fun sendTokenToServer(accessToken: String) {
         ApiClientHelper
             .createMainApiByService(AuthService::class)
-            .loginNaver(accessToken)
+            .loginNaver("naver", accessToken)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
