@@ -22,7 +22,7 @@
         tools:targetApi="n">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_map_api_key" />
+            android:value="@string/maps_api_key" />
 
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
