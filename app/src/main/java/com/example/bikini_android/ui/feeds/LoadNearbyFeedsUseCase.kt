@@ -52,6 +52,10 @@ class LoadNearbyFeedsUseCase(
         }
     }
 
+    override fun execute() {
+        logger.error { "맵 -> 다른 화면으로 전이된 경우에 랜더링된 피드가 없는 경우의 에" }
+    }
+
     private fun getNearbyLoadCase(latLng: LatLng, radius: Float): NearbyLoadCase {
         nearbyFeedsInfoCached?.let {
             return if (it.latLng != latLng || it.biggestRadius < radius) {

@@ -29,14 +29,18 @@ class LoadMyFeedsUseCase(
         if (lastFeedsRendered.isNotEmpty()) {
             itemEventRelay.accept(FeedsEvent(lastFeedsRendered, FeedsType.MY_FEEDS))
         } else {
-            feedsRepository
-                .getUserFeedsFromRemote(TEST_USER_ID)
-                .subscribe { result ->
-                    result?.let {
-                        itemEventRelay.accept(FeedsEvent(it, FeedsType.MY_FEEDS))
-                    }
-                }
-                .addTo(disposable)
+            execute()
         }
+    }
+
+    override fun execute() {
+        feedsRepository
+            .getUserFeedsFromRemote(TEST_USER_ID)
+            .subscribe { result ->
+                result?.let {
+                    itemEventRelay.accept(FeedsEvent(it, FeedsType.MY_FEEDS))
+                }
+            }
+            .addTo(disposable)
     }
 }
