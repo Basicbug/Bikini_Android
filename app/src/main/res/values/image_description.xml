@@ -16,4 +16,5 @@
     <string name="location_button_image">위치 버튼 이미지</string>
     <string name="marker_background_image">마커 배경 이미지</string>
     <string name="arrow_image">화살표 이미지</string>
+    <string name="marker_badge_background_image">뱃지 배경 이미지</string>
 </resources>
