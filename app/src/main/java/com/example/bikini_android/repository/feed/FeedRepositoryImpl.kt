@@ -7,13 +7,14 @@
 
 package com.example.bikini_android.repository.feed
 
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.param.NearbyFeedParameter
 import com.example.bikini_android.network.request.service.FeedService
-import com.example.bikini_android.util.error.ErrorToastHelper
-import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.network.request.service.ImagesService
 import com.example.bikini_android.network.response.DefaultResponse
+import com.example.bikini_android.util.error.ErrorToastHelper
+import com.example.bikini_android.util.logging.Logger
 import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -33,7 +34,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun getUserFeedsFromRemote(userId: String): Single<List<Feed>?> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
-            .getUserFeeds(userId)
+            .getUserFeeds(LoginManagerProxy.jwt, userId)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds
@@ -47,7 +48,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun getRankingFeedsFromRemote(limit: Int): Single<List<Feed>?> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
-            .getRankFeeds(limit)
+            .getRankFeeds(LoginManagerProxy.jwt, limit)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds
@@ -61,7 +62,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun getAllFeedsFromRemote(): Single<List<Feed>?> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
-            .getAllFeeds()
+            .getAllFeeds(LoginManagerProxy.jwt)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds
@@ -75,10 +76,12 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun getNearbyFeedsFromRemote(latLng: LatLng, radius: Float): Single<List<Feed>?> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
-            .getNearbyLocationFeeds(NearbyFeedParameter().apply {
-                setLocation(latLng)
-                setRadius(radius)
-            })
+            .getNearbyLocationFeeds(
+                LoginManagerProxy.jwt,
+                NearbyFeedParameter().apply {
+                    setLocation(latLng)
+                    setRadius(radius)
+                })
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds
@@ -106,9 +109,11 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             }
             .flatMap { imageIds ->
                 ApiClientHelper.createMainApiByService(FeedService::class)
-                    .addFeed(feed.apply {
-                        this.imageIds = imageIds
-                    })
+                    .addFeed(
+                        LoginManagerProxy.jwt,
+                        feed.apply {
+                            this.imageIds = imageIds
+                        })
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
