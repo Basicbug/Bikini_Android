@@ -39,12 +39,7 @@ object AppResources {
     }
 
     @JvmStatic
-<<<<<<< HEAD
     fun getStringResId(@StringRes resId: Int, vararg format: Any): String {
         return getResources().getString(resId, *format)
-=======
-    fun getStringResId(@StringRes resId: Int, vararg formatArgs: Any?): String {
-        return getResources().getString(resId, formatArgs)
->>>>>>> 703bc47 (Implement #144)
     }
 }

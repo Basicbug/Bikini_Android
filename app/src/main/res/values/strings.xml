@@ -31,6 +31,6 @@
     <string name="image_unselected">이미지를 선택하세요.</string>
     <string name="content_empty">내용을 입력하세요.</string>
     <string name="distance_km">%1$.2f km</string>
-    <string name="decimal_suffix">%d+</string>
+    <string name="decimal_suffix">%1$d+</string>
 
 </resources>
