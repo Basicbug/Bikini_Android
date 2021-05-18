@@ -12,6 +12,12 @@ import retrofit2.http.Query
 interface AuthService {
 
     @GET("/v1/auth/login/{provider}")
-    fun loginNaver(@Path("provider") provider: String, @Query("accessToken") accessToken: String): Single<LoginResponse>
+    fun loginNaver(
+        @Path("provider") provider: String = NAVER,
+        @Query("accessToken") accessToken: String
+    ): Single<LoginResponse>
 
+    companion object {
+        private const val NAVER = "naver"
+    }
 }
