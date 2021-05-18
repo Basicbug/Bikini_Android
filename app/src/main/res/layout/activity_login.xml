@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="naverOAuthHandler"
+            type="com.nhn.android.naverlogin.OAuthLoginHandler" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+            android:id="@+id/naver_login"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="@dimen/login_button_height"
+            android:layout_marginBottom="@dimen/large_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:setOAuthLoginHandler="@{naverOAuthHandler}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

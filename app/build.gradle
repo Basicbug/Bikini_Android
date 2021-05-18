@@ -134,6 +134,8 @@ dependencies {
 
     implementation map_libraries.values()
 
+    implementation login_libraries.values()
+
     debugImplementation leakcanary_libraries.values()
     debugImplementation flipper_libraries_debug.values()
 

@@ -9,6 +9,8 @@ package com.example.bikini_android.app
 
 import android.app.Application
 import android.content.Context
+import com.example.bikini_android.R
+import com.kakao.sdk.common.KakaoSdk
 
 /**
  * @author MyeongKi
@@ -17,6 +19,12 @@ class BikiniApp : Application() {
 
     init {
         instance = this
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        KakaoSdk.init(this, AppResources.getStringResId(R.string.kakao_native_app_key))
     }
 
     companion object {
