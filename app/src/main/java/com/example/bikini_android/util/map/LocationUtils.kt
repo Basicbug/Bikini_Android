@@ -51,15 +51,19 @@ object LocationUtils {
         return null
     }
 
-    fun getDistanceBetween(startLatLng: LatLng, endLatLng: LatLng): Float {
-        val diagonalDistance = FloatArray(1)
-        Location.distanceBetween(
-            startLatLng.latitude,
-            startLatLng.longitude,
-            endLatLng.latitude,
-            endLatLng.longitude,
-            diagonalDistance
-        )
-        return diagonalDistance[0] / 1000
+    fun getDistanceBetween(startLatLng: LatLng?, endLatLng: LatLng?): Float {
+        return if (startLatLng == null || endLatLng == null) {
+            0f
+        } else {
+            val diagonalDistance = FloatArray(1)
+            Location.distanceBetween(
+                startLatLng.latitude,
+                startLatLng.longitude,
+                endLatLng.latitude,
+                endLatLng.longitude,
+                diagonalDistance
+            )
+            diagonalDistance[0] / 1000
+        }
     }
 }
