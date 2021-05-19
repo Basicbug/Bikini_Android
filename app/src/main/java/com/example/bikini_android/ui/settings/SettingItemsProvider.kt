@@ -26,10 +26,7 @@ abstract class SettingItemsProvider {
 
     private fun createCommonSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
-            SettingTitleItemViewModel.Builder("공통으로 사용할 아이템들은 main에 저장").build(),
-            SettingContentItemViewModel.Builder("예: 로그인이나 혹은 테마 등등").setOnClickAction {
-
-            }.build()
+            SettingTitleItemViewModel.Builder("설정페이지").build(),
         )
     }
 
