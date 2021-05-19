@@ -44,6 +44,20 @@ class ProfileItemViewModel : ItemViewModel() {
             notifyPropertyChanged(BR.shownCount)
         }
 
+    @get: Bindable
+    var stateMessage = "허허 인생~ 새로운 기능을 추가해야지.."
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.stateMessage)
+        }
+
+    @get: Bindable
+    var feedTicketCount = "5 tickets"
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.feedTicketCount)
+        }
+
     override fun getLayoutRes(): Int {
         return R.layout.view_profile_item
     }
