@@ -9,11 +9,8 @@ package com.example.bikini_android.ui.feeds
 
 import androidx.databinding.Bindable
 import com.example.bikini_android.BR
-import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.firstImageUrl
-import com.example.bikini_android.repository.feed.getDistanceFromMyLocation
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import java.util.Objects
 

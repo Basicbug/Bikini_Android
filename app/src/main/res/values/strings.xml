@@ -19,6 +19,11 @@
     <!--board-->
     <string name="board_content_hint">오늘은?</string>
 
+    <!--profile-->
+    <string name="write">작성</string>
+    <string name="like">좋아요</string>
+    <string name="shown">관심도</string>
+
     <!--common-->
     <string name="post">등록</string>
     <string name="confirm">확인</string>
