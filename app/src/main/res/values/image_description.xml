@@ -8,6 +8,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
 
     <string name="pick_image">선택한 이미지</string>
+    <string name="login_image">로그인 이미지</string>
     <string name="splash_image">스플래시 이미지</string>
     <string name="profile_image">프로필 이미지</string>
     <string name="add_button_image">더하기 버튼</string>

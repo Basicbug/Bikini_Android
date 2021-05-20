@@ -12,7 +12,12 @@ import com.example.bikini_android.network.response.DefaultResponse
 import com.example.bikini_android.network.response.FeedsResponse
 import com.example.bikini_android.repository.feed.Feed
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.QueryMap
 
 /**
  * @author MyeongKi
@@ -20,10 +25,16 @@ import retrofit2.http.*
 
 interface FeedService {
     @GET("/v1/feed/list/{userId}")
-    fun getUserFeeds(@Header("X-AUTH-TOKEN") jwt: String, @Path("userId") userId: String): Single<FeedsResponse>
+    fun getUserFeeds(
+        @Header("X-AUTH-TOKEN") jwt: String,
+        @Path("userId") userId: String
+    ): Single<FeedsResponse>
 
     @GET("/v1/feed/list/top/{limit}")
-    fun getRankFeeds(@Header("X-AUTH-TOKEN") jwt: String, @Path("limit") limit: Int): Single<FeedsResponse>
+    fun getRankFeeds(
+        @Header("X-AUTH-TOKEN") jwt: String,
+        @Path("limit") limit: Int
+    ): Single<FeedsResponse>
 
     @GET("/v1/feed/nearby")
     fun getNearbyLocationFeeds(

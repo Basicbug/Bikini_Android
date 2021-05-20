@@ -2,6 +2,7 @@ package com.example.bikini_android.repository.feed
 
 import android.os.Parcelable
 import androidx.annotation.Keep
+import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.string.EMPTY_STRING
 import kotlinx.parcelize.Parcelize
 
@@ -30,4 +31,11 @@ fun Feed.firstImageUrl(): String {
             EMPTY_STRING
         }
     } ?: EMPTY_STRING
+}
+
+fun Feed.getDistanceFromMyLocation(): Float {
+    return LocationUtils.getDistanceBetween(
+        LocationUtils.getCurrentLatLng(),
+        locationInfo?.convertLatLng()
+    )
 }

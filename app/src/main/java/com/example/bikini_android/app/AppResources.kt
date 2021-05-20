@@ -37,4 +37,9 @@ object AppResources {
     fun getSharedPref(): SharedPreferences {
         return getContext().pref()
     }
+
+    @JvmStatic
+    fun getStringResId(@StringRes resId: Int, vararg format: Any): String {
+        return getResources().getString(resId, *format)
+    }
 }

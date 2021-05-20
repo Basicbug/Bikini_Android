@@ -3,7 +3,9 @@ package com.example.bikini_android.ui.feeds
 import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
+import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.repository.feed.getDistanceFromMyLocation
 import com.example.bikini_android.util.bus.RxAction
 
 /**
@@ -13,6 +15,14 @@ class FeedVerticalItemViewModel(feed: Feed) : FeedItemViewModel(feed) {
 
     @get: Bindable
     var content = feed.content
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.content)
+        }
+
+    @get: Bindable
+    var distance: String =
+        AppResources.getStringResId(R.string.distance_km, feed.getDistanceFromMyLocation())
         set(value) {
             field = value
             notifyPropertyChanged(BR.content)
