@@ -30,9 +30,9 @@ import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvid
 import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModel
 import com.example.bikini_android.ui.map.viewmodel.MapViewModelFactoryProvider
 import com.example.bikini_android.util.ktx.autoCleared
-import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
+import com.google.maps.android.clustering.ClusterManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 /**
@@ -42,8 +42,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class BikiniMapFragment : BaseMapFragment() {
     private var binding by autoCleared<FragmentBikiniMapBinding>()
     private lateinit var feedsViewModel: FeedsViewModel
-
-    private val feedMarkerBindingTable = ArrayMap<Feed, ViewFeedMarkerBinding>()
+    private var clusterManager by autoCleared<ClusterManager<Feed>>()
+    private val feedMarkerBindingTable = ArrayMap<String, ViewFeedMarkerBinding>()
     private val feedAddedToMapTable = ArrayMap<String, Feed>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,11 +95,31 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private fun initMap() {
-        map.get()?.setOnMarkerClickListener { marker ->
-            feedAddedToMapTable[marker.tag]?.let { feed ->
-                navigateNearLocationFeeds(feed)
+        map.get()?.let { map ->
+            clusterManager = ClusterManager<Feed>(requireContext(), map)
+            clusterManager.apply {
+                renderer =
+                    FeedRenderer(
+                        feedMarkerBindingTable,
+                        map,
+                        this
+                    )
+                setOnClusterClickListener { cluster ->
+                    cluster?.items?.first()?.let {
+                        navigateNearLocationFeeds(it)
+                        true
+                    }
+                    false
+                }
+                setOnClusterItemClickListener { item ->
+                    item?.let {
+                        navigateNearLocationFeeds(it)
+                        true
+                    }
+                    false
+                }
             }
-            true
+
         }
     }
 
@@ -126,6 +146,7 @@ class BikiniMapFragment : BaseMapFragment() {
             .ofType(MapLocationChangeEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
+                clusterManager.cluster()
                 feedsViewModel.loadFeeds(event.latLng, event.visibleRadius)
             }.addTo(disposables)
 
@@ -144,27 +165,15 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private fun addMarker(feed: Feed) {
-        feedMarkerBindingTable[feed]?.root?.let { view ->
-            feed.locationInfo?.let { locationInfo ->
-                map.get()?.let {
-                    it.addMarker(GoogleMapUtils.getFeedMarkerOption(view, locationInfo))
-                        .apply {
-                            tag = feed.feedId
-                        }
-                        .also {
-                            feedAddedToMapTable[feed.feedId] = feed
-                        }
-                }
-
-            }
-        }
+        clusterManager.addItem(feed)
+        clusterManager.cluster()
     }
 
     private fun bindFeedMarkers(feeds: List<Feed>) {
         for (feed in feeds) {
-            if (feedMarkerBindingTable[feed] == null) {
+            if (feedMarkerBindingTable[feed.feedId] == null) {
                 getFeedMarkerBinding().run {
-                    feedMarkerBindingTable[feed] = this
+                    feedMarkerBindingTable[feed.feedId] = this
                     apply {
                         viewmodel = FeedMarkerItemViewModel(feed).also {
                             it.itemEventRelay = fragmentItemEventRelay

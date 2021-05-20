@@ -6,5 +6,10 @@
   -->
 
 <resources>
-
+    <array name="autosize_badge_text_sizes">
+        <item>8dp</item>
+        <item>10dp</item>
+        <item>12dp</item>
+        <item>14dp</item>
+    </array>
 </resources>
