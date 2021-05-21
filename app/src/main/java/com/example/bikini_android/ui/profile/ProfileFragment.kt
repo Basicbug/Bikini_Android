@@ -9,18 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileBinding
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.board.BoardActivity
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
-import com.example.bikini_android.ui.feeds.FeedAdapterHelper
-import com.example.bikini_android.ui.feeds.FeedGridItemViewModel
-import com.example.bikini_android.ui.feeds.FeedsFragment
-import com.example.bikini_android.ui.feeds.FeedsSortType
-import com.example.bikini_android.ui.feeds.FeedsType
+import com.example.bikini_android.ui.feeds.*
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
+import com.example.bikini_android.ui.login.LoginActivity
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
@@ -77,6 +75,14 @@ class ProfileFragment : BaseFragment() {
             myFeeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
         observeEvent()
+
+        binding.logout.setOnClickListener {
+            LoginManagerProxy.logOut()
+            startActivity(Intent(activity, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
+        }
+
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

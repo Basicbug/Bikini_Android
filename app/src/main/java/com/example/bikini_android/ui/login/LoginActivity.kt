@@ -11,6 +11,7 @@ import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.AuthService
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
+import com.example.bikini_android.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.util.rx.addTo
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,8 +34,8 @@ class LoginActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         binding.apply {
-            naverOAuthHandler =
-                NaverOAuthLoginHandler()
+            naverOAuthHandler = NaverOAuthLoginHandler()
+            viewmodel = ProgressItemViewModel()
         }
 
         observeEvent()
@@ -46,6 +47,7 @@ class LoginActivity : BaseActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
+                binding.viewmodel?.isVisible = true
                 sendTokenToServer(it.accessToken)
             }
             .addTo(disposables)
@@ -58,12 +60,15 @@ class LoginActivity : BaseActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
+                binding.viewmodel?.isVisible = false
                 response.result?.let {
                     LoginManagerProxy.jwt = it
+                    LoginManagerProxy.successLogin()
                     startActivity(Intent(this, MainHolderActivity::class.java))
                     finish()
                 }
             }, {
+                binding.viewmodel?.isVisible = false
                 logger.error { it.toString() }
             })
             .addTo(disposables)
