@@ -2,9 +2,7 @@ package com.example.bikini_android.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
@@ -77,11 +75,32 @@ class ProfileFragment : BaseFragment() {
             myFeeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
         observeEvent()
+<<<<<<< HEAD
+=======
+
+        setHasOptionsMenu(true)
+
+>>>>>>> 940658c (Implement #150 프로필 페이지 - 프로필 상세 페이지 연결)
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         feedsViewModel.loadFeeds()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_profile, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.profile_detail_menu -> {
+                getNavigationHelper()?.navigateToProfileDetail()
+                false
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun observeEvent() {
