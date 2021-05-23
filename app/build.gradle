@@ -44,7 +44,7 @@ android {
             resValue "string", "maps_api_key", (secureProps.getProperty("MAPS_API_KEY") ?: "")
 
             applicationId "com.example.bikini_android"
-            minSdkVersion 23
+            minSdkVersion 26
             targetSdkVersion 30
             versionCode = versionCodeNo
             versionName = versionNameMajor + "." + versionNameMinor + "," + versionNamePatch

@@ -8,7 +8,7 @@ import com.jakewharton.rxrelay2.Relay
 class ProfileViewModel : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
-
+    val profileItemViewModel = ProfileItemViewModel()
     fun openBoard() {
         itemEventRelay.accept(EventType.OPEN_BOARD)
     }

@@ -15,49 +15,25 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/bottom_navigation_height">
 
-        <TextView
-            android:id="@+id/my_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/large_margin"
-            android:text="@string/test"
-            android:textSize="@dimen/text_default_size"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/representative_image"
-            android:layout_width="@dimen/profile_image_size"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/large_margin"
-            android:contentDescription="@string/profile_image"
-            android:foreground="@drawable/circular"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_id" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/test"
-            android:textSize="@dimen/text_default_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/representative_image"
+        <include
+            android:id="@+id/profile_item_layout"
+            layout="@layout/view_profile_item"
+            app:layout_constraintBottom_toTopOf="@id/division_line"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/representative_image"
-            app:layout_constraintTop_toTopOf="@id/representative_image" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewmodel="@{viewmodel.profileItemViewModel}" />
 
         <View
             android:id="@+id/division_line"
             android:layout_width="@dimen/match_constraint"
             android:layout_height="2dp"
-            android:layout_marginTop="@dimen/large_margin"
+            android:layout_margin="@dimen/median_margin"
+            android:background="?attr/defaultBackgroundColor"
             app:layout_constraintBottom_toTopOf="@id/my_feeds"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/representative_image" />
+            app:layout_constraintTop_toBottomOf="@id/profile_item_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_feeds"

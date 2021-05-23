@@ -36,6 +36,7 @@ import java.lang.ref.WeakReference
  */
 
 abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
+
     protected var mapView: MapView? = null
     protected lateinit var map: WeakReference<GoogleMap>
     private var permissionDenied = false

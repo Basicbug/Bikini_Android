@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ view_feed_marker.xml 2020. 11. 29
+  ~ view_feed_marker.xml 2021. 5. 18
   ~
-  ~ Copyright 2020 BasicBug. All rights Reserved.
+  ~ Copyright 2021 BasicBug. All rights Reserved.
   ~
   -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.map.FeedMarkerItemViewModel"/>
+            type="com.example.bikini_android.ui.map.FeedMarkerItemViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
 
         <ImageView
             android:id="@+id/background"
             android:layout_width="@dimen/feed_marker_background_size"
             android:layout_height="@dimen/feed_marker_background_size"
             android:src="@drawable/ic_feed_marker_background"
+            android:padding="5dp"
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintEnd_toEndOf="@id/image"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/marker_background_image" />
+
         <ImageView
             android:id="@+id/image"
             android:layout_width="@dimen/feed_marker_image_width"
@@ -34,5 +41,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/feed_image" />
+
+        <ImageView
+            android:id="@+id/badge_background"
+            android:layout_width="@dimen/feed_badge_background_size"
+            android:layout_height="@dimen/feed_badge_background_size"
+            android:background="@drawable/circular"
+            android:backgroundTint="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/marker_badge_background_image" />
+
+        <TextView
+            android:id="@+id/badge_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="@{viewmodel.badgeText}"
+            app:autoSizeTextType="uniform"
+            app:autoSizePresetSizes="@array/autosize_badge_text_sizes"
+            app:layout_constraintStart_toStartOf="@id/badge_background"
+            app:layout_constraintEnd_toEndOf="@id/badge_background"
+            app:layout_constraintTop_toTopOf="@id/badge_background"
+            app:layout_constraintBottom_toBottomOf="@id/badge_background"
+            tools:text="999+" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/badge_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="badge_background,badge_text"
+            app:isVisible="@{viewmodel.badgeVisible}" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
