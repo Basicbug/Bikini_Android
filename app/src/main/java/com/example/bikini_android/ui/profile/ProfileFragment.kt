@@ -2,14 +2,11 @@ package com.example.bikini_android.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileBinding
-import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.board.BoardActivity
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
@@ -18,7 +15,6 @@ import com.example.bikini_android.ui.common.list.DefaultListAdapter
 import com.example.bikini_android.ui.feeds.*
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
-import com.example.bikini_android.ui.login.LoginActivity
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
@@ -76,18 +72,28 @@ class ProfileFragment : BaseFragment() {
         }
         observeEvent()
 
-        binding.logout.setOnClickListener {
-            LoginManagerProxy.logOut()
-            startActivity(Intent(activity, LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            })
-        }
+        setHasOptionsMenu(true)
 
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         feedsViewModel.loadFeeds()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_profile, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.profile_detail_menu -> {
+                getNavigationHelper()?.navigateToProfileDetail()
+                false
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun observeEvent() {

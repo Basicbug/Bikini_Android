@@ -19,8 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import java.util.LinkedList
-import java.util.Queue
+import java.util.*
 
 /**
  * @author MyeongKi
@@ -67,6 +66,15 @@ abstract class NavigationHelper(
         }
     }
 
+    fun navigateToProfileDetail() {
+        if (isValidBottomNav(R.id.profile_navigation)) {
+            navigateToDetail().invoke()
+        } else {
+            navigateTaskQueue.offer(navigateToDetail())
+            bottomNav.selectedItemId = R.id.profile_navigation
+        }
+    }
+
     fun navigateToBikiniMap(bundle: Bundle) {
         if (isValidBottomNav(R.id.bikini_navigation)) {
             navigateToMap(bundle).invoke()
@@ -82,6 +90,10 @@ abstract class NavigationHelper(
 
     private fun navigateToMap(bundle: Bundle): () -> Unit = {
         getNavController().navigate(R.id.action_bikini_map, bundle)
+    }
+
+    private fun navigateToDetail(): () -> Unit = {
+        getNavController().navigate(R.id.action_detail)
     }
 
     @Suppress("SameParameterValue")
