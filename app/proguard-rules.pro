@@ -21,4 +21,3 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class com.example.bikini_android.network.**{*;}
-

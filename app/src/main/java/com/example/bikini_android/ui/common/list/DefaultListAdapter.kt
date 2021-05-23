@@ -42,4 +42,3 @@ open class DefaultListAdapter<T : ItemViewModel>(diffCallback: DiffUtil.ItemCall
         return item.getLayoutRes()
     }
 }
-
