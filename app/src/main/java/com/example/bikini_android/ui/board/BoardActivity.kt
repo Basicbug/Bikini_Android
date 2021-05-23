@@ -10,7 +10,7 @@ import com.example.bikini_android.databinding.ActivityBoardBinding
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
-import com.example.bikini_android.util.bus.event.ReadExternalStoragePermissionEvent
+import com.example.bikini_android.util.bus.event.ExternalReadAndWriteStoragePermissionEvent
 import com.example.bikini_android.util.file.FileUtils
 import com.example.bikini_android.util.permission.PermissionUtils
 import com.example.bikini_android.util.rx.addTo
@@ -66,7 +66,7 @@ class BoardActivity : BaseActivity() {
                     else -> Unit
                 }
             }.addTo(disposables)
-        RxActionBus.toObservable(ReadExternalStoragePermissionEvent::class.java).subscribe {
+        RxActionBus.toObservable(ExternalReadAndWriteStoragePermissionEvent::class.java).subscribe {
             if (it.isAccept) {
                 startGalleryPage()
             }
@@ -79,8 +79,12 @@ class BoardActivity : BaseActivity() {
         } else {
             PermissionUtils.requestPermission(
                 this,
-                PermissionUtils.READ_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE,
-                Manifest.permission.READ_EXTERNAL_STORAGE, true
+                PermissionUtils.READ_AND_WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE,
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ),
+                true
             )
         }
     }

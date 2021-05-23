@@ -142,7 +142,8 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
         } else {
             PermissionUtils.requestPermission(
                 requireActivity() as AppCompatActivity, LOCATION_PERMISSION_REQUEST_CODE,
-                Manifest.permission.ACCESS_FINE_LOCATION, true
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                true
             )
         }
         return false
