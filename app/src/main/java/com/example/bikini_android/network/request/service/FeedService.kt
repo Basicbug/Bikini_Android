@@ -12,12 +12,7 @@ import com.example.bikini_android.network.response.DefaultResponse
 import com.example.bikini_android.network.response.FeedsResponse
 import com.example.bikini_android.repository.feed.Feed
 import io.reactivex.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.QueryMap
+import retrofit2.http.*
 
 /**
  * @author MyeongKi
