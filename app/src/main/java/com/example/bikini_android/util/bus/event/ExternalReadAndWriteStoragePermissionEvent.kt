@@ -1,5 +1,5 @@
 /*
- * ReadExternalStoragePermissionEvent.kt 2021. 3. 7
+ * ReadExternalStoragePermissionEvent.kt 2021. 5. 23
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
@@ -12,4 +12,4 @@ import com.example.bikini_android.util.bus.RxAction
 /**
  * @author MyeongKi
  */
-class ReadExternalStoragePermissionEvent(val isAccept: Boolean) : RxAction
+class ExternalReadAndWriteStoragePermissionEvent(val isAccept: Boolean) : RxAction

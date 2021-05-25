@@ -53,6 +53,12 @@ object FileUtils {
         return imageFiles.apply {
             imageUris.forEach { imageUri ->
                 val imageFile = File(getPath(imageUri, AppResources.getContext()))
+                // val bitmap = BitmapFactory.decodeFile(imageFile.path)
+                // bitmap.compress(
+                //     Bitmap.CompressFormat.JPEG,
+                //     2,
+                //     FileOutputStream(imageFile)
+                // )
                 add(
                     MultipartBody.Part.createFormData(
                         ImageConstants.IMAGES,

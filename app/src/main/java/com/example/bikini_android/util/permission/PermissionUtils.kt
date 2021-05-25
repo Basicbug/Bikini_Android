@@ -7,7 +7,6 @@
 
 package com.example.bikini_android.util.permission
 
-import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
@@ -25,35 +24,39 @@ import com.example.bikini_android.R
 
 object PermissionUtils {
     const val LOCATION_PERMISSION_REQUEST_CODE = 1
-    const val READ_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 2
+    const val READ_AND_WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 2
 
     @JvmStatic
     fun requestPermission(
-        activity: AppCompatActivity, requestId: Int, permission: String, finishActivity: Boolean
+        activity: AppCompatActivity,
+        requestId: Int,
+        permissions: Array<String>,
+        finishActivity: Boolean
     ) {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-            RationaleDialog.newInstance(requestId, finishActivity)
-                .show(activity.supportFragmentManager, "dialog")
-        } else {
-            ActivityCompat.requestPermissions(
-                activity,
-                arrayOf(permission),
-                requestId
-            )
+        for (permission in permissions) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                ActivityCompat.requestPermissions(
+                    activity,
+                    permissions,
+                    requestId
+                )
+                return
+            }
         }
+        RationaleDialog.newInstance(requestId, finishActivity, permissions)
+            .show(activity.supportFragmentManager, "dialog")
     }
 
     @JvmStatic
     fun isPermissionGranted(
-        grantPermissions: Array<String>, grantResults: IntArray,
-        permission: String
+        grantPermissions: Array<String>, grantResults: IntArray
     ): Boolean {
         for (i in grantPermissions.indices) {
-            if (permission == grantPermissions[i]) {
-                return grantResults[i] == PackageManager.PERMISSION_GRANTED
+            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                return false
             }
         }
-        return false
+        return true
     }
 
     class PermissionDeniedDialog : DialogFragment() {
@@ -100,13 +103,15 @@ object PermissionUtils {
                 arguments?.getInt(ARGUMENT_PERMISSION_REQUEST_CODE) ?: 0
             finishActivity =
                 arguments?.getBoolean(ARGUMENT_FINISH_ACTIVITY) ?: false
+            val permissions =
+                arguments?.getStringArray(ARGUMENT_PERMISSIONS) ?: arrayOf<String>()
             return AlertDialog.Builder(activity)
                 .setMessage(R.string.permission_rationale_location)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     activity?.let {
                         ActivityCompat.requestPermissions(
                             it,
-                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                            permissions,
                             requestCode
                         )
                     }
@@ -126,11 +131,17 @@ object PermissionUtils {
         companion object {
             private const val ARGUMENT_PERMISSION_REQUEST_CODE = "requestCode"
             private const val ARGUMENT_FINISH_ACTIVITY = "finish"
+            private const val ARGUMENT_PERMISSIONS = "permissions"
 
-            fun newInstance(requestCode: Int, finishActivity: Boolean): RationaleDialog {
+            fun newInstance(
+                requestCode: Int,
+                finishActivity: Boolean,
+                permissions: Array<String>
+            ): RationaleDialog {
                 val arguments = Bundle().apply {
                     putInt(ARGUMENT_PERMISSION_REQUEST_CODE, requestCode)
                     putBoolean(ARGUMENT_FINISH_ACTIVITY, finishActivity)
+                    putStringArray(ARGUMENT_PERMISSIONS, permissions)
                 }
                 return RationaleDialog().apply {
                     this.arguments = arguments
