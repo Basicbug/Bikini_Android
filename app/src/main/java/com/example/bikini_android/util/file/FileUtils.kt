@@ -8,22 +8,24 @@
 package com.example.bikini_android.util.file
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
-import android.provider.MediaStore
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.app.AppResources
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.io.FileOutputStream
 
 /**
  * @author MyeongKi
  */
 object FileUtils {
-    private const val PATH_ERROR_MESSAGE = "path is null"
+    private const val LOCAL_IMAGE_NAME = "localImgFile"
+    private const val DEFAULT_IMAGE_FILE_TYPE = ".jpeg"
     fun checkReadExternalStoragePermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             AppResources.getContext(),
@@ -31,39 +33,30 @@ object FileUtils {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun getPath(uri: Uri, context: Context): String {
-        var result: String? = null
-        val projection = arrayOf(MediaStore.Images.Media.DATA)//FIXME 수정 필요
-        val cursor = context.contentResolver.query(uri, projection, null, null, null)
-        cursor?.let {
-            if (it.moveToFirst()) {
-                val index: Int = it.getColumnIndexOrThrow(projection[0])
-                result = it.getString(index)
-            }
-        }
-        cursor?.close()
-        result?.let {
-            return it
-        }
-        throw NullPointerException(PATH_ERROR_MESSAGE)
-    }
-
     fun getImageFiles(imageUris: List<Uri>): List<MultipartBody.Part> {
         val imageFiles: MutableList<MultipartBody.Part> = mutableListOf()
         return imageFiles.apply {
             imageUris.forEach { imageUri ->
-                val imageFile = File(getPath(imageUri, AppResources.getContext()))
-                // val bitmap = BitmapFactory.decodeFile(imageFile.path)
-                // bitmap.compress(
-                //     Bitmap.CompressFormat.JPEG,
-                //     2,
-                //     FileOutputStream(imageFile)
-                // )
+                val localImgFile: File = File.createTempFile(LOCAL_IMAGE_NAME, DEFAULT_IMAGE_FILE_TYPE).apply {
+                    deleteOnExit()
+                }
+                val inputStream =
+                    AppResources.getContext().contentResolver.openInputStream(imageUri)
+
+                 val bitmap = BitmapFactory.decodeStream(inputStream)
+
+                inputStream?.let {
+                    FileOutputStream(localImgFile).use {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, it)
+                        it.flush()
+                    }
+                }
+
                 add(
                     MultipartBody.Part.createFormData(
                         ImageConstants.IMAGES,
                         ImageConstants.IMAGE_NAME,
-                        imageFile.asRequestBody(ImageConstants.IMAGE_EXTENSION.toMediaTypeOrNull())
+                        localImgFile.asRequestBody(ImageConstants.IMAGE_EXTENSION.toMediaTypeOrNull())
                     )
                 )
             }
