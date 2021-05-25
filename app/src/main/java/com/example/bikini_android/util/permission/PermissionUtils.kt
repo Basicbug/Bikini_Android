@@ -24,7 +24,7 @@ import com.example.bikini_android.R
 
 object PermissionUtils {
     const val LOCATION_PERMISSION_REQUEST_CODE = 1
-    const val READ_AND_WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 2
+    const val READ_AND_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 2
 
     @JvmStatic
     fun requestPermission(
@@ -106,7 +106,7 @@ object PermissionUtils {
             val permissions =
                 arguments?.getStringArray(ARGUMENT_PERMISSIONS) ?: arrayOf<String>()
             return AlertDialog.Builder(activity)
-                .setMessage(R.string.permission_rationale_location)
+                .setMessage(R.string.permission_rationale_default)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     activity?.let {
                         ActivityCompat.requestPermissions(

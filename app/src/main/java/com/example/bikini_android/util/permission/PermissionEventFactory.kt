@@ -26,7 +26,7 @@ object PermissionEventFactory {
             PermissionUtils.LOCATION_PERMISSION_REQUEST_CODE -> {
                 LocationPermissionEvent(isAccept)
             }
-            PermissionUtils.READ_AND_WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE -> {
+            PermissionUtils.READ_AND_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE -> {
                 ExternalReadAndWriteStoragePermissionEvent(isAccept)
             }
             else -> {

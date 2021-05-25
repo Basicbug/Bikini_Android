@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.app.AppResources
+import com.example.bikini_android.util.image.BitmapUtils
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -37,21 +38,28 @@ object FileUtils {
         val imageFiles: MutableList<MultipartBody.Part> = mutableListOf()
         return imageFiles.apply {
             imageUris.forEach { imageUri ->
-                val localImgFile: File = File.createTempFile(LOCAL_IMAGE_NAME, DEFAULT_IMAGE_FILE_TYPE).apply {
-                    deleteOnExit()
-                }
-                val inputStream =
-                    AppResources.getContext().contentResolver.openInputStream(imageUri)
-
-                 val bitmap = BitmapFactory.decodeStream(inputStream)
-
-                inputStream?.let {
-                    FileOutputStream(localImgFile).use {
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, it)
-                        it.flush()
+                val localImgFile: File =
+                    File.createTempFile(LOCAL_IMAGE_NAME, DEFAULT_IMAGE_FILE_TYPE).apply {
+                        deleteOnExit()
+                    }
+                BitmapFactory.decodeStream(
+                    AppResources.getContentResolver().openInputStream(imageUri)
+                ).run {
+                    Bitmap.createBitmap(
+                        this,
+                        0,
+                        0,
+                        this.width,
+                        this.height,
+                        BitmapUtils.getImageMatrix(imageUri),
+                        true
+                    ).run {
+                        FileOutputStream(localImgFile).use {
+                            this.compress(Bitmap.CompressFormat.JPEG, 25, it)
+                            it.flush()
+                        }
                     }
                 }
-
                 add(
                     MultipartBody.Part.createFormData(
                         ImageConstants.IMAGES,
