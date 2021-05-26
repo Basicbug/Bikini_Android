@@ -90,7 +90,7 @@ class ProfileFragment : BaseFragment() {
         return when (item.itemId) {
             R.id.profile_detail_menu -> {
                 getNavigationHelper()?.navigateToProfileDetail()
-                true
+                false
             }
             else -> super.onOptionsItemSelected(item)
         }
