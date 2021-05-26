@@ -12,7 +12,11 @@ import com.example.bikini_android.ui.board.BoardActivity
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
-import com.example.bikini_android.ui.feeds.*
+import com.example.bikini_android.ui.feeds.FeedAdapterHelper
+import com.example.bikini_android.ui.feeds.FeedGridItemViewModel
+import com.example.bikini_android.ui.feeds.FeedsFragment
+import com.example.bikini_android.ui.feeds.FeedsSortType
+import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.FeedsEvent
@@ -71,9 +75,12 @@ class ProfileFragment : BaseFragment() {
             myFeeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
         observeEvent()
+<<<<<<< HEAD
+=======
 
         setHasOptionsMenu(true)
 
+>>>>>>> 940658c (Implement #150 프로필 페이지 - 프로필 상세 페이지 연결)
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
