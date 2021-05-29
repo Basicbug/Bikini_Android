@@ -11,7 +11,7 @@
         <item name="defaultItemUnselectedColor">@color/black_opa50</item>
         <item name="defaultBackgroundColor">@color/black_opa05</item>
         <item name="defaultDimColor">@color/black_opa50</item>
-
+        <item name="progressTintColor">@color/green_500</item>
         <item name="defaultTintColor">@color/black</item>
         <!--splash-->
         <item name="splashTintColor">@color/black</item>

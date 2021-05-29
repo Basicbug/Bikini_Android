@@ -17,5 +17,6 @@
     <attr name="splashTintColor" format="reference|color" />
     <attr name="defaultTintColor" format="reference|color" />
     <attr name="locationButtonTintColor" format="reference|color" />
+    <attr name="progressTintColor" format="reference|color" />
 
 </resources>

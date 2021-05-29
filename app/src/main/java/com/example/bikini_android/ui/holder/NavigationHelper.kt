@@ -19,7 +19,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
+import java.util.LinkedList
+import java.util.Queue
 
 /**
  * @author MyeongKi
