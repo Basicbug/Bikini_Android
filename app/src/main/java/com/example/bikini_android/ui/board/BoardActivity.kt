@@ -79,10 +79,9 @@ class BoardActivity : BaseActivity() {
         } else {
             PermissionUtils.requestPermission(
                 this,
-                PermissionUtils.READ_AND_WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE,
+                PermissionUtils.READ_AND_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE,
                 arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    Manifest.permission.READ_EXTERNAL_STORAGE
                 ),
                 true
             )

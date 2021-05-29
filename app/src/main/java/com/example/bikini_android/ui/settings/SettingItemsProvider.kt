@@ -9,7 +9,6 @@ package com.example.bikini_android.ui.settings
 
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import com.example.bikini_android.ui.holder.NavigationHelperImpl
-import com.example.bikini_android.ui.settings.item.SettingContentItemViewModel
 import com.example.bikini_android.ui.settings.item.SettingTitleItemViewModel
 
 /**

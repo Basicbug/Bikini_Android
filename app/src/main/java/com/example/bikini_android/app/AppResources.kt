@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.app
 
+import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -41,5 +42,9 @@ object AppResources {
     @JvmStatic
     fun getStringResId(@StringRes resId: Int, vararg format: Any): String {
         return getResources().getString(resId, *format)
+    }
+
+    fun getContentResolver(): ContentResolver {
+        return getContext().contentResolver
     }
 }
