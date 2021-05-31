@@ -10,11 +10,12 @@
         <item name="defaultItemUnselectedColor">@color/white_opa50</item>
         <item name="defaultBackgroundColor">@color/white_opa05</item>
         <item name="defaultDimColor">@color/white_opa50</item>
-
+        <item name="progressTintColor">@color/purple_500</item>
         <item name="defaultTintColor">@color/white</item>
         <!--splash-->
         <item name="splashTintColor">@color/white</item>
         <!--feed-->
         <item name="locationButtonTintColor">@color/white_opa70</item>
+
     </style>
 </resources>
