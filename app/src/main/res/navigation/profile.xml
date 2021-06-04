@@ -32,5 +32,6 @@
         app:destination="@id/feeds_end" />
     <action
         android:id="@+id/action_detail"
-        app:destination="@id/profile_detail" />
+        app:destination="@id/profile_detail"
+        app:enterAnim="@anim/slide_in_from_bottom" />
 </navigation>
