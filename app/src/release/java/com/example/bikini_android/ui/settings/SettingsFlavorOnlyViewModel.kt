@@ -1,5 +1,5 @@
 /*
- * SettingItemsProviderImpl.kt 2021. 4. 3
+ * SettingsFlavorOnlyViewModel.kt 2021. 6. 13
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
@@ -13,8 +13,9 @@ import com.example.bikini_android.ui.holder.NavigationHelperImpl
 /**
  * @author MyeongKi
  */
-object SettingItemsProviderImpl : SettingItemsProvider() {
-    override fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+class SettingsFlavorOnlyViewModel(private val navigationHelper: NavigationHelperImpl? = null) :
+    SettingsViewModel() {
+    override fun getSettingsItemViewModels(): List<ItemViewModel> {
         return emptyList()
     }
 }

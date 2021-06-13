@@ -17,7 +17,7 @@ import com.example.bikini_android.ui.settings.item.SettingsContentItemViewModel
  * @author MyeongKi
  */
 
-abstract class SettingItemsProvider {
+abstract class SettingsItemsProvider {
     fun createMainSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return mutableListOf<ItemViewModel>().apply {
             addAll(createCommonSettingItems(navigationHelper))
@@ -29,7 +29,7 @@ abstract class SettingItemsProvider {
         return listOf(
             SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_image_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToImageSettings()
+                    navigationHelper?.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE))
                 }.build()
         )
     }

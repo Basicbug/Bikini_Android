@@ -18,13 +18,13 @@ import com.example.bikini_android.ui.settings.item.SettingsTitleItemViewModel
 /**
  * @author MyeongKi
  */
-object SettingsItemProviderImpl : SettingItemsProvider() {
+object SettingsItemProviderImpl : SettingsItemsProvider() {
     override fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
             SettingsDivideLineItemViewModel(),
             SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_dev_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToSettingsFlavorOnly()?.invoke()
+                    navigationHelper?.navigateToSettingsFlavorOnly(SettingsFragment.makeBundle(SettingsType.FLAVOR_ONLY))
                 }.build()
         )
     }

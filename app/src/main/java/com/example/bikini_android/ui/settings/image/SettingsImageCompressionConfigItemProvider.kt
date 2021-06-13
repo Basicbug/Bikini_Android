@@ -9,7 +9,6 @@ package com.example.bikini_android.ui.settings.image
 
 import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.manager.PreferenceManager
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import com.example.bikini_android.ui.settings.item.SettingsCheckItemViewModel
 import com.example.bikini_android.ui.settings.item.SettingsTitleItemViewModel

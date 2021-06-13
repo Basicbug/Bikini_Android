@@ -8,8 +8,8 @@
 package com.example.bikini_android.ui.settings.image
 
 import com.example.bikini_android.manager.PreferenceManager
-import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.example.bikini_android.ui.settings.SettingsViewModel
 import com.example.bikini_android.ui.settings.item.SettingsCheckItemViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
@@ -21,7 +21,7 @@ import io.reactivex.disposables.CompositeDisposable
 /**
  * @author MyeongKi
  */
-class SettingsImageCompressionViewModel : BaseViewModel() {
+class SettingsImageCompressionViewModel : SettingsViewModel() {
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     val disposables = CompositeDisposable()
     private val headItemViewModel =
@@ -40,7 +40,7 @@ class SettingsImageCompressionViewModel : BaseViewModel() {
             }.addTo(disposables)
     }
 
-    fun getSettingsImageCompressionItemViewModels(): List<ItemViewModel> {
+    override fun getSettingsItemViewModels(): List<ItemViewModel> {
         return mutableListOf<ItemViewModel>().apply {
             add(headItemViewModel)
             addAll(compressionItemViewModels)

@@ -11,6 +11,8 @@ import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import com.example.bikini_android.ui.holder.NavigationHelperImpl
+import com.example.bikini_android.ui.settings.SettingsFragment
+import com.example.bikini_android.ui.settings.SettingsType
 import com.example.bikini_android.ui.settings.item.SettingsContentItemViewModel
 import com.example.bikini_android.ui.settings.item.SettingsTitleItemViewModel
 
@@ -30,9 +32,8 @@ object SettingsImageConfigItemProvider {
                 .build(),
             SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_image_compression_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToImageCompressionSettings()
+                    navigationHelper?.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE_COMPRESSION))
                 }.build()
         )
     }
-
 }
