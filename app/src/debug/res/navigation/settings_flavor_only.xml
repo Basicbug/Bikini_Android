@@ -13,14 +13,13 @@
     app:startDestination="@id/settings_main_flavor_only">
     <fragment
         android:id="@+id/settings_main_flavor_only"
-        android:name="com.example.bikini_android.ui.settings.SettingsFlavorOnlyFragment"
-        tools:layout="@layout/fragment_flavor_only_settings">
+        android:name="com.example.bikini_android.ui.settings.SettingsFlavorOnlyFragment">
     </fragment>
 
     <fragment
         android:id="@+id/settings_api"
         android:name="com.example.bikini_android.ui.settings.SettingsApiFragment"
-        tools:layout="@layout/fragment_api_settings">
+        tools:layout="@layout/fragment_settings_api">
     </fragment>
     <action
         android:id="@+id/action_settings_api"

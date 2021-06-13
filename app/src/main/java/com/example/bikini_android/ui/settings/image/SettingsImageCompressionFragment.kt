@@ -1,17 +1,18 @@
 /*
- * SettingsFragment.kt 2021. 4. 3
+ * SettingsImageCompressionFragment.kt 2021. 6. 13
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android.ui.settings
+package com.example.bikini_android.ui.settings.image
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.R
@@ -24,9 +25,10 @@ import com.example.bikini_android.util.ktx.autoCleared
 /**
  * @author MyeongKi
  */
-
-class SettingsFragment : BaseFragment() {
+class SettingsImageCompressionFragment : BaseFragment() {
     private var binding by autoCleared<FragmentSettingsBinding>()
+    private lateinit var viewModel: SettingsImageCompressionViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,10 +40,13 @@ class SettingsFragment : BaseFragment() {
         false
     ).also {
         super.onCreateView(inflater, container, savedInstanceState)
+        viewModel = ViewModelProvider(this)[SettingsImageCompressionViewModel::class.java]
         binding = it.apply {
             settings.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             settings.adapter = DefaultListAdapter(DefaultDiffCallback()).apply {
-                submitList(SettingsItemProviderImpl.createMainSettingItems(getNavigationHelper()))
+                submitList(
+                    viewModel.getSettingsImageCompressionItemViewModels()
+                )
             }
         }
     }.root

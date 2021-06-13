@@ -84,7 +84,12 @@ abstract class NavigationHelper(
             bottomNav.selectedItemId = R.id.bikini_navigation
         }
     }
-
+    fun navigateToImageSettings() {
+        getNavController().navigate(R.id.action_settings_image)
+    }
+    fun navigateToImageCompressionSettings() {
+        getNavController().navigate(R.id.action_settings_image_compression)
+    }
     private fun navigateToFeeds(bundle: Bundle): () -> Unit = {
         getNavController().navigate(R.id.action_feeds, bundle)
     }

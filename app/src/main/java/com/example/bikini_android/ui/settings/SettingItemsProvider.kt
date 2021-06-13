@@ -7,9 +7,11 @@
 
 package com.example.bikini_android.ui.settings
 
+import com.example.bikini_android.R
+import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import com.example.bikini_android.ui.holder.NavigationHelperImpl
-import com.example.bikini_android.ui.settings.item.SettingTitleItemViewModel
+import com.example.bikini_android.ui.settings.item.SettingsContentItemViewModel
 
 /**
  * @author MyeongKi
@@ -25,7 +27,10 @@ abstract class SettingItemsProvider {
 
     private fun createCommonSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
-            SettingTitleItemViewModel.Builder("설정페이지").build(),
+            SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_image_title))
+                .setOnClickAction {
+                    navigationHelper?.navigateToImageSettings()
+                }.build()
         )
     }
 

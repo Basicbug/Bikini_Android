@@ -21,4 +21,22 @@
     <action
         android:id="@+id/action_flavor_only_setting"
         app:destination="@id/settings_flavor_only_navigation" />
+
+    <fragment
+        android:id="@+id/settings_image"
+        android:name="com.example.bikini_android.ui.settings.image.SettingsImageFragment"
+        >
+    </fragment>
+    <action
+        android:id="@+id/action_settings_image"
+        app:destination="@id/settings_image" />
+
+    <fragment
+        android:id="@+id/settings_image_compression"
+        android:name="com.example.bikini_android.ui.settings.image.SettingsImageCompressionFragment"
+        >
+    </fragment>
+    <action
+        android:id="@+id/action_settings_image_compression"
+        app:destination="@id/settings_image_compression" />
 </navigation>

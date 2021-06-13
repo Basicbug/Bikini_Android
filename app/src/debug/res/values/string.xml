@@ -8,7 +8,7 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
     <!--settings-->
-    <string name="setting_dev_title">Dev Settings</string>
-    <string name="setting_network_title">Network</string>
-    <string name="setting_api_title">API</string>
+    <string name="settings_dev_title">Dev Settings</string>
+    <string name="settings_network_title">Network</string>
+    <string name="settings_api_title">API</string>
 </resources>

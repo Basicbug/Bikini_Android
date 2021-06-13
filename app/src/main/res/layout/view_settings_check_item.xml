@@ -12,7 +12,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.settings.item.SettingContentItemViewModel" />
+            type="com.example.bikini_android.ui.settings.item.SettingsCheckItemViewModel" />
 
     </data>
 
@@ -34,13 +34,14 @@
             tools:text="설정 이름" />
 
         <ImageView
-            android:id="@+id/arrow"
+            android:id="@+id/check"
             android:layout_width="@dimen/arrow_width"
             android:layout_height="@dimen/arrow_height"
             android:layout_margin="@dimen/default_margin"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:src="@drawable/ic_baseline_check_24"
             android:contentDescription="@string/arrow_image"
-            app:tint="?attr/locationButtonTintColor"
+            app:isVisible="@{viewmodel.checked}"
+            app:tint="?attr/settingsCheckColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

@@ -15,23 +15,24 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.R
-import com.example.bikini_android.databinding.FragmentFlavorOnlySettingsBinding
+import com.example.bikini_android.databinding.FragmentSettingsBinding
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.util.ktx.autoCleared
 
 /**
  * @author MyeongKi
  */
 class SettingsFlavorOnlyFragment : BaseFragment() {
-    private var binding: FragmentFlavorOnlySettingsBinding? = null
+    private var binding by autoCleared<FragmentSettingsBinding>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = DataBindingUtil.inflate<FragmentFlavorOnlySettingsBinding>(
+    ): View = DataBindingUtil.inflate<FragmentSettingsBinding>(
         inflater,
-        R.layout.fragment_flavor_only_settings,
+        R.layout.fragment_settings,
         container,
         false
     ).also {
@@ -39,7 +40,7 @@ class SettingsFlavorOnlyFragment : BaseFragment() {
         binding = it.apply {
             settings.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             settings.adapter = DefaultListAdapter(DefaultDiffCallback()).apply {
-                submitList(SettingItemsProviderImpl.createSettingItemsFlavorOnly(getNavigationHelper()))
+                submitList(SettingsItemProviderImpl.createSettingItemsFlavorOnly(getNavigationHelper()))
             }
         }
     }.root

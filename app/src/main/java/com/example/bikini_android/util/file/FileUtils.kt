@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.app.AppResources
+import com.example.bikini_android.manager.PreferenceManager
 import com.example.bikini_android.util.image.BitmapUtils
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -55,7 +56,11 @@ object FileUtils {
                         true
                     ).run {
                         FileOutputStream(localImgFile).use {
-                            this.compress(Bitmap.CompressFormat.JPEG, 25, it)
+                            this.compress(
+                                Bitmap.CompressFormat.JPEG,
+                                PreferenceManager.getImageCompressionRate().rate,
+                                it
+                            )
                             it.flush()
                         }
                     }
