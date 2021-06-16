@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply from: '../libraries.gradle'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     signingConfigs {
@@ -140,4 +141,7 @@ dependencies {
     debugImplementation flipper_libraries_debug.values()
 
     releaseImplementation flipper_libraries_release.values()
+
+    implementation hilt_libraries.values()
+    kapt hilt_annotion.values()
 }
