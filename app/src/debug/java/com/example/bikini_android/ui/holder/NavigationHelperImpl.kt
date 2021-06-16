@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.ui.holder
 
+import android.os.Bundle
 import com.example.bikini_android.R
 import com.example.bikini_android.util.bus.RxAction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,10 +22,9 @@ class NavigationHelperImpl(
     itemRelay: Relay<RxAction>
 ) : NavigationHelper(bottomNav, activity, itemRelay) {
 
-    fun navigateToSettingsFlavorOnly(): () -> Unit = {
-        getNavController().navigate(R.id.action_flavor_only_setting)
+    fun navigateToSettingsFlavorOnly(bundle: Bundle) {
+        getNavController().navigate(R.id.action_flavor_only_setting, bundle)
     }
-
     fun navigateToSettingsApi(): () -> Unit = {
         getNavController().navigate(R.id.action_settings_api)
     }

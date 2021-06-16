@@ -1,5 +1,5 @@
 /*
- * SettingTitleItemViewModel.kt 2021. 4. 4
+ * SettingsDescriptionItemViewModel.kt 2021. 6. 13
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
@@ -15,21 +15,21 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
 /**
  * @author MyeongKi
  */
-class SettingTitleItemViewModel private constructor(
-    title: String
+class SettingsDescriptionItemViewModel private constructor(
+    description: String,
 ) : ItemViewModel() {
-    class Builder(private val title: String) {
-        fun build() = SettingTitleItemViewModel(title)
+    class Builder(private val description: String) {
+        fun build() = SettingsDescriptionItemViewModel(description)
     }
 
     @get: Bindable
-    var title = title
+    var description = description
         set(value) {
             field = value
-            notifyPropertyChanged(BR.title)
+            notifyPropertyChanged(BR.description)
         }
 
     override fun getLayoutRes(): Int {
-        return R.layout.view_setting_title_item
+        return R.layout.view_settings_description_item
     }
 }

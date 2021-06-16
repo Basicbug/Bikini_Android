@@ -35,4 +35,11 @@
     <string name="distance_km">%1$.2f km</string>
     <string name="decimal_suffix">%1$d+</string>
 
+
+    <!--settings-->
+    <string name="settings_image_title">이미지</string>
+    <string name="settings_image_compression_title">이미지 압축</string>
+    <string name="settings_image_compression_bad_quality">저용량</string>
+    <string name="settings_image_compression_normal_quality">일반 화질</string>
+    <string name="settings_image_compression_best_quality">원본</string>
 </resources>

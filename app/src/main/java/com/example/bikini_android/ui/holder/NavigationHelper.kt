@@ -84,7 +84,9 @@ abstract class NavigationHelper(
             bottomNav.selectedItemId = R.id.bikini_navigation
         }
     }
-
+    fun navigateToSettings(bundle: Bundle) {
+        getNavController().navigate(R.id.action_settings, bundle)
+    }
     private fun navigateToFeeds(bundle: Bundle): () -> Unit = {
         getNavController().navigate(R.id.action_feeds, bundle)
     }

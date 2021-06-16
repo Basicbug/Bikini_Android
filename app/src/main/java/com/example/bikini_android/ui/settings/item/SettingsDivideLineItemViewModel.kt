@@ -13,8 +13,8 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
 /**
  * @author MyeongKi
  */
-class SettingDivideLineItemViewModel : ItemViewModel() {
+class SettingsDivideLineItemViewModel : ItemViewModel() {
     override fun getLayoutRes(): Int {
-        return R.layout.view_setting_divide_line_item
+        return R.layout.view_settings_divide_line_item
     }
 }

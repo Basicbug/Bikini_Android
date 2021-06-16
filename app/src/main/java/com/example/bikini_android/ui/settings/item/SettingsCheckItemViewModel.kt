@@ -1,5 +1,5 @@
 /*
- * SettingContentItemViewModel.kt 2021. 4. 4
+ * SettingsCheckItemViewModel.kt 2021. 6. 13
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
@@ -15,19 +15,25 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
 /**
  * @author MyeongKi
  */
-class SettingContentItemViewModel private constructor(
+class SettingsCheckItemViewModel private constructor(
     content: String,
+    isChecked: Boolean,
     private val onClickAction: (() -> Unit)?
 ) : ItemViewModel() {
     class Builder(private val content: String) {
         private var onClickAction: (() -> Unit)? = null
-
+        private var isChecked: Boolean = false
         fun setOnClickAction(action: () -> Unit): Builder {
             onClickAction = action
             return this
         }
 
-        fun build() = SettingContentItemViewModel(content, onClickAction)
+        fun setChecked(isChecked: Boolean): Builder {
+            this.isChecked = isChecked
+            return this
+        }
+
+        fun build() = SettingsCheckItemViewModel(content, isChecked, onClickAction)
     }
 
     @get: Bindable
@@ -37,12 +43,19 @@ class SettingContentItemViewModel private constructor(
             notifyPropertyChanged(BR.content)
         }
 
+    @get: Bindable
+    var isChecked = isChecked
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.checked)
+        }
+
     override fun onClickItem() {
         super.onClickItem()
         onClickAction?.invoke()
     }
 
     override fun getLayoutRes(): Int {
-        return R.layout.view_setting_content_item
+        return R.layout.view_settings_check_item
     }
 }
