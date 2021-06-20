@@ -11,10 +11,12 @@ import android.app.Application
 import android.content.Context
 import com.example.bikini_android.R
 import com.kakao.sdk.common.KakaoSdk
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @author MyeongKi
  */
+@HiltAndroidApp
 class BikiniApp : Application() {
 
     init {
