@@ -13,7 +13,6 @@ import com.jakewharton.rxrelay2.Relay
 object LoginManagerProxy : LoginManager {
 
     var jwt: String = ""
-        get() = field
         set(value) {
             value.let {
                 field = it
@@ -39,7 +38,8 @@ object LoginManagerProxy : LoginManager {
     }
 
     override fun isLoggedIn() =
-        loginManager?.isLoggedIn() ?: PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
+        loginManager?.isLoggedIn()
+            ?: PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
 
     override fun successLogin() {
         loginManager?.successLogin()

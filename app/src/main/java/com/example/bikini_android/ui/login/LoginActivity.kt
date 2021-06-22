@@ -15,7 +15,6 @@ import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
 /**
  * @author bsgreentea
@@ -60,7 +59,5 @@ class LoginActivity : BaseActivity() {
                 finish()
             }
             .addTo(disposables)
-
     }
-
 }

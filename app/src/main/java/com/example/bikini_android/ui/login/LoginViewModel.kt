@@ -3,6 +3,8 @@ package com.example.bikini_android.ui.login
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
+import com.example.bikini_android.ui.provider.DefaultSchedulerProvider
+import com.example.bikini_android.ui.provider.SchedulerProvider
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
@@ -26,11 +28,21 @@ internal object ViewModelLoginModule {
     @Provides
     @ViewModelScoped
     fun provideRepo() = LoginRepository()
+
+    @Provides
+    @ViewModelScoped
+    fun provideScheduler(): SchedulerProvider = DefaultSchedulerProvider()
+
+    @Provides
+    @ViewModelScoped
+    fun provideLoginManager(): LoginManagerProxy = LoginManagerProxy
 }
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    private val schedulerProvider: SchedulerProvider,
+    private val loginManager: LoginManagerProxy
 ) : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
@@ -41,11 +53,12 @@ class LoginViewModel @Inject constructor(
         progressViewModel.isVisible = true
         loginRepository
             .sendTokenToServer(accessToken)
-            .subscribe({ response ->
+            .subscribeOn(schedulerProvider.io())
+            .subscribe({ result ->
                 progressViewModel.isVisible = false
-                response.result?.let {
-                    LoginManagerProxy.jwt = it
-                    LoginManagerProxy.successLogin()
+                result.jwt?.let {
+                    loginManager.jwt = it
+                    loginManager.successLogin()
                     itemEventRelay.accept(CompleteEvent())
                 }
             }, {
