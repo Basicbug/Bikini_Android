@@ -27,6 +27,7 @@ abstract class BaseActivity : AppCompatActivity(),
         permissions: Array<String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         PermissionEventFactory.create(requestCode, permissions, grantResults)?.let {
             RxActionBus.post(it)
         }

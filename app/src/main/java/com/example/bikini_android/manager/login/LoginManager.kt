@@ -9,7 +9,6 @@ import com.jakewharton.rxrelay2.Relay
 interface LoginManager {
 
     val loginEventRelay: Relay<RxAction>
-
     fun logOut()
     fun isLoggedIn(): Boolean
     fun successLogin()

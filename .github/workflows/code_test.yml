@@ -1,0 +1,15 @@
+
+name: TEST_CODE_CI
+on:
+  pull_request:
+    branches: [ develop ]
+
+  workflow_dispatch:
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: UnitTest
+        run: ./gradlew testDebugUnitTest
