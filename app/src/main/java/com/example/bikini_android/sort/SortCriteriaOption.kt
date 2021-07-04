@@ -11,13 +11,13 @@ package com.example.bikini_android.sort
  * @author MyeongKi
  */
 enum class SortCriteriaOption(
-    val sortType: String,
+    val sortType: SortType,
     @Order val sortOrder: String
 
 ) {
-    SORT_RECENTLY_UPDATE("RECENTLY_UPDATE", Order.DESC),
-    SORT_LIKE_COUNT("LIKE_COUNT", Order.DESC),
-    SORT_DISTANCE("DISTANCE", Order.ASC)
+    SORT_UPDATE_DESC(SortType.UPDATE, Order.DESC),
+    SORT_LIKE_COUNT_DESC(SortType.LIKE, Order.DESC),
+    SORT_DISTANCE_ASC(SortType.DISTANCE, Order.ASC)
     ;
 
     fun isAscOrder() = sortOrder == Order.ASC

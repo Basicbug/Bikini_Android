@@ -12,17 +12,17 @@ package com.example.bikini_android.sort
  */
 class SortFeedCriteriaProvider : SortCriteriaProvider {
     override fun getCriteria(sortTarget: SortTarget): SortCriteriaOption {
-        return when(sortTarget){
-            SortTarget.FEED_DISTANCE->{
-                SortCriteriaOption.SORT_RECENTLY_UPDATE
+        return when (sortTarget) {
+            SortTarget.FEED_DISTANCE -> {
+                SortCriteriaOption.SORT_DISTANCE_ASC
             }
-            SortTarget.FEED_UPDATE->{
-                SortCriteriaOption.SORT_RECENTLY_UPDATE
+            SortTarget.FEED_UPDATE -> {
+                SortCriteriaOption.SORT_UPDATE_DESC
             }
-            SortTarget.FEED_LIKE->{
-                SortCriteriaOption.SORT_LIKE_COUNT
+            SortTarget.FEED_LIKE -> {
+                SortCriteriaOption.SORT_LIKE_COUNT_DESC
             }
-            else->{
+            else -> {
                 throw IllegalAccessException("invalid sort target")
             }
         }
