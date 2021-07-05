@@ -1,3 +1,4 @@
 # Bikini_Android
 Bikini android
-- https://basicbug-bikini-dev.herokuapp.com/swagger-ui.html
+- http://3.34.36.203:8080/swagger-ui.html
+- 
