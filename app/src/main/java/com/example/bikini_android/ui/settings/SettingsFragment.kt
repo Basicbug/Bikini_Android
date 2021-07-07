@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikini_android.R
@@ -27,6 +28,19 @@ import com.example.bikini_android.util.ktx.autoCleared
 
 class SettingsFragment : BaseFragment() {
     private var binding by autoCleared<FragmentSettingsBinding>()
+    private lateinit var viewModel: SettingsViewModel
+    private var settingsType: SettingsType = SettingsType.MAIN
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            settingsType =
+                SettingsType.valueOf(
+                    it.getString(KEY_SETTINGS_TYPE)
+                        ?: SettingsType.MAIN.name
+                )
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,11 +52,25 @@ class SettingsFragment : BaseFragment() {
         false
     ).also {
         super.onCreateView(inflater, container, savedInstanceState)
+        viewModel = ViewModelProvider(this, SettingsViewModelFactoryProvider(getNavigationHelper()))
+            .get(SettingsViewModelFactoryProvider.getSettingsViewModelClazz(settingsType))
         binding = it.apply {
             settings.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             settings.adapter = DefaultListAdapter(DefaultDiffCallback()).apply {
-                submitList(SettingItemsProviderImpl.createMainSettingItems(getNavigationHelper()))
+                submitList(viewModel.getSettingsItemViewModels())
             }
         }
     }.root
+
+    companion object {
+        private const val KEY_SETTINGS_TYPE = "settingsType"
+
+        fun makeBundle(
+            settingsType: SettingsType
+        ): Bundle {
+            return Bundle().apply {
+                putString(KEY_SETTINGS_TYPE, settingsType.name)
+            }
+        }
+    }
 }

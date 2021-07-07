@@ -37,6 +37,8 @@ ext {
     def flipper_version = '0.83.0'
     def soloader_version = '0.10.1'
     def okhttp_version = '4.9.1'
+    def hilt_version = '2.37'
+    def mockito_version = '3.8.0'
 
     android_core_libraries = [
             kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -56,7 +58,9 @@ ext {
     ]
 
     core_test_libraries = [
-            android_junit: "junit:junit:$junit_version",
+            android_junit : "junit:junit:$junit_version",
+            mockito_core  : "org.mockito:mockito-core:$mockito_version",
+            mockito_inline: "org.mockito:mockito-inline:$mockito_version",
     ]
 
     network_libraries = [
@@ -142,5 +146,12 @@ ext {
 
     flipper_libraries_release = [
             noop: "com.facebook.flipper:flipper-noop:$flipper_version",
+    ]
+
+    hilt_libraries = [
+            hilt: "com.google.dagger:hilt-android:$hilt_version",
+    ]
+    hilt_annotion = [
+            hilt: "com.google.dagger:hilt-android-compiler:$hilt_version",
     ]
 }

@@ -11,7 +11,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.settings.item.SettingDivideLineItemViewModel" />
+            type="com.example.bikini_android.ui.settings.item.SettingsDivideLineItemViewModel" />
 
     </data>
 

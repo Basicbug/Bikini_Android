@@ -16,6 +16,8 @@
         <item name="splashTintColor">@color/white</item>
         <!--feed-->
         <item name="locationButtonTintColor">@color/white_opa70</item>
-
+        <!--settings-->
+        <item name="settingsDefaultButtonColor">@color/white_opa70</item>
+        <item name="settingsCheckColor">@color/purple_500</item>
     </style>
 </resources>

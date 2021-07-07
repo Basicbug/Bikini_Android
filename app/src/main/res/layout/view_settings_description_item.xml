@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ view_setting_title_item.xml 2021. 4. 3
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ view_setting_content_item.xml 2021. 4. 3
   ~
   ~ Copyright 2021 BasicBug. All rights Reserved.
   ~
   -->
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -14,26 +12,27 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.settings.item.SettingTitleItemViewModel" />
+            type="com.example.bikini_android.ui.settings.item.SettingsDescriptionItemViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/content_item_height"
-        android:onClick="@{()->viewmodel.onClickItem()}">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/title"
-            android:text="@{viewmodel.title}"
-            android:textSize="@dimen/text_default_size"
-            android:textStyle="bold"
+            android:id="@+id/description"
+            android:text="@{viewmodel.description}"
+            android:textSize="@dimen/text_small_size"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/grey"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="설정 이름" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

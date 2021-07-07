@@ -11,29 +11,29 @@ import com.example.bikini_android.R
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.ui.common.item.ItemViewModel
 import com.example.bikini_android.ui.holder.NavigationHelperImpl
-import com.example.bikini_android.ui.settings.item.SettingContentItemViewModel
-import com.example.bikini_android.ui.settings.item.SettingDivideLineItemViewModel
-import com.example.bikini_android.ui.settings.item.SettingTitleItemViewModel
+import com.example.bikini_android.ui.settings.item.SettingsContentItemViewModel
+import com.example.bikini_android.ui.settings.item.SettingsDivideLineItemViewModel
+import com.example.bikini_android.ui.settings.item.SettingsTitleItemViewModel
 
 /**
  * @author MyeongKi
  */
-object SettingItemsProviderImpl : SettingItemsProvider() {
+object SettingsItemProviderImpl : SettingsItemsProvider() {
     override fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
-            SettingDivideLineItemViewModel(),
-            SettingContentItemViewModel.Builder(AppResources.getStringResId(R.string.setting_dev_title))
+            SettingsDivideLineItemViewModel(),
+            SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_dev_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToSettingsFlavorOnly()?.invoke()
+                    navigationHelper?.navigateToSettingsFlavorOnly(SettingsFragment.makeBundle(SettingsType.FLAVOR_ONLY))
                 }.build()
         )
     }
 
     fun createSettingItemsFlavorOnly(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
-            SettingTitleItemViewModel.Builder(AppResources.getStringResId(R.string.setting_network_title))
+            SettingsTitleItemViewModel.Builder(AppResources.getStringResId(R.string.settings_network_title))
                 .build(),
-            SettingContentItemViewModel.Builder(AppResources.getStringResId(R.string.setting_api_title))
+            SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_api_title))
                 .setOnClickAction {
                     navigationHelper?.navigateToSettingsApi()?.invoke()
                 }.build()
