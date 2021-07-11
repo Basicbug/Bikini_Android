@@ -23,7 +23,7 @@ class LoginRepository {
             .createMainApiByService(AuthService::class)
             .loginNaver(accessToken = accessToken)
             .subscribeOn(Schedulers.io())
-            .map { LoginJwtResult(it.result) }
+            .map { LoginJwtResult(it.result?.token) }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
                 null
