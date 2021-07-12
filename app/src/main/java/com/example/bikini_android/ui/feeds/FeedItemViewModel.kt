@@ -21,7 +21,7 @@ import java.util.Objects
 abstract class FeedItemViewModel(protected val feed: Feed) : ItemViewModel() {
 
     @get: Bindable
-    var userId = feed.userId
+    var userId = feed.username
         set(value) {
             field = value
             notifyPropertyChanged(BR.userId)

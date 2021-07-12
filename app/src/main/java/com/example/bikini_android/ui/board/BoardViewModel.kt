@@ -75,7 +75,7 @@ class BoardViewModel : BaseViewModel() {
         return Feed(
             content = boardItemViewModel.content.get() ?: "",
             locationInfo = LocationUtils.getCurrentLocationInfo(),
-            userId = TEST_USER_ID
+            username = TEST_USER_ID
         )
     }
 
