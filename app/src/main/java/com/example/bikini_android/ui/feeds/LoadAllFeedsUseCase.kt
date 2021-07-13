@@ -9,6 +9,9 @@ package com.example.bikini_android.ui.feeds
 
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
+import com.example.bikini_android.sort.SortFeedCriteriaProvider
+import com.example.bikini_android.sort.SortFeedExecutor
+import com.example.bikini_android.sort.SortTarget
 import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
@@ -22,7 +25,6 @@ class LoadAllFeedsUseCase(
     private val disposable: CompositeDisposable,
     private val itemEventRelay: Relay<RxAction>
 ) : LoadFeedsUseCase {
-
     private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
 
     override fun execute(lastFeedsRendered: List<Feed>) {
@@ -38,7 +40,14 @@ class LoadAllFeedsUseCase(
             .getAllFeedsFromRemote()
             .subscribe { result ->
                 result?.let {
-                    itemEventRelay.accept(FeedsEvent(it, FeedsType.ALL_FEEDS))
+                    itemEventRelay.accept(
+                        FeedsEvent(
+                            SortFeedExecutor.execute(
+                                it,
+                                SortFeedCriteriaProvider.getCriteria(SortTarget.FEED_UPDATE)
+                            ), FeedsType.ALL_FEEDS
+                        )
+                    )
                 }
             }
             .addTo(disposable)

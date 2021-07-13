@@ -10,7 +10,7 @@ package com.example.bikini_android.sort
 /**
  * @author MyeongKi
  */
-class SortFeedCriteriaProvider : SortCriteriaProvider {
+object SortFeedCriteriaProvider : SortCriteriaProvider {
     override fun getCriteria(sortTarget: SortTarget): SortCriteriaOption {
         return when (sortTarget) {
             SortTarget.FEED_DISTANCE -> {

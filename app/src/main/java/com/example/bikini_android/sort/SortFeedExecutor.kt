@@ -23,7 +23,7 @@ object SortFeedExecutor {
                 throw IllegalAccessException("Not yet supported")
             }
             SortType.UPDATE -> {
-                throw IllegalAccessException("Not yet supported")
+                feed.sortedBy({ it.modifiedAt }, sortCriteriaOption.isAscOrder())
             }
             else -> {
                 throw IllegalAccessException("invalid sort option")
