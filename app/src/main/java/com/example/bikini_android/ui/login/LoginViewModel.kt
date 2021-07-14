@@ -3,8 +3,8 @@ package com.example.bikini_android.ui.login
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
-import com.example.bikini_android.ui.provider.DefaultSchedulerProvider
-import com.example.bikini_android.ui.provider.SchedulerProvider
+import com.example.bikini_android.util.rx.DefaultSchedulerProvider
+import com.example.bikini_android.util.rx.SchedulerProvider
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay

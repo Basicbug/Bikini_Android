@@ -14,13 +14,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Keep
 data class Feed(
-    var feedId: String = "test1",
+    var feedId: String = "",
     var feedNumOfUser: Int = 0,
-    var username: String = "sampleUsername",
+    var username: String = "",
     var imageIds: List<Int>? = null,
-    var content: String = "sampleContent",
+    var content: String = "",
     var imageUrl: List<String>? = null,
     val locationInfo: LocationInfo?,
+    var modifiedAt: String = ""
 ) : Parcelable, ClusterItem {
     override fun getPosition(): LatLng {
         return locationInfo?.convertLatLng() ?: throw NullPointerException("location info is null")

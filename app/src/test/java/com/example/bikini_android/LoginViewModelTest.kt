@@ -11,7 +11,7 @@ import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.response.LoginResponse
 import com.example.bikini_android.ui.login.LoginRepository
 import com.example.bikini_android.ui.login.LoginViewModel
-import com.example.bikini_android.ui.provider.TestSchedulerProvider
+import com.example.bikini_android.util.rx.TestSchedulerProvider
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins

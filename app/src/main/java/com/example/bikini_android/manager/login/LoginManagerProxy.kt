@@ -13,6 +13,12 @@ import com.jakewharton.rxrelay2.Relay
 object LoginManagerProxy : LoginManager {
 
     var jwt: String = ""
+        get() {
+            if (field.isEmpty()) {
+                field = PreferenceManager.getString(AppResources.getStringResId(R.string.jwt))
+            }
+            return field
+        }
         set(value) {
             value.let {
                 field = it

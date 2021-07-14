@@ -98,7 +98,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     ): Single<DefaultResponse?> {
         return ApiClientHelper
             .createMainApiByService(ImagesService::class)
-            .uploadImages(imageFiles)
+            .uploadImages(LoginManagerProxy.jwt, imageFiles)
             .subscribeOn(Schedulers.io())
             .map { response ->
                 mutableListOf<Int>().apply {
@@ -117,7 +117,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
-                null
+                DefaultResponse()
             }
     }
 
