@@ -17,6 +17,10 @@ object PreferenceManager {
         return AppResources.getContext().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
     }
 
+    fun getString(key: String): String {
+        return getPreferences().getString(key, "") ?: ""
+    }
+
     fun setBoolean(key: String, value: Boolean) {
         getPreferences().edit().putBoolean(key, value).apply()
     }
