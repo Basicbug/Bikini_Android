@@ -5,10 +5,9 @@
  *
  */
 
-package com.example.bikini_android.ui.map
+package com.example.bikini_android.ui.feeds
 
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.util.bus.RxAction
 
 /**

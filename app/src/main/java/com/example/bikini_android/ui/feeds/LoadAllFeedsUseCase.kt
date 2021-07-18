@@ -12,7 +12,6 @@ import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.sort.SortFeedCriteriaProvider
 import com.example.bikini_android.sort.SortFeedExecutor
 import com.example.bikini_android.sort.SortTarget
-import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay

@@ -10,9 +10,10 @@ package com.example.bikini_android.ui.feeds.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseViewModel
+import com.example.bikini_android.ui.feeds.Feeds
+import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.LoadFeedsUseCase
-import com.example.bikini_android.ui.map.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.model.LatLng
@@ -48,7 +49,10 @@ abstract class FeedsViewModel(
             }.addTo(disposables)
     }
 
-    fun loadFeeds() {
+    fun loadFeeds(feeds: Feeds? = null) {
+        feeds?.let {
+            _feedsRendered = it.feedList
+        }
         loadFeedsUseCase.execute(lastFeedsRendered = feedsRendered)
     }
 
