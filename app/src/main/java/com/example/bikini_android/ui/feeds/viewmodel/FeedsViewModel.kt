@@ -10,7 +10,6 @@ package com.example.bikini_android.ui.feeds.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseViewModel
-import com.example.bikini_android.ui.feeds.Feeds
 import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.LoadFeedsUseCase
@@ -49,9 +48,9 @@ abstract class FeedsViewModel(
             }.addTo(disposables)
     }
 
-    fun loadFeeds(feeds: Feeds? = null) {
+    fun loadFeeds(feeds: List<Feed>? = null) {
         feeds?.let {
-            _feedsRendered = it.feedList
+            _feedsRendered = feeds
         }
         loadFeedsUseCase.execute(lastFeedsRendered = feedsRendered)
     }

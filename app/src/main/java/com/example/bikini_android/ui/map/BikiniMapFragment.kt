@@ -22,7 +22,6 @@ import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.feeds.Feeds
 import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.feeds.FeedsSortType
@@ -133,7 +132,7 @@ class BikiniMapFragment : BaseMapFragment() {
                     MAP_FEEDS_TYPE,
                     FeedsSortType.NEAR_DISTANCE,
                     feeds.first(),
-                    Feeds(feeds)
+                    feeds
                 )
             )
         }
