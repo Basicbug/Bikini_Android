@@ -24,7 +24,7 @@ import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
-import com.example.bikini_android.ui.map.FeedsEvent
+import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.RefreshFeedEvent
