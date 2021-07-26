@@ -25,10 +25,10 @@
     <!--feed-->
     <dimen name="feed_marker_size">100dp</dimen>
     <dimen name="feed_vertical_image_height">300dp</dimen>
-    <dimen name="feed_marker_image_top_margin">8dp</dimen>
+    <dimen name="feed_marker_image_top_margin">12dp</dimen>
     <dimen name="feed_marker_image_height">78dp</dimen>
     <dimen name="feed_marker_image_width">100dp</dimen>
-    <dimen name="feed_marker_background_size">110dp</dimen>
+    <dimen name="feed_marker_background_size">120dp</dimen>
     <dimen name="feed_badge_background_size">20dp</dimen>
     <dimen name="feed_badge_text_size">12dp</dimen>
     <dimen name="grid_feed_image_size">200dp</dimen>
