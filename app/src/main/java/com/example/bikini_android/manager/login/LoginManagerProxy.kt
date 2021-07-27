@@ -15,14 +15,14 @@ object LoginManagerProxy : LoginManager {
     var jwt: String = ""
         get() {
             if (field.isEmpty()) {
-                field = PreferenceManager.getString(AppResources.getStringResId(R.string.jwt))
+                field = PreferenceManager.getString(AppResources.getString(R.string.jwt))
             }
             return field
         }
         set(value) {
             value.let {
                 field = it
-                PreferenceManager.setString(AppResources.getStringResId(R.string.jwt), it)
+                PreferenceManager.setString(AppResources.getString(R.string.jwt), it)
             }
         }
 
@@ -39,13 +39,13 @@ object LoginManagerProxy : LoginManager {
     override fun logOut() {
         loginManager?.logOut()
         PreferenceManager.apply {
-            setBoolean(AppResources.getStringResId(R.string.is_logged_in), false)
+            setBoolean(AppResources.getString(R.string.is_logged_in), false)
         }
     }
 
     override fun isLoggedIn() =
         loginManager?.isLoggedIn()
-            ?: PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
+            ?: PreferenceManager.getBoolean(AppResources.getString(R.string.is_logged_in))
 
     override fun successLogin() {
         loginManager?.successLogin()

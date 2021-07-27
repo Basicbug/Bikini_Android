@@ -30,7 +30,7 @@ object AppResources {
     }
 
     @JvmStatic
-    fun getStringResId(@StringRes resId: Int): String {
+    fun getString(@StringRes resId: Int): String {
         return getResources().getString(resId)
     }
 
@@ -40,7 +40,7 @@ object AppResources {
     }
 
     @JvmStatic
-    fun getStringResId(@StringRes resId: Int, vararg format: Any): String {
+    fun getString(@StringRes resId: Int, vararg format: Any): String {
         return getResources().getString(resId, *format)
     }
 

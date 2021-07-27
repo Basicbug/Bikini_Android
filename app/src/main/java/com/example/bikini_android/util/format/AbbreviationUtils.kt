@@ -21,7 +21,7 @@ object AbbreviationUtils {
         @StringRes formatRes: Int
     ): String {
         return if (originalDecimal > pivotLargeDecimal) {
-            AppResources.getStringResId(
+            AppResources.getString(
                 formatRes,
                 pivotLargeDecimal
             )

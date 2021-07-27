@@ -28,9 +28,9 @@ object SettingsImageConfigItemProvider {
 
     private fun createItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
-            SettingsTitleItemViewModel.Builder(AppResources.getStringResId(R.string.settings_image_title))
+            SettingsTitleItemViewModel.Builder(AppResources.getString(R.string.settings_image_title))
                 .build(),
-            SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_image_compression_title))
+            SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_image_compression_title))
                 .setOnClickAction {
                     navigationHelper?.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE_COMPRESSION))
                 }.build()

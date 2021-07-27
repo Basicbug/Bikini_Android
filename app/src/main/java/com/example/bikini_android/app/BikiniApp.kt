@@ -26,7 +26,7 @@ class BikiniApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        KakaoSdk.init(this, AppResources.getStringResId(R.string.kakao_native_app_key))
+        KakaoSdk.init(this, AppResources.getString(R.string.kakao_native_app_key))
     }
 
     companion object {
