@@ -21,7 +21,7 @@ class NaverLoginManager : LoginManager {
     val loginInstance: OAuthLogin = OAuthLogin.getInstance()
 
     override fun isLoggedIn(): Boolean {
-        return PreferenceManager.getBoolean(AppResources.getStringResId(R.string.is_logged_in))
+        return PreferenceManager.getBoolean(AppResources.getString(R.string.is_logged_in))
     }
 
     override fun logOut() {
@@ -31,10 +31,10 @@ class NaverLoginManager : LoginManager {
     override fun successLogin() {
 
         PreferenceManager.apply {
-            setBoolean(AppResources.getStringResId(R.string.is_logged_in), true)
+            setBoolean(AppResources.getString(R.string.is_logged_in), true)
             setString(
-                AppResources.getStringResId(R.string.last_login_platform),
-                AppResources.getStringResId(R.string.naver_id_login)
+                AppResources.getString(R.string.last_login_platform),
+                AppResources.getString(R.string.naver_id_login)
             )
         }
     }

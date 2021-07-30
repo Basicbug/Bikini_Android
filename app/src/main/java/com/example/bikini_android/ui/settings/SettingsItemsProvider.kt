@@ -27,7 +27,7 @@ abstract class SettingsItemsProvider {
 
     private fun createCommonSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
-            SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_image_title))
+            SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_image_title))
                 .setOnClickAction {
                     navigationHelper?.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE))
                 }.build()

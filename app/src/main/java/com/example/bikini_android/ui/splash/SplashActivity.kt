@@ -31,9 +31,9 @@ class SplashActivity : BaseActivity() {
         OAuthLogin.getInstance().apply {
             init(
                 AppResources.getContext(),
-                AppResources.getStringResId(R.string.naver_login_client_id),
-                AppResources.getStringResId(R.string.naver_login_client_secret),
-                AppResources.getStringResId(R.string.app_name)
+                AppResources.getString(R.string.naver_login_client_id),
+                AppResources.getString(R.string.naver_login_client_secret),
+                AppResources.getString(R.string.app_name)
             )
         }
     }

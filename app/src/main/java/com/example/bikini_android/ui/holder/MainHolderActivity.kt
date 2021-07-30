@@ -69,7 +69,7 @@ class MainHolderActivity : BaseActivity() {
             .ofType(ToolbarItem::class.java)
             .subscribe { event ->
                 this.supportActionBar?.let {
-                    it.title = AppResources.getStringResId(event.titleResId)
+                    it.title = AppResources.getString(event.titleResId)
                     if (event.visible) {
                         it.show()
                     } else {

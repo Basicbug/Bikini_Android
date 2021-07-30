@@ -36,13 +36,13 @@ class SettingsApiFragment : PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        findPreference<ListPreference>(AppResources.getStringResId(R.string.perf_server_type))?.apply {
+        findPreference<ListPreference>(AppResources.getString(R.string.perf_server_type))?.apply {
             onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { preference, serverType ->
                     logger.debug { "changed serverType $serverType" }
                     with(requireActivity().pref()) {
                         put(
-                            AppResources.getStringResId(R.string.perf_server_type),
+                            AppResources.getString(R.string.perf_server_type),
                             serverType.toString()
                         )
                     }
