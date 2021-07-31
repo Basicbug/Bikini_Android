@@ -19,6 +19,7 @@ import com.example.bikini_android.ui.dialog.DialogController
 object PermissionUtils {
     const val LOCATION_PERMISSION_REQUEST_CODE = 1
     const val READ_AND_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 2
+    const val CAMERA_READ_AND_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 3
 
     @JvmStatic
     fun requestPermission(

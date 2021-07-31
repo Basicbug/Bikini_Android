@@ -8,6 +8,8 @@
 
 <resources>
     <!-- Common -->
+    <attr name="isLightTheme" format="boolean"/>
+    <attr name="bottomSheetBackgroundColor" format="reference|color" />
     <attr name="bottomNavigationBackgroundColor" format="reference|color" />
     <attr name="toolbarBackgroundColor" format="reference|color" />
     <attr name="defaultItemSelectedColor" format="reference|color" />
@@ -19,7 +21,10 @@
     <attr name="locationButtonTintColor" format="reference|color" />
     <attr name="progressTintColor" format="reference|color" />
 
-    <!-- Common -->
+    <!-- board -->
+    <attr name="boardBottomSheetImageTintColor" format="reference|color" />
+
+    <!-- Settings -->
     <attr name="settingsDefaultButtonColor" format="reference|color" />
     <attr name="settingsCheckColor" format="reference|color" />
 

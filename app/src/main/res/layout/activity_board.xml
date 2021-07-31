@@ -21,7 +21,7 @@
             android:layout_width="@dimen/match_constraint"
             android:layout_height="@dimen/match_constraint"
             android:clickable="true"
-            android:onClick="@{() -> viewmodel.boardItemViewModel.navigateToGallery()}"
+            android:onClick="@{() -> viewmodel.boardItemViewModel.navigateToSelectImageMethod()}"
             android:focusable="true"
             app:completeLoadEvent="@{viewmodel.boardItemViewModel::getImageLoadEvent}"
             app:imageUrl="@{viewmodel.boardItemViewModel.imageUrl}"

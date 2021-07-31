@@ -43,7 +43,7 @@ class BoardViewModel : BaseViewModel() {
             feedsRepository
                 .addFeedToRemote(
                     feed,
-                    FileUtils.getImageFiles(listOf(imageUri))
+                    FileUtils.getImageMultiParts(listOf(imageUri))
                 )
                 .doOnError {
                     progressViewModel.isVisible = false
