@@ -1,6 +1,7 @@
 package com.example.bikini_android.ui.login
 
 import com.example.bikini_android.manager.login.LoginManagerProxy
+import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.ui.provider.DefaultSchedulerProvider
@@ -16,6 +17,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -59,7 +61,7 @@ class LoginViewModel @Inject constructor(
                 result?.token?.let {
                     loginManager.jwt = it
                     loginManager.successLogin()
-                    itemEventRelay.accept(CompleteEvent())
+                    itemEventRelay.accept(EventType.COMPLETE)
                 }
             }, {
                 progressViewModel.isVisible = false
@@ -67,5 +69,25 @@ class LoginViewModel @Inject constructor(
             .addTo(disposables)
     }
 
-    class CompleteEvent : RxAction
+    fun checkMyInfo() {
+        AccountRepositoryImpl
+            .getMyInfoFromRemote()
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+
+                if (it == "1000") {
+                    itemEventRelay.accept(EventType.ALREADY_EXIST)
+                } else {
+                    itemEventRelay.accept(EventType.NO_INFO)
+                }
+
+            }, {
+
+            })
+            .addTo(disposables)
+    }
+
+    enum class EventType : RxAction {
+        COMPLETE, ALREADY_EXIST, NO_INFO
+    }
 }

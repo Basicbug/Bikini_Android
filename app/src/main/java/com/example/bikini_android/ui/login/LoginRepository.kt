@@ -15,7 +15,7 @@ class LoginRepository {
 
     private val logger: Logger by lazy(LazyThreadSafetyMode.NONE) {
         Logger().apply {
-            TAG = "FeedRepositoryImpl"
+            TAG = "LoginRepositoryImpl"
         }
     }
 

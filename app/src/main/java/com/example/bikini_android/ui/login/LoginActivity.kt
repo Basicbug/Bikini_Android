@@ -8,6 +8,7 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityLoginBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.manager.login.naver.NaverOAuthLoginHandler
+import com.example.bikini_android.ui.account.AccountInitActivity
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.example.bikini_android.util.bus.RxAction
@@ -52,12 +53,28 @@ class LoginActivity : BaseActivity() {
             .addTo(disposables)
 
         itemEventRelay
-            .ofType(LoginViewModel.CompleteEvent::class.java)
+            .ofType(LoginViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                startActivity(Intent(this, MainHolderActivity::class.java))
-                finish()
+                when (it) {
+
+                    LoginViewModel.EventType.COMPLETE -> {
+                        viewModel.checkMyInfo()
+                    }
+                    LoginViewModel.EventType.ALREADY_EXIST -> {
+                        startActivity(Intent(this, MainHolderActivity::class.java))
+                        finish()
+                    }
+                    LoginViewModel.EventType.NO_INFO -> {
+                        startActivity(Intent(this, AccountInitActivity::class.java))
+                        finish()
+                    }
+                    else -> {
+                    }
+                }
+
             }
             .addTo(disposables)
+
     }
 }
