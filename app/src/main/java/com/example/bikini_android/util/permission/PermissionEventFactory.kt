@@ -8,6 +8,7 @@
 package com.example.bikini_android.util.permission
 
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.bus.event.CameraAndExternalReadAndWriteStoragePermissionEvent
 import com.example.bikini_android.util.bus.event.ExternalReadAndWriteStoragePermissionEvent
 import com.example.bikini_android.util.bus.event.LocationPermissionEvent
 
@@ -29,6 +30,10 @@ object PermissionEventFactory {
             PermissionUtils.READ_AND_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE -> {
                 ExternalReadAndWriteStoragePermissionEvent(isAccept)
             }
+            PermissionUtils.CAMERA_READ_AND_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE -> {
+                CameraAndExternalReadAndWriteStoragePermissionEvent(isAccept)
+            }
+
             else -> {
                 null
             }
