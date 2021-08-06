@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.bikini_android.ui.provider
+package com.example.bikini_android.util.rx
 
 import io.reactivex.Scheduler
 

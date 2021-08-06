@@ -22,7 +22,7 @@ object SettingsItemProviderImpl : SettingsItemsProvider() {
     override fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
             SettingsDivideLineItemViewModel(),
-            SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_dev_title))
+            SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_dev_title))
                 .setOnClickAction {
                     navigationHelper?.navigateToSettingsFlavorOnly(SettingsFragment.makeBundle(SettingsType.FLAVOR_ONLY))
                 }.build()
@@ -31,9 +31,9 @@ object SettingsItemProviderImpl : SettingsItemsProvider() {
 
     fun createSettingItemsFlavorOnly(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
         return listOf(
-            SettingsTitleItemViewModel.Builder(AppResources.getStringResId(R.string.settings_network_title))
+            SettingsTitleItemViewModel.Builder(AppResources.getString(R.string.settings_network_title))
                 .build(),
-            SettingsContentItemViewModel.Builder(AppResources.getStringResId(R.string.settings_api_title))
+            SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_api_title))
                 .setOnClickAction {
                     navigationHelper?.navigateToSettingsApi()?.invoke()
                 }.build()

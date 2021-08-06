@@ -9,7 +9,9 @@ package com.example.bikini_android.ui.feeds
 
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
-import com.example.bikini_android.ui.map.FeedsEvent
+import com.example.bikini_android.sort.SortFeedCriteriaProvider
+import com.example.bikini_android.sort.SortFeedExecutor
+import com.example.bikini_android.sort.SortTarget
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.util.map.LocationUtils
@@ -73,7 +75,14 @@ class LoadNearbyFeedsUseCase(
             .subscribe { result ->
                 result?.let {
                     cacheNearbyFeedsInfo(latLng, radius, it)
-                    itemEventRelay.accept(FeedsEvent(it, FeedsType.NEARBY_FEEDS))
+                    itemEventRelay.accept(
+                        FeedsEvent(
+                            SortFeedExecutor.execute(
+                                it,
+                                SortFeedCriteriaProvider.getCriteria(SortTarget.FEED_UPDATE)
+                            ), FeedsType.NEARBY_FEEDS
+                        )
+                    )
                 }
             }
             .addTo(disposable)

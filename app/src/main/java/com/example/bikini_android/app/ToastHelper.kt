@@ -18,7 +18,7 @@ object ToastHelper {
     private var toast: Toast? = null
 
     fun show(@StringRes stringResId: Int) {
-        show(AppResources.getStringResId(stringResId))
+        show(AppResources.getString(stringResId))
     }
 
     fun show(message: String) {

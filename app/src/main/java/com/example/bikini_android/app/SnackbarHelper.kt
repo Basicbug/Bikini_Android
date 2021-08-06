@@ -21,7 +21,7 @@ object SnackbarHelper {
     private var lastCallTag = ""
 
     fun show(activity: Activity, @StringRes stringResId: Int, callTag: String) {
-        show(activity, AppResources.getStringResId(stringResId), callTag)
+        show(activity, AppResources.getString(stringResId), callTag)
     }
 
     fun show(activity: Activity, snackbarMessage: String, callTag: String) {

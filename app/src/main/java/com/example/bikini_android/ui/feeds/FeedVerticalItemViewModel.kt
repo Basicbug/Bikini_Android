@@ -22,7 +22,7 @@ class FeedVerticalItemViewModel(feed: Feed) : FeedItemViewModel(feed) {
 
     @get: Bindable
     var distance: String =
-        AppResources.getStringResId(R.string.distance_km, feed.getDistanceFromMyLocation())
+        AppResources.getString(R.string.distance_km, feed.getDistanceFromMyLocation())
         set(value) {
             field = value
             notifyPropertyChanged(BR.content)

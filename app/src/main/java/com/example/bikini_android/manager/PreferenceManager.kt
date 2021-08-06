@@ -17,6 +17,10 @@ object PreferenceManager {
         return AppResources.getContext().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
     }
 
+    fun getString(key: String): String {
+        return getPreferences().getString(key, "") ?: ""
+    }
+
     fun setBoolean(key: String, value: Boolean) {
         getPreferences().edit().putBoolean(key, value).apply()
     }
@@ -27,13 +31,13 @@ object PreferenceManager {
 
     fun setImageCompressionRate(value: SettingsImageCompressionRate) {
         getPreferences().edit()
-            .putInt(AppResources.getStringResId(R.string.image_compression_rate), value.rate)
+            .putInt(AppResources.getString(R.string.image_compression_rate), value.rate)
             .apply()
     }
 
     fun getImageCompressionRate(): SettingsImageCompressionRate {
         val compressionRate = getPreferences().getInt(
-            AppResources.getStringResId(R.string.image_compression_rate),
+            AppResources.getString(R.string.image_compression_rate),
             SettingsImageCompressionRate.NORMAL_QUALITY.rate
         )
         return SettingsImageCompressionRate.fromRate(compressionRate)

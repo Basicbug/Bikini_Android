@@ -19,7 +19,7 @@ import com.example.bikini_android.util.ktx.get
 object DeveloperSettingImpl : DeveloperSetting {
     private fun getServerType(): ServerType {
         with(AppResources.getSharedPref()) {
-            val serverType = get(AppResources.getStringResId(R.string.perf_server_type), "DEV")
+            val serverType = get(AppResources.getString(R.string.perf_server_type), "DEV")
             return ServerType.valueOf(serverType)
         }
     }

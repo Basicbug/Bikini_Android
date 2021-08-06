@@ -22,6 +22,7 @@ import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
+import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
@@ -105,15 +106,15 @@ class BikiniMapFragment : BaseMapFragment() {
                         this
                     )
                 setOnClusterClickListener { cluster ->
-                    cluster?.items?.first()?.let {
-                        navigateNearLocationFeeds(it)
+                    cluster?.items?.let { feeds ->
+                        navigateNearLocationFeeds(feeds.toList())
                         true
                     }
                     false
                 }
                 setOnClusterItemClickListener { item ->
                     item?.let {
-                        navigateNearLocationFeeds(it)
+                        navigateNearLocationFeeds(listOf(it))
                         true
                     }
                     false
@@ -123,15 +124,18 @@ class BikiniMapFragment : BaseMapFragment() {
         }
     }
 
-    private fun navigateNearLocationFeeds(pivotFeed: Feed) {
-        getNavigationHelper()?.navigateToBikiniFeeds(
-            FeedsFragment.makeBundle(
-                RecyclerViewLayoutType.GRID,
-                MAP_FEEDS_TYPE,
-                FeedsSortType.NEAR_DISTANCE,
-                pivotFeed
+    private fun navigateNearLocationFeeds(feeds: List<Feed>) {
+        if (feeds.isNotEmpty()) {
+            getNavigationHelper()?.navigateToBikiniFeeds(
+                FeedsFragment.makeBundle(
+                    RecyclerViewLayoutType.GRID,
+                    MAP_FEEDS_TYPE,
+                    FeedsSortType.NEAR_DISTANCE,
+                    feeds.first(),
+                    feeds
+                )
             )
-        )
+        }
     }
 
     private fun observeEvent() {

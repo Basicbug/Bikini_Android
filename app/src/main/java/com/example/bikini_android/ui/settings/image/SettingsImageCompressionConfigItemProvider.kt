@@ -20,7 +20,7 @@ import com.jakewharton.rxrelay2.Relay
  */
 object SettingsImageCompressionConfigItemProvider {
     fun createImageCompressionHeadItem(): ItemViewModel {
-        return SettingsTitleItemViewModel.Builder(AppResources.getStringResId(R.string.settings_image_compression_title))
+        return SettingsTitleItemViewModel.Builder(AppResources.getString(R.string.settings_image_compression_title))
             .build()
     }
 
@@ -28,7 +28,7 @@ object SettingsImageCompressionConfigItemProvider {
         val result = mutableListOf<SettingsCheckItemViewModel>()
         for (imageCompressionRate in SettingsImageCompressionRate.values()) {
             result.add(
-                SettingsCheckItemViewModel.Builder(AppResources.getStringResId(imageCompressionRate.stringResId))
+                SettingsCheckItemViewModel.Builder(AppResources.getString(imageCompressionRate.stringResId))
                     .setOnClickAction {
                         itemEventRelay.accept(
                             SettingsImageCompressionViewModel.SettingsImageCompressionRateEvent(

@@ -1,11 +1,11 @@
 /*
- * TestShcedulerProvider.kt 2021. 6. 22
+ * TestSchedulerProvider.kt 2021. 7. 13
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android.ui.provider
+package com.example.bikini_android.util.rx
 
 import io.reactivex.schedulers.TestScheduler
 

@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Bikini_Android" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!--common-->
+        <item name="bottomSheetBackgroundColor">@color/black</item>
         <item name="bottomNavigationBackgroundColor">@color/black</item>
         <item name="toolbarBackgroundColor">@color/black</item>
         <item name="android:colorPrimaryDark" tools:targetApi="lollipop">@color/black</item>
@@ -16,8 +17,14 @@
         <item name="splashTintColor">@color/white</item>
         <!--feed-->
         <item name="locationButtonTintColor">@color/white_opa70</item>
+        <!--board-->
+        <item name="boardBottomSheetImageTintColor">@color/white_opa70</item>
+
         <!--settings-->
         <item name="settingsDefaultButtonColor">@color/white_opa70</item>
         <item name="settingsCheckColor">@color/purple_500</item>
+    </style>
+    <style name="Theme.Design.BikiniBottomSheet" parent="Theme.Design.BottomSheetBase">
+       <item name="android:windowLightNavigationBar">false</item>
     </style>
 </resources>

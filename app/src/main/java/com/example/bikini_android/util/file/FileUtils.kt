@@ -8,10 +8,12 @@
 package com.example.bikini_android.util.file
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Environment
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.manager.PreferenceManager
@@ -28,6 +30,7 @@ import java.io.FileOutputStream
 object FileUtils {
     private const val LOCAL_IMAGE_NAME = "localImgFile"
     private const val DEFAULT_IMAGE_FILE_TYPE = ".jpeg"
+
     fun checkReadExternalStoragePermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             AppResources.getContext(),
@@ -35,7 +38,26 @@ object FileUtils {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun getImageFiles(imageUris: List<Uri>): List<MultipartBody.Part> {
+    fun getCameraImageFile(): File? {
+        val files = AppResources.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return files?.listFiles()?.last()
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun createCameraImageFile(): File {
+        val storageDir: File? =
+            AppResources.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        storageDir?.deleteOnExit()
+        return File.createTempFile(
+            "JPEG_capture", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            deleteOnExit()
+        }
+    }
+
+    fun getImageMultiParts(imageUris: List<Uri>): List<MultipartBody.Part> {
         val imageFiles: MutableList<MultipartBody.Part> = mutableListOf()
         return imageFiles.apply {
             imageUris.forEach { imageUri ->

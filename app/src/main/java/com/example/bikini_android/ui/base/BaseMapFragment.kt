@@ -11,6 +11,7 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bikini_android.ui.dialog.DialogController
 import com.example.bikini_android.ui.map.MapLocationChangeEvent
 import com.example.bikini_android.ui.map.viewmodel.MapViewModel
 import com.example.bikini_android.util.bus.RxAction
@@ -114,8 +115,9 @@ abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun showMissingPermissionError() {
-        PermissionUtils.PermissionDeniedDialog.newInstance(true)
-            .show(requireActivity().supportFragmentManager, "dialog")
+        activity?.let {
+            DialogController.showDeniedDialog(it, true)
+        }
     }
 
     private fun initMap() {

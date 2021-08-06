@@ -33,8 +33,8 @@ class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
         this.itemEventRelay = itemEventRelay
     }
 
-    fun navigateToGallery() {
-        itemEventRelay?.accept(EventType.NAVIGATE_GALLERY)
+    fun navigateToSelectImageMethod() {
+        itemEventRelay?.accept(EventType.NAVIGATE_SELECT_IMAGE_METHOD)
     }
 
     fun postFeed() {
@@ -48,6 +48,6 @@ class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
     }
 
     enum class EventType : RxAction {
-        NAVIGATE_GALLERY, POST_FEED, FINISH;
+        NAVIGATE_SELECT_IMAGE_METHOD, POST_FEED, FINISH;
     }
 }
