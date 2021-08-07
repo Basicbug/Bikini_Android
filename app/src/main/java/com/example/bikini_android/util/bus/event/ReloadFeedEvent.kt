@@ -12,4 +12,4 @@ import com.example.bikini_android.util.bus.RxAction
 /**
  * @author MyeongKi
  */
-class RefreshFeedEvent : RxAction
+class ReloadFeedEvent : RxAction

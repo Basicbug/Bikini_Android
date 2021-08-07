@@ -14,5 +14,5 @@ import com.example.bikini_android.repository.feed.FeedRepositoryInjector
  */
 
 class LoadUserFeedsUseCase {
-    private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
+    private val feedsRepository = FeedRepositoryInjector.getFeedRepository()
 }

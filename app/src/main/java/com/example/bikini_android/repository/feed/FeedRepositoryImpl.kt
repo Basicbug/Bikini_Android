@@ -13,6 +13,8 @@ import com.example.bikini_android.network.request.param.NearbyFeedParameter
 import com.example.bikini_android.network.request.service.FeedService
 import com.example.bikini_android.network.request.service.ImagesService
 import com.example.bikini_android.network.response.DefaultResponse
+import com.example.bikini_android.repository.likes.Likes
+import com.example.bikini_android.repository.likes.LikesRepositoryInjector
 import com.example.bikini_android.util.error.ErrorToastHelper
 import com.example.bikini_android.util.logging.Logger
 import com.google.android.gms.maps.model.LatLng
@@ -25,6 +27,7 @@ import okhttp3.MultipartBody
  */
 
 class FeedRepositoryImpl private constructor() : FeedRepository {
+    private val likesRepository = LikesRepositoryInjector.getLikesRepository(Likes.TargetType.FEED)
     private val logger: Logger by lazy(LazyThreadSafetyMode.NONE) {
         Logger().apply {
             TAG = "FeedRepositoryImpl"
@@ -39,6 +42,19 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .map {
                 it.result?.feeds
             }
+            .flattenAsFlowable { it }
+            .flatMap { feed ->
+                likesRepository
+                    .checkLikes(feed.feedId)
+                    .doOnSuccess {
+                        feed.likes = it
+                    }
+                    .map {
+                        feed
+                    }
+                    .toFlowable()
+            }
+            .toList()
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
                 emptyList()
@@ -53,6 +69,19 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .map {
                 it.result?.feeds
             }
+            .flattenAsFlowable { it }
+            .flatMap { feed ->
+                likesRepository
+                    .checkLikes(feed.feedId)
+                    .doOnSuccess {
+                        feed.likes = it
+                    }
+                    .map {
+                        feed
+                    }
+                    .toFlowable()
+            }
+            .toList()
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
                 emptyList()
@@ -67,6 +96,19 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .map {
                 it.result?.feeds
             }
+            .flattenAsFlowable { it }
+            .flatMap { feed ->
+                likesRepository
+                    .checkLikes(feed.feedId)
+                    .doOnSuccess {
+                        feed.likes = it
+                    }
+                    .map {
+                        feed
+                    }
+                    .toFlowable()
+            }
+            .toList()
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
                 emptyList()
@@ -86,6 +128,19 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .map {
                 it.result?.feeds
             }
+            .flattenAsFlowable { it }
+            .flatMap { feed ->
+                likesRepository
+                    .checkLikes(feed.feedId)
+                    .doOnSuccess {
+                        feed.likes = it
+                    }
+                    .map {
+                        feed
+                    }
+                    .toFlowable()
+            }
+            .toList()
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
                 emptyList()

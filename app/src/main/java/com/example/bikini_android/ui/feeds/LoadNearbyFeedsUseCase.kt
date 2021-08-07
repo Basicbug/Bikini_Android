@@ -9,6 +9,8 @@ package com.example.bikini_android.ui.feeds
 
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
+import com.example.bikini_android.repository.likes.Likes
+import com.example.bikini_android.repository.likes.LikesRepositoryInjector
 import com.example.bikini_android.sort.SortFeedCriteriaProvider
 import com.example.bikini_android.sort.SortFeedExecutor
 import com.example.bikini_android.sort.SortTarget
@@ -16,6 +18,7 @@ import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
+import com.example.bikini_android.util.rx.toSingleFromCallable
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.disposables.CompositeDisposable
@@ -32,7 +35,7 @@ class LoadNearbyFeedsUseCase(
     private val logger = Logger().apply {
         TAG = this@LoadNearbyFeedsUseCase.javaClass.simpleName
     }
-    private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
+    private val feedsRepository = FeedRepositoryInjector.getFeedRepository()
     private var nearbyFeedsInfoCached: NearbyFeedsInfo? = null
 
     override fun execute(lastFeedsRendered: List<Feed>) {

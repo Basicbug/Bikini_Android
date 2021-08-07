@@ -13,6 +13,7 @@ import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.LoadFeedsUseCase
+import com.example.bikini_android.ui.likes.LikesViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.model.LatLng
@@ -37,6 +38,7 @@ abstract class FeedsViewModel(
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     protected val disposables: CompositeDisposable = CompositeDisposable()
     open lateinit var loadFeedsUseCase: LoadFeedsUseCase
+    val likeViewModel = LikesViewModel(disposables, itemEventRelay)
 
     init {
         itemEventRelay
@@ -59,7 +61,7 @@ abstract class FeedsViewModel(
         loadFeedsUseCase.execute(latLng, radius)
     }
 
-    fun refreshFeeds() {
+    fun reloadFeeds() {
         loadFeedsUseCase.execute()
     }
 

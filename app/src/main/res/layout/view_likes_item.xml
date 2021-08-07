@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ view_like_item.xml 2021. 8. 7
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.bikini_android.ui.likes.LikesItemViewModel" />
+
+    </data>
+    <ImageView
+        android:src="@drawable/like_selector"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{()->viewmodel.onClickLikes()}"
+        app:isLike="@{viewmodel.liked}"
+        />
+</layout>

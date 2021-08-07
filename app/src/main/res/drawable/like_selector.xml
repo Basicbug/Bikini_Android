@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ like_selector.xml 2021. 8. 7
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_selected="false"
+        android:drawable="@drawable/ic_heart" />
+    <item
+        android:state_selected="true"
+        android:drawable="@drawable/ic_heart_full_color" />
+</selector>

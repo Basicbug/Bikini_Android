@@ -33,7 +33,7 @@
     <dimen name="feed_badge_text_size">12dp</dimen>
     <dimen name="grid_feed_image_size">200dp</dimen>
     <dimen name="feed_location_button_size">35dp</dimen>
-
+    <dimen name="feed_like_size">23dp</dimen>
     <!--setting-->
     <dimen name="content_item_height">48dp</dimen>
     <dimen name="arrow_height">20dp</dimen>
@@ -50,5 +50,6 @@
     <!--login-->
     <dimen name="login_button_width">128dp</dimen>
     <dimen name="login_button_height">48dp</dimen>
+
 
 </resources>

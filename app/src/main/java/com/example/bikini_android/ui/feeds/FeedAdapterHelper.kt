@@ -48,11 +48,9 @@ class FeedAdapterHelper(
     private fun getFeedItemViewModel(feed: Feed): FeedItemViewModel {
         return when (layoutType) {
             RecyclerViewLayoutType.HORIZONTAL, RecyclerViewLayoutType.GRID ->
-                FeedGridItemViewModel(feed)
+                FeedGridItemViewModel(feed, itemEventRelay)
             RecyclerViewLayoutType.VERTICAL ->
-                FeedVerticalItemViewModel(feed)
-        }.apply {
-            itemEventRelay = this@FeedAdapterHelper.itemEventRelay
+                FeedVerticalItemViewModel(feed, itemEventRelay)
         }
     }
 
