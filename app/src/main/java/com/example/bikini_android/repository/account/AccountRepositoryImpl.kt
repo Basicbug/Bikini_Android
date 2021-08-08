@@ -3,6 +3,7 @@ package com.example.bikini_android.repository.account
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.UserService
+import com.example.bikini_android.network.response.MyInfoReponse
 import com.example.bikini_android.util.error.ErrorToastHelper
 import com.example.bikini_android.util.logging.Logger
 import io.reactivex.Single
@@ -25,7 +26,7 @@ object AccountRepositoryImpl : AccountRepository {
             .updateUserInfo(LoginManagerProxy.jwt, userInfo)
             .subscribeOn(Schedulers.io())
             .map {
-                it.code
+                it.message
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
@@ -33,13 +34,13 @@ object AccountRepositoryImpl : AccountRepository {
             }
     }
 
-    override fun getMyInfoFromRemote(): Single<String?> {
+    override fun getMyInfoFromRemote(): Single<MyInfoReponse?> {
         return ApiClientHelper
             .createMainApiByService(UserService::class)
             .getMyInfo(LoginManagerProxy.jwt)
             .subscribeOn(Schedulers.io())
             .map {
-                it.result?.userName
+                it
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)

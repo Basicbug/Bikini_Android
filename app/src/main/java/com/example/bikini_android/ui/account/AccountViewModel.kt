@@ -36,7 +36,7 @@ class AccountViewModel : BaseViewModel() {
                 .getUserFromRemote(UserInfo(accountInitItem.nickname.get()!!))
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    if (it == "1000") {
+                    if (it == "SUCCESS") {
                         itemEventRelay.accept(EventType.UPDATE_SUCCEED)
                         ToastHelper.show("성공")
                         progressViewModel.isVisible = false

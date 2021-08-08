@@ -51,7 +51,6 @@ class AccountInitActivity : BaseActivity() {
                     else -> throw IllegalStateException("Undefined type")
                 }
 
-                startActivity(Intent(this, MainHolderActivity::class.java))
                 finish()
             }
             .addTo(disposables)

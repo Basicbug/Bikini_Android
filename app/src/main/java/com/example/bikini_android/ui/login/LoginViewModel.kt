@@ -4,9 +4,9 @@ import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
+import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.DefaultSchedulerProvider
 import com.example.bikini_android.util.rx.SchedulerProvider
-import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -75,7 +75,7 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe({
 
-                if (it == "1000") {
+                if (it?.code == "1000") {
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)
