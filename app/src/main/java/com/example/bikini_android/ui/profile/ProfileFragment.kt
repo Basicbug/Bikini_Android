@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileBinding
+import com.example.bikini_android.manager.AccountManager
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.board.BoardActivity
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
@@ -19,12 +20,12 @@ import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.DefaultListAdapter
 import com.example.bikini_android.ui.feeds.FeedAdapterHelper
 import com.example.bikini_android.ui.feeds.FeedGridItemViewModel
+import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.feeds.FeedsSortType
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
-import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.RefreshFeedEvent
@@ -88,6 +89,11 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         feedsViewModel.loadFeeds()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        profileViewModel.profileItemViewModel.userId = AccountManager.userName
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
