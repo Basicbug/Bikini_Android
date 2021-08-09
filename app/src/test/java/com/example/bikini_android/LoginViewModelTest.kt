@@ -66,10 +66,10 @@ class LoginViewModelTest {
         viewModel.sendTokenToServer(Mockito.anyString())
         var isCompleteEventInvoked = false
         viewModel.itemEventRelay
-            .ofType(LoginViewModel.CompleteEvent::class.java)
+            .ofType(LoginViewModel.EventType::class.java)
             .observeOn(testSchedulerProvider.testScheduler)
             .subscribe {
-                isCompleteEventInvoked = true
+                isCompleteEventInvoked = it == LoginViewModel.EventType.COMPLETE
             }
         testSchedulerProvider.testScheduler.triggerActions()
         Assert.assertTrue(isCompleteEventInvoked)
