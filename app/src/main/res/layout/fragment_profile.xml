@@ -16,13 +16,13 @@
         android:layout_marginBottom="@dimen/bottom_navigation_height">
 
         <include
-            layout="@layout/view_profile_item"
             android:id="@+id/profile_item_layout"
-            app:viewmodel="@{viewmodel.profileItemViewModel}"
-            app:layout_constraintStart_toStartOf="parent"
+            layout="@layout/view_profile_item"
+            app:layout_constraintBottom_toTopOf="@id/division_line"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/division_line" />
+            app:viewmodel="@{viewmodel.profileItemViewModel}" />
 
         <View
             android:id="@+id/division_line"
