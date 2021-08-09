@@ -1,5 +1,6 @@
 package com.example.bikini_android.ui.login
 
+import com.example.bikini_android.manager.AccountManager
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.ui.base.BaseViewModel
@@ -75,7 +76,8 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe({
 
-                if (it?.code == "1000") {
+                if (it?.code == SUCCESS_CODE && it.result != null) {
+                    AccountManager.userName = it.result.userName
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)
@@ -89,5 +91,9 @@ class LoginViewModel @Inject constructor(
 
     enum class EventType : RxAction {
         COMPLETE, ALREADY_EXIST, NO_INFO
+    }
+
+    companion object {
+        private const val SUCCESS_CODE = "1000"
     }
 }
