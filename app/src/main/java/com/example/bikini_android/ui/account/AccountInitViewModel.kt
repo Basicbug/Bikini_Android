@@ -1,7 +1,9 @@
 package com.example.bikini_android.ui.account
 
-import android.util.Log
+import com.example.bikini_android.BuildConfig
+import com.example.bikini_android.R
 import com.example.bikini_android.app.ToastHelper
+import com.example.bikini_android.manager.AccountManager
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.repository.account.UserInfo
 import com.example.bikini_android.ui.base.BaseViewModel
@@ -17,7 +19,7 @@ import io.reactivex.schedulers.Schedulers
  * @author bsgreentea
  */
 
-class AccountViewModel : BaseViewModel() {
+class AccountInitViewModel : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables = CompositeDisposable()
@@ -27,7 +29,7 @@ class AccountViewModel : BaseViewModel() {
     fun setUserName() {
 
         if (accountInitItem.nickname.get().isNullOrBlank()) {
-            ToastHelper.show("입력하라고")
+            ToastHelper.show(R.string.empty_input_box)
         } else {
 
             progressViewModel.isVisible = true
@@ -36,14 +38,18 @@ class AccountViewModel : BaseViewModel() {
                 .getUserFromRemote(UserInfo(accountInitItem.nickname.get()!!))
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    if (it == "SUCCESS") {
+                    if (it == SUCCESS_MESSAGE) {
+                        AccountManager.userName = accountInitItem.nickname.get()!!
                         itemEventRelay.accept(EventType.UPDATE_SUCCEED)
                         ToastHelper.show("성공")
                         progressViewModel.isVisible = false
                     }
                 }, {
-                    Log.e("asdf", it.toString())
-                    ToastHelper.show(it.toString())
+                    if (BuildConfig.DEBUG) {
+                        ToastHelper.show(it.toString())
+                    } else {
+                        ToastHelper.show(R.string.unknown_error_message)
+                    }
                     progressViewModel.isVisible = false
                 })
                 .addTo(disposables)
@@ -52,5 +58,9 @@ class AccountViewModel : BaseViewModel() {
 
     enum class EventType : RxAction {
         UPDATE_SUCCEED
+    }
+
+    companion object {
+        private const val SUCCESS_MESSAGE = "SUCCESS"
     }
 }

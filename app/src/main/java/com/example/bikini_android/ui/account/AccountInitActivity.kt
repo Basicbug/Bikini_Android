@@ -19,14 +19,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class AccountInitActivity : BaseActivity() {
 
     lateinit var binding: ActivityAccountInitBinding
-    private lateinit var viewModel: AccountViewModel
+    private lateinit var viewModel: AccountInitViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_account_init)
-        viewModel = ViewModelProvider(this)[AccountViewModel::class.java]
+        viewModel = ViewModelProvider(this)[AccountInitViewModel::class.java]
 
         binding.apply {
             viewmodel = viewModel
@@ -40,12 +40,12 @@ class AccountInitActivity : BaseActivity() {
 
     private fun setUpObserver() {
         itemEventRelay
-            .ofType(AccountViewModel.EventType::class.java)
+            .ofType(AccountInitViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { type ->
 
                 when (type) {
-                    AccountViewModel.EventType.UPDATE_SUCCEED -> {
+                    AccountInitViewModel.EventType.UPDATE_SUCCEED -> {
                         startMainHolder()
                     }
                     else -> throw IllegalStateException("Undefined type")
