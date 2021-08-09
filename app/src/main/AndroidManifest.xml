@@ -62,6 +62,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.account.AccountInitActivity"/>
+        <activity android:name=".ui.account.AccountSettingActivity"/>
     </application>
 
 </manifest>
