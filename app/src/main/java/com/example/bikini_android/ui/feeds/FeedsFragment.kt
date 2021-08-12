@@ -53,8 +53,16 @@ class FeedsFragment : BaseFragment() {
                 it.getString(KEY_SORT_TYPE_NAME) ?: FeedsSortType.NEAR_DISTANCE.name
             )
 
-            @Suppress("UNCHECKED_CAST")
-            feedsReceived = (it.getParcelableArray(KEY_FEEDS) as Array<Feed>?)?.toList()
+            val feedsParcelableArray = it.getParcelableArray(KEY_FEEDS)
+            feedsParcelableArray?.let {
+                val tempFeeds = mutableListOf<Feed>()
+                feedsParcelableArray.forEach { feedParcelable ->
+                    (feedParcelable as? Feed)?.let { feed ->
+                        tempFeeds.add(feed)
+                    }
+                }
+                feedsReceived = tempFeeds
+            }
         }
     }
 
@@ -110,7 +118,8 @@ class FeedsFragment : BaseFragment() {
                         RecyclerViewLayoutType.VERTICAL,
                         feedsType,
                         sortType,
-                        event.feed
+                        event.feed,
+                        feedsReceived
                     )
                 )
             }.addTo(disposables)
