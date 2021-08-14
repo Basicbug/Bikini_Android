@@ -140,7 +140,7 @@ dependencies {
     debugImplementation leakcanary_libraries.values()
     debugImplementation flipper_libraries_debug.values()
 
-    releaseImplementation flipper_libraries_release.values()
+    implementation flipper_libraries.values()
 
     implementation hilt_libraries.values()
     kapt hilt_annotion.values()
