@@ -10,4 +10,4 @@ package com.example.bikini_android.network.client
 /**
  * @author MyeongKi
  */
-class BikiniDefaultApiClient(baseUrl: String) : RestApiClient(baseUrl)
+class DefaultApiClient(baseUrl: String) : RestApiClient(baseUrl)

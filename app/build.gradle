@@ -125,8 +125,6 @@ dependencies {
 
     implementation network_libraries.values()
 
-    implementation debugger_libraries.values()
-
     implementation design_libraries.values()
 
     implementation rx_java_libraries.values()

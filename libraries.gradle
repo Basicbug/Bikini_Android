@@ -11,7 +11,6 @@ ext {
     def recyclerview_version = '1.1.0'
     def glide_version = '4.11.0'
     def room_version = '2.2.3'
-    def stetho_version = '1.5.1'
     def material_version = '1.1.0'
     def firebase_analytics_version = '17.2.2'
     def firebase_messaging_version = '20.1.0'
@@ -87,10 +86,6 @@ ext {
             room_annotation: "androidx.room:room-compiler:$room_version",
     ]
 
-    debugger_libraries = [
-            stetho_main: "com.facebook.stetho:stetho-okhttp3:$stetho_version",
-            stetho     : "com.facebook.stetho:stetho-okhttp3:$stetho_version",
-    ]
 
     firebase_libraries = [
             firebase_analytics: "com.google.firebase:firebase-analytics:$firebase_analytics_version",
