@@ -3,12 +3,13 @@ package com.example.bikini_android.ui.account
 import com.example.bikini_android.BuildConfig
 import com.example.bikini_android.R
 import com.example.bikini_android.app.ToastHelper
-import com.example.bikini_android.manager.AccountManager
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.repository.account.UserInfo
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.ktx.isNullOrBlank
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -28,7 +29,7 @@ class AccountInitViewModel : BaseViewModel() {
 
     fun setUserName() {
 
-        if (accountInitItem.nickname.get().isNullOrBlank()) {
+        if (accountInitItem.nickname.isNullOrBlank()) {
             ToastHelper.show(R.string.empty_input_box)
         } else {
 
@@ -39,7 +40,7 @@ class AccountInitViewModel : BaseViewModel() {
                 .subscribeOn(Schedulers.io())
                 .subscribe({
                     if (it == SUCCESS_MESSAGE) {
-                        AccountManager.userName = accountInitItem.nickname.get()!!
+                        LoginManagerProxy.userName = accountInitItem.nickname.get()!!
                         itemEventRelay.accept(EventType.UPDATE_SUCCEED)
                         ToastHelper.show("성공")
                         progressViewModel.isVisible = false
@@ -54,6 +55,11 @@ class AccountInitViewModel : BaseViewModel() {
                 })
                 .addTo(disposables)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
     }
 
     enum class EventType : RxAction {

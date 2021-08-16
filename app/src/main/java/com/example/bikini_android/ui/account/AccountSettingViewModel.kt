@@ -3,7 +3,7 @@ package com.example.bikini_android.ui.account
 import com.example.bikini_android.BuildConfig
 import com.example.bikini_android.R
 import com.example.bikini_android.app.ToastHelper
-import com.example.bikini_android.manager.AccountManager
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.repository.account.UserInfo
 import com.example.bikini_android.ui.base.BaseViewModel
@@ -25,7 +25,7 @@ class AccountSettingViewModel : BaseViewModel() {
     val accountSettingItem = AccountSettingItemViewModel()
     val progressViewModel = ProgressItemViewModel()
 
-    val prevUserName = AccountManager.userName
+    val prevUserName = LoginManagerProxy.userName
 
     fun setUserName() {
 
@@ -40,7 +40,7 @@ class AccountSettingViewModel : BaseViewModel() {
                 .subscribeOn(Schedulers.io())
                 .subscribe({
                     if (it == SUCCESS_MESSAGE) {
-                        AccountManager.userName = accountSettingItem.nickname.get()!!
+                        LoginManagerProxy.userName = accountSettingItem.nickname.get()!!
                         itemEventRelay.accept(EventType.UPDATE_SUCCEED)
                         ToastHelper.show("성공")
                         progressViewModel.isVisible = false
@@ -55,6 +55,11 @@ class AccountSettingViewModel : BaseViewModel() {
                 })
                 .addTo(disposables)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
     }
 
     enum class EventType : RxAction {
