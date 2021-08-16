@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileBinding
-import com.example.bikini_android.manager.AccountManager
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.board.BoardActivity
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
@@ -93,7 +93,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        profileViewModel.profileItemViewModel.userId = AccountManager.userName
+        profileViewModel.profileItemViewModel.userId = LoginManagerProxy.userName
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

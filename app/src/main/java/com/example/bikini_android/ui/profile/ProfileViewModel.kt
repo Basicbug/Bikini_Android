@@ -1,6 +1,6 @@
 package com.example.bikini_android.ui.profile
 
-import com.example.bikini_android.manager.AccountManager
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.PublishRelay
@@ -10,7 +10,7 @@ class ProfileViewModel : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     val profileItemViewModel = ProfileItemViewModel().apply {
-        userId = AccountManager.userName
+        userId = LoginManagerProxy.userName
     }
 
     fun openBoard() {

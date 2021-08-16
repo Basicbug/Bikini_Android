@@ -1,6 +1,5 @@
 package com.example.bikini_android.ui.login
 
-import com.example.bikini_android.manager.AccountManager
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.ui.base.BaseViewModel
@@ -76,8 +75,8 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe({
 
-                if (it?.code == SUCCESS_CODE && it.result != null) {
-                    AccountManager.userName = it.result.userName
+                if (it?.code == SUCCESS_CODE && it.result?.userInfo != null) {
+                    LoginManagerProxy.userName = it.result.userInfo.userName
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)
