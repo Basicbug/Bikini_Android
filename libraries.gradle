@@ -11,7 +11,6 @@ ext {
     def recyclerview_version = '1.1.0'
     def glide_version = '4.11.0'
     def room_version = '2.2.3'
-    def stetho_version = '1.5.1'
     def material_version = '1.1.0'
     def firebase_analytics_version = '17.2.2'
     def firebase_messaging_version = '20.1.0'
@@ -36,7 +35,6 @@ ext {
     def kakao_id_login_version = '2.4.2'
     def flipper_version = '0.83.0'
     def soloader_version = '0.10.1'
-    def okhttp_version = '4.9.1'
     def hilt_version = '2.37'
     def mockito_version = '3.8.0'
 
@@ -68,7 +66,6 @@ ext {
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
-            okhttp                 : "com.squareup.okhttp3:okhttp:$okhttp_version",
     ]
 
     image_libraries = [
@@ -89,10 +86,6 @@ ext {
             room_annotation: "androidx.room:room-compiler:$room_version",
     ]
 
-    debugger_libraries = [
-            stetho_main: "com.facebook.stetho:stetho-okhttp3:$stetho_version",
-            stetho     : "com.facebook.stetho:stetho-okhttp3:$stetho_version",
-    ]
 
     firebase_libraries = [
             firebase_analytics: "com.google.firebase:firebase-analytics:$firebase_analytics_version",
@@ -139,13 +132,13 @@ ext {
     ]
 
     flipper_libraries_debug = [
-            flipper       : "com.facebook.flipper:flipper:$flipper_version",
-            soloader      : "com.facebook.soloader:soloader:$soloader_version",
-            network_plugin: "com.facebook.flipper:flipper-network-plugin:$flipper_version",
+            flipper            : "com.facebook.flipper:flipper:$flipper_version",
+            soloader           : "com.facebook.soloader:soloader:$soloader_version",
+            flipper_leak_canary: "com.facebook.flipper:flipper-leakcanary2-plugin:$flipper_version"
     ]
 
-    flipper_libraries_release = [
-            noop: "com.facebook.flipper:flipper-noop:$flipper_version",
+    flipper_libraries = [
+            network_plugin: "com.facebook.flipper:flipper-network-plugin:$flipper_version",
     ]
 
     hilt_libraries = [
