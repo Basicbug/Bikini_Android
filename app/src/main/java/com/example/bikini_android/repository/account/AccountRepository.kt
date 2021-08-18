@@ -12,5 +12,5 @@ interface AccountRepository {
         userInfo: UserInfo,
     ): Single<String?>
 
-    fun getMyInfoFromRemote(): Single<MyInfoReponse?>
+    fun getMyInfoFromRemote(): Single<Pair<UserInfo?, String>>
 }

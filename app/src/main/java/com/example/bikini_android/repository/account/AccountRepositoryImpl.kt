@@ -34,13 +34,13 @@ object AccountRepositoryImpl : AccountRepository {
             }
     }
 
-    override fun getMyInfoFromRemote(): Single<MyInfoReponse?> {
+    override fun getMyInfoFromRemote(): Single<Pair<UserInfo?, String>> {
         return ApiClientHelper
             .createMainApiByService(UserService::class)
             .getMyInfo(LoginManagerProxy.jwt)
             .subscribeOn(Schedulers.io())
             .map {
-                it
+                Pair(it.result, it.code)
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)

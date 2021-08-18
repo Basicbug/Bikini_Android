@@ -5,8 +5,4 @@ import com.example.bikini_android.repository.account.UserInfo
 /**
  * @author bsgreentea
  */
-class MyInfoReponse : JsonResponseWrapper<MyInfoReponse.Result>() {
-    data class Result(
-        val userInfo: UserInfo
-    )
-}
+class MyInfoReponse : JsonResponseWrapper<UserInfo>()

@@ -74,9 +74,8 @@ class LoginViewModel @Inject constructor(
             .getMyInfoFromRemote()
             .subscribeOn(Schedulers.io())
             .subscribe({
-
-                if (it?.code == SUCCESS_CODE && it.result?.userInfo != null) {
-                    LoginManagerProxy.userName = it.result.userInfo.userName
+                if (it?.second == SUCCESS_CODE && it.first != null) {
+                    LoginManagerProxy.userName = it.first!!.userName
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)
