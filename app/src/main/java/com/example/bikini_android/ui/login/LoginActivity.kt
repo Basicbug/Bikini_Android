@@ -69,8 +69,7 @@ class LoginActivity : BaseActivity() {
                         startActivity(Intent(this, AccountInitActivity::class.java))
                         finish()
                     }
-                    else -> {
-                    }
+                    else -> Unit
                 }
 
             }
