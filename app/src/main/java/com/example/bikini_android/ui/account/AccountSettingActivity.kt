@@ -24,7 +24,10 @@ class AccountSettingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_account_setting)
-        viewModel = ViewModelProvider(this)[AccountSettingViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            AccountViewModelFactory(AccountSettingItemViewModel())
+        )[AccountSettingViewModel::class.java]
 
         binding.apply {
             viewmodel = viewModel

@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.account.AccountInitViewModel" />
+            type="com.example.bikini_android.ui.account.AccountSettingViewModel" />
 
     </data>
 
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/message_input_nick"
-                android:text="@={viewmodel.accountInitItem.nickname}" />
+                android:text="@={viewmodel.accountItem.nickname}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

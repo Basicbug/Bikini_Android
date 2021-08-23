@@ -7,9 +7,9 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
 /**
  * @author bsgreentea
  */
-class AccountInitItemViewModel : ItemViewModel() {
+class AccountInitItemViewModel : ItemViewModel(), AccountItemViewModel {
 
-    val nickname = ObservableField<String>()
+    override val nickname = ObservableField<String>()
 
     override fun getLayoutRes(): Int {
         return R.layout.activity_account_init
