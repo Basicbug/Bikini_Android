@@ -3,7 +3,6 @@ package com.example.bikini_android.repository.account
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.UserService
-import com.example.bikini_android.network.response.MyInfoReponse
 import com.example.bikini_android.util.error.ErrorToastHelper
 import com.example.bikini_android.util.logging.Logger
 import io.reactivex.Single

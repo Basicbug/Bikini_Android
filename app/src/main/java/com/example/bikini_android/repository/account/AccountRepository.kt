@@ -1,6 +1,5 @@
 package com.example.bikini_android.repository.account
 
-import com.example.bikini_android.network.response.MyInfoReponse
 import io.reactivex.Single
 
 /**
