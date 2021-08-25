@@ -41,7 +41,7 @@ class LoginViewModelTest {
     @Mock
     lateinit var accountRepository: AccountRepositoryImpl
 
-    val testSchedulerProvider = TestSchedulerProvider()
+    private val testSchedulerProvider = TestSchedulerProvider()
 
     @Before
     fun setup() {
