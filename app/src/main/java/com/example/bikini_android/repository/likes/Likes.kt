@@ -9,6 +9,7 @@ package com.example.bikini_android.repository.likes
 
 import android.os.Parcelable
 import androidx.annotation.Keep
+import androidx.annotation.StringDef
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -18,20 +19,18 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Likes(
     var targetId: String = "",
-    var targetType: TargetType,
+    @LikesTargetType
+    var targetType: String,
     var liked: Boolean = false
-) : Parcelable {
-    enum class TargetType(val type: String) {
-        NONE("NONE"),
-        FEED("FEED");
-    }
-}
+) : Parcelable
 
-fun String.convertLikesTargetType(): Likes.TargetType {
-    Likes.TargetType.values().forEach {
-        if (it.type == this) {
-            return it
-        }
+@StringDef(
+    LikesTargetType.FEED,
+    LikesTargetType.NONE
+)
+annotation class LikesTargetType {
+    companion object {
+        const val FEED = "FEED"
+        const val NONE = "NONE"
     }
-    return Likes.TargetType.NONE
 }

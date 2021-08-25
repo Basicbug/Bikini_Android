@@ -13,9 +13,9 @@ import java.lang.IllegalArgumentException
  * @author MyeongKi
  */
 object LikesRepositoryInjector {
-    fun getLikesRepository(targetType: Likes.TargetType): LikesRepository {
+    fun getLikesRepository(@LikesTargetType targetType: String): LikesRepository {
         when(targetType){
-            Likes.TargetType.FEED->{
+            LikesTargetType.FEED->{
                 return LikesFeedRepository.getInstance()
             }
             else->{

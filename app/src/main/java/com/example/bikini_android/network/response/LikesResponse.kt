@@ -8,7 +8,7 @@
 package com.example.bikini_android.network.response
 
 import com.example.bikini_android.repository.likes.Likes
-import com.example.bikini_android.repository.likes.convertLikesTargetType
+import com.example.bikini_android.repository.likes.LikesTargetType
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -21,10 +21,11 @@ class LikesResponse : JsonResponseWrapper<LikesResponse.Result>() {
         @SerializedName("targetId")
         val targetId: String,
         @SerializedName("targetType")
+        @LikesTargetType
         val targetType: String
     )
 }
 
 fun LikesResponse.Result.convertLikes(): Likes {
-    return Likes(targetId, targetType.convertLikesTargetType(), liked)
+    return Likes(targetId, targetType, liked)
 }

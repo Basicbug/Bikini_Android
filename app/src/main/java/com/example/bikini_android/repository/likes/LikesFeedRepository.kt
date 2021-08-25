@@ -70,7 +70,7 @@ class LikesFeedRepository private constructor() : LikesRepository {
     }
 
     private fun getLikesParameter(targetId: String): LikesParameter = LikesParameter().apply {
-        setLikesParameter(targetId, Likes.TargetType.FEED)
+        setLikesParameter(targetId, LikesTargetType.FEED)
     }
 
     companion object {

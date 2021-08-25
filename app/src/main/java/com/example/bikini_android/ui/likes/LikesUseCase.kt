@@ -8,9 +8,9 @@
 package com.example.bikini_android.ui.likes
 
 import com.example.bikini_android.manager.likes.LikesCacheManager
-import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.repository.likes.LikesRepository
 import com.example.bikini_android.repository.likes.LikesRepositoryInjector
+import com.example.bikini_android.repository.likes.LikesTargetType
 import com.example.bikini_android.util.rx.addTo
 import io.reactivex.disposables.CompositeDisposable
 
@@ -35,7 +35,7 @@ class LikesUseCase(
     private fun addLikes(item: LikesItemViewModel) {
         getLikesRepository(item.targetType)
             .addLikes(item.targetId)
-            .subscribe { result->
+            .subscribe { result ->
                 result?.let {
                     LikesCacheManager.cacheLikes(result)
                     item.liked = result.liked
@@ -47,7 +47,7 @@ class LikesUseCase(
     private fun removeLikes(item: LikesItemViewModel) {
         getLikesRepository(item.targetType)
             .removeLikes(item.targetId)
-            .subscribe { result->
+            .subscribe { result ->
                 result?.let {
                     LikesCacheManager.cacheLikes(result)
                     item.liked = result.liked
@@ -56,7 +56,7 @@ class LikesUseCase(
             .addTo(disposables)
     }
 
-    private fun getLikesRepository(targetType: Likes.TargetType): LikesRepository {
+    private fun getLikesRepository(@LikesTargetType targetType: String): LikesRepository {
         return LikesRepositoryInjector.getLikesRepository(targetType)
     }
 }

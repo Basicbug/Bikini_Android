@@ -7,14 +7,14 @@
 
 package com.example.bikini_android.network.request.param
 
-import com.example.bikini_android.repository.likes.Likes
+import com.example.bikini_android.repository.likes.LikesTargetType
 
 /**
  * @author MyeongKi
  */
 class LikesParameter : RestApiParameter() {
-    fun setLikesParameter(targetId: String, targetType: Likes.TargetType) {
+    fun setLikesParameter(targetId: String, @LikesTargetType targetType: String) {
         put(RestApiParameterKey.TARGET_ID, targetId)
-        put(RestApiParameterKey.TARGET_TYPE, targetType.type)
+        put(RestApiParameterKey.TARGET_TYPE, targetType)
     }
 }
