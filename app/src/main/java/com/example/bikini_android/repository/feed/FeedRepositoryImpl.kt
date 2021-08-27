@@ -13,7 +13,6 @@ import com.example.bikini_android.network.request.param.NearbyFeedParameter
 import com.example.bikini_android.network.request.service.FeedService
 import com.example.bikini_android.network.request.service.ImagesService
 import com.example.bikini_android.network.response.DefaultResponse
-import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.repository.likes.LikesRepositoryInjector
 import com.example.bikini_android.repository.likes.LikesTargetType
 import com.example.bikini_android.util.error.ErrorToastHelper

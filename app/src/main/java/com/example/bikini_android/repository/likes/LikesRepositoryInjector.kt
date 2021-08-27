@@ -7,21 +7,18 @@
 
 package com.example.bikini_android.repository.likes
 
-import java.lang.IllegalArgumentException
-
 /**
  * @author MyeongKi
  */
 object LikesRepositoryInjector {
     fun getLikesRepository(@LikesTargetType targetType: String): LikesRepository {
-        when(targetType){
-            LikesTargetType.FEED->{
+        when (targetType) {
+            LikesTargetType.FEED -> {
                 return LikesFeedRepository.getInstance()
             }
-            else->{
+            else -> {
                 throw IllegalArgumentException("invalid target type type")
             }
         }
-
     }
 }

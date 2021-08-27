@@ -65,7 +65,6 @@ class LikesUseCaseTest {
         Assert.assertTrue(LikesCacheManager.isLikes("testId", LikesTargetType.FEED)?.liked ?: false)
     }
 
-
     @Test
     fun removeLikesTest() {
         Mockito.`when`(likesRepository.removeLikes("testId")).thenReturn(
