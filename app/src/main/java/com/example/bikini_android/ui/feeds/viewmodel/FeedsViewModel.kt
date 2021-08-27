@@ -9,6 +9,7 @@ package com.example.bikini_android.ui.feeds.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import com.example.bikini_android.repository.feed.Feed
+import com.example.bikini_android.repository.likes.LikesTargetType
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsType
@@ -38,7 +39,7 @@ abstract class FeedsViewModel(
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     protected val disposables: CompositeDisposable = CompositeDisposable()
     open lateinit var loadFeedsUseCase: LoadFeedsUseCase
-    val likeViewModel = LikesViewModel(disposables, itemEventRelay)
+    val likeViewModel = LikesViewModel(disposables, itemEventRelay, LikesTargetType.FEED)
 
     init {
         itemEventRelay

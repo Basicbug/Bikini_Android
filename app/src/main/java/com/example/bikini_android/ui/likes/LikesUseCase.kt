@@ -9,16 +9,18 @@ package com.example.bikini_android.ui.likes
 
 import com.example.bikini_android.manager.likes.LikesCacheManager
 import com.example.bikini_android.repository.likes.LikesRepository
-import com.example.bikini_android.repository.likes.LikesRepositoryInjector
-import com.example.bikini_android.repository.likes.LikesTargetType
+import com.example.bikini_android.util.rx.SchedulerProvider
 import com.example.bikini_android.util.rx.addTo
 import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
  */
+
 class LikesUseCase(
     private val disposables: CompositeDisposable,
+    private val repository: LikesRepository,
+    private val schedulerProvider: SchedulerProvider,
 ) {
 
     fun execute(event: LikesItemViewModel.EventType) {
@@ -33,8 +35,9 @@ class LikesUseCase(
     }
 
     private fun addLikes(item: LikesItemViewModel) {
-        getLikesRepository(item.targetType)
+        repository
             .addLikes(item.targetId)
+            .subscribeOn(schedulerProvider.io())
             .subscribe { result ->
                 result?.let {
                     LikesCacheManager.cacheLikes(result)
@@ -45,8 +48,9 @@ class LikesUseCase(
     }
 
     private fun removeLikes(item: LikesItemViewModel) {
-        getLikesRepository(item.targetType)
+        repository
             .removeLikes(item.targetId)
+            .subscribeOn(schedulerProvider.io())
             .subscribe { result ->
                 result?.let {
                     LikesCacheManager.cacheLikes(result)
@@ -54,9 +58,5 @@ class LikesUseCase(
                 }
             }
             .addTo(disposables)
-    }
-
-    private fun getLikesRepository(@LikesTargetType targetType: String): LikesRepository {
-        return LikesRepositoryInjector.getLikesRepository(targetType)
     }
 }

@@ -1,11 +1,11 @@
 /*
- * LikesItemViewModel.kt 2021. 8. 25
+ * LikesItemViewModelTest.kt 2021. 8. 27
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android
+package com.example.bikini_android.likes
 
 import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.repository.likes.LikesTargetType
