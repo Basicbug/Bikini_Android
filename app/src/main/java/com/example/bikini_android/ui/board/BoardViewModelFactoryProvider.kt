@@ -1,11 +1,11 @@
 /*
- * MapViewModelFactoryProvider.kt 2021. 3. 17
+ * BoardViewModelFactoryProvider.kt 2021. 9. 2
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android.ui.map.viewmodel
+package com.example.bikini_android.ui.board
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
@@ -16,7 +16,7 @@ import androidx.savedstate.SavedStateRegistryOwner
 /**
  * @author MyeongKi
  */
-class MapViewModelFactoryProvider(
+class BoardViewModelFactoryProvider(
     owner: SavedStateRegistryOwner,
     savedInstanceState: Bundle?
 ) : AbstractSavedStateViewModelFactory(owner, savedInstanceState) {
@@ -28,9 +28,13 @@ class MapViewModelFactoryProvider(
         handle: SavedStateHandle
     ): T {
         return when {
-            modelClass.isAssignableFrom(BikiniMapViewModel::class.java) -> {
-                BikiniMapViewModel(handle) as T
+            modelClass.isAssignableFrom(BoardMapViewModel::class.java) -> {
+                BoardMapViewModel(handle) as T
             }
+            modelClass.isAssignableFrom(BoardViewModel::class.java) -> {
+                BoardViewModel(handle) as T
+            }
+
             else -> {
                 throw IllegalArgumentException()
             }

@@ -26,6 +26,8 @@
     <string name="camera">카메라</string>
     <string name="gallery">갤러리</string>
     <string name="board_content_hint">오늘은?</string>
+    <string name="recommend_positioning">지도를 이용하여 피드 위치를 설정해 보세요.</string>
+    <string name="board_invalid_click">반경을 넘어가는 곳에는 피드를 등록할 수 없습니다.</string>
     <!--profile-->
     <string name="write">작성</string>
     <string name="like">좋아요</string>

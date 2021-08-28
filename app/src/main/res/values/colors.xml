@@ -24,4 +24,6 @@
     <color name="white_opa05">#0dffffff</color>
     <color name="transparent">#00000000</color>
     <color name="grey">#808080</color>
+
+    <color name="posca_opa40">#66479bd8</color>
 </resources>

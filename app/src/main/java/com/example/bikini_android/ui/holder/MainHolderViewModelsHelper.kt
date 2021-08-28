@@ -23,14 +23,8 @@ object MainHolderViewModelsHelper : ViewModelsHelper {
         savedInstanceState: Bundle?
     ): List<BaseViewModel> {
         return mutableListOf<BaseViewModel>().apply {
-            addAll(FeedsViewModelsProvider.getFeedsViewModels(owner, savedInstanceState))
-            addAll(MapViewModelsProvider.getMapViewModels(owner, savedInstanceState))
-        }
-    }
-
-    override fun saveState(viewModels: List<BaseViewModel>) {
-        for (viewModel in viewModels) {
-            viewModel.saveState()
+            addAll(MainHolderFeedsViewModelsProvider.getFeedsViewModels(owner, savedInstanceState))
+            addAll(MainHolderMapViewModelsProvider.getMapViewModels(owner, savedInstanceState))
         }
     }
 }

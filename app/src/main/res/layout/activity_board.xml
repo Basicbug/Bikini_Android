@@ -18,27 +18,25 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="@dimen/match_constraint"
-            android:layout_height="@dimen/match_constraint"
+            android:layout_width="@dimen/board_image_size"
+            android:layout_height="@dimen/board_image_size"
             android:clickable="true"
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginStart="@dimen/median_margin"
             android:onClick="@{() -> viewmodel.boardItemViewModel.navigateToSelectImageMethod()}"
             android:focusable="true"
             app:completeLoadEvent="@{viewmodel.boardItemViewModel::getImageLoadEvent}"
             app:imageUrl="@{viewmodel.boardItemViewModel.imageUrl}"
             app:errorAttrResId="@{R.drawable.ic_baseline_image_24}"
-            app:layout_constraintDimensionRatio="H,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/content"
             android:contentDescription="@string/pick_image" />
 
         <EditText
             android:id="@+id/content"
             android:layout_width="@dimen/match_constraint"
             android:layout_height="@dimen/match_constraint"
-            android:layout_marginHorizontal="@dimen/default_margin"
-            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginHorizontal="@dimen/median_margin"
             android:background="@color/transparent"
             android:hint="@string/board_content_hint"
             android:textSize="@dimen/text_default_size"
@@ -47,19 +45,33 @@
             android:importantForAutofill="no"
             android:gravity="top"
             android:text="@={viewmodel.boardItemViewModel.content}"
+            android:paddingTop="@dimen/board_text_top_padding_size"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image"
-            app:layout_constraintBottom_toTopOf="@id/post_button" />
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintTop_toTopOf="@id/image"
+            app:layout_constraintBottom_toBottomOf="@id/image"/>
 
-        <Button
+        <androidx.fragment.app.FragmentContainerView
+            android:name="com.example.bikini_android.ui.board.BoardMapFragment"
+            android:id="@+id/map"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="@dimen/match_constraint"
+            android:layout_marginTop="@dimen/median_margin"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
             android:id="@+id/post_button"
             android:layout_width="@dimen/match_constraint"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
             android:onClick="@{() -> viewmodel.boardItemViewModel.postFeed()}"
             android:text="@string/post"
             android:textStyle="bold"
+            android:gravity="center"
+            android:padding="@dimen/median_margin"
+            android:background="?attr/boardBottomButtonBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

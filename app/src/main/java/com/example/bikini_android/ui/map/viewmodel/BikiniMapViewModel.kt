@@ -12,6 +12,4 @@ import androidx.lifecycle.SavedStateHandle
 /**
  * @author MyeongKi
  */
-class BikiniMapViewModel(handle: SavedStateHandle) : MapViewModel(handle) {
-
-}
+class BikiniMapViewModel(handle: SavedStateHandle) : MapViewModel(handle)

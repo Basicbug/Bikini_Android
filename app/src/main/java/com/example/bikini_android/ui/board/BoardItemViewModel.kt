@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.ui.board
 
+import android.net.Uri
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableField
 import com.example.bikini_android.BR
@@ -19,11 +20,11 @@ import com.jakewharton.rxrelay2.Relay
  * @author MyeongKi
  */
 
-class BoardItemViewModel(itemEventRelay: Relay<RxAction>) : ItemViewModel() {
-    val content = ObservableField<String>()
+class BoardItemViewModel(itemEventRelay: Relay<RxAction>, content: String?, imageUri: Uri?) : ItemViewModel() {
+    val content = ObservableField<String>(content)
 
     @get:Bindable
-    var imageUrl = ""
+    var imageUrl = imageUri.toString()
         set(value) {
             field = value
             notifyPropertyChanged(BR.imageUrl)
