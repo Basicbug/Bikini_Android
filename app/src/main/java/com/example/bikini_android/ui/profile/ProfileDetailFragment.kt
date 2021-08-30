@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileDetailBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.ui.account.AccountSettingActivity
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.login.LoginActivity
 import com.example.bikini_android.util.ktx.autoCleared
@@ -42,7 +41,7 @@ class ProfileDetailFragment : BaseFragment() {
         }
 
         binding.account.setOnClickListener {
-            startActivity(Intent(activity, AccountSettingActivity::class.java))
+            getNavigationHelper()?.navigateToAccountSetting()
         }
 
     }.root
