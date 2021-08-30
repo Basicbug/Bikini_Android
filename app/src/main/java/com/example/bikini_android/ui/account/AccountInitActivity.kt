@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityAccountInitBinding
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.example.bikini_android.util.bus.RxAction
@@ -42,19 +43,24 @@ class AccountInitActivity : BaseActivity() {
     }
 
     private fun setUpObserver() {
-        itemEventRelay
-            .ofType(AccountSettingViewModel.EventType::class.java)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { type ->
 
-                when (type) {
+        itemEventRelay
+            .ofType(AccountEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                viewModel.progressViewModel.isVisible = false
+
+                when (it.type) {
                     AccountSettingViewModel.EventType.UPDATE_SUCCEED -> {
+                        LoginManagerProxy.userName = it.result
                         startMainHolder()
                     }
-                    else -> throw IllegalStateException("Undefined type")
+
+                    AccountSettingViewModel.EventType.UPDATE_FAILED -> {
+                        viewModel.showError(it.result)
+                    }
                 }
 
-                finish()
             }
             .addTo(disposables)
     }

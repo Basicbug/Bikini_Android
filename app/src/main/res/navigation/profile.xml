@@ -27,6 +27,11 @@
         android:name="com.example.bikini_android.ui.profile.ProfileDetailFragment"
         tools:layout="@layout/fragment_profile_detail">
     </fragment>
+    <fragment
+        android:id="@+id/account_setting"
+        android:name="com.example.bikini_android.ui.account.AccountSettingFragment"
+        tools:layout="@layout/fragment_account_setting">
+    </fragment>
     <action
         android:id="@+id/action_feeds"
         app:destination="@id/feeds_end" />
@@ -34,4 +39,7 @@
         android:id="@+id/action_detail"
         app:destination="@id/profile_detail"
         app:enterAnim="@anim/slide_in_from_bottom" />
+    <action
+        android:id="@+id/action_profile_setting"
+        app:destination="@id/account_setting" />
 </navigation>

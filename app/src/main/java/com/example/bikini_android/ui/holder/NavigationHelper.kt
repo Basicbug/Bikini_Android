@@ -67,6 +67,15 @@ abstract class NavigationHelper(
         }
     }
 
+    fun navigateToAccountSetting() {
+        if (isValidBottomNav(R.id.profile_navigation)) {
+            navigateToAccount().invoke()
+        } else {
+            navigateTaskQueue.offer(navigateToAccount())
+            bottomNav.selectedItemId = R.id.profile_navigation
+        }
+    }
+
     fun navigateToProfileDetail() {
         if (isValidBottomNav(R.id.profile_navigation)) {
             navigateToDetail().invoke()
@@ -99,6 +108,10 @@ abstract class NavigationHelper(
         getNavController().navigate(R.id.action_detail)
     }
 
+    private fun navigateToAccount() :( ) ->Unit = {
+        getNavController().navigate(R.id.account_setting)
+    }
+
     @Suppress("SameParameterValue")
     protected fun isValidBottomNav(@IdRes resId: Int): Boolean {
         return bottomNav.selectedItemId == resId
@@ -107,6 +120,10 @@ abstract class NavigationHelper(
     fun clear() {
         disposables.dispose()
         activity = null
+    }
+
+    fun popBackStack() {
+        getNavController().popBackStack()
     }
 
     protected fun getNavController(): NavController {

@@ -12,6 +12,6 @@ class AccountSettingItemViewModel : ItemViewModel(), AccountItemViewModel {
     override val nickname = ObservableField<String>()
 
     override fun getLayoutRes(): Int {
-        return R.layout.activity_account_setting
+        return R.layout.fragment_account_setting
     }
 }

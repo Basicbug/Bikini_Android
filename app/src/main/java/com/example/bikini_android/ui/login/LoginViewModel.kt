@@ -74,8 +74,9 @@ class LoginViewModel @Inject constructor(
             .getMyInfoFromRemote()
             .subscribeOn(Schedulers.io())
             .subscribe({
-                if (it?.second == SUCCESS_CODE && it.first != null) {
-                    LoginManagerProxy.userName = it.first!!.userName
+
+                if (it?.result != null) {
+                    LoginManagerProxy.userName = it.result.userInfo.userName
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)
@@ -91,7 +92,4 @@ class LoginViewModel @Inject constructor(
         COMPLETE, ALREADY_EXIST, NO_INFO
     }
 
-    companion object {
-        private const val SUCCESS_CODE = "1000"
-    }
 }
