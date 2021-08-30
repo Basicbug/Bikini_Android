@@ -1,5 +1,7 @@
 package com.example.bikini_android.repository.account
 
+import com.example.bikini_android.network.response.MyInfoReponse
+import com.example.bikini_android.network.response.UserUpdateResponse
 import io.reactivex.Single
 
 /**
@@ -9,7 +11,7 @@ interface AccountRepository {
 
     fun getUserFromRemote(
         userInfo: UserInfo,
-    ): Single<String?>
+    ): Single<UserUpdateResponse?>
 
-    fun getMyInfoFromRemote(): Single<Pair<UserInfo?, String>>
+    fun getMyInfoFromRemote(): Single<MyInfoReponse?>
 }
