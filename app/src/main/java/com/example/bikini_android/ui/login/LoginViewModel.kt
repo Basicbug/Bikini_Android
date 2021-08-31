@@ -17,7 +17,6 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -38,13 +37,18 @@ internal object ViewModelLoginModule {
     @Provides
     @ViewModelScoped
     fun provideLoginManager(): LoginManagerProxy = LoginManagerProxy
+
+    @Provides
+    @ViewModelScoped
+    fun provideAccountRepo(): AccountRepositoryImpl = AccountRepositoryImpl
 }
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
     private val schedulerProvider: SchedulerProvider,
-    private val loginManager: LoginManagerProxy
+    private val loginManager: LoginManagerProxy,
+    private val accountRepository: AccountRepositoryImpl
 ) : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
@@ -70,13 +74,13 @@ class LoginViewModel @Inject constructor(
     }
 
     fun checkMyInfo() {
-        AccountRepositoryImpl
+        accountRepository
             .getMyInfoFromRemote()
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(schedulerProvider.io())
             .subscribe({
 
                 if (it != null) {
-                    LoginManagerProxy.userName = it.userInfo.userName
+                    loginManager.userName = it.userInfo.userName
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)
