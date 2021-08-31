@@ -75,8 +75,8 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe({
 
-                if (it?.result != null) {
-                    LoginManagerProxy.userName = it.result.userInfo.userName
+                if (it != null) {
+                    LoginManagerProxy.userName = it.userInfo.userName
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)

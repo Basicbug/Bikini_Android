@@ -11,7 +11,7 @@ interface AccountRepository {
 
     fun getUserFromRemote(
         userInfo: UserInfo,
-    ): Single<UserUpdateResponse?>
+    ): Single<UserUpdateResponse.Result?>
 
-    fun getMyInfoFromRemote(): Single<MyInfoReponse?>
+    fun getMyInfoFromRemote(): Single<MyInfoReponse.Result?>
 }

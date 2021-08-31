@@ -21,13 +21,13 @@ object AccountRepositoryImpl : AccountRepository {
         }
     }
 
-    override fun getUserFromRemote(userInfo: UserInfo): Single<UserUpdateResponse?> {
+    override fun getUserFromRemote(userInfo: UserInfo): Single<UserUpdateResponse.Result?> {
         return ApiClientHelper
             .createMainApiByService(UserService::class)
             .updateUserInfo(LoginManagerProxy.jwt, userInfo)
             .subscribeOn(Schedulers.io())
             .map {
-                it
+                it.result
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
@@ -35,13 +35,13 @@ object AccountRepositoryImpl : AccountRepository {
             }
     }
 
-    override fun getMyInfoFromRemote(): Single<MyInfoReponse?> {
+    override fun getMyInfoFromRemote(): Single<MyInfoReponse.Result?> {
         return ApiClientHelper
             .createMainApiByService(UserService::class)
             .getMyInfo(LoginManagerProxy.jwt)
             .subscribeOn(Schedulers.io())
             .map {
-                it
+                it.result
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
