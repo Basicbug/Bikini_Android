@@ -26,6 +26,20 @@ object LoginManagerProxy : LoginManager {
             }
         }
 
+    var userName: String = ""
+        get() {
+            if (field.isEmpty()) {
+                field = PreferenceManager.getString(AppResources.getString(R.string.user_name_key))
+            }
+            return field
+        }
+        set(value) {
+            value.let {
+                field = it
+                PreferenceManager.setString(AppResources.getString(R.string.user_name_key), it)
+            }
+        }
+
     private var loginManager: LoginManager? = null
 
     override val loginEventRelay: Relay<RxAction> = PublishRelay.create()

@@ -9,6 +9,9 @@ package com.example.bikini_android
 
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.response.LoginResponse
+import com.example.bikini_android.network.response.MyInfoReponse
+import com.example.bikini_android.repository.account.AccountRepositoryImpl
+import com.example.bikini_android.repository.account.UserInfo
 import com.example.bikini_android.ui.login.LoginRepository
 import com.example.bikini_android.ui.login.LoginViewModel
 import com.example.bikini_android.util.rx.TestSchedulerProvider
@@ -35,6 +38,9 @@ class LoginViewModelTest {
     @Mock
     lateinit var loginManagerProxy: LoginManagerProxy
 
+    @Mock
+    lateinit var accountRepository: AccountRepositoryImpl
+
     val testSchedulerProvider = TestSchedulerProvider()
 
     @Before
@@ -43,7 +49,7 @@ class LoginViewModelTest {
         RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
-        viewModel = LoginViewModel(loginRepository, testSchedulerProvider, loginManagerProxy)
+        viewModel = LoginViewModel(loginRepository, testSchedulerProvider, loginManagerProxy, accountRepository)
     }
 
     @Test
@@ -66,10 +72,10 @@ class LoginViewModelTest {
         viewModel.sendTokenToServer(Mockito.anyString())
         var isCompleteEventInvoked = false
         viewModel.itemEventRelay
-            .ofType(LoginViewModel.CompleteEvent::class.java)
+            .ofType(LoginViewModel.EventType::class.java)
             .observeOn(testSchedulerProvider.testScheduler)
             .subscribe {
-                isCompleteEventInvoked = true
+                isCompleteEventInvoked = it == LoginViewModel.EventType.COMPLETE
             }
         testSchedulerProvider.testScheduler.triggerActions()
         Assert.assertTrue(isCompleteEventInvoked)
@@ -87,4 +93,25 @@ class LoginViewModelTest {
         testSchedulerProvider.testScheduler.triggerActions()
         Assert.assertFalse(viewModel.progressViewModel.isVisible)
     }
+
+    @Test
+    fun check_my_info_success_exist() {
+
+        Mockito.`when`(accountRepository.getMyInfoFromRemote()).thenReturn(
+            Single.just(MyInfoReponse.Result(UserInfo("nickname")))
+        )
+
+        viewModel.checkMyInfo()
+        var alreadyExists = false
+        viewModel.itemEventRelay
+            .ofType(LoginViewModel.EventType::class.java)
+            .observeOn(testSchedulerProvider.testScheduler)
+            .subscribe {
+                alreadyExists = it == LoginViewModel.EventType.ALREADY_EXIST
+            }
+        testSchedulerProvider.testScheduler.triggerActions()
+
+        Assert.assertTrue(alreadyExists)
+    }
+
 }

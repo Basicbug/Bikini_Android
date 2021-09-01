@@ -40,5 +40,9 @@ class ProfileDetailFragment : BaseFragment() {
             })
         }
 
+        binding.account.setOnClickListener {
+            getNavigationHelper()?.navigateToAccountSetting()
+        }
+
     }.root
 }

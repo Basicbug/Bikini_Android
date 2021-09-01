@@ -1,11 +1,12 @@
 package com.example.bikini_android.ui.login
 
 import com.example.bikini_android.manager.login.LoginManagerProxy
+import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
+import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.DefaultSchedulerProvider
 import com.example.bikini_android.util.rx.SchedulerProvider
-import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -36,13 +37,18 @@ internal object ViewModelLoginModule {
     @Provides
     @ViewModelScoped
     fun provideLoginManager(): LoginManagerProxy = LoginManagerProxy
+
+    @Provides
+    @ViewModelScoped
+    fun provideAccountRepo(): AccountRepositoryImpl = AccountRepositoryImpl
 }
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
     private val schedulerProvider: SchedulerProvider,
-    private val loginManager: LoginManagerProxy
+    private val loginManager: LoginManagerProxy,
+    private val accountRepository: AccountRepositoryImpl
 ) : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
@@ -59,7 +65,7 @@ class LoginViewModel @Inject constructor(
                 result?.token?.let {
                     loginManager.jwt = it
                     loginManager.successLogin()
-                    itemEventRelay.accept(CompleteEvent())
+                    itemEventRelay.accept(EventType.COMPLETE)
                 }
             }, {
                 progressViewModel.isVisible = false
@@ -67,5 +73,27 @@ class LoginViewModel @Inject constructor(
             .addTo(disposables)
     }
 
-    class CompleteEvent : RxAction
+    fun checkMyInfo() {
+        accountRepository
+            .getMyInfoFromRemote()
+            .subscribeOn(schedulerProvider.io())
+            .subscribe({
+
+                if (it != null) {
+                    loginManager.userName = it.userInfo.userName
+                    itemEventRelay.accept(EventType.ALREADY_EXIST)
+                } else {
+                    itemEventRelay.accept(EventType.NO_INFO)
+                }
+
+            }, {
+
+            })
+            .addTo(disposables)
+    }
+
+    enum class EventType : RxAction {
+        COMPLETE, ALREADY_EXIST, NO_INFO
+    }
+
 }
