@@ -10,7 +10,7 @@ import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
-import com.example.bikini_android.util.bus.event.RefreshFeedEvent
+import com.example.bikini_android.util.bus.event.ReloadFeedEvent
 import com.example.bikini_android.util.file.FileUtils
 import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
@@ -25,7 +25,7 @@ class BoardViewModel : BaseViewModel() {
     val progressViewModel = ProgressItemViewModel()
     val disposables = CompositeDisposable()
 
-    private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
+    private val feedsRepository = FeedRepositoryInjector.getFeedRepository()
     private var imageUri: Uri? = null
 
     fun setImageUriSelected(uri: Uri) {
@@ -50,7 +50,7 @@ class BoardViewModel : BaseViewModel() {
                 }
                 .subscribe { _ ->
                     progressViewModel.isVisible = false
-                    RxActionBus.post(RefreshFeedEvent())
+                    RxActionBus.post(ReloadFeedEvent())
                     itemEventRelay.accept(BoardItemViewModel.EventType.FINISH)
                 }
                 .addTo(disposables)

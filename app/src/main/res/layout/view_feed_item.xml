@@ -64,16 +64,28 @@
             app:layout_constraintTop_toBottomOf="@id/user_thumbnail"
             android:contentDescription="@string/feed_image" />
 
-
+        <include
+            android:id="@+id/likes"
+            layout="@layout/view_likes_item"
+            android:layout_width="@dimen/feed_like_size"
+            android:layout_height="@dimen/feed_like_size"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:viewmodel="@{viewmodel.likesItemViewModel}" />
         <TextView
             android:id="@+id/distance"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:gravity="center_vertical"
             android:text="@{viewmodel.distance}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image" />
+            app:layout_constraintTop_toBottomOf="@id/likes"
+            tools:text="여기는 거리 및 좋아요 수를 표시하자."/>
 
         <TextView
             android:id="@+id/content"

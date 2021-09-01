@@ -14,5 +14,7 @@ package com.example.bikini_android.network.request.param
 enum class RestApiParameterKey(val key: String) {
     LATITUDE("latitude"),
     LONGITUDE("longitude"),
-    RADIUS("radius")
+    RADIUS("radius"),
+    TARGET_ID("targetId"),
+    TARGET_TYPE("targetType"),
 }

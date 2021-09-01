@@ -32,7 +32,7 @@ class LoadNearbyFeedsUseCase(
     private val logger = Logger().apply {
         TAG = this@LoadNearbyFeedsUseCase.javaClass.simpleName
     }
-    private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
+    private val feedsRepository = FeedRepositoryInjector.getFeedRepository()
     private var nearbyFeedsInfoCached: NearbyFeedsInfo? = null
 
     override fun execute(lastFeedsRendered: List<Feed>) {

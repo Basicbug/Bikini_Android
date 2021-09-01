@@ -12,7 +12,7 @@ package com.example.bikini_android.repository.feed
  */
 
 object FeedRepositoryInjector {
-    fun getFeedRepositoryImpl(): FeedRepository {
+    fun getFeedRepository(): FeedRepository {
         return FeedRepositoryImpl.getInstance()
     }
 }

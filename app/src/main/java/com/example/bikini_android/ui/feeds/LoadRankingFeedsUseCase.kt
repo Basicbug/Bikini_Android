@@ -25,7 +25,7 @@ class LoadRankingFeedsUseCase(
     private val disposable: CompositeDisposable,
     private val itemEventRelay: Relay<RxAction>
 ) : LoadFeedsUseCase {
-    private val feedsRepository = FeedRepositoryInjector.getFeedRepositoryImpl()
+    private val feedsRepository = FeedRepositoryInjector.getFeedRepository()
 
     override fun execute(lastFeedsRendered: List<Feed>) {
         if (lastFeedsRendered.isNotEmpty()) {

@@ -21,7 +21,6 @@ import com.example.bikini_android.ui.common.item.ItemViewModel
 open class DefaultListAdapter<T : ItemViewModel>(diffCallback: DiffUtil.ItemCallback<T>) :
     ListAdapter<T, GenericBindingViewHolder<T>>(diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericBindingViewHolder<T> {
-
         return GenericBindingViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),

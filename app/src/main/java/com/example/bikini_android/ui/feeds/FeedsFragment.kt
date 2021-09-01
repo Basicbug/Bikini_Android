@@ -12,13 +12,13 @@ import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.common.list.DefaultDiffCallback
-import com.example.bikini_android.ui.common.list.DefaultListAdapter
+import com.example.bikini_android.ui.common.list.CacheListAdapter
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.BikiniMapFragment
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
-import com.example.bikini_android.util.bus.event.RefreshFeedEvent
+import com.example.bikini_android.util.bus.event.ReloadFeedEvent
 import com.example.bikini_android.util.ktx.autoCleared
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
@@ -83,7 +83,7 @@ class FeedsFragment : BaseFragment() {
         )[FeedsViewModelFactoryProvider.getFeedViewModelClazz(feedsType)]
         itemEventRelay = viewModel.itemEventRelay
         feedAdapterHelper = FeedAdapterHelper(
-            DefaultListAdapter(DefaultDiffCallback()),
+            CacheListAdapter(DefaultDiffCallback()),
             recyclerViewLayoutType,
             itemEventRelay
         )
@@ -134,8 +134,8 @@ class FeedsFragment : BaseFragment() {
                 }
 
             }.addTo(disposables)
-        RxActionBus.toObservable(RefreshFeedEvent::class.java).subscribe {
-            viewModel.refreshFeeds()
+        RxActionBus.toObservable(ReloadFeedEvent::class.java).subscribe {
+            viewModel.reloadFeeds()
         }.addTo(disposables)
     }
 
