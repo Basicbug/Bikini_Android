@@ -29,12 +29,15 @@ import com.google.android.gms.maps.model.MarkerOptions
 /**
  * @author MyeongKi
  */
-class BoardMapViewModel(private val handle: SavedStateHandle) : MapViewModel(handle) {
+
+class BoardMapViewModel(
+    private val handle: SavedStateHandle,
+    private val locationUtils: LocationUtils
+) : MapViewModel(handle) {
     var circleCenter: LatLng? = null
 
     val selectableMarkerCircle: CircleOptions = CircleOptions()
         .radius(SELECTABLE_MARKER_MAX_RADIUS)
-        .fillColor(AppResources.getResources().getColor(R.color.posca_opa40, null))
         .strokeColor(Color.TRANSPARENT)
 
     val marker: MarkerOptions = handle.get<MarkerOptions>(KEY_LAST_MARKER) ?: MarkerOptions().draggable(true)
@@ -99,7 +102,7 @@ class BoardMapViewModel(private val handle: SavedStateHandle) : MapViewModel(han
     }
 
     fun isValidPosition(latLng: LatLng): Boolean {
-        return LocationUtils.getDistanceBetween(circleCenter, latLng) * 1000 < SELECTABLE_MARKER_MAX_RADIUS
+        return locationUtils.getDistanceBetween(circleCenter, latLng) * 1000 < SELECTABLE_MARKER_MAX_RADIUS
     }
 
     enum class EventType : RxAction {

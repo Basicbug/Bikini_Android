@@ -12,6 +12,11 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
+import com.example.bikini_android.manager.login.LoginManagerProxy
+import com.example.bikini_android.repository.feed.FeedRepositoryInjector
+import com.example.bikini_android.util.file.FileUtils
+import com.example.bikini_android.util.map.LocationUtils
+import com.example.bikini_android.util.rx.DefaultSchedulerProvider
 
 /**
  * @author MyeongKi
@@ -29,10 +34,16 @@ class BoardViewModelFactoryProvider(
     ): T {
         return when {
             modelClass.isAssignableFrom(BoardMapViewModel::class.java) -> {
-                BoardMapViewModel(handle) as T
+                BoardMapViewModel(handle, LocationUtils) as T
             }
             modelClass.isAssignableFrom(BoardViewModel::class.java) -> {
-                BoardViewModel(handle) as T
+                BoardViewModel(
+                    handle,
+                    FeedRepositoryInjector.getFeedRepository(),
+                    LoginManagerProxy,
+                    FileUtils,
+                    DefaultSchedulerProvider()
+                ) as T
             }
 
             else -> {

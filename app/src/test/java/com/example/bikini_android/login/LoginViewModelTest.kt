@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.bikini_android
+package com.example.bikini_android.login
 
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.response.LoginResponse

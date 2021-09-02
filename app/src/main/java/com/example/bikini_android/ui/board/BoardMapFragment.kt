@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
+import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.app.ToastHelper
 import com.example.bikini_android.databinding.FragmentBoardMapBinding
 import com.example.bikini_android.ui.base.BaseMapFragment
@@ -27,6 +28,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 /**
  * @author MyeongKi
  */
+
 class BoardMapFragment : BaseMapFragment() {
     private var binding by autoCleared<FragmentBoardMapBinding>()
     private lateinit var boardMapViewModel: BoardMapViewModel
@@ -76,7 +78,11 @@ class BoardMapFragment : BaseMapFragment() {
                 boardMapViewModel.circleCenter = currentLocation
                 boardMapViewModel.initMarker(currentLocation)
 
-                map.addCircle(boardMapViewModel.selectableMarkerCircle.center(currentLocation))
+                map.addCircle(
+                    boardMapViewModel.selectableMarkerCircle
+                        .center(currentLocation)
+                        .fillColor(AppResources.getResources().getColor(R.color.posca_opa40, null))
+                )
                 lastMarkerName = map.addMarker(boardMapViewModel.marker)
             }
 

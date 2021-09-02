@@ -46,7 +46,6 @@ class BoardActivity : BaseActivity() {
             BoardViewModelFactoryProvider(this, savedInstanceState)
         )[BoardMapViewModel::class.java]
 
-
         itemEventRelay = viewModel.itemEventRelay
         binding.apply {
             viewmodel = viewModel
@@ -78,6 +77,20 @@ class BoardActivity : BaseActivity() {
     }
 
     private fun setUpObservers() {
+        itemEventRelay
+            .ofType(BoardViewModel.EventType::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                when (it) {
+                    BoardViewModel.EventType.INVALID_CONTENT -> {
+                        ToastHelper.show(R.string.content_empty)
+                    }
+                    BoardViewModel.EventType.INVALID_IMAGE -> {
+                        ToastHelper.show(R.string.image_unselected)
+                    }
+                    else -> Unit
+                }
+            }.addTo(disposables)
         itemEventRelay
             .ofType(BoardItemViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())

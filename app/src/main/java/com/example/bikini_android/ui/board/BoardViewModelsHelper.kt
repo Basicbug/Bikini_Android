@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.common.ViewModelsHelper
-import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModelFactoryProvider
 
 /**
  * @author MyeongKi
