@@ -19,7 +19,7 @@ import com.example.bikini_android.ui.feeds.viewmodel.RankingFeedsViewModel
 /**
  * @author MyeongKi
  */
-object FeedsViewModelsProvider {
+object MainHolderFeedsViewModelsProvider {
     fun getFeedsViewModels(
         owner: BaseActivity,
         savedInstanceState: Bundle?

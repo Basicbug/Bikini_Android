@@ -10,8 +10,10 @@ import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
+import com.example.bikini_android.app.ToastHelper
 import com.example.bikini_android.databinding.ActivityBoardBinding
 import com.example.bikini_android.ui.base.BaseActivity
+import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.dialog.SelectImageMethodBottomSheet
 import com.example.bikini_android.ui.dialog.SelectImageMethodViewModel
 import com.example.bikini_android.util.bus.RxAction
@@ -31,11 +33,19 @@ class BoardActivity : BaseActivity() {
     lateinit var binding: ActivityBoardBinding
     private lateinit var viewModel: BoardViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
+    private lateinit var viewModels: List<BaseViewModel>
+    private lateinit var boardMapViewModel: BoardMapViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board)
+        viewModels = BoardViewModelsHelper.getViewModels(this, savedInstanceState)
         viewModel = ViewModelProvider(this)[BoardViewModel::class.java]
+        boardMapViewModel = ViewModelProvider(
+            this,
+            BoardViewModelFactoryProvider(this, savedInstanceState)
+        )[BoardMapViewModel::class.java]
+
         itemEventRelay = viewModel.itemEventRelay
         binding.apply {
             viewmodel = viewModel
@@ -51,6 +61,7 @@ class BoardActivity : BaseActivity() {
                     val imageUrl = intent.data
                     imageUrl?.let {
                         viewModel.setImageUriSelected(it)
+                        ToastHelper.show(R.string.recommend_positioning)
                     }
                 }
             }
@@ -58,6 +69,7 @@ class BoardActivity : BaseActivity() {
                 FileUtils.getCameraImageFile()?.let { file ->
                     file.toUri().let {
                         viewModel.setImageUriSelected(it)
+                        ToastHelper.show(R.string.recommend_positioning)
                     }
                 }
             }
@@ -66,12 +78,26 @@ class BoardActivity : BaseActivity() {
 
     private fun setUpObservers() {
         itemEventRelay
+            .ofType(BoardViewModel.EventType::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                when (it) {
+                    BoardViewModel.EventType.INVALID_CONTENT -> {
+                        ToastHelper.show(R.string.content_empty)
+                    }
+                    BoardViewModel.EventType.INVALID_IMAGE -> {
+                        ToastHelper.show(R.string.image_unselected)
+                    }
+                    else -> Unit
+                }
+            }.addTo(disposables)
+        itemEventRelay
             .ofType(BoardItemViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 when (it) {
                     BoardItemViewModel.EventType.POST_FEED -> {
-                        viewModel.postFeed()
+                        viewModel.postFeed(boardMapViewModel.marker.position)
                     }
                     BoardItemViewModel.EventType.NAVIGATE_SELECT_IMAGE_METHOD -> {
                         navigateToSelectImageMethod()
@@ -96,7 +122,7 @@ class BoardActivity : BaseActivity() {
                     }
                     else -> Unit
                 }
-            }.addTo(viewModel.disposables)
+            }.addTo(disposables)
 
         RxActionBus.toObservable(ExternalReadAndWriteStoragePermissionEvent::class.java)
             .subscribe {
@@ -184,6 +210,11 @@ class BoardActivity : BaseActivity() {
         if (viewModel.progressViewModel.isVisible)
             return
         super.onBackPressed()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        BoardViewModelsHelper.saveState(viewModels)
+        super.onSaveInstanceState(outState)
     }
 
     companion object {

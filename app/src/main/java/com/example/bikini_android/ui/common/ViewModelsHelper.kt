@@ -17,5 +17,9 @@ import com.example.bikini_android.ui.base.BaseViewModel
 
 interface ViewModelsHelper {
     fun getViewModels(owner: BaseActivity, savedInstanceState: Bundle?): List<BaseViewModel>
-    fun saveState(viewModels: List<BaseViewModel>)
+    fun saveState(viewModels: List<BaseViewModel>) {
+        for (viewModel in viewModels) {
+            viewModel.saveState()
+        }
+    }
 }

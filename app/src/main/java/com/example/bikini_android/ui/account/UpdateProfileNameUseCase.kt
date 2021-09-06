@@ -42,5 +42,4 @@ class UpdateProfileNameUseCase(
             })
             .addTo(disposable)
     }
-
 }

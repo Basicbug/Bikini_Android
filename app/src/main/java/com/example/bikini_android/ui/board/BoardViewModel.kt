@@ -1,32 +1,39 @@
 package com.example.bikini_android.ui.board
 
 import android.net.Uri
-import com.example.bikini_android.R
-import com.example.bikini_android.app.TEST_USER_ID
-import com.example.bikini_android.app.ToastHelper
+import androidx.lifecycle.SavedStateHandle
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.repository.feed.FeedRepositoryInjector
+import com.example.bikini_android.repository.feed.FeedRepository
+import com.example.bikini_android.repository.feed.convertLocationInfo
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.ReloadFeedEvent
 import com.example.bikini_android.util.file.FileUtils
-import com.example.bikini_android.util.map.LocationUtils
+import com.example.bikini_android.util.rx.SchedulerProvider
 import com.example.bikini_android.util.rx.addTo
+import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.disposables.CompositeDisposable
 
-class BoardViewModel : BaseViewModel() {
+class BoardViewModel(
+    private val handle: SavedStateHandle,
+    private val feedsRepository: FeedRepository,
+    private val loginManager: LoginManagerProxy,
+    private val fileUtils: FileUtils,
+    private val schedulerProvider: SchedulerProvider
+) : BaseViewModel() {
+
+    private var imageUri: Uri? = handle.get<Uri>(KEY_URI)
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
-    val boardItemViewModel = BoardItemViewModel(itemEventRelay)
+    val boardItemViewModel =
+        BoardItemViewModel(itemEventRelay, handle.get<String>(KEY_CONTENT), imageUri)
     val progressViewModel = ProgressItemViewModel()
     val disposables = CompositeDisposable()
-
-    private val feedsRepository = FeedRepositoryInjector.getFeedRepository()
-    private var imageUri: Uri? = null
 
     fun setImageUriSelected(uri: Uri) {
         imageUri = uri
@@ -37,17 +44,18 @@ class BoardViewModel : BaseViewModel() {
         boardItemViewModel.imageUrl = imageUrl
     }
 
-    fun postFeed() {
-        getValidFeedAndImageUrl()?.let { (feed, imageUri) ->
+    fun postFeed(postLocation: LatLng) {
+        getValidFeedAndImageUrl(postLocation)?.let { (feed, imageUri) ->
             progressViewModel.isVisible = true
             feedsRepository
                 .addFeedToRemote(
                     feed,
-                    FileUtils.getImageMultiParts(listOf(imageUri))
+                    fileUtils.getImageMultiParts(listOf(imageUri))
                 )
                 .doOnError {
                     progressViewModel.isVisible = false
                 }
+                .observeOn(schedulerProvider.main())
                 .subscribe { _ ->
                     progressViewModel.isVisible = false
                     RxActionBus.post(ReloadFeedEvent())
@@ -57,30 +65,44 @@ class BoardViewModel : BaseViewModel() {
         }
     }
 
-    private fun getValidFeedAndImageUrl(): Pair<Feed, Uri>? {
+    private fun getValidFeedAndImageUrl(postLocation: LatLng): Pair<Feed, Uri>? {
         if (imageUri == null) {
-            ToastHelper.show(R.string.image_unselected)
+            itemEventRelay.accept(EventType.INVALID_IMAGE)
             return null
         }
-        val feed = makePostFeed().also { feed ->
+        val feed = makePostFeed(postLocation).also { feed ->
             if (feed.content.isEmpty()) {
-                ToastHelper.show(R.string.content_empty)
+                itemEventRelay.accept(EventType.INVALID_CONTENT)
                 return null
             }
         }
         return Pair(feed, imageUri!!)
     }
 
-    private fun makePostFeed(): Feed {
+    private fun makePostFeed(postLocation: LatLng): Feed {
         return Feed(
             content = boardItemViewModel.content.get() ?: "",
-            locationInfo = LocationUtils.getCurrentLocationInfo(),
-            username = TEST_USER_ID
+            locationInfo = postLocation.convertLocationInfo(),
+            username = loginManager.userName
         )
+    }
+
+    override fun saveState() {
+        handle[KEY_CONTENT] = boardItemViewModel.content.get()
+        handle[KEY_URI] = imageUri
     }
 
     override fun onCleared() {
         disposables.dispose()
         super.onCleared()
+    }
+
+    enum class EventType : RxAction {
+        INVALID_IMAGE, INVALID_CONTENT, ;
+    }
+
+    companion object {
+        private const val KEY_CONTENT = "keyContent"
+        private const val KEY_URI = "keyUri"
     }
 }

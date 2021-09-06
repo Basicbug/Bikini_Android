@@ -39,6 +39,11 @@
     <dimen name="arrow_height">20dp</dimen>
     <dimen name="arrow_width">15dp</dimen>
     <!--board-->
+    <dimen name="board_image_size">150dp</dimen>
+    <dimen name="board_marker_height">75dp</dimen>
+    <dimen name="board_marker_width">75dp</dimen>
+    <dimen name="board_text_top_padding_size">15dp</dimen>
+
     <dimen name="board_bottom_sheet_image_padding">7dp</dimen>
     <dimen name="board_bottom_sheet_text_size">20sp</dimen>
 

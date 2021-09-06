@@ -23,6 +23,7 @@
 
     <!-- board -->
     <attr name="boardBottomSheetImageTintColor" format="reference|color" />
+    <attr name="boardBottomButtonBackground" format="reference|color" />
 
     <!-- Settings -->
     <attr name="settingsDefaultButtonColor" format="reference|color" />

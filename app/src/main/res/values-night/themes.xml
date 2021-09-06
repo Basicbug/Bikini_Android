@@ -19,6 +19,7 @@
         <item name="locationButtonTintColor">@color/white_opa70</item>
         <!--board-->
         <item name="boardBottomSheetImageTintColor">@color/white_opa70</item>
+        <item name="boardBottomButtonBackground">@color/black</item>
 
         <!--settings-->
         <item name="settingsDefaultButtonColor">@color/white_opa70</item>

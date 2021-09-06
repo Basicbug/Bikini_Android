@@ -7,7 +7,7 @@
 
 package com.example.bikini_android.ui.feeds
 
-import com.example.bikini_android.app.TEST_USER_ID
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.sort.SortFeedCriteriaProvider
@@ -38,7 +38,7 @@ class LoadMyFeedsUseCase(
 
     override fun execute() {
         feedsRepository
-            .getUserFeedsFromRemote(TEST_USER_ID)
+            .getUserFeedsFromRemote(LoginManagerProxy.userName)
             .subscribe { result ->
                 result?.let {
                     itemEventRelay.accept(

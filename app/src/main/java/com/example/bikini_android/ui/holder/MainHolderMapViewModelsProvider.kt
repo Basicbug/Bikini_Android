@@ -12,12 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModel
-import com.example.bikini_android.ui.map.viewmodel.MapViewModelFactoryProvider
+import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModelFactoryProvider
 
 /**
  * @author MyeongKi
  */
-object MapViewModelsProvider {
+object MainHolderMapViewModelsProvider {
     fun getMapViewModels(
         owner: BaseActivity,
         savedInstanceState: Bundle?
@@ -25,7 +25,7 @@ object MapViewModelsProvider {
         return listOf(
             ViewModelProvider(
                 owner,
-                MapViewModelFactoryProvider(owner, savedInstanceState)
+                BikiniMapViewModelFactoryProvider(owner, savedInstanceState)
             )[BikiniMapViewModel::class.java]
         )
     }

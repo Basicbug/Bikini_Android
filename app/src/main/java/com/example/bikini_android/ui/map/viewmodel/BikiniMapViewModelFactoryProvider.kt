@@ -16,7 +16,7 @@ import androidx.savedstate.SavedStateRegistryOwner
 /**
  * @author MyeongKi
  */
-class MapViewModelFactoryProvider(
+class BikiniMapViewModelFactoryProvider(
     owner: SavedStateRegistryOwner,
     savedInstanceState: Bundle?
 ) : AbstractSavedStateViewModelFactory(owner, savedInstanceState) {

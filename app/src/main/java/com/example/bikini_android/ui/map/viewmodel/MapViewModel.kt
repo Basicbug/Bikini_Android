@@ -9,6 +9,7 @@ package com.example.bikini_android.ui.map.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import com.example.bikini_android.repository.feed.LocationInfo
+import com.example.bikini_android.repository.feed.convertLocationInfo
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.util.bus.RxAction
@@ -39,7 +40,7 @@ abstract class MapViewModel(private val handle: SavedStateHandle) : BaseViewMode
 
     fun saveLastState(googleMap: GoogleMap) {
         googleMap.cameraPosition.target?.let {
-            locationFocused = LocationInfo(it.latitude, it.longitude)
+            locationFocused = it.convertLocationInfo()
         }
         zoom = googleMap.cameraPosition.zoom
     }

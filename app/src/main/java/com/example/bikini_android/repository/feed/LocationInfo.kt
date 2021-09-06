@@ -26,3 +26,7 @@ data class LocationInfo(
 fun LocationInfo.convertLatLng(): LatLng {
     return LatLng(latitude, longitude)
 }
+
+fun LatLng.convertLocationInfo(): LocationInfo {
+    return LocationInfo(latitude, longitude)
+}

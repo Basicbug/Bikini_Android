@@ -29,7 +29,7 @@ import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModel
-import com.example.bikini_android.ui.map.viewmodel.MapViewModelFactoryProvider
+import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModelFactoryProvider
 import com.example.bikini_android.util.ktx.autoCleared
 import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.GoogleMap
@@ -51,7 +51,7 @@ class BikiniMapFragment : BaseMapFragment() {
         super.onCreate(savedInstanceState)
         mapViewModel = ViewModelProvider(
             this,
-            MapViewModelFactoryProvider(this, savedInstanceState)
+            BikiniMapViewModelFactoryProvider(this, savedInstanceState)
         )[BikiniMapViewModel::class.java]
         feedsViewModel = ViewModelProvider(
             requireActivity(),
