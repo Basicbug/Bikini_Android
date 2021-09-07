@@ -17,6 +17,7 @@ import kotlinx.parcelize.Parcelize
 data class Feed(
     var feedId: String = "",
     var feedNumOfUser: Int = 0,
+    var numOfLikes: Int = 0,
     var username: String = "",
     var imageIds: List<Int>? = null,
     var content: String = "",

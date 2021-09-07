@@ -75,17 +75,18 @@
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintStart_toStartOf="parent"
             app:viewmodel="@{viewmodel.likesItemViewModel}" />
+
         <TextView
-            android:id="@+id/distance"
+            android:id="@+id/feedInfo"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:gravity="center_vertical"
-            android:text="@{viewmodel.distance}"
+            android:text="@{viewmodel.feedInfo}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/likes"
-            tools:text="여기는 거리 및 좋아요 수를 표시하자."/>
+            tools:text="1 likes · 100km"/>
 
         <TextView
             android:id="@+id/content"
@@ -98,7 +99,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/distance"
+            app:layout_constraintTop_toBottomOf="@id/feedInfo"
             app:layout_goneMarginLeft="10dp"
             tools:text="여기는 컨탠츠 자리입니다."/>
 

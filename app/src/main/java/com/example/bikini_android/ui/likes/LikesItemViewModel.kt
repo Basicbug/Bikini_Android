@@ -8,6 +8,7 @@
 package com.example.bikini_android.ui.likes
 
 import androidx.databinding.Bindable
+import androidx.databinding.ObservableBoolean
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
 import com.example.bikini_android.manager.likes.LikesCacheManager
@@ -26,6 +27,7 @@ class LikesItemViewModel(
     likes: Likes?
 ) : CacheItemViewModel() {
     val targetId: String = likes?.targetId ?: EMPTY_STRING
+    val likedObservable = ObservableBoolean()
 
     @LikesTargetType
     val targetType: String = likes?.targetType ?: LikesTargetType.NONE
@@ -38,6 +40,7 @@ class LikesItemViewModel(
     var liked: Boolean = likes?.liked ?: false
         set(value) {
             field = value
+            likedObservable.set(value)
             notifyPropertyChanged(BR.liked)
         }
 
