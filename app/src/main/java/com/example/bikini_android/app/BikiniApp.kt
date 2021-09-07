@@ -10,6 +10,7 @@ package com.example.bikini_android.app
 import android.app.Application
 import android.content.Context
 import com.example.bikini_android.R
+import com.example.bikini_android.util.map.LocationUtils
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
@@ -27,6 +28,7 @@ class BikiniApp : Application() {
         super.onCreate()
 
         KakaoSdk.init(this, AppResources.getString(R.string.kakao_native_app_key))
+        LocationUtils.initCurrentLocationEvent()
     }
 
     companion object {

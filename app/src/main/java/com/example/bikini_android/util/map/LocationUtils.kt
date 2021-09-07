@@ -8,19 +8,19 @@
 package com.example.bikini_android.util.map
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import androidx.core.content.ContextCompat
 import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.repository.feed.LocationInfo
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 
 /**
  * @author MyeongKi
  */
 object LocationUtils {
+    private var lastCurrentLocation: Location? = null
+
     fun checkLocationPermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             AppResources.getContext(),
@@ -28,27 +28,27 @@ object LocationUtils {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun getCurrentLocationInfo(): LocationInfo? {
-        return getCurrentLocation()?.let {
-            LocationInfo(it.latitude, it.longitude)
-        }
-    }
-
     fun getCurrentLatLng(): LatLng? {
-        return getCurrentLocation()?.let {
+        return lastCurrentLocation?.let {
             LatLng(it.latitude, it.longitude)
         }
     }
 
-    fun getCurrentLocation(): Location? {
+    fun initCurrentLocationEvent() {
         if (checkLocationPermission()) {
-            (AppResources.getContext()
-                .getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
-                return this.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                    ?: this.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            LocationServices.getFusedLocationProviderClient(AppResources.getContext()).lastLocation.addOnCompleteListener {
+                lastCurrentLocation = it.result
             }
         }
-        return null
+    }
+
+    fun addOnCompleteCurrentLocationListener(action: (Location?) -> Unit) {
+        if (checkLocationPermission()) {
+            LocationServices.getFusedLocationProviderClient(AppResources.getContext()).lastLocation.addOnCompleteListener {
+                lastCurrentLocation = it.result
+                action(it.result)
+            }
+        }
     }
 
     fun getDistanceBetween(startLatLng: LatLng?, endLatLng: LatLng?): Float {

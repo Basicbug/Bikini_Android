@@ -16,6 +16,7 @@ import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.common.ToolbarItem
 import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.util.map.LocationUtils
 import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -83,6 +84,11 @@ class MainHolderActivity : BaseActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         setUpBottomNavigation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        LocationUtils.initCurrentLocationEvent()
     }
 
     override fun onDestroy() {
