@@ -126,7 +126,7 @@ class BikiniMapFragment : BaseMapFragment() {
 
     private fun navigateNearLocationFeeds(feeds: List<Feed>) {
         if (feeds.isNotEmpty()) {
-            getNavigationHelper()?.navigateToBikiniFeeds(
+            getNavigationHelper()?.navigateToFeeds(
                 FeedsFragment.makeBundle(
                     RecyclerViewLayoutType.GRID,
                     MAP_FEEDS_TYPE,

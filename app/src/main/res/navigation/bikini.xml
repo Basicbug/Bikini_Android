@@ -9,25 +9,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bikini_navigation"
-    app:startDestination="@id/bikini">
-
-    <fragment
-        android:id="@+id/bikini"
-        android:name="com.example.bikini_android.ui.map.BikiniMapFragment"
-        tools:layout="@layout/fragment_bikini_map">
-    </fragment>
+    app:startDestination="@id/feeds_map">
 
     <fragment
         android:id="@+id/feeds_end"
         android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
-        tools:layout="@layout/fragment_feeds">
-    </fragment>
+        tools:layout="@layout/fragment_feeds" />
+
+    <fragment
+        android:id="@+id/feeds_map"
+        android:name="com.example.bikini_android.ui.map.BikiniMapFragment"
+        tools:layout="@layout/fragment_bikini_map" />
 
     <action
-        android:id="@+id/action_feeds"
+        android:id="@+id/action_feeds_end"
         app:destination="@id/feeds_end" />
 
     <action
-        android:id="@+id/action_bikini_map"
-        app:destination="@id/bikini" />
+        android:id="@+id/action_feed_map"
+        app:destination="@id/feeds_map" />
 </navigation>

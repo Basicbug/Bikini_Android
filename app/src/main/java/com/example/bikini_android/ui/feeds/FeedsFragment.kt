@@ -113,7 +113,7 @@ class FeedsFragment : BaseFragment() {
             .ofType(FeedGridItemViewModel.ImageClickEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                getNavigationHelper()?.navigateToBikiniFeeds(
+                getNavigationHelper()?.navigateToFeeds(
                     makeBundle(
                         RecyclerViewLayoutType.VERTICAL,
                         feedsType,
@@ -130,7 +130,7 @@ class FeedsFragment : BaseFragment() {
             .subscribe { event ->
                 event.feed.locationInfo?.let {
                     val bundle = BikiniMapFragment.makeBundle(it)
-                    getNavigationHelper()?.navigateToBikiniMap(bundle)
+                    getNavigationHelper()?.navigateToFeedsMap(bundle)
                 }
 
             }.addTo(disposables)

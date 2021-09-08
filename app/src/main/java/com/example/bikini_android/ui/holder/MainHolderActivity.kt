@@ -57,7 +57,7 @@ class MainHolderActivity : BaseActivity() {
                 itemEventRelay
             )
             navigationHelper =
-                NavigationHelperImpl(it.bottomNavigation, this, itemEventRelay)
+                NavigationHelperImpl(this)
         }
     }
 
