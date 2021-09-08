@@ -124,7 +124,8 @@ ext {
     map_libraries = [
             google_maps      : "com.google.android.gms:play-services-maps:$google_maps_version",
             google_maps_utils: "com.google.maps.android:android-maps-utils:$google_maps_utils_version",
-            google_maps_ktx  : "com.google.maps.android:maps-utils-ktx:$google_maps_ktx_version"
+            google_maps_ktx  : "com.google.maps.android:maps-utils-ktx:$google_maps_ktx_version",
+            google_maps_location  : "com.google.android.gms:play-services-location:$google_maps_version"
     ]
 
     leakcanary_libraries = [

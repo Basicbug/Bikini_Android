@@ -29,10 +29,17 @@ abstract class MapViewModel(private val handle: SavedStateHandle) : BaseViewMode
 
     fun initMap() {
         if (locationFocused == null) {
-            LocationUtils.getCurrentLocation()?.let {
-                locationFocused = LocationInfo(it.latitude, it.longitude)
+            LocationUtils.addOnCompleteCurrentLocationListener {
+                it?.let {
+                    locationFocused = LocationInfo(it.latitude, it.longitude)
+                    invokeLocationFocused()
+                }
             }
         }
+        invokeLocationFocused()
+    }
+
+    private fun invokeLocationFocused() {
         locationFocused?.let {
             itemEventRelay.accept(MoveToLocationEvent(LatLng(it.latitude, it.longitude), zoom))
         }
