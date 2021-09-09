@@ -11,6 +11,7 @@ import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
 import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.example.bikini_android.util.bus.RxAction
 
 /**
  * @author MyeongKi
@@ -45,7 +46,7 @@ class ProfileItemViewModel : ItemViewModel() {
         }
 
     @get: Bindable
-    var stateMessage = "허허 인생~ 새로운 기능을 추가해야지.."
+    var stateMessage = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.stateMessage)
@@ -57,6 +58,14 @@ class ProfileItemViewModel : ItemViewModel() {
             field = value
             notifyPropertyChanged(BR.feedTicketCount)
         }
+
+    fun onClickNickName() {
+        itemEventRelay?.accept(EventType.OPEN_EDIT_NICKNAME)
+    }
+
+    enum class EventType : RxAction {
+        OPEN_EDIT_NICKNAME,
+    }
 
     override fun getLayoutRes(): Int {
         return R.layout.view_profile_item

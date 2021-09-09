@@ -11,6 +11,7 @@ class ProfileViewModel : BaseViewModel() {
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     val profileItemViewModel = ProfileItemViewModel().apply {
         userId = LoginManagerProxy.userName
+        this.itemEventRelay = this@ProfileViewModel.itemEventRelay
     }
 
     fun openBoard() {
@@ -18,6 +19,6 @@ class ProfileViewModel : BaseViewModel() {
     }
 
     enum class EventType : RxAction {
-        OPEN_BOARD
+        OPEN_BOARD,
     }
 }

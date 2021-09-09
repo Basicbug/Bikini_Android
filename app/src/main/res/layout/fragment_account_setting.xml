@@ -21,7 +21,7 @@
             android:layout_height="@dimen/match_constraint"
             android:layout_marginStart="24dp"
             android:layout_marginTop="48dp"
-            android:text="@string/user_name"
+            android:text="@string/nickname"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,14 +48,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/logout"
+        <TextView
+            android:id="@+id/complete"
             android:layout_width="@dimen/match_constraint"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="@dimen/content_item_height"
             android:onClick="@{() -> viewmodel.setUserName()}"
             android:text="@string/complete"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@color/green_500"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

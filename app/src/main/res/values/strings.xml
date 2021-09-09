@@ -15,7 +15,7 @@
     <!--account-->
     <string name="empty_input_box">사용할 별명을 입력해주세요.</string>
     <string name="message_input_nick">별명을 입력하세요.</string>
-    <string name="user_name">UserName</string>
+    <string name="nickname">Nickname</string>
 
     <!--permission-->
     <string name="permission_required_toast">권한이 필요합니다.</string>
@@ -32,6 +32,10 @@
     <string name="write">작성</string>
     <string name="like">좋아요</string>
     <string name="shown">관심도</string>
+    <!--login-->
+    <string name="logout">LOGOUT</string>
+    <string name="edit_nickname">Edit nickname</string>
+
 
     <!--common-->
     <string name="post">등록</string>
