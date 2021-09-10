@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ profile.xml 2020. 12. 10
   ~
   ~ Copyright 2020 BasicBug. All rights Reserved.
   ~
   -->
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_navigation"
@@ -15,26 +13,32 @@
     <fragment
         android:id="@+id/profile"
         android:name="com.example.bikini_android.ui.profile.ProfileFragment"
-        tools:layout="@layout/fragment_profile">
-    </fragment>
-    <fragment
-        android:id="@+id/feeds_end"
-        android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
-        tools:layout="@layout/fragment_feeds">
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/profile_detail"
         android:name="com.example.bikini_android.ui.profile.ProfileDetailFragment"
-        tools:layout="@layout/fragment_profile_detail">
-    </fragment>
+        tools:layout="@layout/fragment_profile_detail" />
     <fragment
         android:id="@+id/account_setting"
         android:name="com.example.bikini_android.ui.account.AccountSettingFragment"
-        tools:layout="@layout/fragment_account_setting">
-    </fragment>
+        tools:layout="@layout/fragment_account_setting" />
+    <fragment
+        android:id="@+id/feeds_end"
+        android:name="com.example.bikini_android.ui.feeds.FeedsFragment"
+        tools:layout="@layout/fragment_feeds" />
+
+    <fragment
+        android:id="@+id/feeds_map"
+        android:name="com.example.bikini_android.ui.map.BikiniMapFragment"
+        tools:layout="@layout/fragment_bikini_map" />
+
     <action
-        android:id="@+id/action_feeds"
+        android:id="@+id/action_feeds_end"
         app:destination="@id/feeds_end" />
+
+    <action
+        android:id="@+id/action_feed_map"
+        app:destination="@id/feeds_map" />
     <action
         android:id="@+id/action_detail"
         app:destination="@id/profile_detail"

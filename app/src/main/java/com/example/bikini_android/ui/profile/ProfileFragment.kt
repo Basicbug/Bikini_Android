@@ -134,7 +134,7 @@ class ProfileFragment : BaseFragment() {
             .ofType(FeedGridItemViewModel.ImageClickEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                getNavigationHelper()?.navigateToProfileFeeds(
+                getNavigationHelper()?.navigateToFeeds(
                     FeedsFragment.makeBundle(
                         RecyclerViewLayoutType.VERTICAL,
                         feedsType,
