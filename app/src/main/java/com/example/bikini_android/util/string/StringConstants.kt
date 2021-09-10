@@ -11,3 +11,4 @@ package com.example.bikini_android.util.string
  * @author MyeongKi
  */
 const val EMPTY_STRING = ""
+const val SEPARATOR_STRING = " · "
