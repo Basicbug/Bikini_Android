@@ -52,7 +52,7 @@ class SettingsFragment : BaseFragment() {
         false
     ).also {
         super.onCreateView(inflater, container, savedInstanceState)
-        viewModel = ViewModelProvider(this, SettingsViewModelFactoryProvider(getNavigationHelper()))
+        viewModel = ViewModelProvider(this, SettingsViewModelFactoryProvider())
             .get(SettingsViewModelFactoryProvider.getSettingsViewModelClazz(settingsType))
         binding = it.apply {
             settings.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

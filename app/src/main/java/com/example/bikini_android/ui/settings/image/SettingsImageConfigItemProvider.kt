@@ -20,19 +20,19 @@ import com.example.bikini_android.ui.settings.item.SettingsTitleItemViewModel
  * @author MyeongKi
  */
 object SettingsImageConfigItemProvider {
-    fun createImageSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+    fun createImageSettingItems(): List<ItemViewModel> {
         return mutableListOf<ItemViewModel>().apply {
-            addAll(createItems(navigationHelper))
+            addAll(createItems())
         }
     }
 
-    private fun createItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+    private fun createItems(): List<ItemViewModel> {
         return listOf(
             SettingsTitleItemViewModel.Builder(AppResources.getString(R.string.settings_image_title))
                 .build(),
             SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_image_compression_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE_COMPRESSION))
+                    NavigationHelperImpl.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE_COMPRESSION))
                 }.build()
         )
     }

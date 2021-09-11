@@ -21,27 +21,27 @@ import com.example.bikini_android.ui.settings.item.SettingsUserItemViewModel
  */
 
 abstract class SettingsItemsProvider {
-    fun createMainSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+    fun createMainSettingItems(): List<ItemViewModel> {
         return mutableListOf<ItemViewModel>().apply {
-            addAll(createCommonSettingItems(navigationHelper))
-            addAll(createMainSubSettingItems(navigationHelper))
+            addAll(createCommonSettingItems())
+            addAll(createMainSubSettingItems())
         }
     }
 
-    private fun createCommonSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+    private fun createCommonSettingItems(): List<ItemViewModel> {
         return listOf(
             SettingsUserItemViewModel.Builder(LoginManagerProxy.userName)
                 .setOnClickAction {
-                    navigationHelper?.navigateToProfileDetail()
+                    NavigationHelperImpl.navigateToProfileDetail()
                 }.build(),
             SettingsDivideLineItemViewModel(),
             SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_image_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE))
+                    NavigationHelperImpl.navigateToSettings(SettingsFragment.makeBundle(SettingsType.IMAGE))
                 }.build()
 
         )
     }
 
-    protected abstract fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel>
+    protected abstract fun createMainSubSettingItems(): List<ItemViewModel>
 }

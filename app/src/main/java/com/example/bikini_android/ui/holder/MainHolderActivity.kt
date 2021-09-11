@@ -57,8 +57,9 @@ class MainHolderActivity : BaseActivity() {
                 R.id.content_fragment_holder,
                 itemEventRelay
             )
-            navigationHelper =
-                NavigationHelperImpl(this)
+            navigationHelper = NavigationHelperImpl.apply {
+                setActivity(this@MainHolderActivity)
+            }
         }
     }
 

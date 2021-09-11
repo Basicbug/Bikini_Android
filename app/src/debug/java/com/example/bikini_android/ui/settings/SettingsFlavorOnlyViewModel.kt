@@ -8,14 +8,12 @@
 package com.example.bikini_android.ui.settings
 
 import com.example.bikini_android.ui.common.item.ItemViewModel
-import com.example.bikini_android.ui.holder.NavigationHelperImpl
 
 /**
  * @author MyeongKi
  */
-class SettingsFlavorOnlyViewModel(private val navigationHelper: NavigationHelperImpl? = null) :
-    SettingsViewModel() {
+class SettingsFlavorOnlyViewModel : SettingsViewModel() {
     override fun getSettingsItemViewModels(): List<ItemViewModel> {
-        return SettingsItemProviderImpl.createSettingItemsFlavorOnly(navigationHelper)
+        return SettingsItemProviderImpl.createSettingItemsFlavorOnly()
     }
 }

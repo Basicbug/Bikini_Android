@@ -9,31 +9,28 @@ package com.example.bikini_android.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.bikini_android.ui.holder.NavigationHelperImpl
 import com.example.bikini_android.ui.settings.image.SettingsImageCompressionViewModel
 import com.example.bikini_android.ui.settings.image.SettingsImageViewModel
 
 /**
  * @author MyeongKi
  */
-class SettingsViewModelFactoryProvider(
-    private val navigationHelper: NavigationHelperImpl?
-) : ViewModelProvider.Factory {
+class SettingsViewModelFactoryProvider : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainSettingsViewModel::class.java) -> {
-                MainSettingsViewModel(navigationHelper) as T
+                MainSettingsViewModel() as T
             }
             modelClass.isAssignableFrom(SettingsImageViewModel::class.java) -> {
-                SettingsImageViewModel(navigationHelper) as T
+                SettingsImageViewModel() as T
             }
             modelClass.isAssignableFrom(SettingsImageCompressionViewModel::class.java) -> {
                 SettingsImageCompressionViewModel() as T
             }
             modelClass.isAssignableFrom(SettingsFlavorOnlyViewModel::class.java) -> {
-                SettingsFlavorOnlyViewModel(navigationHelper) as T
+                SettingsFlavorOnlyViewModel() as T
             }
             else -> {
                 throw IllegalArgumentException()

@@ -13,15 +13,13 @@ import com.example.bikini_android.R
 /**
  * @author MyeongKi
  */
-class NavigationHelperImpl(
-    activity: MainHolderActivity?
-) : NavigationHelper(activity) {
+object NavigationHelperImpl : NavigationHelper() {
 
     fun navigateToSettingsFlavorOnly(bundle: Bundle) {
-        getNavController().navigate(R.id.action_flavor_only_setting, bundle)
+        getNavController()?.navigate(R.id.action_flavor_only_setting, bundle)
     }
 
     fun navigateToSettingsApi(): () -> Unit = {
-        getNavController().navigate(R.id.action_settings_api)
+        getNavController()?.navigate(R.id.action_settings_api)
     }
 }

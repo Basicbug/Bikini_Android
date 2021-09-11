@@ -19,23 +19,23 @@ import com.example.bikini_android.ui.settings.item.SettingsTitleItemViewModel
  * @author MyeongKi
  */
 object SettingsItemProviderImpl : SettingsItemsProvider() {
-    override fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+    override fun createMainSubSettingItems(): List<ItemViewModel> {
         return listOf(
             SettingsDivideLineItemViewModel(),
             SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_dev_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToSettingsFlavorOnly(SettingsFragment.makeBundle(SettingsType.FLAVOR_ONLY))
+                    NavigationHelperImpl.navigateToSettingsFlavorOnly(SettingsFragment.makeBundle(SettingsType.FLAVOR_ONLY))
                 }.build()
         )
     }
 
-    fun createSettingItemsFlavorOnly(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+    fun createSettingItemsFlavorOnly(): List<ItemViewModel> {
         return listOf(
             SettingsTitleItemViewModel.Builder(AppResources.getString(R.string.settings_network_title))
                 .build(),
             SettingsContentItemViewModel.Builder(AppResources.getString(R.string.settings_api_title))
                 .setOnClickAction {
-                    navigationHelper?.navigateToSettingsApi()?.invoke()
+                    NavigationHelperImpl.navigateToSettingsApi().invoke()
                 }.build()
         )
     }

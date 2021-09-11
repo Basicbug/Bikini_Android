@@ -8,13 +8,12 @@
 package com.example.bikini_android.ui.settings
 
 import com.example.bikini_android.ui.common.item.ItemViewModel
-import com.example.bikini_android.ui.holder.NavigationHelperImpl
 
 /**
  * @author MyeongKi
  */
 object SettingsItemProviderImpl : SettingsItemsProvider() {
-    override fun createMainSubSettingItems(navigationHelper: NavigationHelperImpl?): List<ItemViewModel> {
+    override fun createMainSubSettingItems(): List<ItemViewModel> {
         return emptyList()
     }
 }

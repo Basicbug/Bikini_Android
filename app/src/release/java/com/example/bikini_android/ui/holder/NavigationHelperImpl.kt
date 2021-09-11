@@ -10,6 +10,4 @@ package com.example.bikini_android.ui.holder
 /**
  * @author MyeongKi
  */
-class NavigationHelperImpl(
-    activity: MainHolderActivity?
-) : NavigationHelper(activity)
+object NavigationHelperImpl : NavigationHelper()
