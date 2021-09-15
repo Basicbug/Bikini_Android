@@ -16,6 +16,7 @@
     <string name="empty_input_box">사용할 별명을 입력해주세요.</string>
     <string name="message_input_nick">별명을 입력하세요.</string>
     <string name="nickname">Nickname</string>
+    <string name="success_edit_nickname">닉네임이 변경되었습니다.</string>
 
     <!--permission-->
     <string name="permission_required_toast">권한이 필요합니다.</string>
