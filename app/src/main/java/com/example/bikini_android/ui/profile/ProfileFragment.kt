@@ -117,11 +117,25 @@ class ProfileFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 when (it) {
-                    ProfileViewModel.EventType.OPEN_BOARD ->
+                    ProfileViewModel.EventType.OPEN_BOARD -> {
                         openBoard()
+                    }
                     else -> Unit
                 }
             }.addTo(disposables)
+
+        profileEventRelay
+            .ofType(ProfileItemViewModel.EventType::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                when (it) {
+                    ProfileItemViewModel.EventType.OPEN_EDIT_NICKNAME -> {
+                        getNavigationHelper()?.navigateToAccountSetting()
+                    }
+                    else -> Unit
+                }
+            }.addTo(disposables)
+
         feedsEventRelay
             .ofType(FeedsEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
@@ -143,6 +157,7 @@ class ProfileFragment : BaseFragment() {
                     )
                 )
             }.addTo(disposables)
+
         RxActionBus.toObservable(ReloadFeedEvent::class.java).subscribe {
             feedsViewModel.reloadFeeds()
         }.addTo(disposables)

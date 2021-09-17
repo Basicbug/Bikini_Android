@@ -4,26 +4,51 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/median_margin"
         android:layout_marginBottom="@dimen/bottom_navigation_height">
-
-        <com.google.android.material.button.MaterialButton
+        <TextView
             android:id="@+id/account"
+            android:text="@string/edit_nickname"
+            android:textSize="@dimen/text_default_size"
+            android:layout_marginStart="@dimen/default_margin"
             android:layout_width="@dimen/match_constraint"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/grey"
-            android:text="Account"
+            android:layout_height="@dimen/content_item_height"
+            android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="@dimen/arrow_width"
+            android:layout_height="@dimen/arrow_height"
+            android:layout_margin="@dimen/default_margin"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:contentDescription="@string/arrow_image"
+            app:tint="?attr/settingsDefaultButtonColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/account"
+            app:layout_constraintBottom_toBottomOf="@id/account" />
+
+        <View
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:background="?attr/defaultBackgroundColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account"/>
+
+        <TextView
             android:id="@+id/logout"
             android:layout_width="@dimen/match_constraint"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:text="LOGOUT"
+            android:layout_height="@dimen/content_item_height"
+            android:textColor="@color/white"
+            android:background="@color/red"
+            android:text="@string/logout"
+            android:gravity="center"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

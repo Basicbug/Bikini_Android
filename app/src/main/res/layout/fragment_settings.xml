@@ -18,7 +18,7 @@
             android:id="@+id/settings"
             android:layout_width="@dimen/match_constraint"
             android:layout_height="@dimen/match_constraint"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginTop="@dimen/median_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
             android:text="@{viewmodel.userId}"
+            android:onClick="@{() -> viewmodel.onClickNickName()}"
             android:textSize="@dimen/text_large_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,23 +144,22 @@
             android:layout_marginStart="@dimen/default_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/representative_image"
-            app:layout_constraintBottom_toTopOf="@id/ticket_count"
             tools:text="상매입니다 입력해주세fefefefefefefefefefe용" />
 
-        <Button
-            android:id="@+id/ticket_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewmodel.feedTicketCount}"
-            android:layout_marginTop="@dimen/default_margin"
-            android:textSize="@dimen/text_profile_ticket_size"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/state_message"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="5 ticket" />
+<!--        <Button-->
+<!--            android:id="@+id/ticket_count"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@{viewmodel.feedTicketCount}"-->
+<!--            android:layout_marginTop="@dimen/default_margin"-->
+<!--            android:textSize="@dimen/text_profile_ticket_size"-->
+<!--            android:layout_marginStart="@dimen/default_margin"-->
+<!--            android:layout_marginEnd="@dimen/default_margin"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/state_message"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            tools:text="5 ticket" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

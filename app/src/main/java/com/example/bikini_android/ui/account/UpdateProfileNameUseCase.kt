@@ -36,7 +36,7 @@ class UpdateProfileNameUseCase(
                 itemEventRelay.accept(
                     (AccountEvent(
                         it.toString(),
-                        AccountSettingViewModel.EventType.UPDATE_SUCCEED
+                        AccountSettingViewModel.EventType.UPDATE_FAILED
                     ))
                 )
             })

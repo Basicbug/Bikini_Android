@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ menu_bikini.xml 2021. 9. 11
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/feed_add_menu"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="add"
+        app:showAsAction="always" />
+</menu>

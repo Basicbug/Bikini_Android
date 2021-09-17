@@ -17,6 +17,15 @@
         android:name="com.example.bikini_android.ui.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings">
     </fragment>
+    <fragment
+        android:id="@+id/profile_detail"
+        android:name="com.example.bikini_android.ui.profile.ProfileDetailFragment"
+        tools:layout="@layout/fragment_profile_detail" />
+    <fragment
+        android:id="@+id/account_setting"
+        android:name="com.example.bikini_android.ui.account.AccountSettingFragment"
+        tools:layout="@layout/fragment_account_setting" />
+
     <include app:graph="@navigation/settings_flavor_only" />
     <action
         android:id="@+id/action_flavor_only_setting"
@@ -24,4 +33,12 @@
     <action
         android:id="@+id/action_settings"
         app:destination="@id/settings" />
+
+    <action
+        android:id="@+id/action_detail"
+        app:destination="@id/profile_detail"
+        app:enterAnim="@anim/slide_in_from_bottom" />
+    <action
+        android:id="@+id/action_profile_setting"
+        app:destination="@id/account_setting" />
 </navigation>

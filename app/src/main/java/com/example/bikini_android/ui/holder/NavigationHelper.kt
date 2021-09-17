@@ -17,31 +17,35 @@ import com.example.bikini_android.util.logging.Logger
  * @author MyeongKi
  */
 
-abstract class NavigationHelper(
-    private var activity: MainHolderActivity?
-) {
+abstract class NavigationHelper {
+    private var activity: MainHolderActivity? = null
+
     private val logger = Logger().apply {
         TAG = this.javaClass.simpleName
     }
 
+    fun setActivity(activity: MainHolderActivity) {
+        this.activity = activity
+    }
+
     fun navigateToFeeds(bundle: Bundle) {
-        getNavController().navigate(R.id.action_feeds_end, bundle)
+        getNavController()?.navigate(R.id.action_feeds_end, bundle)
     }
 
     fun navigateToAccountSetting() {
-        getNavController().navigate(R.id.account_setting)
+        getNavController()?.navigate(R.id.account_setting)
     }
 
     fun navigateToProfileDetail() {
-        getNavController().navigate(R.id.action_detail)
+        getNavController()?.navigate(R.id.action_detail)
     }
 
     fun navigateToFeedsMap(bundle: Bundle) {
-        getNavController().navigate(R.id.action_feed_map, bundle)
+        getNavController()?.navigate(R.id.action_feed_map, bundle)
     }
 
     fun navigateToSettings(bundle: Bundle) {
-        getNavController().navigate(R.id.action_settings, bundle)
+        getNavController()?.navigate(R.id.action_settings, bundle)
     }
 
     fun clear() {
@@ -49,10 +53,10 @@ abstract class NavigationHelper(
     }
 
     fun popBackStack() {
-        getNavController().popBackStack()
+        getNavController()?.popBackStack()
     }
 
-    protected fun getNavController(): NavController {
-        return activity!!.findNavController(R.id.content_fragment_holder)
+    protected fun getNavController(): NavController? {
+        return activity?.findNavController(R.id.content_fragment_holder)
     }
 }

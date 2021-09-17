@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
+import com.example.bikini_android.app.ToastHelper
 import com.example.bikini_android.databinding.FragmentAccountSettingBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BaseFragment
@@ -63,6 +64,7 @@ class AccountSettingFragment : BaseFragment() {
 
                 when (it.type) {
                     AccountSettingViewModel.EventType.UPDATE_SUCCEED -> {
+                        ToastHelper.show(R.string.success_edit_nickname)
                         LoginManagerProxy.userName = it.result
                         getNavigationHelper()?.popBackStack()
                     }

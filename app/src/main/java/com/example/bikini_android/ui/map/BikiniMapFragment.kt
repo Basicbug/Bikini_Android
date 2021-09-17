@@ -7,9 +7,13 @@
 
 package com.example.bikini_android.ui.map
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.ArrayMap
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -21,6 +25,7 @@ import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseMapFragment
+import com.example.bikini_android.ui.board.BoardActivity
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
 import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsFragment
@@ -81,6 +86,7 @@ class BikiniMapFragment : BaseMapFragment() {
             mapView = it.map.also { view ->
                 view.getMapAsync(this)
             }
+            setHasOptionsMenu(true)
         }.root
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -90,6 +96,19 @@ class BikiniMapFragment : BaseMapFragment() {
         feedsViewModel.loadFeeds()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bikini, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.feed_add_menu -> {
+                openBoard()
+                false
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onDestroyView() {
         clearFeedTable()
         super.onDestroyView()
@@ -207,7 +226,9 @@ class BikiniMapFragment : BaseMapFragment() {
             }
         }
     }
-
+    private fun openBoard() {
+        startActivity(Intent(activity, BoardActivity::class.java))
+    }
     companion object {
         private const val KEY_LOCATION_INFO = "keyLocationInfo"
         private val MAP_FEEDS_TYPE = FeedsType.NEARBY_FEEDS

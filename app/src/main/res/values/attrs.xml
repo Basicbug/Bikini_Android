@@ -20,7 +20,6 @@
     <attr name="defaultTintColor" format="reference|color" />
     <attr name="locationButtonTintColor" format="reference|color" />
     <attr name="progressTintColor" format="reference|color" />
-
     <!-- board -->
     <attr name="boardBottomSheetImageTintColor" format="reference|color" />
     <attr name="boardBottomButtonBackground" format="reference|color" />
