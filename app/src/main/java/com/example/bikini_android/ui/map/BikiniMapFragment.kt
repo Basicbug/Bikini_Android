@@ -174,7 +174,7 @@ class BikiniMapFragment : BaseMapFragment() {
     }
 
     private fun bindFeedMarkers(feeds: List<Feed>) {
-        for (feed in feeds) {
+        for (feed in feeds.sortedByDescending { it.modifiedAt }) {
             if (feedMarkerBindingTable[feed.feedId] == null) {
                 getFeedMarkerBinding().run {
                     feedMarkerBindingTable[feed.feedId] = this

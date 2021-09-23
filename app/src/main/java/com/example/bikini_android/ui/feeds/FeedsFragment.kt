@@ -11,8 +11,8 @@ import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.CacheListAdapter
+import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.BikiniMapFragment
@@ -36,6 +36,7 @@ class FeedsFragment : BaseFragment() {
     private var feedsType: FeedsType = FeedsType.RANKING_FEEDS
     private var recyclerViewLayoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.VERTICAL
     private var feedsReceived: List<Feed>? = null
+    private var needToFocus = false
 
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
@@ -52,6 +53,7 @@ class FeedsFragment : BaseFragment() {
             sortType = FeedsSortType.valueOf(
                 it.getString(KEY_SORT_TYPE_NAME) ?: FeedsSortType.NEAR_DISTANCE.name
             )
+            needToFocus = it.getBoolean(KEY_FOCUS)
 
             val feedsParcelableArray = it.getParcelableArray(KEY_FEEDS)
             feedsParcelableArray?.let {
@@ -97,7 +99,7 @@ class FeedsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadFeeds(feedsReceived)
+        viewModel.loadFeeds(feedsReceived, pivotFeed, needToFocus)
     }
 
     private fun observeEvent() {
@@ -119,7 +121,8 @@ class FeedsFragment : BaseFragment() {
                         feedsType,
                         sortType,
                         event.feed,
-                        feedsReceived
+                        feedsReceived,
+                        needToFocus = true
                     )
                 )
             }.addTo(disposables)
@@ -145,17 +148,20 @@ class FeedsFragment : BaseFragment() {
         private const val KEY_PIVOT_FEED = "pivotFeed"
         private const val KEY_FEEDS_TYPE = "viewType"
         private const val KEY_FEEDS = "keyFeeds"
+        private const val KEY_FOCUS = "focus"
         fun makeBundle(
             layoutType: RecyclerViewLayoutType,
             feedsType: FeedsType = FeedsType.RANKING_FEEDS,
             sortType: FeedsSortType = FeedsSortType.POPULAR,
             pivotFeed: Feed? = null,
-            feeds: List<Feed>? = null
+            feeds: List<Feed>? = null,
+            needToFocus: Boolean = false
         ): Bundle {
             return Bundle().apply {
                 putString(KEY_LAYOUT_TYPE_NAME, layoutType.name)
                 putString(KEY_SORT_TYPE_NAME, sortType.name)
                 putString(KEY_FEEDS_TYPE, feedsType.name)
+                putBoolean(KEY_FOCUS, needToFocus)
                 putParcelable(KEY_PIVOT_FEED, pivotFeed)
                 putParcelableArray(KEY_FEEDS, feeds?.toTypedArray())
             }

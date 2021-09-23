@@ -51,9 +51,13 @@ abstract class FeedsViewModel(
             }.addTo(disposables)
     }
 
-    fun loadFeeds(feeds: List<Feed>? = null) {
+    fun loadFeeds(feeds: List<Feed>? = null, pickedFeed: Feed? = null, isForFocusing: Boolean = false) {
         feeds?.let {
             _feedsRendered = feeds
+            if (isForFocusing && pickedFeed != null) {
+                loadFeedsUseCase.execute(listByFocus(it, pickedFeed))
+                return
+            }
         }
         loadFeedsUseCase.execute(lastFeedsRendered = feedsRendered)
     }
@@ -64,6 +68,13 @@ abstract class FeedsViewModel(
 
     fun reloadFeeds() {
         loadFeedsUseCase.execute()
+    }
+
+    private fun listByFocus(list: List<Feed>, pickedFeed: Feed): List<Feed> {
+        val tempList = list as MutableList<Feed>
+        tempList.remove(pickedFeed)
+        tempList.add(0, pickedFeed)
+        return tempList
     }
 
     override fun saveState() {
