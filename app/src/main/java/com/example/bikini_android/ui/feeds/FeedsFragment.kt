@@ -11,8 +11,8 @@ import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.CacheListAdapter
+import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.BikiniMapFragment
@@ -37,6 +37,9 @@ class FeedsFragment : BaseFragment() {
     private var recyclerViewLayoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.VERTICAL
     private var feedsReceived: List<Feed>? = null
 
+    var posOfPivot = -1
+    var isPosChecked = false
+
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
 
@@ -59,6 +62,13 @@ class FeedsFragment : BaseFragment() {
                 feedsParcelableArray.forEach { feedParcelable ->
                     (feedParcelable as? Feed)?.let { feed ->
                         tempFeeds.add(feed)
+
+                        pivotFeed?.let { pivot ->
+                            if (!isPosChecked) {
+                                posOfPivot++
+                                if (pivot.feedId == feed.feedId) isPosChecked = true
+                            }
+                        }
                     }
                 }
                 feedsReceived = tempFeeds
@@ -107,6 +117,7 @@ class FeedsFragment : BaseFragment() {
             .filter { it.feedsType == this.feedsType }
             .subscribe { event ->
                 feedAdapterHelper.bindFeeds(event.feeds)
+                showPivotFeed()
             }.addTo(disposables)
 
         itemEventRelay
@@ -137,6 +148,12 @@ class FeedsFragment : BaseFragment() {
         RxActionBus.toObservable(ReloadFeedEvent::class.java).subscribe {
             viewModel.reloadFeeds()
         }.addTo(disposables)
+    }
+
+    private fun showPivotFeed() {
+        if (recyclerViewLayoutType == RecyclerViewLayoutType.VERTICAL && isPosChecked) {
+            binding.feeds.layoutManager?.scrollToPosition(posOfPivot)
+        }
     }
 
     companion object {
