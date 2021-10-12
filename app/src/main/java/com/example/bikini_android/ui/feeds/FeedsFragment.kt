@@ -11,8 +11,8 @@ import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BaseFragment
 import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.common.list.CacheListAdapter
+import com.example.bikini_android.ui.common.list.DefaultDiffCallback
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.BikiniMapFragment
@@ -37,6 +37,8 @@ class FeedsFragment : BaseFragment() {
     private var recyclerViewLayoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.VERTICAL
     private var feedsReceived: List<Feed>? = null
 
+    var posOfPivot = IDX_NOT_INITIATED
+
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
 
@@ -56,9 +58,13 @@ class FeedsFragment : BaseFragment() {
             val feedsParcelableArray = it.getParcelableArray(KEY_FEEDS)
             feedsParcelableArray?.let {
                 val tempFeeds = mutableListOf<Feed>()
-                feedsParcelableArray.forEach { feedParcelable ->
+                feedsParcelableArray.forEachIndexed { idx, feedParcelable ->
                     (feedParcelable as? Feed)?.let { feed ->
                         tempFeeds.add(feed)
+
+                        pivotFeed?.let { pivot ->
+                            if (pivot.feedId == feed.feedId) posOfPivot = idx
+                        }
                     }
                 }
                 feedsReceived = tempFeeds
@@ -107,6 +113,7 @@ class FeedsFragment : BaseFragment() {
             .filter { it.feedsType == this.feedsType }
             .subscribe { event ->
                 feedAdapterHelper.bindFeeds(event.feeds)
+                showPivotFeed()
             }.addTo(disposables)
 
         itemEventRelay
@@ -139,12 +146,22 @@ class FeedsFragment : BaseFragment() {
         }.addTo(disposables)
     }
 
+    private fun showPivotFeed() {
+        if (recyclerViewLayoutType == RecyclerViewLayoutType.VERTICAL && posOfPivot != IDX_NOT_INITIATED) {
+            binding.feeds.layoutManager?.scrollToPosition(posOfPivot)
+        }
+    }
+
     companion object {
+
+        private const val IDX_NOT_INITIATED = -1
+
         private const val KEY_LAYOUT_TYPE_NAME = "keyLayoutType"
         private const val KEY_SORT_TYPE_NAME = "sortType"
         private const val KEY_PIVOT_FEED = "pivotFeed"
         private const val KEY_FEEDS_TYPE = "viewType"
         private const val KEY_FEEDS = "keyFeeds"
+
         fun makeBundle(
             layoutType: RecyclerViewLayoutType,
             feedsType: FeedsType = FeedsType.RANKING_FEEDS,
