@@ -37,8 +37,7 @@ class FeedsFragment : BaseFragment() {
     private var recyclerViewLayoutType: RecyclerViewLayoutType = RecyclerViewLayoutType.VERTICAL
     private var feedsReceived: List<Feed>? = null
 
-    var posOfPivot = -1
-    var isPosChecked = false
+    var posOfPivot = IDX_NOT_INITIATED
 
     private lateinit var viewModel: FeedsViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
@@ -59,15 +58,12 @@ class FeedsFragment : BaseFragment() {
             val feedsParcelableArray = it.getParcelableArray(KEY_FEEDS)
             feedsParcelableArray?.let {
                 val tempFeeds = mutableListOf<Feed>()
-                feedsParcelableArray.forEach { feedParcelable ->
+                feedsParcelableArray.forEachIndexed { idx, feedParcelable ->
                     (feedParcelable as? Feed)?.let { feed ->
                         tempFeeds.add(feed)
 
                         pivotFeed?.let { pivot ->
-                            if (!isPosChecked) {
-                                posOfPivot++
-                                if (pivot.feedId == feed.feedId) isPosChecked = true
-                            }
+                            if (pivot.feedId == feed.feedId) posOfPivot = idx
                         }
                     }
                 }
@@ -151,17 +147,21 @@ class FeedsFragment : BaseFragment() {
     }
 
     private fun showPivotFeed() {
-        if (recyclerViewLayoutType == RecyclerViewLayoutType.VERTICAL && isPosChecked) {
+        if (recyclerViewLayoutType == RecyclerViewLayoutType.VERTICAL && posOfPivot != IDX_NOT_INITIATED) {
             binding.feeds.layoutManager?.scrollToPosition(posOfPivot)
         }
     }
 
     companion object {
+
+        private const val IDX_NOT_INITIATED = -1
+
         private const val KEY_LAYOUT_TYPE_NAME = "keyLayoutType"
         private const val KEY_SORT_TYPE_NAME = "sortType"
         private const val KEY_PIVOT_FEED = "pivotFeed"
         private const val KEY_FEEDS_TYPE = "viewType"
         private const val KEY_FEEDS = "keyFeeds"
+
         fun makeBundle(
             layoutType: RecyclerViewLayoutType,
             feedsType: FeedsType = FeedsType.RANKING_FEEDS,
