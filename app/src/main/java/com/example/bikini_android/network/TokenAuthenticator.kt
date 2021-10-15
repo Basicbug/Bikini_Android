@@ -33,7 +33,7 @@ class TokenAuthenticator : Authenticator {
 
     private fun updatedToken() {
         val authTokenResponse = ApiClientHelper
-            .createMainApiByService(AuthService::class)
+            .createInvalidAuthApiByService(AuthService::class)
             .refreshAccessToken(
                 PreferenceManager.getString(AppResources.getString(R.string.jwt)),
                 LoginManagerProxy.refreshToken

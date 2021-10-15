@@ -15,6 +15,7 @@ import retrofit2.Retrofit
  */
 
 interface ApiClient {
+    fun setBuilder(builder: OkHttpClient.Builder): OkHttpClient.Builder
     fun builder(builder: OkHttpClient.Builder): Retrofit.Builder
     fun build(builder: Retrofit.Builder): Retrofit
 }
