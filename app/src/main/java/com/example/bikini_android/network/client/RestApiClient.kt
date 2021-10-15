@@ -10,6 +10,7 @@ package com.example.bikini_android.network.client
 import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.network.HostSelectionInterceptor
 import com.example.bikini_android.network.ResponseCacheFactory
+import com.example.bikini_android.network.TokenAuthenticator
 import com.example.bikini_android.ui.settings.FlipperSettingImpl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -27,9 +28,11 @@ abstract class RestApiClient(private val requestUrl: String) : ApiClient {
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
+            .authenticator(TokenAuthenticator())
             .addInterceptor(HostSelectionInterceptor())
             .addInterceptor(FlipperSettingImpl().getFlipperNetworkPlugin())
             .cache(ResponseCacheFactory().createCache(AppResources.getContext()))
+
         return Retrofit.Builder().client(builder.build())
     }
 

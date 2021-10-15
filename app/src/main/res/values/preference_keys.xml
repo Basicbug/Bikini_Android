@@ -5,6 +5,7 @@
     <string name="last_login_platform">lastLoginPlatform</string>
     <string name="naver_id_login">NAVER</string>
     <string name="jwt">JSON-Web-Token</string>
+    <string name="refresh_token">Refresh-Token</string>
     <string name="user_name_key">USER-NAME</string>
     <string name="image_compression_rate">imageCompressionRate</string>
 </resources>

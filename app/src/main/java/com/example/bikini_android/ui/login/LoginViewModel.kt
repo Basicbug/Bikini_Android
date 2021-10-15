@@ -62,8 +62,9 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(schedulerProvider.io())
             .subscribe({ result ->
                 progressViewModel.isVisible = false
-                result?.token?.let {
-                    loginManager.jwt = it
+                result?.let {
+                    loginManager.jwt = it.accessToken
+                    loginManager.refreshToken = it.refreshToken
                     loginManager.successLogin()
                     itemEventRelay.accept(EventType.COMPLETE)
                 }

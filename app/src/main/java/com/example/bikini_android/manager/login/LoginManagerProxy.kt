@@ -25,6 +25,19 @@ object LoginManagerProxy : LoginManager {
                 PreferenceManager.setString(AppResources.getString(R.string.jwt), it)
             }
         }
+    var refreshToken: String = ""
+        get() {
+            if (field.isEmpty()) {
+                field = PreferenceManager.getString(AppResources.getString(R.string.refresh_token))
+            }
+            return field
+        }
+        set(value) {
+            value.let {
+                field = it
+                PreferenceManager.setString(AppResources.getString(R.string.refresh_token), it)
+            }
+        }
 
     var userName: String = ""
         get() {
