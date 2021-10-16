@@ -26,7 +26,7 @@ class TokenAuthenticator : Authenticator {
         updatedToken()
         return response.request.newBuilder()
             .header(
-                "X-AUTH-TOKEN", LoginManagerProxy.jwt
+                "X-AUTH-TOKEN", LoginManagerProxy.accessToken
             )
             .build()
     }
@@ -35,12 +35,12 @@ class TokenAuthenticator : Authenticator {
         val authTokenResponse = ApiClientHelper
             .createInvalidAuthApiByService(AuthService::class)
             .refreshAccessToken(
-                PreferenceManager.getString(AppResources.getString(R.string.jwt)),
+                PreferenceManager.getString(AppResources.getString(R.string.access_token)),
                 LoginManagerProxy.refreshToken
             )
             .blockingGet()
         authTokenResponse.result?.let {
-            LoginManagerProxy.jwt = it.accessToken
+            LoginManagerProxy.accessToken = it.accessToken
             LoginManagerProxy.refreshToken = it.refreshToken
             return
         }

@@ -55,7 +55,7 @@ class LoginViewModelTest {
     @Test
     fun signup_success_progress() {
         Mockito.`when`(loginRepository.sendTokenToServer(Mockito.anyString())).thenReturn(
-            Single.just(TokenResponse.Result(""))
+            Single.just(TokenResponse.Result("", ""))
         )
         viewModel.sendTokenToServer(Mockito.anyString())
 
@@ -67,7 +67,7 @@ class LoginViewModelTest {
     @Test
     fun signup_success_complete_event() {
         Mockito.`when`(loginRepository.sendTokenToServer(Mockito.anyString())).thenReturn(
-            Single.just(TokenResponse.Result(""))
+            Single.just(TokenResponse.Result("", ""))
         )
         viewModel.sendTokenToServer(Mockito.anyString())
         var isCompleteEventInvoked = false

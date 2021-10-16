@@ -11,20 +11,20 @@ import com.jakewharton.rxrelay2.Relay
  * @author bsgreentea
  */
 object LoginManagerProxy : LoginManager {
-
-    var jwt: String = ""
+    var accessToken: String = ""
         get() {
             if (field.isEmpty()) {
-                field = PreferenceManager.getString(AppResources.getString(R.string.jwt))
+                field = PreferenceManager.getString(AppResources.getString(R.string.access_token))
             }
             return field
         }
         set(value) {
             value.let {
                 field = it
-                PreferenceManager.setString(AppResources.getString(R.string.jwt), it)
+                PreferenceManager.setString(AppResources.getString(R.string.access_token), it)
             }
         }
+
     var refreshToken: String = ""
         get() {
             if (field.isEmpty()) {
