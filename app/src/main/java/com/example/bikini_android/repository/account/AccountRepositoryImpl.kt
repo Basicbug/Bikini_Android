@@ -24,7 +24,7 @@ object AccountRepositoryImpl : AccountRepository {
     override fun getUserFromRemote(userInfo: UserInfo): Single<UserUpdateResponse.Result?> {
         return ApiClientHelper
             .createMainApiByService(UserService::class)
-            .updateUserInfo(LoginManagerProxy.jwt, userInfo)
+            .updateUserInfo(LoginManagerProxy.accessToken, userInfo)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result
@@ -38,7 +38,7 @@ object AccountRepositoryImpl : AccountRepository {
     override fun getMyInfoFromRemote(): Single<MyInfoReponse.Result?> {
         return ApiClientHelper
             .createMainApiByService(UserService::class)
-            .getMyInfo(LoginManagerProxy.jwt)
+            .getMyInfo(LoginManagerProxy.accessToken)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result

@@ -37,7 +37,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun getUserFeedsFromRemote(userId: String): Single<List<Feed>?> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
-            .getUserFeeds(LoginManagerProxy.jwt, userId)
+            .getUserFeeds(LoginManagerProxy.accessToken, userId)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds
@@ -64,7 +64,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun getRankingFeedsFromRemote(limit: Int): Single<List<Feed>?> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
-            .getRankFeeds(LoginManagerProxy.jwt, limit)
+            .getRankFeeds(LoginManagerProxy.accessToken, limit)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds
@@ -91,7 +91,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     override fun getAllFeedsFromRemote(): Single<List<Feed>?> {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
-            .getAllFeeds(LoginManagerProxy.jwt)
+            .getAllFeeds(LoginManagerProxy.accessToken)
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.feeds
@@ -119,7 +119,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
         return ApiClientHelper
             .createMainApiByService(FeedService::class)
             .getNearbyLocationFeeds(
-                LoginManagerProxy.jwt,
+                LoginManagerProxy.accessToken,
                 NearbyFeedParameter().apply {
                     setLocation(latLng)
                     setRadius(radius)
@@ -153,7 +153,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
     ): Single<DefaultResponse?> {
         return ApiClientHelper
             .createMainApiByService(ImagesService::class)
-            .uploadImages(LoginManagerProxy.jwt, imageFiles)
+            .uploadImages(LoginManagerProxy.accessToken, imageFiles)
             .subscribeOn(Schedulers.io())
             .map { response ->
                 mutableListOf<Int>().apply {
@@ -165,7 +165,7 @@ class FeedRepositoryImpl private constructor() : FeedRepository {
             .flatMap { imageIds ->
                 ApiClientHelper.createMainApiByService(FeedService::class)
                     .addFeed(
-                        LoginManagerProxy.jwt,
+                        LoginManagerProxy.accessToken,
                         feed.apply {
                             this.imageIds = imageIds
                         })

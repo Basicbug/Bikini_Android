@@ -8,7 +8,7 @@
 package com.example.bikini_android.login
 
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.network.response.LoginResponse
+import com.example.bikini_android.network.response.TokenResponse
 import com.example.bikini_android.network.response.MyInfoReponse
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.repository.account.UserInfo
@@ -55,7 +55,7 @@ class LoginViewModelTest {
     @Test
     fun signup_success_progress() {
         Mockito.`when`(loginRepository.sendTokenToServer(Mockito.anyString())).thenReturn(
-            Single.just(LoginResponse.Result(""))
+            Single.just(TokenResponse.Result("", ""))
         )
         viewModel.sendTokenToServer(Mockito.anyString())
 
@@ -67,7 +67,7 @@ class LoginViewModelTest {
     @Test
     fun signup_success_complete_event() {
         Mockito.`when`(loginRepository.sendTokenToServer(Mockito.anyString())).thenReturn(
-            Single.just(LoginResponse.Result(""))
+            Single.just(TokenResponse.Result("", ""))
         )
         viewModel.sendTokenToServer(Mockito.anyString())
         var isCompleteEventInvoked = false

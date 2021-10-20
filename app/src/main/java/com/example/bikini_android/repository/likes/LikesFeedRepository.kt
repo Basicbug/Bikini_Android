@@ -30,7 +30,7 @@ class LikesFeedRepository private constructor() : LikesRepository {
     override fun addLikes(targetId: String): Single<Likes?> {
         return ApiClientHelper
             .createMainApiByService(LikesService::class)
-            .addLikes(LoginManagerProxy.jwt, getLikesParameter(targetId))
+            .addLikes(LoginManagerProxy.accessToken, getLikesParameter(targetId))
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.convertLikes()
@@ -44,7 +44,7 @@ class LikesFeedRepository private constructor() : LikesRepository {
     override fun removeLikes(targetId: String): Single<Likes?> {
         return ApiClientHelper
             .createMainApiByService(LikesService::class)
-            .removeLikes(LoginManagerProxy.jwt, getLikesParameter(targetId))
+            .removeLikes(LoginManagerProxy.accessToken, getLikesParameter(targetId))
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.convertLikes()
@@ -58,7 +58,7 @@ class LikesFeedRepository private constructor() : LikesRepository {
     override fun checkLikes(targetId: String): Single<Likes?> {
         return ApiClientHelper
             .createMainApiByService(LikesService::class)
-            .checkLikes(LoginManagerProxy.jwt, getLikesParameter(targetId))
+            .checkLikes(LoginManagerProxy.accessToken, getLikesParameter(targetId))
             .subscribeOn(Schedulers.io())
             .map {
                 it.result?.convertLikes()

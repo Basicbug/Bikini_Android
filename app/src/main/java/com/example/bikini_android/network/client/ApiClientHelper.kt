@@ -17,9 +17,14 @@ import kotlin.reflect.KClass
 
 object ApiClientHelper {
     private val mainClient: Retrofit = ApiFactory.getMainApiClient(NetworkConstants.DEV_URL)
+    private val invalidAuthClient: Retrofit = ApiFactory.getInvalidApiClient(NetworkConstants.DEV_URL)
 
     @JvmStatic
     fun <T : Any> createMainApiByService(clazz: KClass<T>): T {
         return mainClient.create(clazz.java)
+    }
+    @JvmStatic
+    fun <T : Any> createInvalidAuthApiByService(clazz: KClass<T>): T {
+        return invalidAuthClient.create(clazz.java)
     }
 }

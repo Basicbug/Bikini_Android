@@ -2,7 +2,7 @@ package com.example.bikini_android.ui.login
 
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.AuthService
-import com.example.bikini_android.network.response.LoginResponse
+import com.example.bikini_android.network.response.TokenResponse
 import com.example.bikini_android.util.error.ErrorToastHelper
 import com.example.bikini_android.util.logging.Logger
 import io.reactivex.Single
@@ -19,7 +19,7 @@ class LoginRepository {
         }
     }
 
-    fun sendTokenToServer(accessToken: String): Single<LoginResponse.Result?> {
+    fun sendTokenToServer(accessToken: String): Single<TokenResponse.Result?> {
         return ApiClientHelper
             .createMainApiByService(AuthService::class)
             .loginNaver(accessToken = accessToken)
