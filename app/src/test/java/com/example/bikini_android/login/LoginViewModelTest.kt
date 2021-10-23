@@ -7,14 +7,13 @@
 
 package com.example.bikini_android.login
 
-import com.example.bikini_android.manager.login.LoginManagerProxy
+import com.basicbug.core.rx.TestSchedulerProvider
 import com.basicbug.network.response.TokenResponse
-import com.example.bikini_android.network.response.MyInfoReponse
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.repository.account.UserInfo
 import com.example.bikini_android.ui.login.LoginRepository
 import com.example.bikini_android.ui.login.LoginViewModel
-import com.basicbug.core.rx.TestSchedulerProvider
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
@@ -97,8 +96,8 @@ class LoginViewModelTest {
     @Test
     fun check_my_info_success_exist() {
 
-        Mockito.`when`(accountRepository.getMyInfoFromRemote()).thenReturn(
-            Single.just(MyInfoReponse.Result(UserInfo("nickname")))
+        Mockito.`when`(accountRepository.getMyInfo()).thenReturn(
+            Single.just(UserInfo("nickname", 0, 0))
         )
 
         viewModel.checkMyInfo()

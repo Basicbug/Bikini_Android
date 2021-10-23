@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author bsgreentea
  */
-class MyInfoReponse : JsonResponseWrapper<MyInfoReponse.Result>() {
+class MyInfoResponse : JsonResponseWrapper<MyInfoResponse.Result>() {
     data class Result(
         @SerializedName("userInfo")
         val userInfo: UserInfo

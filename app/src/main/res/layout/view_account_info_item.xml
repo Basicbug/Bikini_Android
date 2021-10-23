@@ -12,13 +12,21 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.profile.ProfileItemViewModel" />
+            type="com.example.bikini_android.ui.account.info.AccountInfoItemViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="300dp"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/account_info_bottom_margin">
+
+        <androidx.constraintlayout.widget.Guideline
+            app:layout_constraintGuide_percent="0.55"
+            android:id="@+id/guideline"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/my_id"
@@ -27,16 +35,15 @@
             android:layout_margin="@dimen/large_margin"
             android:text="@{viewmodel.userId}"
             android:onClick="@{() -> viewmodel.onClickNickName()}"
-            android:textSize="@dimen/text_large_static_size"
+            android:textSize="@dimen/text_large_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="여기는 아이디"
-            tools:ignore="SpUsage" />
+            tools:text="여기는 아이디" />
 
         <ImageView
             android:id="@+id/representative_image"
-            android:layout_width="@dimen/profile_image_size"
+            android:layout_width="@dimen/account_image_size"
             android:layout_height="0dp"
             android:layout_margin="@dimen/large_margin"
             android:foreground="@drawable/circular"
@@ -51,101 +58,93 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewmodel.likeCount}"
-            android:textSize="@dimen/text_default_static_size"
+            android:textSize="@dimen/text_default_size"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/representative_image"
+            app:layout_constraintStart_toEndOf="@id/representative_image"
+            app:layout_constraintTop_toTopOf="@id/representative_image"
             app:layout_constraintBottom_toTopOf="@id/like_title"
             app:layout_constraintEnd_toStartOf="@id/shown_count"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="10"
-            tools:ignore="SpUsage" />
+            tools:text="10" />
 
         <TextView
             android:id="@+id/like_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/like"
-            android:textSize="@dimen/text_profile_title_static_size"
+            android:textSize="@dimen/text_account_title_size"
             android:layout_marginTop="@dimen/small_margin"
             app:layout_constraintStart_toStartOf="@id/like_count"
             app:layout_constraintEnd_toEndOf="@id/like_count"
             app:layout_constraintTop_toBottomOf="@id/like_count"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="좋아요"
-            tools:ignore="SpUsage" />
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            tools:text="좋아요" />
 
         <TextView
             android:id="@+id/shown_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewmodel.shownCount}"
-            android:textSize="@dimen/text_default_static_size"
+            android:textSize="@dimen/text_default_size"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/like_count"
-            app:layout_constraintTop_toBottomOf="@id/representative_image"
+            app:layout_constraintTop_toTopOf="@id/representative_image"
             app:layout_constraintBottom_toTopOf="@id/shown_title"
             app:layout_constraintEnd_toStartOf="@id/write_count"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="10"
-            tools:ignore="SpUsage" />
+            tools:text="10" />
 
         <TextView
             android:id="@+id/shown_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/shown"
-            android:textSize="@dimen/text_profile_title_static_size"
+            android:textSize="@dimen/text_account_title_size"
             android:layout_marginTop="@dimen/small_margin"
             app:layout_constraintStart_toStartOf="@id/shown_count"
             app:layout_constraintEnd_toEndOf="@id/shown_count"
             app:layout_constraintTop_toBottomOf="@id/shown_count"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="노출"
-            tools:ignore="SpUsage" />
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            tools:text="노출" />
 
         <TextView
             android:id="@+id/write_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.writeCount}"
-            android:textSize="@dimen/text_default_static_size"
+            android:text="@{viewmodel.feedCount}"
+            android:textSize="@dimen/text_default_size"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/representative_image"
+            app:layout_constraintTop_toTopOf="@id/representative_image"
             app:layout_constraintStart_toEndOf="@id/shown_count"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/write_title"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="10"
-            tools:ignore="SpUsage" />
+            tools:text="10" />
 
         <TextView
             android:id="@+id/write_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/write"
-            android:textSize="@dimen/text_profile_title_static_size"
+            android:textSize="@dimen/text_account_title_size"
             android:layout_marginTop="@dimen/small_margin"
             app:layout_constraintStart_toStartOf="@id/write_count"
             app:layout_constraintEnd_toEndOf="@id/write_count"
             app:layout_constraintTop_toBottomOf="@id/write_count"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="작성"
-            tools:ignore="SpUsage" />
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            tools:text="작성" />
 
         <TextView
             android:id="@+id/state_message"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewmodel.stateMessage}"
-            android:textSize="@dimen/text_profile_title_static_size"
-            android:layout_marginTop="@dimen/large_margin"
+            android:textSize="@dimen/text_account_title_size"
+            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginStart="@dimen/default_margin"
-            app:layout_constraintStart_toEndOf="@id/representative_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/representative_image"
-            tools:text="상매입니다 입력해주세fefefefefefefefefefe용"
-            tools:ignore="SpUsage" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/representative_image"
+            tools:text="상매입니다 입력해주세fefefefefefefefefefe용" />
 
 <!--        <Button-->
 <!--            android:id="@+id/ticket_count"-->

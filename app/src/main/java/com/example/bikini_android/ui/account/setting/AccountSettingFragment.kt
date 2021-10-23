@@ -1,52 +1,71 @@
-package com.example.bikini_android.ui.account
+/*
+ * AccountSettingFragment.kt 2021. 10. 23
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
 
-import android.content.Intent
+package com.example.bikini_android.ui.account.setting
+
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.basicbug.core.app.ToastHelper
 import com.basicbug.core.rx.addTo
-import com.basicbug.core.ui.base.BaseActivity
 import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.ktx.autoCleared
 import com.example.bikini_android.R
-import com.example.bikini_android.databinding.ActivityAccountInitBinding
+import com.example.bikini_android.databinding.FragmentAccountSettingBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.ui.holder.MainHolderActivity
+import com.example.bikini_android.ui.account.viewmodel.AccountViewModelFactory
+import com.example.bikini_android.ui.base.BikiniBaseFragment
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 /**
  * @author bsgreentea
  */
-class AccountInitActivity : BaseActivity() {
+class AccountSettingFragment : BikiniBaseFragment() {
 
-    lateinit var binding: ActivityAccountInitBinding
+    private var binding by autoCleared<FragmentAccountSettingBinding>()
+
     private lateinit var viewModel: AccountSettingViewModel
     private lateinit var itemEventRelay: Relay<RxAction>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = DataBindingUtil.inflate<FragmentAccountSettingBinding>(
+        inflater,
+        R.layout.fragment_account_setting,
+        container,
+        false
+    ).also {
+        super.onCreateView(inflater, container, savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_account_init)
         viewModel = ViewModelProvider(
             this,
-            AccountViewModelFactory(AccountInitItemViewModel())
+            AccountViewModelFactory(AccountSettingItemViewModel())
         )[AccountSettingViewModel::class.java]
 
-        binding.apply {
+        binding = it.apply {
             viewmodel = viewModel
         }
 
         itemEventRelay = viewModel.itemEventRelay
 
-        setUpObserver()
+        setUpObservers()
 
-    }
+    }.root
 
-    private fun setUpObserver() {
+    private fun setUpObservers() {
 
         itemEventRelay
-            .ofType(AccountEvent::class.java)
+            .ofType(AccountSettingEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 viewModel.progressViewModel.isVisible = false
@@ -55,7 +74,7 @@ class AccountInitActivity : BaseActivity() {
                     AccountSettingViewModel.EventType.UPDATE_SUCCEED -> {
                         ToastHelper.show(R.string.success_edit_nickname)
                         LoginManagerProxy.userName = it.result
-                        startMainHolder()
+                        getNavigationHelper()?.popBackStack()
                     }
 
                     AccountSettingViewModel.EventType.UPDATE_FAILED -> {
@@ -66,10 +85,4 @@ class AccountInitActivity : BaseActivity() {
             }
             .addTo(disposables)
     }
-
-    private fun startMainHolder() {
-        startActivity(Intent(this, MainHolderActivity::class.java))
-        finish()
-    }
-
 }

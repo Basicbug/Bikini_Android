@@ -60,7 +60,7 @@
                     android:scheme="kakaobe438496239e7eea4e01a1aa407ee5fb" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.account.AccountInitActivity" />
+        <activity android:name=".ui.account.setting.AccountInitActivity" />
     </application>
 
 </manifest>

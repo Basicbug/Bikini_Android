@@ -37,7 +37,7 @@
     <dimen name="feed_location_button_size">35dp</dimen>
     <dimen name="feed_like_size">23dp</dimen>
     <!--setting-->
-    <dimen name="setting_profile_image_size">55dp</dimen>
+    <dimen name="setting_account_image_size">55dp</dimen>
     <dimen name="content_item_height">38dp</dimen>
     <dimen name="arrow_height">20dp</dimen>
     <dimen name="arrow_width">15dp</dimen>
@@ -50,15 +50,16 @@
     <dimen name="board_bottom_sheet_image_padding">7dp</dimen>
     <dimen name="board_bottom_sheet_text_size">20sp</dimen>
 
-    <!--profile-->
-    <dimen name="edit_profile_text_size">20sp</dimen>
-    <dimen name="profile_image_size">110dp</dimen>
+    <!--account-->
+    <dimen name="account_info_bottom_margin">20dp</dimen>
+    <dimen name="edit_account_text_size">20sp</dimen>
+    <dimen name="account_image_size">110dp</dimen>
     <dimen name="user_id_height">50dp</dimen>
-    <dimen name="text_profile_title_size">15sp</dimen>
-    <dimen name="text_profile_title_static_size">15dp</dimen>
-    <dimen name="text_profile_ticket_size">20sp</dimen>
-    <dimen name="small_profile_info_land_margin">60dp</dimen>
-    <dimen name="profile_info_bottom_margin">20dp</dimen>
+    <dimen name="text_account_title_size">15sp</dimen>
+    <dimen name="text_account_title_static_size">15dp</dimen>
+    <dimen name="text_account_ticket_size">20sp</dimen>
+    <dimen name="small_account_info_land_margin">60dp</dimen>
+
     <!--login-->
     <dimen name="login_button_width">128dp</dimen>
     <dimen name="login_button_height">48dp</dimen>

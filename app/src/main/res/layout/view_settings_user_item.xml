@@ -24,7 +24,7 @@
         android:onClick="@{()->viewmodel.onClickItem()}">
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="@dimen/setting_profile_image_size"
+            android:layout_width="@dimen/setting_account_image_size"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/large_margin"
             android:layout_marginVertical="@dimen/median_margin"

@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.account.AccountSettingViewModel" />
+            type="com.example.bikini_android.ui.account.setting.AccountSettingViewModel" />
 
     </data>
 

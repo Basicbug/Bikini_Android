@@ -35,7 +35,7 @@ enum class BottomNavigationItem(
         eventAction = { relay -> relay.accept(ToolbarItem.SETTINGS_TOOLBAR) }
     ),
     PROFILE(
-        menuId = R.id.profile_navigation,
+        menuId = R.id.account_navigation,
         eventAction = { relay -> relay.accept(ToolbarItem.PROFILE_TOOLBAR) }
     );
 
