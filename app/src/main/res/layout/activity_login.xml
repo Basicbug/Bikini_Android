@@ -34,10 +34,24 @@
             android:layout_width="@dimen/match_constraint"
             android:layout_height="@dimen/login_button_height"
             android:layout_marginBottom="@dimen/large_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/login_later"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:setOAuthLoginHandler="@{naverOAuthHandler}" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/login_later"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:onClick="@{() -> viewmodel.lookAround()}"
+            android:text="@string/look_around_without_login"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_middle_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <include
             layout="@layout/view_progress"

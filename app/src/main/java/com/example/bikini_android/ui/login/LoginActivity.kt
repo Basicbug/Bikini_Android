@@ -61,7 +61,9 @@ class LoginActivity : BaseActivity() {
                     LoginViewModel.EventType.COMPLETE -> {
                         viewModel.checkMyInfo()
                     }
-                    LoginViewModel.EventType.ALREADY_EXIST -> {
+                    LoginViewModel.EventType.ALREADY_EXIST,
+                    LoginViewModel.EventType.LOOK_AROUND,
+                    -> {
                         startActivity(Intent(this, MainHolderActivity::class.java))
                         finish()
                     }

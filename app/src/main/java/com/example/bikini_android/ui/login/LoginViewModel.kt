@@ -93,8 +93,15 @@ class LoginViewModel @Inject constructor(
             .addTo(disposables)
     }
 
+    fun lookAround() {
+        itemEventRelay.accept(EventType.LOOK_AROUND)
+    }
+
     enum class EventType : RxAction {
-        COMPLETE, ALREADY_EXIST, NO_INFO
+        COMPLETE,
+        ALREADY_EXIST,
+        NO_INFO,
+        LOOK_AROUND,
     }
 
 }

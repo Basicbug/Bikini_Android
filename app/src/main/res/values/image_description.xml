@@ -17,4 +17,5 @@
     <string name="marker_background_image">마커 배경 이미지</string>
     <string name="arrow_image">화살표 이미지</string>
     <string name="marker_badge_background_image">뱃지 배경 이미지</string>
+    <string name="look_around_without_login">둘러보기</string>
 </resources>
