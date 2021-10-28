@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="@dimen/match_constraint"
-            android:layout_height="@dimen/app_bar_height"
+            android:layout_height="wrap_content"
             android:background="?attr/bottomNavigationBackgroundColor"
             android:elevation="@dimen/divide_line_height"
             app:layout_constraintEnd_toEndOf="parent"
