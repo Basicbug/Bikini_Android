@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bottom_navigation_height">
+        android:layout_marginBottom="@dimen/profile_info_bottom_margin">
 
         <androidx.constraintlayout.widget.Guideline
             app:layout_constraintGuide_percent="0.55"
