@@ -1,0 +1,74 @@
+/*
+ * build.gradle 2021. 11. 24
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: '../libraries.gradle'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        applicationId "com.basicbug.core"
+        minSdkVersion 23
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    testImplementation core_test_libraries.values()
+    androidTestImplementation android_core_test_libraries.values()
+
+    implementation android_core_libraries.values()
+
+    implementation database_libraries.values()
+    kapt database_annotion.values()
+
+    implementation image_libraries.values()
+    kapt image_annotation_processor.values()
+
+    implementation network_libraries.values()
+
+    implementation design_libraries.values()
+
+    implementation rx_java_libraries.values()
+
+    implementation lifecycle_libraries.values()
+
+    implementation map_libraries.values()
+
+    implementation login_libraries.values()
+
+    debugImplementation leakcanary_libraries.values()
+    debugImplementation flipper_libraries_debug.values()
+
+    implementation flipper_libraries.values()
+
+    implementation hilt_libraries.values()
+    kapt hilt_annotion.values()
+}
