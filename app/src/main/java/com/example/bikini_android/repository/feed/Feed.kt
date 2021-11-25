@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.annotation.Keep
 import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.util.map.LocationUtils
-import com.example.bikini_android.util.string.EMPTY_STRING
+import com.basicbug.core.string.EMPTY_STRING
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import kotlinx.parcelize.Parcelize

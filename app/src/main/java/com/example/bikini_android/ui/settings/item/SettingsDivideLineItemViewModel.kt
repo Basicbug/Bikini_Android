@@ -8,7 +8,7 @@
 package com.example.bikini_android.ui.settings.item
 
 import com.example.bikini_android.R
-import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.basicbug.core.ui.item.ItemViewModel
 
 /**
  * @author MyeongKi

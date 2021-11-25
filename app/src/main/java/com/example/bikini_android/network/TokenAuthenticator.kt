@@ -7,13 +7,13 @@
 
 package com.example.bikini_android.network
 
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.util.logging.Logger
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.manager.PreferenceManager
+import com.example.bikini_android.manager.PreferenceManagerImpl
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.AuthService
-import com.example.bikini_android.util.logging.Logger
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -47,7 +47,7 @@ class TokenAuthenticator : Authenticator {
         val authTokenResponse = ApiClientHelper
             .createInvalidAuthApiByService(AuthService::class)
             .refreshAccessToken(
-                PreferenceManager.getString(AppResources.getString(R.string.access_token)),
+                PreferenceManagerImpl.getString(AppResources.getString(R.string.access_token)),
                 LoginManagerProxy.refreshToken
             )
             .onErrorReturn {

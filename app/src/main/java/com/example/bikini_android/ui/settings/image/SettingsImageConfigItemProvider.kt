@@ -8,8 +8,8 @@
 package com.example.bikini_android.ui.settings.image
 
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.ui.item.ItemViewModel
 import com.example.bikini_android.ui.holder.NavigationHelperImpl
 import com.example.bikini_android.ui.settings.SettingsFragment
 import com.example.bikini_android.ui.settings.SettingsType

@@ -4,20 +4,18 @@
  * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply from: '../libraries.gradle'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
-apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.basicbug.core"
-        minSdkVersion 23
-        targetSdkVersion 31
+        minSdkVersion 27
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -36,6 +34,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 }
 
@@ -68,7 +70,4 @@ dependencies {
     debugImplementation flipper_libraries_debug.values()
 
     implementation flipper_libraries.values()
-
-    implementation hilt_libraries.values()
-    kapt hilt_annotion.values()
 }

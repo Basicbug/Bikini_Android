@@ -1,6 +1,6 @@
 package com.example.bikini_android.manager.login
 
-import com.example.bikini_android.util.bus.RxAction
+import com.basicbug.core.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 
 /**

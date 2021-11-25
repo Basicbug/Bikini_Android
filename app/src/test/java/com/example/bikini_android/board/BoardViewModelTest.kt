@@ -16,10 +16,10 @@ import com.example.bikini_android.repository.feed.FeedRepository
 import com.example.bikini_android.repository.feed.convertLocationInfo
 import com.example.bikini_android.ui.board.BoardItemViewModel
 import com.example.bikini_android.ui.board.BoardViewModel
-import com.example.bikini_android.util.bus.RxActionBus
+import com.basicbug.core.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.ReloadFeedEvent
-import com.example.bikini_android.util.file.FileUtils
-import com.example.bikini_android.util.rx.TestSchedulerProvider
+import com.basicbug.core.util.file.FileUtils
+import com.basicbug.core.rx.TestSchedulerProvider
 import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins

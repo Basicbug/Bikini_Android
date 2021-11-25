@@ -9,8 +9,8 @@ package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.bikini_android.ui.base.BaseActivity
-import com.example.bikini_android.ui.base.BaseViewModel
+import com.basicbug.core.ui.base.BaseActivity
+import com.basicbug.core.ui.base.BaseViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.AllFeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.feeds.viewmodel.MyFeedsViewModel

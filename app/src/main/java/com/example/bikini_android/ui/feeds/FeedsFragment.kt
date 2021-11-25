@@ -6,21 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.bus.RxActionBus
+import com.basicbug.core.util.ktx.autoCleared
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.base.BaseFragment
-import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.common.list.CacheListAdapter
-import com.example.bikini_android.ui.common.list.DefaultDiffCallback
+import com.example.bikini_android.ui.base.BikiniBaseFragment
+import com.basicbug.core.ui.list.RecyclerViewLayoutType
+import com.basicbug.core.ui.list.CacheListAdapter
+import com.basicbug.core.ui.list.DefaultDiffCallback
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.BikiniMapFragment
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.ReloadFeedEvent
-import com.example.bikini_android.util.ktx.autoCleared
-import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -28,7 +28,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  * @author bsgreentea
  */
 
-class FeedsFragment : BaseFragment() {
+class FeedsFragment : BikiniBaseFragment() {
     private var binding by autoCleared<FragmentFeedsBinding>()
     private var feedAdapterHelper by autoCleared<FeedAdapterHelper>()
     private var pivotFeed: Feed? = null

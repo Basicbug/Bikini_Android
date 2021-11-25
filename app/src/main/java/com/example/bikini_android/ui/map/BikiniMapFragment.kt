@@ -19,14 +19,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
+import com.basicbug.core.app.AppResources
 import com.example.bikini_android.databinding.FragmentBikiniMapBinding
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.ui.base.BaseMapFragment
 import com.example.bikini_android.ui.board.BoardActivity
-import com.example.bikini_android.ui.common.RecyclerViewLayoutType
+import com.basicbug.core.ui.list.RecyclerViewLayoutType
 import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsFragment
 import com.example.bikini_android.ui.feeds.FeedsSortType
@@ -35,8 +35,8 @@ import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModel
 import com.example.bikini_android.ui.map.viewmodel.BikiniMapViewModelFactoryProvider
-import com.example.bikini_android.util.ktx.autoCleared
-import com.example.bikini_android.util.rx.addTo
+import com.basicbug.core.util.ktx.autoCleared
+import com.basicbug.core.rx.addTo
 import com.google.android.gms.maps.GoogleMap
 import com.google.maps.android.clustering.ClusterManager
 import io.reactivex.android.schedulers.AndroidSchedulers

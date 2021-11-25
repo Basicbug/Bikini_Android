@@ -14,7 +14,7 @@ import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.repository.account.UserInfo
 import com.example.bikini_android.ui.login.LoginRepository
 import com.example.bikini_android.ui.login.LoginViewModel
-import com.example.bikini_android.util.rx.TestSchedulerProvider
+import com.basicbug.core.rx.TestSchedulerProvider
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins

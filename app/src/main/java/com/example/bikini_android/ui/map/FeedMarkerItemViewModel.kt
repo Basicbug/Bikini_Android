@@ -12,8 +12,8 @@ import com.example.bikini_android.BR
 import com.example.bikini_android.R
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.firstImageUrl
-import com.example.bikini_android.ui.common.item.ItemViewModel
-import com.example.bikini_android.util.format.AbbreviationUtils
+import com.basicbug.core.ui.item.ItemViewModel
+import com.basicbug.core.util.format.AbbreviationUtils
 
 /**
  * @author MyeongKi

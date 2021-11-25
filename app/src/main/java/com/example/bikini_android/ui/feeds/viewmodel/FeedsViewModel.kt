@@ -10,13 +10,13 @@ package com.example.bikini_android.ui.feeds.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.likes.LikesTargetType
-import com.example.bikini_android.ui.base.BaseViewModel
+import com.basicbug.core.ui.base.BaseViewModel
 import com.example.bikini_android.ui.feeds.FeedsEvent
 import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.LoadFeedsUseCase
 import com.example.bikini_android.ui.likes.LikesViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.rx.addTo
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.rx.addTo
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay

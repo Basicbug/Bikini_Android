@@ -9,8 +9,8 @@ package com.example.bikini_android.ui.likes
 
 import com.example.bikini_android.manager.likes.LikesCacheManager
 import com.example.bikini_android.repository.likes.LikesRepository
-import com.example.bikini_android.util.rx.SchedulerProvider
-import com.example.bikini_android.util.rx.addTo
+import com.basicbug.core.rx.SchedulerProvider
+import com.basicbug.core.rx.addTo
 import io.reactivex.disposables.CompositeDisposable
 
 /**

@@ -10,7 +10,7 @@ package com.example.bikini_android.ui.holder
 import androidx.annotation.IdRes
 import com.example.bikini_android.R
 import com.example.bikini_android.ui.common.ToolbarItem
-import com.example.bikini_android.util.bus.RxAction
+import com.basicbug.core.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.Observable
 

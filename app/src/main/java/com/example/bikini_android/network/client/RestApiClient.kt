@@ -7,7 +7,7 @@
 
 package com.example.bikini_android.network.client
 
-import com.example.bikini_android.app.AppResources
+import com.basicbug.core.app.AppResources
 import com.example.bikini_android.network.HostSelectionInterceptor
 import com.example.bikini_android.network.ResponseCacheFactory
 import com.example.bikini_android.network.TokenAuthenticator

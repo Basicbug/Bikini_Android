@@ -1,10 +1,10 @@
 package com.example.bikini_android.ui.login
 
+import com.basicbug.core.util.logging.Logger
 import com.example.bikini_android.network.client.ApiClientHelper
 import com.example.bikini_android.network.request.service.AuthService
 import com.example.bikini_android.network.response.TokenResponse
-import com.example.bikini_android.util.error.ErrorToastHelper
-import com.example.bikini_android.util.logging.Logger
+import com.basicbug.core.util.error.ErrorToastHelper
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 

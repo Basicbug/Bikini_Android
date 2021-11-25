@@ -11,17 +11,17 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.bikini_android.ui.dialog.DialogController
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.dialog.DialogController
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.bus.RxActionBus
+import com.basicbug.core.util.bus.event.LocationPermissionEvent
+import com.basicbug.core.util.permission.PermissionUtils
+import com.basicbug.core.util.permission.PermissionUtils.LOCATION_PERMISSION_REQUEST_CODE
 import com.example.bikini_android.ui.map.MapLocationChangeEvent
 import com.example.bikini_android.ui.map.viewmodel.MapViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.bus.RxActionBus
-import com.example.bikini_android.util.bus.event.LocationPermissionEvent
 import com.example.bikini_android.util.map.GoogleMapUtils
 import com.example.bikini_android.util.map.LocationUtils
-import com.example.bikini_android.util.permission.PermissionUtils
-import com.example.bikini_android.util.permission.PermissionUtils.LOCATION_PERMISSION_REQUEST_CODE
-import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -36,7 +36,7 @@ import java.lang.ref.WeakReference
  * @author MyeongKi
  */
 
-abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
+abstract class BaseMapFragment : BikiniBaseFragment(), OnMapReadyCallback {
 
     protected var mapView: MapView? = null
     protected lateinit var map: WeakReference<GoogleMap>

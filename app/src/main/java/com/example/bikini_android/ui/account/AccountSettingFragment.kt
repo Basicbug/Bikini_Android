@@ -7,20 +7,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
-import com.example.bikini_android.app.ToastHelper
+import com.basicbug.core.app.ToastHelper
 import com.example.bikini_android.databinding.FragmentAccountSettingBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.ui.base.BaseFragment
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.ktx.autoCleared
-import com.example.bikini_android.util.rx.addTo
+import com.basicbug.core.ui.base.BaseFragment
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.ktx.autoCleared
+import com.basicbug.core.rx.addTo
+import com.example.bikini_android.ui.base.BikiniBaseFragment
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 /**
  * @author bsgreentea
  */
-class AccountSettingFragment : BaseFragment() {
+class AccountSettingFragment : BikiniBaseFragment() {
 
     private var binding by autoCleared<FragmentAccountSettingBinding>()
 

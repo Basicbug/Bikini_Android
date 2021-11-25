@@ -11,8 +11,8 @@ import androidx.databinding.Bindable
 import com.example.bikini_android.BR
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.firstImageUrl
-import com.example.bikini_android.ui.common.item.CacheItemViewModel
-import com.example.bikini_android.util.bus.RxAction
+import com.basicbug.core.ui.item.CacheItemViewModel
+import com.basicbug.core.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 import java.util.Objects
 

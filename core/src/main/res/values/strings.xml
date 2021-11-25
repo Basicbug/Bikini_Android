@@ -1,3 +1,13 @@
-<resources>
-    <string name="app_name">Core</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <!--permission-->
+    <string name="permission_request">권한 요청</string>
+    <string name="permission_required_toast">권한이 필요합니다.</string>
+    <string name="permission_denied">해당 권한 없이는 앱을 사용할 수 없습니다.</string>
+
+    <!--common-->
+    <string name="confirm">확인</string>
+    <string name="close">닫기</string>
+    <string name="cancel">취소</string>
+    <!--error-->
+    <string name="unknown_error_message">잠시 후 다시 이용해 주세요.</string>
 </resources>

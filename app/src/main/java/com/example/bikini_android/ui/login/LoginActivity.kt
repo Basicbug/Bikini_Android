@@ -9,10 +9,10 @@ import com.example.bikini_android.databinding.ActivityLoginBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.manager.login.naver.NaverOAuthLoginHandler
 import com.example.bikini_android.ui.account.AccountInitActivity
-import com.example.bikini_android.ui.base.BaseActivity
+import com.basicbug.core.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.rx.addTo
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers

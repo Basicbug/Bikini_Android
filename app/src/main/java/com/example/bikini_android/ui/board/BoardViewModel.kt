@@ -2,18 +2,18 @@ package com.example.bikini_android.ui.board
 
 import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
+import com.basicbug.core.rx.SchedulerProvider
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.bus.RxActionBus
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepository
 import com.example.bikini_android.repository.feed.convertLocationInfo
-import com.example.bikini_android.ui.base.BaseViewModel
-import com.example.bikini_android.ui.progress.ProgressItemViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.bus.RxActionBus
+import com.basicbug.core.ui.base.BaseViewModel
+import com.basicbug.core.ui.progress.ProgressItemViewModel
 import com.example.bikini_android.util.bus.event.ReloadFeedEvent
-import com.example.bikini_android.util.file.FileUtils
-import com.example.bikini_android.util.rx.SchedulerProvider
-import com.example.bikini_android.util.rx.addTo
+import com.example.bikini_android.util.file.FileUtilsImpl
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
@@ -23,7 +23,7 @@ class BoardViewModel(
     private val handle: SavedStateHandle,
     private val feedsRepository: FeedRepository,
     private val loginManager: LoginManagerProxy,
-    private val fileUtils: FileUtils,
+    private val fileUtils: FileUtilsImpl,
     private val schedulerProvider: SchedulerProvider
 ) : BaseViewModel() {
 

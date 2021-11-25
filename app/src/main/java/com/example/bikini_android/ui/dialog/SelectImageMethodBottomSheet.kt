@@ -14,9 +14,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ViewSelectImageMethodBottomSheetBinding
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.ktx.autoCleared
-import com.example.bikini_android.util.rx.addTo
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.ktx.autoCleared
+import com.basicbug.core.rx.addTo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers

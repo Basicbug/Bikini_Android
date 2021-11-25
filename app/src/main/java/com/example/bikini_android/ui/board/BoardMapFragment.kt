@@ -14,13 +14,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.app.ToastHelper
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.app.ToastHelper
 import com.example.bikini_android.databinding.FragmentBoardMapBinding
 import com.example.bikini_android.ui.base.BaseMapFragment
-import com.example.bikini_android.util.ktx.autoCleared
+import com.basicbug.core.util.ktx.autoCleared
 import com.example.bikini_android.util.map.LocationUtils
-import com.example.bikini_android.util.rx.addTo
+import com.basicbug.core.rx.addTo
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import io.reactivex.android.schedulers.AndroidSchedulers

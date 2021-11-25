@@ -2,7 +2,7 @@ package com.example.bikini_android.ui.account
 
 import androidx.databinding.ObservableField
 import com.example.bikini_android.R
-import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.basicbug.core.ui.item.ItemViewModel
 
 /**
  * @author bsgreentea

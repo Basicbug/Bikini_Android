@@ -110,7 +110,14 @@ android {
     }
 
 }
-
+kapt {
+    javacOptions {
+        // These options are normally set automatically via the Hilt Gradle plugin, but we
+        // set them manually to workaround a bug in the Kotlin 1.5.20
+        option("-Adagger.fastInit=ENABLED")
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
+}
 dependencies {
     testImplementation core_test_libraries.values()
     androidTestImplementation android_core_test_libraries.values()
@@ -142,4 +149,6 @@ dependencies {
 
     implementation hilt_libraries.values()
     kapt hilt_annotion.values()
+
+    implementation project(':core')
 }
