@@ -13,10 +13,11 @@ import android.content.Context
 /**
  * @author MyeongKi
  */
-abstract class BasicBugApp: Application() {
+abstract class BasicBugApp : Application() {
     init {
         this.also { instance = it }
     }
+
     companion object {
         private var instance: BasicBugApp? = null
         fun applicationContext(): Context {

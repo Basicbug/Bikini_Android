@@ -10,7 +10,7 @@ import io.reactivex.Single
 interface AccountRepository {
 
     fun getUserFromRemote(
-        userInfo: UserInfo,
+        userInfo: UserInfo
     ): Single<UserUpdateResponse.Result?>
 
     fun getMyInfoFromRemote(): Single<MyInfoReponse.Result?>

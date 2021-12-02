@@ -9,13 +9,13 @@ package com.example.bikini_android.manager
 
 import com.basicbug.core.app.AppResources
 import com.basicbug.core.manager.PreferenceManager
-import com.example.bikini_android.ui.settings.image.SettingsImageCompressionRate
 import com.example.bikini_android.R
+import com.example.bikini_android.ui.settings.image.SettingsImageCompressionRate
 
 /**
  * @author MyeongKi
  */
-object PreferenceManagerImpl:PreferenceManager() {
+object PreferenceManagerImpl : PreferenceManager() {
     fun setImageCompressionRate(value: SettingsImageCompressionRate) {
         getPreferences().edit()
             .putInt(AppResources.getString(R.string.image_compression_rate), value.rate)

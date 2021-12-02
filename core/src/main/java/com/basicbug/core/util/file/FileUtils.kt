@@ -10,19 +10,10 @@ package com.basicbug.core.util.file
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Environment
 import androidx.core.content.ContextCompat
 import com.basicbug.core.app.AppResources
-import com.basicbug.core.manager.PreferenceManager
-import com.basicbug.core.util.image.BitmapUtils
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import java.io.FileOutputStream
 
 /**
  * @author MyeongKi
@@ -54,8 +45,6 @@ abstract class FileUtils {
             deleteOnExit()
         }
     }
-
-
 
     protected companion object {
         const val LOCAL_IMAGE_NAME = "localImgFile"

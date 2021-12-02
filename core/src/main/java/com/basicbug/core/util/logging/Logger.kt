@@ -9,6 +9,7 @@ package com.basicbug.core.util.logging
 
 import android.util.Log
 import com.basicbug.core.BuildConfig
+
 /**
  * @author qwebnm7788
  */

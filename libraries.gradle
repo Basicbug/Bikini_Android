@@ -19,6 +19,7 @@ ext {
     def rx_version = '2.1.1'
     def lifecycle_version = '2.2.0'
     def fragment_version = '1.2.4'
+    def activity_version = '1.2.2'
     def preference_version = '0.12.0'
     def ktx_version = '1.3.2'
     def appcompat_version = '1.2.0'
@@ -45,6 +46,7 @@ ext {
             constraint_layout  : "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
             recyclerview       : "androidx.recyclerview:recyclerview:$recyclerview_version",
             fragment           : "androidx.fragment:fragment-ktx:$fragment_version",
+            activity           : "androidx.activity:activity-ktx:$activity_version",
             preference         : "androidx.preference:preference-ktx:$android_preference_version",
             navigation_fragment: "androidx.navigation:navigation-fragment-ktx:$navigation_version",
             navigation         : "androidx.navigation:navigation-ui-ktx:$navigation_version",

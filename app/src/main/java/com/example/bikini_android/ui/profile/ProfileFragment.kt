@@ -2,10 +2,18 @@ package com.example.bikini_android.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.list.DefaultDiffCallback
+import com.basicbug.core.ui.list.DefaultListAdapter
+import com.basicbug.core.ui.list.RecyclerViewLayoutType
 import com.basicbug.core.util.bus.RxAction
 import com.basicbug.core.util.bus.RxActionBus
 import com.basicbug.core.util.ktx.autoCleared
@@ -14,10 +22,12 @@ import com.example.bikini_android.databinding.FragmentProfileBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.base.BikiniBaseFragment
 import com.example.bikini_android.ui.board.BoardActivity
-import com.basicbug.core.ui.list.RecyclerViewLayoutType
-import com.basicbug.core.ui.list.DefaultDiffCallback
-import com.basicbug.core.ui.list.DefaultListAdapter
-import com.example.bikini_android.ui.feeds.*
+import com.example.bikini_android.ui.feeds.FeedAdapterHelper
+import com.example.bikini_android.ui.feeds.FeedGridItemViewModel
+import com.example.bikini_android.ui.feeds.FeedsEvent
+import com.example.bikini_android.ui.feeds.FeedsFragment
+import com.example.bikini_android.ui.feeds.FeedsSortType
+import com.example.bikini_android.ui.feeds.FeedsType
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.util.bus.event.ReloadFeedEvent

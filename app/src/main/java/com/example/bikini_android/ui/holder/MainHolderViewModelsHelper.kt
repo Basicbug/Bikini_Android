@@ -8,9 +8,9 @@
 package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
+import com.basicbug.core.ui.ViewModelsHelper
 import com.basicbug.core.ui.base.BaseActivity
 import com.basicbug.core.ui.base.BaseViewModel
-import com.basicbug.core.ui.ViewModelsHelper
 
 /**
  * @author MyeongKi

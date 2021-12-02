@@ -12,4 +12,4 @@ import com.basicbug.core.util.bus.RxAction
 /**
  * @author MyeongKi
  */
-class CameraAndExternalReadAndWriteStoragePermissionEvent (val isAccept: Boolean) : RxAction
+class CameraAndExternalReadAndWriteStoragePermissionEvent(val isAccept: Boolean) : RxAction

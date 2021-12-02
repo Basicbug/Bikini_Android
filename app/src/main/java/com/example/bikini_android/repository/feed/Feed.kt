@@ -2,9 +2,9 @@ package com.example.bikini_android.repository.feed
 
 import android.os.Parcelable
 import androidx.annotation.Keep
+import com.basicbug.core.string.EMPTY_STRING
 import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.util.map.LocationUtils
-import com.basicbug.core.string.EMPTY_STRING
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import kotlinx.parcelize.Parcelize
@@ -24,7 +24,7 @@ data class Feed(
     var imageUrl: List<String>? = null,
     val locationInfo: LocationInfo?,
     var modifiedAt: String = "",
-    var likes: Likes? = null,
+    var likes: Likes? = null
 ) : Parcelable, ClusterItem {
     override fun getPosition(): LatLng {
         return locationInfo?.convertLatLng() ?: throw NullPointerException("location info is null")

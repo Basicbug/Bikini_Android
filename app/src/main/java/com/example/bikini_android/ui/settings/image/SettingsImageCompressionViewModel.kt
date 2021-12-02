@@ -7,12 +7,12 @@
 
 package com.example.bikini_android.ui.settings.image
 
+import com.basicbug.core.rx.addTo
 import com.basicbug.core.ui.item.ItemViewModel
+import com.basicbug.core.util.bus.RxAction
+import com.example.bikini_android.manager.PreferenceManagerImpl
 import com.example.bikini_android.ui.settings.SettingsViewModel
 import com.example.bikini_android.ui.settings.item.SettingsCheckItemViewModel
-import com.basicbug.core.util.bus.RxAction
-import com.basicbug.core.rx.addTo
-import com.example.bikini_android.manager.PreferenceManagerImpl
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers

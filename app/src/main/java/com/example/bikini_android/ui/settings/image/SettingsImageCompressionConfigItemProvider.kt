@@ -7,12 +7,12 @@
 
 package com.example.bikini_android.ui.settings.image
 
-import com.example.bikini_android.R
 import com.basicbug.core.app.AppResources
 import com.basicbug.core.ui.item.ItemViewModel
+import com.basicbug.core.util.bus.RxAction
+import com.example.bikini_android.R
 import com.example.bikini_android.ui.settings.item.SettingsCheckItemViewModel
 import com.example.bikini_android.ui.settings.item.SettingsTitleItemViewModel
-import com.basicbug.core.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 
 /**

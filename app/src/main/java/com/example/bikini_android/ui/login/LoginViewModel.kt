@@ -1,13 +1,13 @@
 package com.example.bikini_android.ui.login
 
-import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.repository.account.AccountRepositoryImpl
-import com.basicbug.core.ui.base.BaseViewModel
-import com.basicbug.core.ui.progress.ProgressItemViewModel
-import com.basicbug.core.util.bus.RxAction
 import com.basicbug.core.rx.DefaultSchedulerProvider
 import com.basicbug.core.rx.SchedulerProvider
 import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.base.BaseViewModel
+import com.basicbug.core.ui.progress.ProgressItemViewModel
+import com.basicbug.core.util.bus.RxAction
+import com.example.bikini_android.manager.login.LoginManagerProxy
+import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import dagger.Module

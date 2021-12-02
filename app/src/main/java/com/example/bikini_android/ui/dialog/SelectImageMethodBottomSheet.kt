@@ -12,11 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.bikini_android.R
-import com.example.bikini_android.databinding.ViewSelectImageMethodBottomSheetBinding
+import com.basicbug.core.rx.addTo
 import com.basicbug.core.util.bus.RxAction
 import com.basicbug.core.util.ktx.autoCleared
-import com.basicbug.core.rx.addTo
+import com.example.bikini_android.R
+import com.example.bikini_android.databinding.ViewSelectImageMethodBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers

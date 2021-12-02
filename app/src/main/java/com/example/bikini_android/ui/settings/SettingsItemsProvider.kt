@@ -7,10 +7,10 @@
 
 package com.example.bikini_android.ui.settings
 
-import com.example.bikini_android.R
 import com.basicbug.core.app.AppResources
-import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.basicbug.core.ui.item.ItemViewModel
+import com.example.bikini_android.R
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.holder.NavigationHelperImpl
 import com.example.bikini_android.ui.settings.item.SettingsContentItemViewModel
 import com.example.bikini_android.ui.settings.item.SettingsDivideLineItemViewModel

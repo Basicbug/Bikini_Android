@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.list.CacheListAdapter
+import com.basicbug.core.ui.list.DefaultDiffCallback
+import com.basicbug.core.ui.list.RecyclerViewLayoutType
 import com.basicbug.core.util.bus.RxAction
 import com.basicbug.core.util.bus.RxActionBus
 import com.basicbug.core.util.ktx.autoCleared
@@ -14,9 +17,6 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentFeedsBinding
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.ui.base.BikiniBaseFragment
-import com.basicbug.core.ui.list.RecyclerViewLayoutType
-import com.basicbug.core.ui.list.CacheListAdapter
-import com.basicbug.core.ui.list.DefaultDiffCallback
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModel
 import com.example.bikini_android.ui.feeds.viewmodel.FeedsViewModelFactoryProvider
 import com.example.bikini_android.ui.map.BikiniMapFragment

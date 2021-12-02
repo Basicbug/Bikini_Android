@@ -2,14 +2,14 @@ package com.example.bikini_android.ui.feeds
 
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.string.StringUtils
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
-import com.basicbug.core.app.AppResources
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.getDistanceFromMyLocation
 import com.example.bikini_android.ui.likes.LikesItemViewModel
-import com.basicbug.core.util.bus.RxAction
-import com.basicbug.core.string.StringUtils
 import com.jakewharton.rxrelay2.Relay
 
 /**

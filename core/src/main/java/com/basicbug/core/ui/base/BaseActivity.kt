@@ -1,7 +1,7 @@
 /*
- * BaseActivity.kt 2021. 12. 2
+ * BaseActivity.kt 2020. 10. 31
  *
- * Copyright 2021 BasicBug. All rights Reserved.
+ * Copyright 2020 BasicBug. All rights Reserved.
  *
  */
 

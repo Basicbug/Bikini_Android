@@ -1,8 +1,8 @@
 package com.example.bikini_android.ui.profile
 
-import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.basicbug.core.ui.base.BaseViewModel
 import com.basicbug.core.util.bus.RxAction
+import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 

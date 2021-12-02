@@ -9,9 +9,9 @@ package com.basicbug.core.ui.item
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.basicbug.core.BR
 import com.basicbug.core.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
-import com.basicbug.core.BR
 
 /**
  * @author MyeongKi

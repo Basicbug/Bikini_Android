@@ -7,11 +7,11 @@
 
 package com.example.bikini_android.ui.likes
 
-import com.example.bikini_android.repository.likes.LikesRepositoryInjector
-import com.example.bikini_android.repository.likes.LikesTargetType
-import com.basicbug.core.util.bus.RxAction
 import com.basicbug.core.rx.DefaultSchedulerProvider
 import com.basicbug.core.rx.addTo
+import com.basicbug.core.util.bus.RxAction
+import com.example.bikini_android.repository.likes.LikesRepositoryInjector
+import com.example.bikini_android.repository.likes.LikesTargetType
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

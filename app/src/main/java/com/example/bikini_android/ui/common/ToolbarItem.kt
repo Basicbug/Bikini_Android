@@ -8,8 +8,8 @@
 package com.example.bikini_android.ui.common
 
 import androidx.annotation.StringRes
-import com.example.bikini_android.R
 import com.basicbug.core.util.bus.RxAction
+import com.example.bikini_android.R
 
 /**
  * @author MyeongKi

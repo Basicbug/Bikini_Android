@@ -8,8 +8,8 @@
 package com.basicbug.core.ui.progress
 
 import androidx.databinding.Bindable
-import com.basicbug.core.R
 import com.basicbug.core.BR
+import com.basicbug.core.R
 import com.basicbug.core.ui.item.ItemViewModel
 
 /**

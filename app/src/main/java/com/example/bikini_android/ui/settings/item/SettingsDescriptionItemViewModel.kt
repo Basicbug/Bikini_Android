@@ -8,15 +8,15 @@
 package com.example.bikini_android.ui.settings.item
 
 import androidx.databinding.Bindable
+import com.basicbug.core.ui.item.ItemViewModel
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
-import com.basicbug.core.ui.item.ItemViewModel
 
 /**
  * @author MyeongKi
  */
 class SettingsDescriptionItemViewModel private constructor(
-    description: String,
+    description: String
 ) : ItemViewModel() {
     class Builder(private val description: String) {
         fun build() = SettingsDescriptionItemViewModel(description)

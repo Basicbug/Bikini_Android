@@ -34,7 +34,7 @@ abstract class PreferenceManager {
 
     fun getBoolean(key: String) = getPreferences().getBoolean(key, false)
 
-    companion object{
+    companion object {
         private const val PREFERENCE_NAME = "basicbug"
     }
 }

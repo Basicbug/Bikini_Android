@@ -15,12 +15,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.basicbug.core.ui.list.DefaultDiffCallback
+import com.basicbug.core.ui.list.DefaultListAdapter
 import com.basicbug.core.util.ktx.autoCleared
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentSettingsBinding
 import com.example.bikini_android.ui.base.BikiniBaseFragment
-import com.basicbug.core.ui.list.DefaultDiffCallback
-import com.basicbug.core.ui.list.DefaultListAdapter
 
 /**
  * @author MyeongKi

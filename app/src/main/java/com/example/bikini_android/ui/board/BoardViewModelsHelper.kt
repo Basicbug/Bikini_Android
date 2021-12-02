@@ -9,9 +9,9 @@ package com.example.bikini_android.ui.board
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.basicbug.core.ui.ViewModelsHelper
 import com.basicbug.core.ui.base.BaseActivity
 import com.basicbug.core.ui.base.BaseViewModel
-import com.basicbug.core.ui.ViewModelsHelper
 
 /**
  * @author MyeongKi

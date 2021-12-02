@@ -17,11 +17,11 @@ interface UserService {
     @PUT("/v1/user/update")
     fun updateUserInfo(
         @Header("X-AUTH-TOKEN") jwt: String,
-        @Body userInfo: UserInfo,
+        @Body userInfo: UserInfo
     ): Single<UserUpdateResponse>
 
     @GET("/v1/user/about/me")
     fun getMyInfo(
-        @Header("X-AUTH-TOKEN") jwt: String,
+        @Header("X-AUTH-TOKEN") jwt: String
     ): Single<MyInfoReponse>
 }

@@ -34,7 +34,7 @@ object DialogController {
         @StringRes
         msgResId: Int,
         closeCallback: DialogInterface.OnClickListener? = null,
-        dismissCallback: () -> Unit = { },
+        dismissCallback: () -> Unit = { }
     ) {
         if (isShowDialog())
             return
@@ -62,7 +62,7 @@ object DialogController {
         msgResId: Int,
         confirmCallback: DialogInterface.OnClickListener? = null,
         closeCallback: DialogInterface.OnClickListener? = null,
-        dismissCallback: () -> Unit = { },
+        dismissCallback: () -> Unit = { }
     ) {
         if (isShowDialog()) {
             return
