@@ -1,12 +1,13 @@
 /*
- * HostSelectionInterceptor.kt 2021. 2. 11
+ * HostSelectionInterceptor.kt 2021. 12. 3
  *
  * Copyright 2021 BasicBug. All rights Reserved.
+ *
  */
 
-package com.example.bikini_android.network
+package com.basicbug.network
 
-import com.example.bikini_android.ui.settings.DeveloperSettingImpl
+import com.basicbug.core.ui.settings.DeveloperSetting
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -14,11 +15,11 @@ import okhttp3.Response
 /**
  * @author qwebnm7788
  */
-class HostSelectionInterceptor : Interceptor {
+class HostSelectionInterceptor(private val developerSetting: DeveloperSetting) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
-        val host = DeveloperSettingImpl.getBaseDomain().toHttpUrlOrNull()
+        val host = developerSetting.getBaseDomain().toHttpUrlOrNull()
 
         if (host != null) {
             val newUrl = request.url.newBuilder()

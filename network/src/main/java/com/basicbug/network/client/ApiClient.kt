@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.bikini_android.network.client
+package com.basicbug.network.client
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

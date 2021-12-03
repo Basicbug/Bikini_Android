@@ -6,6 +6,7 @@
  */
 
 ext {
+    def okhttp3_version = '4.9.3'
     def retrofit_version = '2.9.0'
     def gson_version = '2.5.0'
     def recyclerview_version = '1.1.0'
@@ -68,6 +69,7 @@ ext {
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            okhttp3                : "com.squareup.okhttp3:okhttp:$okhttp3_version"
     ]
 
     image_libraries = [

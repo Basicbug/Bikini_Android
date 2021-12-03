@@ -8,7 +8,7 @@
 package com.example.bikini_android.login
 
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.network.response.TokenResponse
+import com.basicbug.network.response.TokenResponse
 import com.example.bikini_android.network.response.MyInfoReponse
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
 import com.example.bikini_android.repository.account.UserInfo

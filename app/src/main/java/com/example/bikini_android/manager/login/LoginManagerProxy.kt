@@ -1,7 +1,9 @@
 package com.example.bikini_android.manager.login
 
 import com.basicbug.core.app.AppResources
+import com.basicbug.core.manager.login.LoginManager
 import com.basicbug.core.util.bus.RxAction
+import com.basicbug.network.TokenManager
 import com.example.bikini_android.R
 import com.example.bikini_android.manager.PreferenceManagerImpl
 import com.jakewharton.rxrelay2.PublishRelay
@@ -10,8 +12,8 @@ import com.jakewharton.rxrelay2.Relay
 /**
  * @author bsgreentea
  */
-object LoginManagerProxy : LoginManager {
-    var accessToken: String = ""
+object LoginManagerProxy : LoginManager, TokenManager {
+    override var accessToken: String = ""
         get() {
             if (field.isEmpty()) {
                 field = PreferenceManagerImpl.getString(AppResources.getString(R.string.access_token))
@@ -25,7 +27,7 @@ object LoginManagerProxy : LoginManager {
             }
         }
 
-    var refreshToken: String = ""
+    override var refreshToken: String = ""
         get() {
             if (field.isEmpty()) {
                 field = PreferenceManagerImpl.getString(AppResources.getString(R.string.refresh_token))

@@ -1,5 +1,6 @@
 package com.example.bikini_android.manager.login
 
+import com.basicbug.core.manager.login.LoginManager
 import com.example.bikini_android.manager.login.naver.NaverLoginManager
 import com.example.bikini_android.manager.login.naver.NaverLoginManagerFactory
 

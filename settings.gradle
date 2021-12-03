@@ -1,3 +1,4 @@
 include ':app'
 rootProject.name = "Bikini_Android"
 include ':core'
+include ':network'

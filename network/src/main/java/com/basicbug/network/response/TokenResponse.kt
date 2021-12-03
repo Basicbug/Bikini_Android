@@ -1,4 +1,11 @@
-package com.example.bikini_android.network.response
+/*
+ * TokenResponse.kt 2021. 12. 3
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
+
+package com.basicbug.network.response
 
 import com.google.gson.annotations.SerializedName
 

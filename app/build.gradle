@@ -119,6 +119,9 @@ kapt {
     }
 }
 dependencies {
+    implementation project(':core')
+    implementation project(':network')
+
     testImplementation core_test_libraries.values()
     androidTestImplementation android_core_test_libraries.values()
 
@@ -149,6 +152,4 @@ dependencies {
 
     implementation hilt_libraries.values()
     kapt hilt_annotion.values()
-
-    implementation project(':core')
 }

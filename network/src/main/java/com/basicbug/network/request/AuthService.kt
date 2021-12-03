@@ -1,6 +1,13 @@
-package com.example.bikini_android.network.request.service
+/*
+ * AuthService.kt 2021. 12. 3
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
 
-import com.example.bikini_android.network.response.TokenResponse
+package com.basicbug.network.request
+
+import com.basicbug.network.response.TokenResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.POST

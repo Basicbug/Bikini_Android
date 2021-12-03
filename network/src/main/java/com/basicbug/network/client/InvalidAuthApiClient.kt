@@ -1,30 +1,34 @@
 /*
- * InvalidAuthApiClient.kt 2021. 10. 16
+ * InvalidAuthApiClient.kt 2021. 12. 3
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android.network.client
+package com.basicbug.network.client
 
 import com.basicbug.core.app.AppResources
-import com.example.bikini_android.network.HostSelectionInterceptor
-import com.example.bikini_android.network.ResponseCacheFactory
-import com.example.bikini_android.ui.settings.FlipperSettingImpl
+import com.basicbug.network.ResponseCacheFactory
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
 /**
  * @author MyeongKi
  */
-class InvalidAuthApiClient(baseUrl: String) : RestApiClient(baseUrl) {
+class InvalidAuthApiClient(
+    baseUrl: String,
+    private val interceptors: List<Interceptor>
+) : RestApiClient(baseUrl) {
     override fun setBuilder(builder: OkHttpClient.Builder): OkHttpClient.Builder {
-        return builder
+        val resultBuilder = builder
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(HostSelectionInterceptor())
-            .addInterceptor(FlipperSettingImpl().getFlipperNetworkPlugin())
+        interceptors.forEach {
+            resultBuilder.addInterceptor(it)
+        }
+        return resultBuilder
             .cache(ResponseCacheFactory().createCache(AppResources.getContext()))
     }
 }

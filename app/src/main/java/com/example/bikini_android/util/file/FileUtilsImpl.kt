@@ -13,8 +13,8 @@ import android.net.Uri
 import com.basicbug.core.app.AppResources
 import com.basicbug.core.util.file.FileConstants
 import com.basicbug.core.util.file.FileUtils
-import com.basicbug.core.util.image.BitmapUtils
 import com.example.bikini_android.manager.PreferenceManagerImpl
+import com.example.bikini_android.util.image.BitmapUtilsImpl
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -42,7 +42,7 @@ object FileUtilsImpl : FileUtils() {
                         0,
                         this.width,
                         this.height,
-                        BitmapUtils.getImageMatrix(imageUri),
+                        BitmapUtilsImpl.getImageMatrix(imageUri),
                         true
                     ).run {
                         FileOutputStream(localImgFile).use {

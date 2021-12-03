@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.bikini_android.ui.settings
+package com.basicbug.core.ui.settings
 
 /**
  * @author MyeongKi

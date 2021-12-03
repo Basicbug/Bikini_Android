@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.bikini_android.network.response
+package com.basicbug.network.response
 
 import com.google.gson.annotations.SerializedName
 
