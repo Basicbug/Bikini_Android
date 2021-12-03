@@ -1,5 +1,5 @@
 /*
- * DeveloperSetting.kt 2021. 2. 19
+ * DeveloperSetting.kt 2021. 12. 3
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *

@@ -9,6 +9,8 @@ package com.example.bikini_android.board
 
 import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
+import com.basicbug.core.rx.TestSchedulerProvider
+import com.basicbug.core.util.bus.RxActionBus
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.response.DefaultResponse
 import com.example.bikini_android.repository.feed.Feed
@@ -16,10 +18,8 @@ import com.example.bikini_android.repository.feed.FeedRepository
 import com.example.bikini_android.repository.feed.convertLocationInfo
 import com.example.bikini_android.ui.board.BoardItemViewModel
 import com.example.bikini_android.ui.board.BoardViewModel
-import com.basicbug.core.util.bus.RxActionBus
 import com.example.bikini_android.util.bus.event.ReloadFeedEvent
-import com.basicbug.core.util.file.FileUtils
-import com.basicbug.core.rx.TestSchedulerProvider
+import com.example.bikini_android.util.file.FileUtilsImpl
 import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
@@ -50,7 +50,7 @@ class BoardViewModelTest {
     lateinit var testUri: Uri
 
     @Mock
-    lateinit var fileUtils: FileUtils
+    lateinit var fileUtils: FileUtilsImpl
     private val testSchedulerProvider = TestSchedulerProvider()
     private lateinit var viewModel: BoardViewModel
 

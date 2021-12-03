@@ -12,6 +12,9 @@ apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdkVersion 30
+    packagingOptions {
+        exclude 'META-INF/network_release.kotlin_module'
+    }
 
     defaultConfig {
         minSdkVersion 27
@@ -25,7 +28,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {

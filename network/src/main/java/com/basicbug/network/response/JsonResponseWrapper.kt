@@ -1,7 +1,7 @@
 /*
- * JsonResponse.kt 2020. 10. 26
+ * JsonResponseWrapper.kt 2021. 12. 3
  *
- * Copyright 2020 BasicBug. All rights Reserved.
+ * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
 

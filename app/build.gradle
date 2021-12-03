@@ -6,6 +6,9 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
+    packagingOptions {
+        exclude 'META-INF/network_release.kotlin_module'
+    }
     signingConfigs {
         release {
         }
@@ -85,7 +88,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            debuggable false
+            debuggable true
             signingConfig signingConfigs.releaseWithSignedKey
 
         }
@@ -152,4 +155,6 @@ dependencies {
 
     implementation hilt_libraries.values()
     kapt hilt_annotion.values()
+
+    implementation network_libraries.values()
 }
