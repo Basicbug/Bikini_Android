@@ -10,10 +10,10 @@ package com.example.bikini_android.ui.board
 import android.net.Uri
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableField
+import com.basicbug.core.ui.item.ItemViewModel
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
-import com.example.bikini_android.ui.common.item.ItemViewModel
-import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 
 /**

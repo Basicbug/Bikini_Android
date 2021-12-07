@@ -1,0 +1,61 @@
+/*
+ * build.gradle 2021. 11. 24
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: '../libraries.gradle'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+
+android {
+    compileSdkVersion 30
+    packagingOptions {
+        exclude 'META-INF/network_release.kotlin_module'
+    }
+
+    defaultConfig {
+        minSdkVersion 27
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    testImplementation core_test_libraries.values()
+    androidTestImplementation android_core_test_libraries.values()
+
+    implementation android_core_libraries.values()
+
+    implementation image_libraries.values()
+    kapt image_annotation_processor.values()
+
+    implementation design_libraries.values()
+
+    implementation rx_java_libraries.values()
+
+    implementation lifecycle_libraries.values()
+
+}

@@ -10,9 +10,9 @@ package com.example.bikini_android.likes
 import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.repository.likes.LikesTargetType
 import com.example.bikini_android.ui.likes.LikesItemViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.rx.TestSchedulerProvider
-import com.example.bikini_android.util.string.EMPTY_STRING
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.rx.TestSchedulerProvider
+import com.basicbug.core.string.EMPTY_STRING
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.plugins.RxAndroidPlugins

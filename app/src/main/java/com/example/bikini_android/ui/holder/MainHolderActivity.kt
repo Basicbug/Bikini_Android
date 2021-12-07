@@ -9,15 +9,15 @@ package com.example.bikini_android.ui.holder
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.base.BaseActivity
+import com.basicbug.core.ui.base.BaseViewModel
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.databinding.ActivityMainHolderBinding
-import com.example.bikini_android.ui.base.BaseActivity
-import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.common.ToolbarItem
-import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.LocationUtils
-import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers

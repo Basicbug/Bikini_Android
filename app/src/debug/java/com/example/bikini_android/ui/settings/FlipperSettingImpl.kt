@@ -1,6 +1,6 @@
 package com.example.bikini_android.ui.settings
 
-import com.example.bikini_android.app.AppResources
+import com.basicbug.core.app.AppResources
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping

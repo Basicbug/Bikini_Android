@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ AndroidManifest.xml 2021. 11. 24
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.basicbug.core">
+
+
+</manifest>

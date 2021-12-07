@@ -15,18 +15,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.basicbug.core.ui.list.DefaultDiffCallback
+import com.basicbug.core.ui.list.DefaultListAdapter
+import com.basicbug.core.util.ktx.autoCleared
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentSettingsBinding
-import com.example.bikini_android.ui.base.BaseFragment
-import com.example.bikini_android.ui.common.list.DefaultDiffCallback
-import com.example.bikini_android.ui.common.list.DefaultListAdapter
-import com.example.bikini_android.util.ktx.autoCleared
+import com.example.bikini_android.ui.base.BikiniBaseFragment
 
 /**
  * @author MyeongKi
  */
 
-class SettingsFragment : BaseFragment() {
+class SettingsFragment : BikiniBaseFragment() {
     private var binding by autoCleared<FragmentSettingsBinding>()
     private lateinit var viewModel: SettingsViewModel
     private var settingsType: SettingsType = SettingsType.MAIN

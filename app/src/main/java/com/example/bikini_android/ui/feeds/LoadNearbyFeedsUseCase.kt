@@ -7,15 +7,15 @@
 
 package com.example.bikini_android.ui.feeds
 
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.logging.Logger
 import com.example.bikini_android.repository.feed.Feed
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
 import com.example.bikini_android.sort.SortFeedCriteriaProvider
 import com.example.bikini_android.sort.SortFeedExecutor
 import com.example.bikini_android.sort.SortTarget
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.logging.Logger
 import com.example.bikini_android.util.map.LocationUtils
-import com.example.bikini_android.util.rx.addTo
 import com.google.android.gms.maps.model.LatLng
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.disposables.CompositeDisposable

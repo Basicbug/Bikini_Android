@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.ui.settings
 
+import com.basicbug.core.ui.settings.DeveloperSetting
 import com.example.bikini_android.network.NetworkConstants
 
 /**

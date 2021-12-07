@@ -8,11 +8,11 @@
 package com.example.bikini_android.ui.map.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
+import com.basicbug.core.ui.base.BaseViewModel
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.repository.feed.LocationInfo
 import com.example.bikini_android.repository.feed.convertLocationInfo
 import com.example.bikini_android.ui.base.BaseMapFragment
-import com.example.bikini_android.ui.base.BaseViewModel
-import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.LocationUtils
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng

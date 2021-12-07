@@ -13,7 +13,7 @@ import com.example.bikini_android.repository.likes.LikesRepository
 import com.example.bikini_android.repository.likes.LikesTargetType
 import com.example.bikini_android.ui.likes.LikesItemViewModel
 import com.example.bikini_android.ui.likes.LikesUseCase
-import com.example.bikini_android.util.rx.TestSchedulerProvider
+import com.basicbug.core.rx.TestSchedulerProvider
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.CompositeDisposable

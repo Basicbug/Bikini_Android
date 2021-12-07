@@ -7,13 +7,13 @@
 
 package com.example.bikini_android.repository.likes
 
+import com.basicbug.core.util.error.ErrorToastHelper
+import com.basicbug.core.util.logging.Logger
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.network.client.ApiClientHelper
+import com.example.bikini_android.network.client.ApiClientHelperImpl
 import com.example.bikini_android.network.request.param.LikesParameter
 import com.example.bikini_android.network.request.service.LikesService
 import com.example.bikini_android.network.response.convertLikes
-import com.example.bikini_android.util.error.ErrorToastHelper
-import com.example.bikini_android.util.logging.Logger
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
@@ -28,7 +28,7 @@ class LikesFeedRepository private constructor() : LikesRepository {
     }
 
     override fun addLikes(targetId: String): Single<Likes?> {
-        return ApiClientHelper
+        return ApiClientHelperImpl
             .createMainApiByService(LikesService::class)
             .addLikes(LoginManagerProxy.accessToken, getLikesParameter(targetId))
             .subscribeOn(Schedulers.io())
@@ -42,7 +42,7 @@ class LikesFeedRepository private constructor() : LikesRepository {
     }
 
     override fun removeLikes(targetId: String): Single<Likes?> {
-        return ApiClientHelper
+        return ApiClientHelperImpl
             .createMainApiByService(LikesService::class)
             .removeLikes(LoginManagerProxy.accessToken, getLikesParameter(targetId))
             .subscribeOn(Schedulers.io())
@@ -56,7 +56,7 @@ class LikesFeedRepository private constructor() : LikesRepository {
     }
 
     override fun checkLikes(targetId: String): Single<Likes?> {
-        return ApiClientHelper
+        return ApiClientHelperImpl
             .createMainApiByService(LikesService::class)
             .checkLikes(LoginManagerProxy.accessToken, getLikesParameter(targetId))
             .subscribeOn(Schedulers.io())

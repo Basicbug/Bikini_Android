@@ -6,17 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.basicbug.core.util.ktx.autoCleared
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.FragmentProfileDetailBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.ui.base.BaseFragment
+import com.example.bikini_android.ui.base.BikiniBaseFragment
 import com.example.bikini_android.ui.login.LoginActivity
-import com.example.bikini_android.util.ktx.autoCleared
 
 /**
  * @author bsgreentea
  */
-class ProfileDetailFragment : BaseFragment() {
+class ProfileDetailFragment : BikiniBaseFragment() {
 
     private var binding by autoCleared<FragmentProfileDetailBinding>()
 

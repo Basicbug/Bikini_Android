@@ -1,5 +1,5 @@
 /*
- * SettingsImageCompressionRate.kt 2021. 6. 13
+ * SettingsImageCompressionRate.kt 2021. 12. 2
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *

@@ -9,21 +9,21 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.basicbug.core.app.ToastHelper
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.base.BaseActivity
+import com.basicbug.core.ui.base.BaseViewModel
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.bus.RxActionBus
+import com.basicbug.core.util.bus.event.CameraAndExternalReadAndWriteStoragePermissionEvent
+import com.basicbug.core.util.bus.event.ExternalReadAndWriteStoragePermissionEvent
+import com.basicbug.core.util.camera.CameraUtils
+import com.basicbug.core.util.permission.PermissionUtils
 import com.example.bikini_android.R
-import com.example.bikini_android.app.ToastHelper
 import com.example.bikini_android.databinding.ActivityBoardBinding
-import com.example.bikini_android.ui.base.BaseActivity
-import com.example.bikini_android.ui.base.BaseViewModel
 import com.example.bikini_android.ui.dialog.SelectImageMethodBottomSheet
 import com.example.bikini_android.ui.dialog.SelectImageMethodViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.bus.RxActionBus
-import com.example.bikini_android.util.bus.event.CameraAndExternalReadAndWriteStoragePermissionEvent
-import com.example.bikini_android.util.bus.event.ExternalReadAndWriteStoragePermissionEvent
-import com.example.bikini_android.util.camera.CameraUtils
-import com.example.bikini_android.util.file.FileUtils
-import com.example.bikini_android.util.permission.PermissionUtils
-import com.example.bikini_android.util.rx.addTo
+import com.example.bikini_android.util.file.FileUtilsImpl
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.io.File
@@ -66,7 +66,7 @@ class BoardActivity : BaseActivity() {
                 }
             }
             REQUEST_CODE_CAMERA_PAGE -> {
-                FileUtils.getCameraImageFile()?.let { file ->
+                FileUtilsImpl.getCameraImageFile()?.let { file ->
                     file.toUri().let {
                         viewModel.setImageUriSelected(it)
                         ToastHelper.show(R.string.recommend_positioning)
@@ -144,7 +144,7 @@ class BoardActivity : BaseActivity() {
     }
 
     private fun navigateToCamera() {
-        if (FileUtils.checkReadExternalStoragePermission() && CameraUtils.checkCameraPermission()) {
+        if (FileUtilsImpl.checkReadExternalStoragePermission() && CameraUtils.checkCameraPermission()) {
             startCameraPage()
         } else {
             checkCameraPermission()
@@ -152,7 +152,7 @@ class BoardActivity : BaseActivity() {
     }
 
     private fun navigateToGallery() {
-        if (FileUtils.checkReadExternalStoragePermission()) {
+        if (FileUtilsImpl.checkReadExternalStoragePermission()) {
             startGalleryPage()
         } else {
             checkGalleryPermission()
@@ -162,7 +162,7 @@ class BoardActivity : BaseActivity() {
     private fun startCameraPage() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
-                val photoFile: File = FileUtils.createCameraImageFile()
+                val photoFile: File = FileUtilsImpl.createCameraImageFile()
                 photoFile.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         this,

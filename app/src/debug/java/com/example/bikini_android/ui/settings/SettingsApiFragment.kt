@@ -13,10 +13,10 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.util.ktx.pref
-import com.example.bikini_android.util.ktx.put
-import com.example.bikini_android.util.logging.Logger
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.util.ktx.pref
+import com.basicbug.core.util.ktx.put
+import com.basicbug.core.util.logging.Logger
 
 /**
  * @author MyeongKi

@@ -10,8 +10,8 @@ package com.example.bikini_android.ui.holder
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.basicbug.core.util.logging.Logger
 import com.example.bikini_android.R
-import com.example.bikini_android.util.logging.Logger
 
 /**
  * @author MyeongKi

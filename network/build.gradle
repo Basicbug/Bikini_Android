@@ -1,0 +1,42 @@
+/*
+ * build.gradle 2021. 11. 24
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: '../libraries.gradle'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        minSdkVersion 27
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    implementation network_libraries.values()
+}

@@ -7,8 +7,8 @@
 
 package com.example.bikini_android.ui.feeds
 
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.util.bus.RxAction
 
 /**
  * @author MyeongKi

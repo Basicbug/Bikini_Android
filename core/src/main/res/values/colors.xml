@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ colors.xml 2021. 11. 24
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="green_700">#388E3C</color>
+    <color name="green_500">#4CAF50</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#ff0000</color>
+    <color name="imperial_red">#ed2939</color>
+    <color name="white_opa80">#ccffffff</color>
+    <color name="black_opa80">#cc000000</color>
+    <color name="white_opa60">#99ffffff</color>
+    <color name="white_opa70">#b2ffffff</color>
+    <color name="black_opa70">#b2000000</color>
+    <color name="black_opa60">#99000000</color>
+    <color name="white_opa50">#80ffffff</color>
+    <color name="black_opa50">#7f000000</color>
+    <color name="black_opa05">#0d000000</color>
+    <color name="white_opa05">#0dffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="grey">#808080</color>
+
+    <color name="posca_opa40">#66479bd8</color>
+</resources>

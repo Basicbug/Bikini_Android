@@ -7,7 +7,7 @@
 
 package com.example.bikini_android.ui.settings.image
 
-import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.basicbug.core.ui.item.ItemViewModel
 import com.example.bikini_android.ui.settings.SettingsViewModel
 
 /**
