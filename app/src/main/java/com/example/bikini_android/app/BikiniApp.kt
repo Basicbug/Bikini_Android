@@ -7,8 +7,8 @@
 
 package com.example.bikini_android.app
 
-import android.app.Application
-import android.content.Context
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.app.BasicBugApp
 import com.example.bikini_android.R
 import com.example.bikini_android.util.map.LocationUtils
 import com.kakao.sdk.common.KakaoSdk
@@ -18,23 +18,11 @@ import dagger.hilt.android.HiltAndroidApp
  * @author MyeongKi
  */
 @HiltAndroidApp
-class BikiniApp : Application() {
-
-    init {
-        instance = this
-    }
-
+class BikiniApp : BasicBugApp() {
     override fun onCreate() {
         super.onCreate()
 
         KakaoSdk.init(this, AppResources.getString(R.string.kakao_native_app_key))
         LocationUtils.initCurrentLocationEvent()
-    }
-
-    companion object {
-        private var instance: BikiniApp? = null
-        fun applicationContext(): Context {
-            return instance!!.applicationContext
-        }
     }
 }

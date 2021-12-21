@@ -7,10 +7,10 @@
 
 package com.example.bikini_android.ui.likes
 
+import com.basicbug.core.rx.SchedulerProvider
+import com.basicbug.core.rx.addTo
 import com.example.bikini_android.manager.likes.LikesCacheManager
 import com.example.bikini_android.repository.likes.LikesRepository
-import com.example.bikini_android.util.rx.SchedulerProvider
-import com.example.bikini_android.util.rx.addTo
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -20,7 +20,7 @@ import io.reactivex.disposables.CompositeDisposable
 class LikesUseCase(
     private val disposables: CompositeDisposable,
     private val repository: LikesRepository,
-    private val schedulerProvider: SchedulerProvider,
+    private val schedulerProvider: SchedulerProvider
 ) {
 
     fun execute(event: LikesItemViewModel.EventType) {

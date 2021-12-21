@@ -8,8 +8,8 @@
 package com.example.bikini_android.board
 
 import com.example.bikini_android.ui.board.BoardItemViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.rx.TestSchedulerProvider
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.rx.TestSchedulerProvider
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.plugins.RxAndroidPlugins

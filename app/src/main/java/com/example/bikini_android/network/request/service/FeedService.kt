@@ -39,7 +39,7 @@ interface FeedService {
     @GET("/v1/feed/nearby")
     fun getNearbyLocationFeeds(
         @Header("X-AUTH-TOKEN") jwt: String,
-        @QueryMap nearbyParameter: NearbyFeedParameter,
+        @QueryMap nearbyParameter: NearbyFeedParameter
     ): Single<FeedsResponse>
 
     @GET("/v1/feed/list")

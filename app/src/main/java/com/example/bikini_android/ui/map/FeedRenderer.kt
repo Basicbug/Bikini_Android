@@ -8,10 +8,10 @@
 package com.example.bikini_android.ui.map
 
 import android.util.ArrayMap
-import com.example.bikini_android.app.AppResources
+import com.basicbug.core.app.AppResources
 import com.example.bikini_android.databinding.ViewFeedMarkerBinding
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.util.image.BitmapUtils
+import com.example.bikini_android.util.image.BitmapUtilsImpl
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.Marker
@@ -65,7 +65,7 @@ class FeedRenderer(
     }
 
     private fun getItemIcon(iconBinding: ViewFeedMarkerBinding): BitmapDescriptor {
-        return BitmapUtils.convertBitmapDescriptor(iconBinding.root)
+        return BitmapUtilsImpl.convertBitmapDescriptor(iconBinding.root)
     }
 
     override fun shouldRenderAsCluster(cluster: Cluster<Feed>): Boolean {

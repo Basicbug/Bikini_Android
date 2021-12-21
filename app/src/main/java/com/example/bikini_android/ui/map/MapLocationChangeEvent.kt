@@ -7,7 +7,7 @@
 
 package com.example.bikini_android.ui.map
 
-import com.example.bikini_android.util.bus.RxAction
+import com.basicbug.core.util.bus.RxAction
 import com.google.android.gms.maps.model.LatLng
 
 /**

@@ -19,10 +19,8 @@
     <string name="success_edit_nickname">닉네임이 변경되었습니다.</string>
 
     <!--permission-->
-    <string name="permission_required_toast">권한이 필요합니다.</string>
     <string name="permission_rationale_location">위치 권한 요청</string>
-    <string name="permission_denied">해당 권한 없이는 앱을 사용할 수 없습니다.</string>
-    <string name="permission_request">권한 요청</string>
+
     <!--board-->
     <string name="camera">카메라</string>
     <string name="gallery">갤러리</string>
@@ -41,22 +39,19 @@
     <!--common-->
     <string name="post">등록</string>
     <string name="complete">완료</string>
-    <string name="confirm">확인</string>
-    <string name="cancel">취소</string>
-    <string name="close">닫기</string>
-    <string name="unknown_error_message">잠시 후 다시 이용해 주세요.</string>
     <string name="image_unselected">이미지를 선택하세요.</string>
     <string name="content_empty">내용을 입력하세요.</string>
     <string name="distance_km">%1$.2f km</string>
     <string name="like_count">%1d likes</string>
     <string name="decimal_suffix">%1$d+</string>
 
-
+    <!--image-->
+    <string name="settings_image_compression_bad_quality">저용량</string>
+    <string name="settings_image_compression_normal_quality">일반 화질</string>
+    <string name="settings_image_compression_best_quality">원본</string>
 
     <!--settings-->
     <string name="settings_image_title">이미지</string>
     <string name="settings_image_compression_title">이미지 압축</string>
-    <string name="settings_image_compression_bad_quality">저용량</string>
-    <string name="settings_image_compression_normal_quality">일반 화질</string>
-    <string name="settings_image_compression_best_quality">원본</string>
+
 </resources>

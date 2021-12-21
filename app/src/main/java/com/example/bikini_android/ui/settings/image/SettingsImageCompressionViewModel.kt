@@ -7,12 +7,12 @@
 
 package com.example.bikini_android.ui.settings.image
 
-import com.example.bikini_android.manager.PreferenceManager
-import com.example.bikini_android.ui.common.item.ItemViewModel
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.item.ItemViewModel
+import com.basicbug.core.util.bus.RxAction
+import com.example.bikini_android.manager.PreferenceManagerImpl
 import com.example.bikini_android.ui.settings.SettingsViewModel
 import com.example.bikini_android.ui.settings.item.SettingsCheckItemViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,12 +30,12 @@ class SettingsImageCompressionViewModel : SettingsViewModel() {
         SettingsImageCompressionConfigItemProvider.createCompressionItems(itemEventRelay)
 
     init {
-        checkCompressionItem(PreferenceManager.getImageCompressionRate())
+        checkCompressionItem(PreferenceManagerImpl.getImageCompressionRate())
         itemEventRelay
             .ofType(SettingsImageCompressionRateEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
-                PreferenceManager.setImageCompressionRate(event.rate)
+                PreferenceManagerImpl.setImageCompressionRate(event.rate)
                 checkCompressionItem(event.rate)
             }.addTo(disposables)
     }

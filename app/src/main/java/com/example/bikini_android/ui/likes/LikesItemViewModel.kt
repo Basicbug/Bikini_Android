@@ -9,14 +9,14 @@ package com.example.bikini_android.ui.likes
 
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableBoolean
+import com.basicbug.core.string.EMPTY_STRING
+import com.basicbug.core.ui.item.CacheItemViewModel
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
 import com.example.bikini_android.manager.likes.LikesCacheManager
 import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.repository.likes.LikesTargetType
-import com.example.bikini_android.ui.common.item.CacheItemViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.string.EMPTY_STRING
 import com.jakewharton.rxrelay2.Relay
 
 /**

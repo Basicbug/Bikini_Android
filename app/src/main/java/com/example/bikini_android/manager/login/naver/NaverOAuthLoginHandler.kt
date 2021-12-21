@@ -1,7 +1,7 @@
 package com.example.bikini_android.manager.login.naver
 
 import android.util.Log
-import com.example.bikini_android.app.AppResources
+import com.basicbug.core.app.AppResources
 import com.example.bikini_android.manager.login.LoginManagerFactory
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.login.LoginEvent

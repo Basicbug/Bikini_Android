@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ attrs.xml 2021. 12. 2
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<resources>
+    <!-- Common -->
+    <attr name="progressTintColor" format="reference|color" />
+    <attr name="defaultDimColor" format="reference|color" />
+
+</resources>

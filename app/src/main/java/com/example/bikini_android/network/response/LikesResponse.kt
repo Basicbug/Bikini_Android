@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.network.response
 
+import com.basicbug.network.response.JsonResponseWrapper
 import com.example.bikini_android.repository.likes.Likes
 import com.example.bikini_android.repository.likes.LikesTargetType
 import com.google.gson.annotations.SerializedName

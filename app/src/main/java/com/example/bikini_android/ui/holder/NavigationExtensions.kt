@@ -22,8 +22,8 @@ import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.R
-import com.example.bikini_android.util.bus.RxAction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jakewharton.rxrelay2.Relay
 
@@ -82,7 +82,7 @@ fun BottomNavigationView.setupNavController(
                     FragmentManager.POP_BACK_STACK_INCLUSIVE
                 )
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                    as NavHostFragment
+                        as NavHostFragment
 
                 if (firstFragmentTag != newlySelectedItemTag) {
                     fragmentManager.beginTransaction()
@@ -164,7 +164,7 @@ private fun BottomNavigationView.setupItemReselected(
     setOnNavigationItemReselectedListener { item ->
         val newlySelectedItemTag = graphIdToTagMap[item.itemId]
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-            as NavHostFragment
+                as NavHostFragment
         val navController = selectedFragment.navController
         navController.popBackStack(
             navController.graph.startDestination, false

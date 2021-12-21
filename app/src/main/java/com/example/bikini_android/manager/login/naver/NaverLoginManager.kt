@@ -1,10 +1,10 @@
 package com.example.bikini_android.manager.login.naver
 
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
-import com.example.bikini_android.manager.PreferenceManager
-import com.example.bikini_android.manager.login.LoginManager
-import com.example.bikini_android.util.bus.RxAction
+import com.example.bikini_android.manager.PreferenceManagerImpl
+import com.basicbug.core.manager.login.LoginManager
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import com.nhn.android.naverlogin.OAuthLogin
@@ -21,7 +21,7 @@ class NaverLoginManager : LoginManager {
     val loginInstance: OAuthLogin = OAuthLogin.getInstance()
 
     override fun isLoggedIn(): Boolean {
-        return PreferenceManager.getBoolean(AppResources.getString(R.string.is_logged_in))
+        return PreferenceManagerImpl.getBoolean(AppResources.getString(R.string.is_logged_in))
     }
 
     override fun logOut() {
@@ -30,7 +30,7 @@ class NaverLoginManager : LoginManager {
 
     override fun successLogin() {
 
-        PreferenceManager.apply {
+        PreferenceManagerImpl.apply {
             setBoolean(AppResources.getString(R.string.is_logged_in), true)
             setString(
                 AppResources.getString(R.string.last_login_platform),

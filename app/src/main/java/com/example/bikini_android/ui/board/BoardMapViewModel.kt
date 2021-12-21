@@ -13,10 +13,10 @@ import android.graphics.Color
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.SavedStateHandle
+import com.basicbug.core.app.AppResources
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.R
-import com.example.bikini_android.app.AppResources
 import com.example.bikini_android.ui.map.viewmodel.MapViewModel
-import com.example.bikini_android.util.bus.RxAction
 import com.example.bikini_android.util.map.LocationUtils
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptor

@@ -10,7 +10,7 @@ package com.example.bikini_android.board
 import androidx.lifecycle.SavedStateHandle
 import com.example.bikini_android.ui.board.BoardMapViewModel
 import com.example.bikini_android.util.map.LocationUtils
-import com.example.bikini_android.util.rx.TestSchedulerProvider
+import com.basicbug.core.rx.TestSchedulerProvider
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import io.reactivex.android.plugins.RxAndroidPlugins

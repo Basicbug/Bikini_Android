@@ -1,13 +1,16 @@
 package com.example.bikini_android.ui.login
 
+import com.basicbug.core.rx.DefaultSchedulerProvider
+import com.basicbug.core.rx.SchedulerProvider
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.base.BaseViewModel
+import com.basicbug.core.ui.progress.ProgressItemViewModel
+import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.error.ErrorToastHelper
+import com.basicbug.core.util.logging.Logger
+import com.basicbug.network.response.TokenResponse
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.account.AccountRepositoryImpl
-import com.example.bikini_android.ui.base.BaseViewModel
-import com.example.bikini_android.ui.progress.ProgressItemViewModel
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.rx.DefaultSchedulerProvider
-import com.example.bikini_android.util.rx.SchedulerProvider
-import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import dagger.Module
@@ -54,12 +57,21 @@ class LoginViewModel @Inject constructor(
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     val progressViewModel = ProgressItemViewModel()
     private val disposables = CompositeDisposable()
+    private val logger: Logger by lazy(LazyThreadSafetyMode.NONE) {
+        Logger().apply {
+            TAG = "LoginViewModel"
+        }
+    }
 
     fun sendTokenToServer(accessToken: String) {
         progressViewModel.isVisible = true
         loginRepository
             .sendTokenToServer(accessToken)
             .subscribeOn(schedulerProvider.io())
+            .onErrorReturn {
+                ErrorToastHelper.unknownError(logger, it)
+                TokenResponse.Result("", "")
+            }
             .subscribe({ result ->
                 progressViewModel.isVisible = false
                 result?.let {
@@ -88,7 +100,7 @@ class LoginViewModel @Inject constructor(
                 }
 
             }, {
-
+                ErrorToastHelper.unknownError(logger, it)
             })
             .addTo(disposables)
     }

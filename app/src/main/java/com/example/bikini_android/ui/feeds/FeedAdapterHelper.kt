@@ -11,10 +11,10 @@ import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.basicbug.core.ui.list.DefaultListAdapter
+import com.basicbug.core.ui.list.RecyclerViewLayoutType
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.repository.feed.Feed
-import com.example.bikini_android.ui.common.RecyclerViewLayoutType
-import com.example.bikini_android.ui.common.list.DefaultListAdapter
-import com.example.bikini_android.util.bus.RxAction
 import com.jakewharton.rxrelay2.Relay
 
 /**

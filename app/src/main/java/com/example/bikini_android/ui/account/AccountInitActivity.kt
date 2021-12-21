@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.basicbug.core.app.ToastHelper
+import com.basicbug.core.rx.addTo
+import com.basicbug.core.ui.base.BaseActivity
+import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.R
-import com.example.bikini_android.app.ToastHelper
 import com.example.bikini_android.databinding.ActivityAccountInitBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
-import com.example.bikini_android.ui.base.BaseActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
-import com.example.bikini_android.util.bus.RxAction
-import com.example.bikini_android.util.rx.addTo
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 

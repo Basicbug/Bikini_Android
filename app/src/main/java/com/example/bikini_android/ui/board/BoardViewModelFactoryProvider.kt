@@ -12,11 +12,11 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
+import com.basicbug.core.rx.DefaultSchedulerProvider
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.repository.feed.FeedRepositoryInjector
-import com.example.bikini_android.util.file.FileUtils
+import com.example.bikini_android.util.file.FileUtilsImpl
 import com.example.bikini_android.util.map.LocationUtils
-import com.example.bikini_android.util.rx.DefaultSchedulerProvider
 
 /**
  * @author MyeongKi
@@ -41,7 +41,7 @@ class BoardViewModelFactoryProvider(
                     handle,
                     FeedRepositoryInjector.getFeedRepository(),
                     LoginManagerProxy,
-                    FileUtils,
+                    FileUtilsImpl,
                     DefaultSchedulerProvider()
                 ) as T
             }

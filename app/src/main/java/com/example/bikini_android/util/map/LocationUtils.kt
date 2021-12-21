@@ -11,7 +11,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.core.content.ContextCompat
-import com.example.bikini_android.app.AppResources
+import com.basicbug.core.app.AppResources
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 
