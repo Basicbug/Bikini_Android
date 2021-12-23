@@ -25,26 +25,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/large_margin"
-            android:text="@{viewmodel.userId}"
             android:onClick="@{() -> viewmodel.onClickNickName()}"
+            android:text="@{viewmodel.userId}"
             android:textSize="@dimen/text_large_static_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="여기는 아이디"
-            tools:ignore="SpUsage" />
+            tools:ignore="SpUsage"
+            tools:text="여기는 아이디" />
 
         <ImageView
             android:id="@+id/representative_image"
             android:layout_width="@dimen/account_image_size"
             android:layout_height="0dp"
             android:layout_margin="@dimen/large_margin"
+            android:contentDescription="@string/profile_image"
             android:foreground="@drawable/circular"
             android:src="@mipmap/ic_launcher"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_id"
-            android:contentDescription="@string/profile_image" />
+            app:layout_constraintTop_toBottomOf="@id/my_id" />
 
         <TextView
             android:id="@+id/like_count"
@@ -53,56 +53,27 @@
             android:text="@{viewmodel.likeCount}"
             android:textSize="@dimen/text_default_static_size"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/like_title"
+            app:layout_constraintEnd_toStartOf="@id/write_count"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/representative_image"
-            app:layout_constraintBottom_toTopOf="@id/like_title"
-            app:layout_constraintEnd_toStartOf="@id/shown_count"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="10"
-            tools:ignore="SpUsage" />
+            tools:ignore="SpUsage"
+            tools:text="10" />
 
         <TextView
             android:id="@+id/like_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
             android:text="@string/like"
             android:textSize="@dimen/text_account_title_static_size"
-            android:layout_marginTop="@dimen/small_margin"
-            app:layout_constraintStart_toStartOf="@id/like_count"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/like_count"
+            app:layout_constraintStart_toStartOf="@id/like_count"
             app:layout_constraintTop_toBottomOf="@id/like_count"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="좋아요"
-            tools:ignore="SpUsage" />
-
-        <TextView
-            android:id="@+id/shown_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewmodel.shownCount}"
-            android:textSize="@dimen/text_default_static_size"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/like_count"
-            app:layout_constraintTop_toBottomOf="@id/representative_image"
-            app:layout_constraintBottom_toTopOf="@id/shown_title"
-            app:layout_constraintEnd_toStartOf="@id/write_count"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="10"
-            tools:ignore="SpUsage" />
-
-        <TextView
-            android:id="@+id/shown_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/shown"
-            android:textSize="@dimen/text_account_title_static_size"
-            android:layout_marginTop="@dimen/small_margin"
-            app:layout_constraintStart_toStartOf="@id/shown_count"
-            app:layout_constraintEnd_toEndOf="@id/shown_count"
-            app:layout_constraintTop_toBottomOf="@id/shown_count"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="노출"
-            tools:ignore="SpUsage" />
+            tools:ignore="SpUsage"
+            tools:text="좋아요" />
 
         <TextView
             android:id="@+id/write_count"
@@ -111,56 +82,55 @@
             android:text="@{viewmodel.feedCount}"
             android:textSize="@dimen/text_default_static_size"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/representative_image"
-            app:layout_constraintStart_toEndOf="@id/shown_count"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/write_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/like_count"
+            app:layout_constraintTop_toBottomOf="@id/representative_image"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="10"
-            tools:ignore="SpUsage" />
+            tools:ignore="SpUsage"
+            tools:text="10" />
 
         <TextView
             android:id="@+id/write_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
             android:text="@string/write"
             android:textSize="@dimen/text_account_title_static_size"
-            android:layout_marginTop="@dimen/small_margin"
-            app:layout_constraintStart_toStartOf="@id/write_count"
-            app:layout_constraintEnd_toEndOf="@id/write_count"
-            app:layout_constraintTop_toBottomOf="@id/write_count"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="작성"
-            tools:ignore="SpUsage" />
+            app:layout_constraintEnd_toEndOf="@id/write_count"
+            app:layout_constraintStart_toStartOf="@id/write_count"
+            app:layout_constraintTop_toBottomOf="@id/write_count"
+            tools:ignore="SpUsage"
+            tools:text="작성" />
 
         <TextView
             android:id="@+id/state_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/large_margin"
             android:text="@{viewmodel.stateMessage}"
             android:textSize="@dimen/text_account_title_static_size"
-            android:layout_marginTop="@dimen/large_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            app:layout_constraintStart_toEndOf="@id/representative_image"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/representative_image"
-            tools:text="상매입니다 입력해주세fefefefefefefefefefe용"
-            tools:ignore="SpUsage" />
-
-<!--        <Button-->
-<!--            android:id="@+id/ticket_count"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{viewmodel.feedTicketCount}"-->
-<!--            android:layout_marginTop="@dimen/default_margin"-->
-<!--            android:textSize="@dimen/text_profile_ticket_size"-->
-<!--            android:layout_marginStart="@dimen/default_margin"-->
-<!--            android:layout_marginEnd="@dimen/default_margin"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/state_message"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            tools:text="5 ticket" />-->
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/representative_image"
+            tools:ignore="SpUsage"
+            tools:text="상매입니다 입력해주세fefefefefefefefefefe용" />
+        <!--        <Button-->
+        <!--            android:id="@+id/ticket_count"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@{viewmodel.feedTicketCount}"-->
+        <!--            android:layout_marginTop="@dimen/default_margin"-->
+        <!--            android:textSize="@dimen/text_profile_ticket_size"-->
+        <!--            android:layout_marginStart="@dimen/default_margin"-->
+        <!--            android:layout_marginEnd="@dimen/default_margin"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/state_message"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            tools:text="5 ticket" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

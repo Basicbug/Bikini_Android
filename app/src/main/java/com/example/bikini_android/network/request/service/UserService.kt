@@ -16,7 +16,7 @@ interface UserService {
     @PUT("/v2/user/update")
     fun updateUserInfo(
         @Header("X-AUTH-TOKEN") jwt: String,
-        @Body userUpdateInfo: UserUpdateInfo,
+        @Body userUpdateInfo: UserUpdateInfo
     ): Single<UserUpdateResponse>
 
     @GET("/v2/user/about/me")
