@@ -7,6 +7,7 @@
 
 package com.example.bikini_android.ui.account.setting
 
+import androidx.databinding.ObservableField
 import com.basicbug.core.app.ToastHelper
 import com.basicbug.core.ui.base.BaseViewModel
 import com.basicbug.core.ui.progress.ProgressItemViewModel
@@ -32,9 +33,9 @@ class AccountSettingViewModel(
     private val disposables = CompositeDisposable()
     val progressViewModel = ProgressItemViewModel()
 
-    val prevUserName = LoginManagerProxy.userName
+    val prevUserName = ObservableField(LoginManagerProxy.userName)
 
-    private val updateProfileNameUseCase = UpdateUserInfoUseCase(disposables)
+    private val updateProfileNameUseCase = UpdateUserInfoUseCase(disposables, itemEventRelay)
 
     fun setUserName() {
 

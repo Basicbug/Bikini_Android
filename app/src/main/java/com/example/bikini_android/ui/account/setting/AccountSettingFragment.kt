@@ -74,6 +74,7 @@ class AccountSettingFragment : BikiniBaseFragment() {
                     AccountSettingViewModel.EventType.UPDATE_SUCCEED -> {
                         ToastHelper.show(R.string.success_edit_nickname)
                         LoginManagerProxy.userName = it.result
+                        viewModel.prevUserName.set(it.result)
                         getNavigationHelper()?.popBackStack()
                     }
 

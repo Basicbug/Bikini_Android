@@ -43,7 +43,7 @@ object AccountRepositoryImpl : AccountRepository {
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
-                null
+                UserInfo("", 0, 0)
             }
     }
 
