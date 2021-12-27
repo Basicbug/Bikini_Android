@@ -17,4 +17,5 @@ enum class RestApiParameterKey(val key: String) {
     RADIUS("radius"),
     TARGET_ID("targetId"),
     TARGET_TYPE("targetType"),
+    USER_NAME("username")
 }

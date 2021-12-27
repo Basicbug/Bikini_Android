@@ -11,7 +11,7 @@ import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityLoginBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.manager.login.naver.NaverOAuthLoginHandler
-import com.example.bikini_android.ui.account.AccountInitActivity
+import com.example.bikini_android.ui.account.setting.AccountInitActivity
 import com.example.bikini_android.ui.holder.MainHolderActivity
 import com.jakewharton.rxrelay2.Relay
 import dagger.hilt.android.AndroidEntryPoint

@@ -5,8 +5,6 @@ import com.basicbug.core.util.logging.Logger
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.network.client.ApiClientHelperImpl
 import com.example.bikini_android.network.request.service.UserService
-import com.example.bikini_android.network.response.MyInfoReponse
-import com.example.bikini_android.network.response.UserUpdateResponse
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
@@ -21,13 +19,13 @@ object AccountRepositoryImpl : AccountRepository {
         }
     }
 
-    override fun getUserFromRemote(userInfo: UserInfo): Single<UserUpdateResponse.Result?> {
+    override fun updateUserInfo(userUpdateInfo: UserUpdateInfo): Single<UserInfo?> {
         return ApiClientHelperImpl
             .createMainApiByService(UserService::class)
-            .updateUserInfo(LoginManagerProxy.accessToken, userInfo)
+            .updateUserInfo(LoginManagerProxy.accessToken, userUpdateInfo)
             .subscribeOn(Schedulers.io())
             .map {
-                it.result
+                it.result?.userInfo
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
@@ -35,17 +33,17 @@ object AccountRepositoryImpl : AccountRepository {
             }
     }
 
-    override fun getMyInfoFromRemote(): Single<MyInfoReponse.Result?> {
+    override fun getMyInfo(): Single<UserInfo?> {
         return ApiClientHelperImpl
             .createMainApiByService(UserService::class)
             .getMyInfo(LoginManagerProxy.accessToken)
             .subscribeOn(Schedulers.io())
             .map {
-                it.result
+                it.result?.userInfo
             }
             .onErrorReturn { throwable ->
                 ErrorToastHelper.unknownError(logger, throwable)
-                null
+                UserInfo("", 0, 0)
             }
     }
 

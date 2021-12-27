@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.profile.ProfileViewModel" />
+            type="com.example.bikini_android.ui.account.info.AccountInfoViewModel" />
 
     </data>
 
@@ -16,12 +16,12 @@
         android:layout_marginBottom="@dimen/bottom_navigation_height">
         <include
             android:id="@+id/profile_item_layout"
-            layout="@layout/view_profile_item"
+            layout="@layout/view_account_info_item"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/my_feeds"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:viewmodel="@{viewmodel.profileItemViewModel}" />
+            app:viewmodel="@{viewmodel.accountInfoItemViewModel}" />
 
 
 

@@ -1,4 +1,11 @@
-package com.example.bikini_android.ui.account
+/*
+ * AccountInitActivity.kt 2021. 10. 23
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
+
+package com.example.bikini_android.ui.account.setting
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +15,12 @@ import com.basicbug.core.app.ToastHelper
 import com.basicbug.core.rx.addTo
 import com.basicbug.core.ui.base.BaseActivity
 import com.basicbug.core.util.bus.RxAction
+import com.basicbug.core.util.bus.RxActionBus
 import com.example.bikini_android.R
 import com.example.bikini_android.databinding.ActivityAccountInitBinding
 import com.example.bikini_android.manager.login.LoginManagerProxy
 import com.example.bikini_android.ui.holder.MainHolderActivity
+import com.example.bikini_android.ui.account.viewmodel.AccountViewModelFactory
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -44,9 +53,8 @@ class AccountInitActivity : BaseActivity() {
     }
 
     private fun setUpObserver() {
-
-        itemEventRelay
-            .ofType(AccountEvent::class.java)
+        RxActionBus
+            .toObservable(AccountSettingEvent::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 viewModel.progressViewModel.isVisible = false

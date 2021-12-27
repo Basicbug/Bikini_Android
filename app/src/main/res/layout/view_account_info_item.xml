@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ view_profile_item.xml 2021. 5. 19
+  ~
+  ~ Copyright 2021 BasicBug. All rights Reserved.
+  ~
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.bikini_android.ui.account.info.AccountInfoItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/account_info_bottom_margin">
+
+        <TextView
+            android:id="@+id/my_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin"
+            android:onClick="@{() -> viewmodel.onClickNickName()}"
+            android:text="@{viewmodel.userId}"
+            android:textSize="@dimen/text_large_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="여기는 아이디" />
+
+        <ImageView
+            android:id="@+id/representative_image"
+            android:layout_width="@dimen/account_image_size"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/large_margin"
+            android:contentDescription="@string/profile_image"
+            android:foreground="@drawable/circular"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_id" />
+
+        <TextView
+            android:id="@+id/like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.likeCount}"
+            android:textSize="@dimen/text_default_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/like_title"
+            app:layout_constraintEnd_toStartOf="@id/write_count"
+            app:layout_constraintStart_toEndOf="@id/representative_image"
+            app:layout_constraintTop_toTopOf="@id/representative_image"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/like_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/like"
+            android:textSize="@dimen/text_account_title_size"
+            app:layout_constraintBottom_toBottomOf="@id/representative_image"
+            app:layout_constraintEnd_toEndOf="@id/like_count"
+            app:layout_constraintStart_toStartOf="@id/like_count"
+            app:layout_constraintTop_toBottomOf="@id/like_count"
+            tools:text="좋아요" />
+
+        <TextView
+            android:id="@+id/write_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.feedCount}"
+            android:textSize="@dimen/text_default_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/write_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/like_count"
+            app:layout_constraintTop_toTopOf="@id/representative_image"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/write_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/write"
+            android:textSize="@dimen/text_account_title_size"
+            app:layout_constraintBottom_toBottomOf="@id/representative_image"
+            app:layout_constraintEnd_toEndOf="@id/write_count"
+            app:layout_constraintStart_toStartOf="@id/write_count"
+            app:layout_constraintTop_toBottomOf="@id/write_count"
+            tools:text="작성" />
+
+        <TextView
+            android:id="@+id/state_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@{viewmodel.stateMessage}"
+            android:textSize="@dimen/text_account_title_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/representative_image"
+            tools:text="상매입니다 입력해주세fefefefefefefefefefe용" />
+        <!--        <Button-->
+        <!--            android:id="@+id/ticket_count"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@{viewmodel.feedTicketCount}"-->
+        <!--            android:layout_marginTop="@dimen/default_margin"-->
+        <!--            android:textSize="@dimen/text_profile_ticket_size"-->
+        <!--            android:layout_marginStart="@dimen/default_margin"-->
+        <!--            android:layout_marginEnd="@dimen/default_margin"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/state_message"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            tools:text="5 ticket" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

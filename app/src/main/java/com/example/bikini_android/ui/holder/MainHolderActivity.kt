@@ -48,7 +48,7 @@ class MainHolderActivity : BaseActivity() {
                 R.navigation.bikini,
                 R.navigation.hot_feeds,
                 R.navigation.settings,
-                R.navigation.profile
+                R.navigation.account
             )
         binding?.let {
             it.bottomNavigation.setupNavController(

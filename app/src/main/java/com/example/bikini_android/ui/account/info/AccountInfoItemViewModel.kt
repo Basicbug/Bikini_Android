@@ -1,38 +1,39 @@
 /*
- * ProfileItemViewModel.kt 2021. 5. 19
+ * AccountInfoItemViewModel.kt 2021. 10. 23
  *
  * Copyright 2021 BasicBug. All rights Reserved.
  *
  */
 
-package com.example.bikini_android.ui.profile
+package com.example.bikini_android.ui.account.info
 
 import androidx.databinding.Bindable
 import com.basicbug.core.ui.item.ItemViewModel
 import com.basicbug.core.util.bus.RxAction
 import com.example.bikini_android.BR
 import com.example.bikini_android.R
+import com.example.bikini_android.repository.account.UserInfo
 
 /**
  * @author MyeongKi
  */
-class ProfileItemViewModel : ItemViewModel() {
+class AccountInfoItemViewModel : ItemViewModel() {
     @get: Bindable
-    var userId = "mk5432"
+    var userId = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.userId)
         }
 
     @get: Bindable
-    var writeCount = "10"
+    var feedCount = "0"
         set(value) {
             field = value
-            notifyPropertyChanged(BR.writeCount)
+            notifyPropertyChanged(BR.feedCount)
         }
 
     @get: Bindable
-    var likeCount = "1300"
+    var likeCount = "0"
         set(value) {
             field = value
             notifyPropertyChanged(BR.likeCount)
@@ -59,6 +60,14 @@ class ProfileItemViewModel : ItemViewModel() {
             notifyPropertyChanged(BR.feedTicketCount)
         }
 
+    fun setUserInfo(userInfo: UserInfo?) {
+        userInfo?.let {
+            userId = it.userName
+            likeCount = it.likeCount.toString()
+            feedCount = it.feedCount.toString()
+        }
+    }
+
     fun onClickNickName() {
         itemEventRelay?.accept(EventType.OPEN_EDIT_NICKNAME)
     }
@@ -68,6 +77,6 @@ class ProfileItemViewModel : ItemViewModel() {
     }
 
     override fun getLayoutRes(): Int {
-        return R.layout.view_profile_item
+        return R.layout.view_account_info_item
     }
 }

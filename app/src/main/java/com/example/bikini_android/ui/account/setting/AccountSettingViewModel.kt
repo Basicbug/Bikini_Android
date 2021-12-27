@@ -1,5 +1,13 @@
-package com.example.bikini_android.ui.account
+/*
+ * AccountSettingViewModel.kt 2021. 10. 23
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
 
+package com.example.bikini_android.ui.account.setting
+
+import androidx.databinding.ObservableField
 import com.basicbug.core.app.ToastHelper
 import com.basicbug.core.ui.base.BaseViewModel
 import com.basicbug.core.ui.progress.ProgressItemViewModel
@@ -8,6 +16,8 @@ import com.basicbug.core.util.ktx.isNullOrBlank
 import com.example.bikini_android.BuildConfig
 import com.example.bikini_android.R
 import com.example.bikini_android.manager.login.LoginManagerProxy
+import com.example.bikini_android.repository.account.UserUpdateInfo
+import com.example.bikini_android.ui.account.UpdateUserInfoUseCase
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.disposables.CompositeDisposable
@@ -16,27 +26,27 @@ import io.reactivex.disposables.CompositeDisposable
  * @author bsgreentea
  */
 class AccountSettingViewModel(
-    val accountItem: AccountItemViewModel
+    val accountItem: AccountUserNameItemViewModel?
 ) : BaseViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
     private val disposables = CompositeDisposable()
     val progressViewModel = ProgressItemViewModel()
 
-    val prevUserName = LoginManagerProxy.userName
+    val prevUserName = ObservableField(LoginManagerProxy.userName)
 
-    private val updateProfileNameUseCase = UpdateProfileNameUseCase(disposables, itemEventRelay)
+    private val updateProfileNameUseCase = UpdateUserInfoUseCase(disposables, itemEventRelay)
 
     fun setUserName() {
 
-        if (accountItem.nickname.isNullOrBlank()) {
+        if (accountItem?.nickname?.isNullOrBlank() == true) {
             ToastHelper.show(R.string.empty_input_box)
         } else {
 
             progressViewModel.isVisible = true
 
-            accountItem.nickname.get()?.let {
-                updateProfileNameUseCase.execute(it)
+            accountItem?.nickname?.get()?.let {
+                updateProfileNameUseCase.execute(UserUpdateInfo(it))
             }
         }
     }

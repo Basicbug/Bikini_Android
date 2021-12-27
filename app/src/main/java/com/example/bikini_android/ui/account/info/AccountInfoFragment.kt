@@ -1,4 +1,11 @@
-package com.example.bikini_android.ui.profile
+/*
+ * AccountInfoFragment.kt 2021. 10. 23
+ *
+ * Copyright 2021 BasicBug. All rights Reserved.
+ *
+ */
+
+package com.example.bikini_android.ui.account.info
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,8 +25,10 @@ import com.basicbug.core.util.bus.RxAction
 import com.basicbug.core.util.bus.RxActionBus
 import com.basicbug.core.util.ktx.autoCleared
 import com.example.bikini_android.R
-import com.example.bikini_android.databinding.FragmentProfileBinding
-import com.example.bikini_android.manager.login.LoginManagerProxy
+import com.example.bikini_android.databinding.FragmentAccountInfoBinding
+import com.example.bikini_android.ui.account.setting.AccountInitItemViewModel
+import com.example.bikini_android.ui.account.setting.AccountSettingEvent
+import com.example.bikini_android.ui.account.viewmodel.AccountViewModelFactory
 import com.example.bikini_android.ui.base.BikiniBaseFragment
 import com.example.bikini_android.ui.board.BoardActivity
 import com.example.bikini_android.ui.feeds.FeedAdapterHelper
@@ -37,15 +46,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 /**
  * @author bsgreentea
  */
-class ProfileFragment : BikiniBaseFragment() {
+class AccountInfoFragment : BikiniBaseFragment() {
 
-    private var binding by autoCleared<FragmentProfileBinding>()
+    private var binding by autoCleared<FragmentAccountInfoBinding>()
     private var feedAdapterHelper by autoCleared<FeedAdapterHelper>()
 
     private lateinit var feedsViewModel: FeedsViewModel
-    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var accountInfoViewModel: AccountInfoViewModel
     private lateinit var feedsEventRelay: Relay<RxAction>
-    private lateinit var profileEventRelay: Relay<RxAction>
+    private lateinit var accountInfoEventRelay: Relay<RxAction>
 
     private val feedsType: FeedsType = FeedsType.MY_FEEDS
     private val sortType: FeedsSortType = FeedsSortType.LATEST_DATE
@@ -55,20 +64,27 @@ class ProfileFragment : BikiniBaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = DataBindingUtil.inflate<FragmentProfileBinding>(
+    ): View = DataBindingUtil.inflate<FragmentAccountInfoBinding>(
         inflater,
-        R.layout.fragment_profile,
+        R.layout.fragment_account_info,
         container,
         false
     ).also {
         super.onCreateView(inflater, container, savedInstanceState)
+
         feedsViewModel = ViewModelProvider(
             requireActivity(),
             FeedsViewModelFactoryProvider(requireActivity(), savedInstanceState)
         )[FeedsViewModelFactoryProvider.getFeedViewModelClazz(feedsType)]
-        profileViewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+
+        accountInfoViewModel = ViewModelProvider(
+            requireActivity(),
+            AccountViewModelFactory(AccountInitItemViewModel())
+        )[AccountInfoViewModel::class.java]
+
         feedsEventRelay = feedsViewModel.itemEventRelay
-        profileEventRelay = profileViewModel.itemEventRelay
+        accountInfoEventRelay = accountInfoViewModel.itemEventRelay
+
         feedAdapterHelper = FeedAdapterHelper(
             DefaultListAdapter(DefaultDiffCallback()),
             recyclerViewLayoutType,
@@ -76,7 +92,7 @@ class ProfileFragment : BikiniBaseFragment() {
         )
 
         binding = it.apply {
-            viewmodel = profileViewModel
+            viewmodel = accountInfoViewModel
             myFeeds.adapter = feedAdapterHelper.feedsAdapter
             myFeeds.layoutManager = feedAdapterHelper.getLayoutManger(requireContext())
         }
@@ -89,21 +105,17 @@ class ProfileFragment : BikiniBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         feedsViewModel.loadFeeds()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        profileViewModel.profileItemViewModel.userId = LoginManagerProxy.userName
+        accountInfoViewModel.updateAccountInfoUi()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_profile, menu)
+        inflater.inflate(R.menu.menu_account, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.profile_detail_menu -> {
+            R.id.account_detail_menu -> {
                 getNavigationHelper()?.navigateToProfileDetail()
                 false
             }
@@ -112,24 +124,24 @@ class ProfileFragment : BikiniBaseFragment() {
     }
 
     private fun observeEvent() {
-        profileEventRelay
-            .ofType(ProfileViewModel.EventType::class.java)
+        accountInfoEventRelay
+            .ofType(AccountInfoViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 when (it) {
-                    ProfileViewModel.EventType.OPEN_BOARD -> {
+                    AccountInfoViewModel.EventType.OPEN_BOARD -> {
                         openBoard()
                     }
                     else -> Unit
                 }
             }.addTo(disposables)
 
-        profileEventRelay
-            .ofType(ProfileItemViewModel.EventType::class.java)
+        accountInfoEventRelay
+            .ofType(AccountInfoItemViewModel.EventType::class.java)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 when (it) {
-                    ProfileItemViewModel.EventType.OPEN_EDIT_NICKNAME -> {
+                    AccountInfoItemViewModel.EventType.OPEN_EDIT_NICKNAME -> {
                         getNavigationHelper()?.navigateToAccountSetting()
                     }
                     else -> Unit
@@ -142,6 +154,7 @@ class ProfileFragment : BikiniBaseFragment() {
             .filter { it.feedsType == this.feedsType }
             .subscribe { event ->
                 feedAdapterHelper.bindFeeds(event.feeds)
+                accountInfoViewModel.updateAccountInfoUi()
             }.addTo(disposables)
 
         feedsEventRelay
@@ -158,9 +171,21 @@ class ProfileFragment : BikiniBaseFragment() {
                 )
             }.addTo(disposables)
 
-        RxActionBus.toObservable(ReloadFeedEvent::class.java).subscribe {
-            feedsViewModel.reloadFeeds()
-        }.addTo(disposables)
+        RxActionBus
+            .toObservable(ReloadFeedEvent::class.java)
+            .subscribe {
+                feedsViewModel.reloadFeeds()
+            }
+            .addTo(disposables)
+
+        RxActionBus
+            .toObservable(AccountSettingEvent::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                accountInfoViewModel.updateAccountInfoUi()
+            }
+            .addTo(disposables)
+
     }
 
     private fun openBoard() {

@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.bikini_android.ui.profile.ProfileViewModel" />
+            type="com.example.bikini_android.ui.account.info.AccountInfoViewModel" />
 
     </data>
 
@@ -26,8 +26,8 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
                 <include
                     android:id="@+id/profile_item_layout"
-                    layout="@layout/view_profile_item"
-                    app:viewmodel="@{viewmodel.profileItemViewModel}" />
+                    layout="@layout/view_account_info_item"
+                    app:viewmodel="@{viewmodel.accountInfoItemViewModel}" />
                 <View
                     android:id="@+id/division_line"
                     android:layout_width="match_parent"

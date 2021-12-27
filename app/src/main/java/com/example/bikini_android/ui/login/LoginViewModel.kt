@@ -88,12 +88,12 @@ class LoginViewModel @Inject constructor(
 
     fun checkMyInfo() {
         accountRepository
-            .getMyInfoFromRemote()
+            .getMyInfo()
             .subscribeOn(schedulerProvider.io())
             .subscribe({
 
                 if (it != null) {
-                    loginManager.userName = it.userInfo.userName
+                    loginManager.userName = it.userName
                     itemEventRelay.accept(EventType.ALREADY_EXIST)
                 } else {
                     itemEventRelay.accept(EventType.NO_INFO)
